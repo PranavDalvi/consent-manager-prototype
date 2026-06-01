@@ -1,5 +1,8 @@
 import express from "express";
 import cors from "cors";
+import { prisma } from "./db/prisma";
+import consentRoutes from "./routes/consent.routes";
+import { errorHandler } from "./middlewares/error.middleware";
 
 const app = express();
 
@@ -9,5 +12,18 @@ app.use(cors());
 app.get("/health", (_req, res) => {
 	res.json({status: "ok"})
 });
+
+
+app.get("/db-check", async (_req, res) => {
+  const count = await prisma.consent.count();
+
+  res.json({
+    consentCount: count,
+  });
+});
+
+
+app.use("/api/consents", consentRoutes);
+app.use(errorHandler);
 
 export default app;

@@ -1,5 +1,5 @@
 generator client {
-//if you use js instead of ts use prisma-client-js instead prisma-client
+  //if you use js instead of ts use prisma-client-js instead prisma-client
   provider   = "prisma-client-js"
   output     = "../src/generated/"
   engineType = "client"
@@ -15,25 +15,24 @@ enum ConsentStatus {
 }
 
 model Consent {
-  id            String   @id @default(cuid())
+  id            String        @id @default(cuid())
   userId        String
   purpose       String
   status        ConsentStatus
   policyVersion String
-  createdAt     DateTime @default(now())
+  createdAt     DateTime      @default(now())
 
   @@index([userId])
   @@index([purpose])
-  @@index([userId, purpose])
 }
 
 model AuditLog {
-  id         String   @id @default(cuid())
-  userId     String
-  action     String
-  purpose    String?
-  metadata   Json?
-  createdAt  DateTime @default(now())
+  id        String   @id @default(cuid())
+  userId    String
+  action    String
+  purpose   String?
+  metadata  Json?
+  createdAt DateTime @default(now())
 
   @@index([userId])
 }
