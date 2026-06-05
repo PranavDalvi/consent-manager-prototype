@@ -5,6 +5,78 @@ import { validate } from "../middlewares/validate.middleware";
 
 const router = Router();
 
-router.get("/", validate(fetchAuditLogsSchema), fetchAuditLogsHandler);
+/**
+ * @swagger
+ * /audit:
+ *   get:
+ *     summary: Fetch audit logs for a user
+ *     description: Returns all audit log entries for a given tenant and user ordered by creation date.
+ *     tags:
+ *       - Audit Logs
+ *     parameters:
+ *       - in: query
+ *         name: tenantId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: Tenant identifier
+ *         example: amazon
+ *       - in: query
+ *         name: userId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: User identifier
+ *         example: user-123
+ *     responses:
+ *       200:
+ *         description: Audit logs fetched successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: string
+ *                         example: cmq0wjdg10000j9pp60waqi1k
+ *                       tenantId:
+ *                         type: string
+ *                         example: amazon
+ *                       userId:
+ *                         type: string
+ *                         example: user-123
+ *                       action:
+ *                         type: string
+ *                         example: CONSENT_GRANTED
+ *                       purpose:
+ *                         type: string
+ *                         example: marketing
+ *                       metadata:
+ *                         nullable: true
+ *                       createdAt:
+ *                         type: string
+ *                         format: date-time
+ *       400:
+ *         description: Missing required query parameters
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: tenantId is required
+ *       500:
+ *         description: Internal Server Error
+ */
+router.get("/", validate(fetchAuditLogsSchema, "query"), fetchAuditLogsHandler);
 
 export default router;

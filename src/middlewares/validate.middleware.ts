@@ -20,7 +20,11 @@ export function validate<T extends z.ZodTypeAny>(
       );
     }
 
-    req[source] = result.data;
+    if (source === "body") {
+      req.body = result.data;
+    } else {
+      Object.assign(req[source] as Record<string, unknown>, result.data);
+    }
 
     next();
   };
