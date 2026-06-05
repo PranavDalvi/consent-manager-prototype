@@ -3206,6 +3206,7 @@ export namespace Prisma {
 
   export type ConsentWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    tenantId_userId_purpose?: ConsentTenantIdUserIdPurposeCompoundUniqueInput
     AND?: ConsentWhereInput | ConsentWhereInput[]
     OR?: ConsentWhereInput[]
     NOT?: ConsentWhereInput | ConsentWhereInput[]
@@ -3215,7 +3216,7 @@ export namespace Prisma {
     status?: EnumConsentStatusFilter<"Consent"> | $Enums.ConsentStatus
     policyVersion?: StringFilter<"Consent"> | string
     createdAt?: DateTimeFilter<"Consent"> | Date | string
-  }, "id">
+  }, "id" | "tenantId_userId_purpose">
 
   export type ConsentOrderByWithAggregationInput = {
     id?: SortOrder
@@ -3476,6 +3477,12 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type ConsentTenantIdUserIdPurposeCompoundUniqueInput = {
+    tenantId: string
+    userId: string
+    purpose: string
   }
 
   export type ConsentCountOrderByAggregateInput = {

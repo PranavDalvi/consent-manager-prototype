@@ -2,16 +2,27 @@ import { ConsentStatus } from "@prisma/client";
 import { prisma } from "../db/prisma";
 
 export async function grantConsent(
-  userId: string,
   tenantId: string,
+  userId: string,
   purpose: string,
   policyVersion: string
 ) {
   return prisma.$transaction(async (tx) => {
-    const consent = await tx.consent.create({
-      data: {
-        userId,
+    const consent = await tx.consent.upsert({
+      where: {
+        tenantId_userId_purpose: {
+          tenantId,
+          userId,
+          purpose,
+        },
+      },
+      update: {
+        status: ConsentStatus.GRANTED,
+        policyVersion,
+      },
+      create: {
         tenantId,
+        userId,
         purpose,
         policyVersion,
         status: ConsentStatus.GRANTED,
@@ -20,8 +31,8 @@ export async function grantConsent(
 
     await tx.auditLog.create({
       data: {
-        userId,
         tenantId,
+        userId,
         action: "CONSENT_GRANTED",
         purpose,
       },

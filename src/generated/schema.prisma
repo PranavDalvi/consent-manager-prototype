@@ -23,6 +23,7 @@ model Consent {
   policyVersion String
   createdAt     DateTime      @default(now())
 
+  @@unique([tenantId, userId, purpose])
   @@index([userId])
   @@index([purpose])
   @@index([userId, purpose])
