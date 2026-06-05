@@ -3,6 +3,6 @@ import {fetchAuditLogsHandler} from "../controllers/audit.controller";
 
 const router = Router();
 
-router.get("/:userId", fetchAuditLogsHandler);
+router.get("/", fetchAuditLogsHandler);
 
 export default router;

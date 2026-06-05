@@ -3,6 +3,7 @@ import { prisma } from "../db/prisma";
 
 export async function grantConsent(
   userId: string,
+  tenantId: string,
   purpose: string,
   policyVersion: string
 ) {
@@ -10,6 +11,7 @@ export async function grantConsent(
     const consent = await tx.consent.create({
       data: {
         userId,
+        tenantId,
         purpose,
         policyVersion,
         status: ConsentStatus.GRANTED,
@@ -19,6 +21,7 @@ export async function grantConsent(
     await tx.auditLog.create({
       data: {
         userId,
+        tenantId,
         action: "CONSENT_GRANTED",
         purpose,
       },
@@ -28,9 +31,9 @@ export async function grantConsent(
   });
 }
 
-export async function fetchUserConsents(userId: string) {
+export async function fetchUserConsents(userId: string, tenantId: string) {
   return prisma.consent.findMany({
-    where: { userId, status: ConsentStatus.GRANTED },
+    where: { userId, tenantId, status: ConsentStatus.GRANTED },
     orderBy: { createdAt: "desc" },
   });
 }
@@ -45,6 +48,7 @@ export async function revokeConsent(consentId: string) {
     await tx.auditLog.create({
       data: {
         userId: consent.userId,
+        tenantId: consent.tenantId,
         action: "CONSENT_REVOKED",
         purpose: consent.purpose,
       },
@@ -57,10 +61,12 @@ export async function revokeConsent(consentId: string) {
 export async function checkConsent(
     userId: string,
     purpose: string,
+    tenantId: string
 ) {
     const consent = await prisma.consent.findFirst({
         where: {
             userId,
+            tenantId,
             purpose,
             status: ConsentStatus.GRANTED
         }

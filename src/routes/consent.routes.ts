@@ -7,6 +7,6 @@ const router = Router();
 router.post("/", grantConsentHandler);
 router.post("/revoke", revokeConsentHandler);
 router.get("/check", checkConsentHandler);
-router.get("/user/:userId", fetchUserConsentsHandler);
+router.get("/user", fetchUserConsentsHandler);
 
 export default router;

@@ -1,7 +1,7 @@
 import { prisma } from "../db/prisma";
-export async function fetchAuditLogs(userId: string) {
+export async function fetchAuditLogs(userId: string, tenantId: string) {
   return prisma.auditLog.findMany({
-    where: { userId },
+    where: { userId, tenantId },
     orderBy: { createdAt: "desc" },
   });
 }

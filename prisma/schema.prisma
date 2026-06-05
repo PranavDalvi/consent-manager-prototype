@@ -16,6 +16,7 @@ enum ConsentStatus {
 
 model Consent {
   id            String   @id @default(cuid())
+  tenantId      String
   userId        String
   purpose       String
   status        ConsentStatus
@@ -29,6 +30,7 @@ model Consent {
 
 model AuditLog {
   id         String   @id @default(cuid())
+  tenantId   String
   userId     String
   action     String
   purpose    String?

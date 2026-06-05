@@ -986,6 +986,7 @@ export namespace Prisma {
 
   export type ConsentMinAggregateOutputType = {
     id: string | null
+    tenantId: string | null
     userId: string | null
     purpose: string | null
     status: $Enums.ConsentStatus | null
@@ -995,6 +996,7 @@ export namespace Prisma {
 
   export type ConsentMaxAggregateOutputType = {
     id: string | null
+    tenantId: string | null
     userId: string | null
     purpose: string | null
     status: $Enums.ConsentStatus | null
@@ -1004,6 +1006,7 @@ export namespace Prisma {
 
   export type ConsentCountAggregateOutputType = {
     id: number
+    tenantId: number
     userId: number
     purpose: number
     status: number
@@ -1015,6 +1018,7 @@ export namespace Prisma {
 
   export type ConsentMinAggregateInputType = {
     id?: true
+    tenantId?: true
     userId?: true
     purpose?: true
     status?: true
@@ -1024,6 +1028,7 @@ export namespace Prisma {
 
   export type ConsentMaxAggregateInputType = {
     id?: true
+    tenantId?: true
     userId?: true
     purpose?: true
     status?: true
@@ -1033,6 +1038,7 @@ export namespace Prisma {
 
   export type ConsentCountAggregateInputType = {
     id?: true
+    tenantId?: true
     userId?: true
     purpose?: true
     status?: true
@@ -1115,6 +1121,7 @@ export namespace Prisma {
 
   export type ConsentGroupByOutputType = {
     id: string
+    tenantId: string
     userId: string
     purpose: string
     status: $Enums.ConsentStatus
@@ -1141,6 +1148,7 @@ export namespace Prisma {
 
   export type ConsentSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    tenantId?: boolean
     userId?: boolean
     purpose?: boolean
     status?: boolean
@@ -1150,6 +1158,7 @@ export namespace Prisma {
 
   export type ConsentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    tenantId?: boolean
     userId?: boolean
     purpose?: boolean
     status?: boolean
@@ -1159,6 +1168,7 @@ export namespace Prisma {
 
   export type ConsentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    tenantId?: boolean
     userId?: boolean
     purpose?: boolean
     status?: boolean
@@ -1168,6 +1178,7 @@ export namespace Prisma {
 
   export type ConsentSelectScalar = {
     id?: boolean
+    tenantId?: boolean
     userId?: boolean
     purpose?: boolean
     status?: boolean
@@ -1175,13 +1186,14 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type ConsentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "purpose" | "status" | "policyVersion" | "createdAt", ExtArgs["result"]["consent"]>
+  export type ConsentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "userId" | "purpose" | "status" | "policyVersion" | "createdAt", ExtArgs["result"]["consent"]>
 
   export type $ConsentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Consent"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      tenantId: string
       userId: string
       purpose: string
       status: $Enums.ConsentStatus
@@ -1611,6 +1623,7 @@ export namespace Prisma {
    */
   interface ConsentFieldRefs {
     readonly id: FieldRef<"Consent", 'String'>
+    readonly tenantId: FieldRef<"Consent", 'String'>
     readonly userId: FieldRef<"Consent", 'String'>
     readonly purpose: FieldRef<"Consent", 'String'>
     readonly status: FieldRef<"Consent", 'ConsentStatus'>
@@ -1999,6 +2012,7 @@ export namespace Prisma {
 
   export type AuditLogMinAggregateOutputType = {
     id: string | null
+    tenantId: string | null
     userId: string | null
     action: string | null
     purpose: string | null
@@ -2007,6 +2021,7 @@ export namespace Prisma {
 
   export type AuditLogMaxAggregateOutputType = {
     id: string | null
+    tenantId: string | null
     userId: string | null
     action: string | null
     purpose: string | null
@@ -2015,6 +2030,7 @@ export namespace Prisma {
 
   export type AuditLogCountAggregateOutputType = {
     id: number
+    tenantId: number
     userId: number
     action: number
     purpose: number
@@ -2026,6 +2042,7 @@ export namespace Prisma {
 
   export type AuditLogMinAggregateInputType = {
     id?: true
+    tenantId?: true
     userId?: true
     action?: true
     purpose?: true
@@ -2034,6 +2051,7 @@ export namespace Prisma {
 
   export type AuditLogMaxAggregateInputType = {
     id?: true
+    tenantId?: true
     userId?: true
     action?: true
     purpose?: true
@@ -2042,6 +2060,7 @@ export namespace Prisma {
 
   export type AuditLogCountAggregateInputType = {
     id?: true
+    tenantId?: true
     userId?: true
     action?: true
     purpose?: true
@@ -2124,6 +2143,7 @@ export namespace Prisma {
 
   export type AuditLogGroupByOutputType = {
     id: string
+    tenantId: string
     userId: string
     action: string
     purpose: string | null
@@ -2150,6 +2170,7 @@ export namespace Prisma {
 
   export type AuditLogSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    tenantId?: boolean
     userId?: boolean
     action?: boolean
     purpose?: boolean
@@ -2159,6 +2180,7 @@ export namespace Prisma {
 
   export type AuditLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    tenantId?: boolean
     userId?: boolean
     action?: boolean
     purpose?: boolean
@@ -2168,6 +2190,7 @@ export namespace Prisma {
 
   export type AuditLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    tenantId?: boolean
     userId?: boolean
     action?: boolean
     purpose?: boolean
@@ -2177,6 +2200,7 @@ export namespace Prisma {
 
   export type AuditLogSelectScalar = {
     id?: boolean
+    tenantId?: boolean
     userId?: boolean
     action?: boolean
     purpose?: boolean
@@ -2184,13 +2208,14 @@ export namespace Prisma {
     createdAt?: boolean
   }
 
-  export type AuditLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "action" | "purpose" | "metadata" | "createdAt", ExtArgs["result"]["auditLog"]>
+  export type AuditLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "userId" | "action" | "purpose" | "metadata" | "createdAt", ExtArgs["result"]["auditLog"]>
 
   export type $AuditLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AuditLog"
     objects: {}
     scalars: $Extensions.GetPayloadResult<{
       id: string
+      tenantId: string
       userId: string
       action: string
       purpose: string | null
@@ -2620,6 +2645,7 @@ export namespace Prisma {
    */
   interface AuditLogFieldRefs {
     readonly id: FieldRef<"AuditLog", 'String'>
+    readonly tenantId: FieldRef<"AuditLog", 'String'>
     readonly userId: FieldRef<"AuditLog", 'String'>
     readonly action: FieldRef<"AuditLog", 'String'>
     readonly purpose: FieldRef<"AuditLog", 'String'>
@@ -3012,6 +3038,7 @@ export namespace Prisma {
 
   export const ConsentScalarFieldEnum: {
     id: 'id',
+    tenantId: 'tenantId',
     userId: 'userId',
     purpose: 'purpose',
     status: 'status',
@@ -3024,6 +3051,7 @@ export namespace Prisma {
 
   export const AuditLogScalarFieldEnum: {
     id: 'id',
+    tenantId: 'tenantId',
     userId: 'userId',
     action: 'action',
     purpose: 'purpose',
@@ -3158,6 +3186,7 @@ export namespace Prisma {
     OR?: ConsentWhereInput[]
     NOT?: ConsentWhereInput | ConsentWhereInput[]
     id?: StringFilter<"Consent"> | string
+    tenantId?: StringFilter<"Consent"> | string
     userId?: StringFilter<"Consent"> | string
     purpose?: StringFilter<"Consent"> | string
     status?: EnumConsentStatusFilter<"Consent"> | $Enums.ConsentStatus
@@ -3167,6 +3196,7 @@ export namespace Prisma {
 
   export type ConsentOrderByWithRelationInput = {
     id?: SortOrder
+    tenantId?: SortOrder
     userId?: SortOrder
     purpose?: SortOrder
     status?: SortOrder
@@ -3179,6 +3209,7 @@ export namespace Prisma {
     AND?: ConsentWhereInput | ConsentWhereInput[]
     OR?: ConsentWhereInput[]
     NOT?: ConsentWhereInput | ConsentWhereInput[]
+    tenantId?: StringFilter<"Consent"> | string
     userId?: StringFilter<"Consent"> | string
     purpose?: StringFilter<"Consent"> | string
     status?: EnumConsentStatusFilter<"Consent"> | $Enums.ConsentStatus
@@ -3188,6 +3219,7 @@ export namespace Prisma {
 
   export type ConsentOrderByWithAggregationInput = {
     id?: SortOrder
+    tenantId?: SortOrder
     userId?: SortOrder
     purpose?: SortOrder
     status?: SortOrder
@@ -3203,6 +3235,7 @@ export namespace Prisma {
     OR?: ConsentScalarWhereWithAggregatesInput[]
     NOT?: ConsentScalarWhereWithAggregatesInput | ConsentScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Consent"> | string
+    tenantId?: StringWithAggregatesFilter<"Consent"> | string
     userId?: StringWithAggregatesFilter<"Consent"> | string
     purpose?: StringWithAggregatesFilter<"Consent"> | string
     status?: EnumConsentStatusWithAggregatesFilter<"Consent"> | $Enums.ConsentStatus
@@ -3215,6 +3248,7 @@ export namespace Prisma {
     OR?: AuditLogWhereInput[]
     NOT?: AuditLogWhereInput | AuditLogWhereInput[]
     id?: StringFilter<"AuditLog"> | string
+    tenantId?: StringFilter<"AuditLog"> | string
     userId?: StringFilter<"AuditLog"> | string
     action?: StringFilter<"AuditLog"> | string
     purpose?: StringNullableFilter<"AuditLog"> | string | null
@@ -3224,6 +3258,7 @@ export namespace Prisma {
 
   export type AuditLogOrderByWithRelationInput = {
     id?: SortOrder
+    tenantId?: SortOrder
     userId?: SortOrder
     action?: SortOrder
     purpose?: SortOrderInput | SortOrder
@@ -3236,6 +3271,7 @@ export namespace Prisma {
     AND?: AuditLogWhereInput | AuditLogWhereInput[]
     OR?: AuditLogWhereInput[]
     NOT?: AuditLogWhereInput | AuditLogWhereInput[]
+    tenantId?: StringFilter<"AuditLog"> | string
     userId?: StringFilter<"AuditLog"> | string
     action?: StringFilter<"AuditLog"> | string
     purpose?: StringNullableFilter<"AuditLog"> | string | null
@@ -3245,6 +3281,7 @@ export namespace Prisma {
 
   export type AuditLogOrderByWithAggregationInput = {
     id?: SortOrder
+    tenantId?: SortOrder
     userId?: SortOrder
     action?: SortOrder
     purpose?: SortOrderInput | SortOrder
@@ -3260,6 +3297,7 @@ export namespace Prisma {
     OR?: AuditLogScalarWhereWithAggregatesInput[]
     NOT?: AuditLogScalarWhereWithAggregatesInput | AuditLogScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"AuditLog"> | string
+    tenantId?: StringWithAggregatesFilter<"AuditLog"> | string
     userId?: StringWithAggregatesFilter<"AuditLog"> | string
     action?: StringWithAggregatesFilter<"AuditLog"> | string
     purpose?: StringNullableWithAggregatesFilter<"AuditLog"> | string | null
@@ -3269,6 +3307,7 @@ export namespace Prisma {
 
   export type ConsentCreateInput = {
     id?: string
+    tenantId: string
     userId: string
     purpose: string
     status: $Enums.ConsentStatus
@@ -3278,6 +3317,7 @@ export namespace Prisma {
 
   export type ConsentUncheckedCreateInput = {
     id?: string
+    tenantId: string
     userId: string
     purpose: string
     status: $Enums.ConsentStatus
@@ -3287,6 +3327,7 @@ export namespace Prisma {
 
   export type ConsentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
@@ -3296,6 +3337,7 @@ export namespace Prisma {
 
   export type ConsentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
@@ -3305,6 +3347,7 @@ export namespace Prisma {
 
   export type ConsentCreateManyInput = {
     id?: string
+    tenantId: string
     userId: string
     purpose: string
     status: $Enums.ConsentStatus
@@ -3314,6 +3357,7 @@ export namespace Prisma {
 
   export type ConsentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
@@ -3323,6 +3367,7 @@ export namespace Prisma {
 
   export type ConsentUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
@@ -3332,6 +3377,7 @@ export namespace Prisma {
 
   export type AuditLogCreateInput = {
     id?: string
+    tenantId: string
     userId: string
     action: string
     purpose?: string | null
@@ -3341,6 +3387,7 @@ export namespace Prisma {
 
   export type AuditLogUncheckedCreateInput = {
     id?: string
+    tenantId: string
     userId: string
     action: string
     purpose?: string | null
@@ -3350,6 +3397,7 @@ export namespace Prisma {
 
   export type AuditLogUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3359,6 +3407,7 @@ export namespace Prisma {
 
   export type AuditLogUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3368,6 +3417,7 @@ export namespace Prisma {
 
   export type AuditLogCreateManyInput = {
     id?: string
+    tenantId: string
     userId: string
     action: string
     purpose?: string | null
@@ -3377,6 +3427,7 @@ export namespace Prisma {
 
   export type AuditLogUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3386,6 +3437,7 @@ export namespace Prisma {
 
   export type AuditLogUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3428,6 +3480,7 @@ export namespace Prisma {
 
   export type ConsentCountOrderByAggregateInput = {
     id?: SortOrder
+    tenantId?: SortOrder
     userId?: SortOrder
     purpose?: SortOrder
     status?: SortOrder
@@ -3437,6 +3490,7 @@ export namespace Prisma {
 
   export type ConsentMaxOrderByAggregateInput = {
     id?: SortOrder
+    tenantId?: SortOrder
     userId?: SortOrder
     purpose?: SortOrder
     status?: SortOrder
@@ -3446,6 +3500,7 @@ export namespace Prisma {
 
   export type ConsentMinOrderByAggregateInput = {
     id?: SortOrder
+    tenantId?: SortOrder
     userId?: SortOrder
     purpose?: SortOrder
     status?: SortOrder
@@ -3540,6 +3595,7 @@ export namespace Prisma {
 
   export type AuditLogCountOrderByAggregateInput = {
     id?: SortOrder
+    tenantId?: SortOrder
     userId?: SortOrder
     action?: SortOrder
     purpose?: SortOrder
@@ -3549,6 +3605,7 @@ export namespace Prisma {
 
   export type AuditLogMaxOrderByAggregateInput = {
     id?: SortOrder
+    tenantId?: SortOrder
     userId?: SortOrder
     action?: SortOrder
     purpose?: SortOrder
@@ -3557,6 +3614,7 @@ export namespace Prisma {
 
   export type AuditLogMinOrderByAggregateInput = {
     id?: SortOrder
+    tenantId?: SortOrder
     userId?: SortOrder
     action?: SortOrder
     purpose?: SortOrder
