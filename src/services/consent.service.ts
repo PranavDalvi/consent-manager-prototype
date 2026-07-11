@@ -1,4 +1,4 @@
-import { ConsentStatus } from "@prisma/client";
+import { ConsentStatus } from "../generated";
 import { prisma } from "../db/prisma";
 
 export async function grantConsent(
