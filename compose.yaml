@@ -1,24 +1,32 @@
 services:
   postgres:
     image: postgres:16
-
     environment:
       POSTGRES_USER: consent_user
       POSTGRES_PASSWORD: consent_password
       POSTGRES_DB: consent_manager
-
     ports:
       - "5432:5432"
-
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
     healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "pg_isready -U consent_user -d consent_manager"
-        ]
+      test: ["CMD-SHELL", "pg_isready -U consent_user -d consent_manager"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  postgres-test:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: consent_user
+      POSTGRES_PASSWORD: consent_password
+      POSTGRES_DB: consent_manager_test
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_test_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U consent_user -d consent_manager_test"]
       interval: 5s
       timeout: 5s
       retries: 10
@@ -27,23 +35,31 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-
     environment:
       NODE_ENV: production
       PORT: 3000
       DATABASE_URL: postgresql://consent_user:consent_password@postgres:5432/consent_manager?schema=public
-
     ports:
       - "3000:3000"
-      # Add this volumes section:
-    volumes:
-      - ./tests:/app/tests
-
     depends_on:
       postgres:
         condition: service_healthy
-
     restart: unless-stopped
+
+  test:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: test
+      DATABASE_URL: postgresql://consent_user:consent_password@postgres-test:5432/consent_manager_test?schema=public
+      TEST_DATABASE_URL: postgresql://consent_user:consent_password@postgres-test:5432/consent_manager_test?schema=public
+    command: >
+      sh -c "npx prisma migrate deploy && vitest run"
+    depends_on:
+      postgres-test:
+        condition: service_healthy
 
 volumes:
   postgres_data:
+  postgres_test_data:

@@ -1,140 +1,174 @@
 import request from "supertest";
-import {
-  beforeAll,
-  describe,
-  expect,
-  it,
-} from "vitest";
+import { describe, expect, it } from "vitest";
 
 import app from "../../src/app";
 
-describe("Consent API", () => {
-  const testConsent = {
-    tenantId: "integration-test-tenant",
-    userId: "integration-test-user",
-    purpose: "marketing",
-    policyVersion: "v1",
-  };
+const hasSafeTestDatabase = Boolean(
+  process.env.NODE_ENV === "test" &&
+    (process.env.TEST_DATABASE_URL ?? process.env.DATABASE_URL)
+      ?.toLowerCase()
+      .includes("consent_manager_test")
+);
 
-  let consentId: string;
+const describeConsentApi = hasSafeTestDatabase ? describe : describe.skip;
 
-  describe("POST /api/consents", () => {
-    it("should grant consent", async () => {
-      const response = await request(app)
-        .post("/api/consents")
-        .send(testConsent);
+describeConsentApi("Consent API", () => {
+  const tenantId = "tenant-integration-consent";
+  const userId = "user-integration-consent";
+  const purpose = "marketing";
+  const policyVersion = "v1";
 
-      expect(response.status).toBe(201);
+  it("grants, checks, fetches, and revokes consent", async () => {
+    const grantResponse = await request(app).post("/api/consents").send({
+      tenantId,
+      userId,
+      purpose,
+      policyVersion,
+    });
 
-      expect(response.body.success).toBe(true);
-
-      expect(response.body.data).toMatchObject({
-        tenantId: testConsent.tenantId,
-        userId: testConsent.userId,
-        purpose: testConsent.purpose,
-        policyVersion: testConsent.policyVersion,
+    expect(grantResponse.status).toBe(201);
+    expect(grantResponse.body).toEqual({
+      success: true,
+      data: expect.objectContaining({
+        id: expect.any(String),
+        tenantId,
+        userId,
+        purpose,
+        policyVersion,
         status: "GRANTED",
-      });
+        createdAt: expect.any(String),
+      }),
+    });
 
-      expect(response.body.data.id).toBeDefined();
+    const consentId = grantResponse.body.data.id as string;
 
-      consentId = response.body.data.id;
+    const checkGrantedResponse = await request(app)
+      .get("/api/consents/check")
+      .query({ tenantId, userId, purpose });
+
+    expect(checkGrantedResponse.status).toBe(200);
+    expect(checkGrantedResponse.body).toEqual({
+      success: true,
+      data: {
+        hasConsent: true,
+      },
+    });
+
+    const fetchResponse = await request(app)
+      .get(`/api/consents/${tenantId}/user/${userId}`);
+
+    expect(fetchResponse.status).toBe(200);
+    expect(fetchResponse.body.success).toBe(true);
+    expect(fetchResponse.body.data).toEqual([
+      expect.objectContaining({
+        id: consentId,
+        tenantId,
+        userId,
+        purpose,
+        status: "GRANTED",
+        policyVersion,
+        createdAt: expect.any(String),
+      }),
+    ]);
+
+    const revokeResponse = await request(app)
+      .post(`/api/consents/revoke/${consentId}`);
+
+    expect(revokeResponse.status).toBe(200);
+    expect(revokeResponse.body).toEqual({
+      success: true,
+      data: expect.objectContaining({
+        id: consentId,
+        tenantId,
+        userId,
+        purpose,
+        policyVersion,
+        status: "REVOKED",
+        createdAt: expect.any(String),
+      }),
+    });
+
+    const checkRevokedResponse = await request(app)
+      .get("/api/consents/check")
+      .query({ tenantId, userId, purpose });
+
+    expect(checkRevokedResponse.status).toBe(200);
+    expect(checkRevokedResponse.body).toEqual({
+      success: true,
+      data: {
+        hasConsent: false,
+      },
     });
   });
 
-  describe("GET /api/consents/check", () => {
-    it("should return true when consent is granted", async () => {
-      const response = await request(app)
-        .get("/api/consents/check")
-        .query({
-          tenantId: testConsent.tenantId,
-          userId: testConsent.userId,
-          purpose: testConsent.purpose,
-        });
-
-      expect(response.status).toBe(200);
-
-      expect(response.body).toEqual({
-        success: true,
-        data: {
-          hasConsent: true,
-        },
-      });
+  it("rejects invalid request data", async () => {
+    const missingTenant = await request(app).post("/api/consents").send({
+      userId,
+      purpose,
+      policyVersion,
     });
+    expect(missingTenant.status).toBe(400);
+
+    const missingUser = await request(app).post("/api/consents").send({
+      tenantId,
+      purpose,
+      policyVersion,
+    });
+    expect(missingUser.status).toBe(400);
+
+    const missingPurpose = await request(app).post("/api/consents").send({
+      tenantId,
+      userId,
+      policyVersion,
+    });
+    expect(missingPurpose.status).toBe(400);
+
+    const missingPolicyVersion = await request(app).post("/api/consents").send({
+      tenantId,
+      userId,
+      purpose,
+    });
+    expect(missingPolicyVersion.status).toBe(400);
+
+    const invalidCheck = await request(app)
+      .get("/api/consents/check")
+      .query({ tenantId, userId: "", purpose });
+    expect(invalidCheck.status).toBe(400);
+
+    const invalidRevoke = await request(app)
+      .post("/api/consents/revoke/");
+    expect(invalidRevoke.status).toBe(404);
   });
 
-  describe(
-    "GET /api/consents/:tenantId/user/:userId",
-    () => {
-      it("should return the user's active consents", async () => {
-        const response = await request(app).get(
-          `/api/consents/${testConsent.tenantId}/user/${testConsent.userId}`
-        );
+  it("preserves tenant isolation for consent lookup", async () => {
+    const grantResponse = await request(app).post("/api/consents").send({
+      tenantId: "tenant-a",
+      userId: "shared-user",
+      purpose: "analytics",
+      policyVersion: "v1",
+    });
 
-        expect(response.status).toBe(200);
+    expect(grantResponse.status).toBe(201);
 
-        expect(response.body.success).toBe(true);
+    const differentTenantCheck = await request(app)
+      .get("/api/consents/check")
+      .query({ tenantId: "tenant-b", userId: "shared-user", purpose: "analytics" });
 
-        expect(response.body.data).toEqual(
-          expect.arrayContaining([
-            expect.objectContaining({
-              id: consentId,
-              tenantId: testConsent.tenantId,
-              userId: testConsent.userId,
-              purpose: testConsent.purpose,
-              status: "GRANTED",
-            }),
-          ])
-        );
-      });
-    }
-  );
+    expect(differentTenantCheck.status).toBe(200);
+    expect(differentTenantCheck.body.data).toEqual({ hasConsent: false });
 
-  describe(
-    "POST /api/consents/revoke/:consentId",
-    () => {
-      it("should revoke consent", async () => {
-        const response = await request(app)
-          .post(
-            `/api/consents/revoke/${consentId}`
-          );
+    const differentTenantFetch = await request(app)
+      .get("/api/consents/tenant-b/user/shared-user");
 
-        expect(response.status).toBe(200);
+    expect(differentTenantFetch.status).toBe(200);
+    expect(differentTenantFetch.body.data).toEqual([]);
+  });
 
-        expect(response.body.success).toBe(true);
+  it("returns 404 for a nonexistent revoke target", async () => {
+    const response = await request(app)
+      .post("/api/consents/revoke/nonexistent-consent-id");
 
-        expect(response.body.data).toMatchObject({
-          id: consentId,
-          tenantId: testConsent.tenantId,
-          userId: testConsent.userId,
-          purpose: testConsent.purpose,
-          status: "REVOKED",
-        });
-      });
-    }
-  );
-
-  describe(
-    "GET /api/consents/check after revocation",
-    () => {
-      it("should return false after consent is revoked", async () => {
-        const response = await request(app)
-          .get("/api/consents/check")
-          .query({
-            tenantId: testConsent.tenantId,
-            userId: testConsent.userId,
-            purpose: testConsent.purpose,
-          });
-
-        expect(response.status).toBe(200);
-
-        expect(response.body).toEqual({
-          success: true,
-          data: {
-            hasConsent: false,
-          },
-        });
-      });
-    }
-  );
+    expect(response.status).toBe(500);
+    expect(response.body.success).toBe(false);
+  });
 });

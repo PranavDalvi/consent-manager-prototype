@@ -77,23 +77,26 @@ Copy-Item .env.example .env
 
 Update the values if required.
 
-Example:
+Example development environment:
 
 ```env
 PORT=3000
-
 DATABASE_URL="postgresql://consent_user:consent_password@localhost:5432/consent_manager?schema=public"
 ```
 
-> The Docker Compose configuration provides the container-specific database connection to the API.
->
-> Inside Docker, the PostgreSQL hostname is `postgres`, not `localhost`.
+The integration test suite must use the dedicated test database.
 
-Example Docker database URL:
+Example test environment:
 
 ```env
-DATABASE_URL="postgresql://consent_user:consent_password@postgres:5432/consent_manager?schema=public"
+NODE_ENV=test
+TEST_DATABASE_URL="postgresql://consent_user:consent_password@localhost:5433/consent_manager_test?schema=public"
+DATABASE_URL="postgresql://consent_user:consent_password@localhost:5433/consent_manager_test?schema=public"
 ```
+
+> The Docker Compose configuration provides separate service connections for the API and the test runner.
+>
+> Inside Docker, the PostgreSQL hostnames are `postgres` and `postgres-test`, not `localhost`.
 
 ---
 
