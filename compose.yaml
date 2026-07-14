@@ -55,7 +55,7 @@ services:
       DATABASE_URL: postgresql://consent_user:consent_password@postgres-test:5432/consent_manager_test?schema=public
       TEST_DATABASE_URL: postgresql://consent_user:consent_password@postgres-test:5432/consent_manager_test?schema=public
     command: >
-      sh -c "npx prisma migrate deploy && vitest run"
+      sh -c "npx prisma migrate deploy && npm test"
     depends_on:
       postgres-test:
         condition: service_healthy

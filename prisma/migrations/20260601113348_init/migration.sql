@@ -4,6 +4,7 @@ CREATE TYPE "ConsentStatus" AS ENUM ('GRANTED', 'REVOKED');
 -- CreateTable
 CREATE TABLE "Consent" (
     "id" TEXT NOT NULL,
+    "tenantId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "purpose" TEXT NOT NULL,
     "status" "ConsentStatus" NOT NULL,
@@ -16,6 +17,7 @@ CREATE TABLE "Consent" (
 -- CreateTable
 CREATE TABLE "AuditLog" (
     "id" TEXT NOT NULL,
+    "tenantId" TEXT NOT NULL,
     "userId" TEXT NOT NULL,
     "action" TEXT NOT NULL,
     "purpose" TEXT,
@@ -30,6 +32,9 @@ CREATE INDEX "Consent_userId_idx" ON "Consent"("userId");
 
 -- CreateIndex
 CREATE INDEX "Consent_purpose_idx" ON "Consent"("purpose");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Consent_tenantId_userId_purpose_key" ON "Consent"("tenantId", "userId", "purpose");
 
 -- CreateIndex
 CREATE INDEX "AuditLog_userId_idx" ON "AuditLog"("userId");

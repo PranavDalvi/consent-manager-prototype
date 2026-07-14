@@ -1,0 +1,27 @@
+#!/usr/bin/env sh
+set -eu
+
+mode="${1:-}"
+
+case "$mode" in
+  docker)
+    docker compose -f compose.yaml up --build -d
+    ;;
+  podman)
+    podman compose -f compose.yaml up --build -d
+    ;;
+  logs)
+    if command -v docker >/dev/null 2>&1; then
+      docker compose -f compose.yaml logs -f
+    elif command -v podman >/dev/null 2>&1; then
+      podman compose -f compose.yaml logs -f
+    else
+      echo "Neither docker nor podman is available on PATH." >&2
+      exit 1
+    fi
+    ;;
+  *)
+    echo "Usage: run-setup {docker|podman|logs}" >&2
+    exit 1
+    ;;
+esac

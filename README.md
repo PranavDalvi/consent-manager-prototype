@@ -102,7 +102,23 @@ DATABASE_URL="postgresql://consent_user:consent_password@localhost:5433/consent_
 
 # Start the Application with Docker
 
-Build the images and start all services:
+You can use the helper script for Docker, Podman, or logs:
+
+```bash
+./run-setup docker
+./run-setup podman
+./run-setup logs
+```
+
+On Windows PowerShell, run:
+
+```powershell
+.\run-setup.cmd docker
+.\run-setup.cmd podman
+.\run-setup.cmd logs
+```
+
+If you prefer to call Compose directly:
 
 ```bash
 docker compose up --build
