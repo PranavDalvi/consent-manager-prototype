@@ -14,6 +14,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
+ * Model Tenant
+ * 
+ */
+export type Tenant = $Result.DefaultSelection<Prisma.$TenantPayload>
+/**
  * Model Consent
  * 
  */
@@ -50,8 +55,8 @@ export const ConsentStatus: typeof $Enums.ConsentStatus
  * const prisma = new PrismaClient({
  *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
  * })
- * // Fetch zero or more Consents
- * const consents = await prisma.consent.findMany()
+ * // Fetch zero or more Tenants
+ * const tenants = await prisma.tenant.findMany()
  * ```
  *
  *
@@ -73,8 +78,8 @@ export class PrismaClient<
    * const prisma = new PrismaClient({
    *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
    * })
-   * // Fetch zero or more Consents
-   * const consents = await prisma.consent.findMany()
+   * // Fetch zero or more Tenants
+   * const tenants = await prisma.tenant.findMany()
    * ```
    *
    *
@@ -163,6 +168,16 @@ export class PrismaClient<
   }>>
 
       /**
+   * `prisma.tenant`: Exposes CRUD operations for the **Tenant** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Tenants
+    * const tenants = await prisma.tenant.findMany()
+    * ```
+    */
+  get tenant(): Prisma.TenantDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.consent`: Exposes CRUD operations for the **Consent** model.
     * Example usage:
     * ```ts
@@ -615,6 +630,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
+    Tenant: 'Tenant',
     Consent: 'Consent',
     AuditLog: 'AuditLog'
   };
@@ -632,10 +648,84 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "consent" | "auditLog"
+      modelProps: "tenant" | "consent" | "auditLog"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
+      Tenant: {
+        payload: Prisma.$TenantPayload<ExtArgs>
+        fields: Prisma.TenantFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TenantFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TenantFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+          }
+          findFirst: {
+            args: Prisma.TenantFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TenantFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+          }
+          findMany: {
+            args: Prisma.TenantFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>[]
+          }
+          create: {
+            args: Prisma.TenantCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+          }
+          createMany: {
+            args: Prisma.TenantCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TenantCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>[]
+          }
+          delete: {
+            args: Prisma.TenantDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+          }
+          update: {
+            args: Prisma.TenantUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+          }
+          deleteMany: {
+            args: Prisma.TenantDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TenantUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TenantUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>[]
+          }
+          upsert: {
+            args: Prisma.TenantUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantPayload>
+          }
+          aggregate: {
+            args: Prisma.TenantAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTenant>
+          }
+          groupBy: {
+            args: Prisma.TenantGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TenantGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TenantCountArgs<ExtArgs>
+            result: $Utils.Optional<TenantCountAggregateOutputType> | number
+          }
+        }
+      }
       Consent: {
         payload: Prisma.$ConsentPayload<ExtArgs>
         fields: Prisma.ConsentFieldRefs
@@ -892,6 +982,7 @@ export namespace Prisma {
     comments?: runtime.SqlCommenterPlugin[]
   }
   export type GlobalOmitConfig = {
+    tenant?: TenantOmit
     consent?: ConsentOmit
     auditLog?: AuditLogOmit
   }
@@ -969,10 +1060,1165 @@ export namespace Prisma {
    */
 
 
+  /**
+   * Count Type TenantCountOutputType
+   */
+
+  export type TenantCountOutputType = {
+    consents: number
+    auditLogs: number
+  }
+
+  export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    consents?: boolean | TenantCountOutputTypeCountConsentsArgs
+    auditLogs?: boolean | TenantCountOutputTypeCountAuditLogsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantCountOutputType
+     */
+    select?: TenantCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountConsentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConsentWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountAuditLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AuditLogWhereInput
+  }
+
 
   /**
    * Models
    */
+
+  /**
+   * Model Tenant
+   */
+
+  export type AggregateTenant = {
+    _count: TenantCountAggregateOutputType | null
+    _min: TenantMinAggregateOutputType | null
+    _max: TenantMaxAggregateOutputType | null
+  }
+
+  export type TenantMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantCountAggregateOutputType = {
+    id: number
+    name: number
+    slug: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TenantMinAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantMaxAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantCountAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TenantAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tenant to aggregate.
+     */
+    where?: TenantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tenants to fetch.
+     */
+    orderBy?: TenantOrderByWithRelationInput | TenantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TenantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tenants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tenants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Tenants
+    **/
+    _count?: true | TenantCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TenantMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TenantMaxAggregateInputType
+  }
+
+  export type GetTenantAggregateType<T extends TenantAggregateArgs> = {
+        [P in keyof T & keyof AggregateTenant]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTenant[P]>
+      : GetScalarType<T[P], AggregateTenant[P]>
+  }
+
+
+
+
+  export type TenantGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TenantWhereInput
+    orderBy?: TenantOrderByWithAggregationInput | TenantOrderByWithAggregationInput[]
+    by: TenantScalarFieldEnum[] | TenantScalarFieldEnum
+    having?: TenantScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TenantCountAggregateInputType | true
+    _min?: TenantMinAggregateInputType
+    _max?: TenantMaxAggregateInputType
+  }
+
+  export type TenantGroupByOutputType = {
+    id: string
+    name: string
+    slug: string
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: TenantCountAggregateOutputType | null
+    _min: TenantMinAggregateOutputType | null
+    _max: TenantMaxAggregateOutputType | null
+  }
+
+  type GetTenantGroupByPayload<T extends TenantGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TenantGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TenantGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TenantGroupByOutputType[P]>
+            : GetScalarType<T[P], TenantGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TenantSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    consents?: boolean | Tenant$consentsArgs<ExtArgs>
+    auditLogs?: boolean | Tenant$auditLogsArgs<ExtArgs>
+    _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenant"]>
+
+  export type TenantSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["tenant"]>
+
+  export type TenantSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["tenant"]>
+
+  export type TenantSelectScalar = {
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["tenant"]>
+  export type TenantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    consents?: boolean | Tenant$consentsArgs<ExtArgs>
+    auditLogs?: boolean | Tenant$auditLogsArgs<ExtArgs>
+    _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TenantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type TenantIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $TenantPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Tenant"
+    objects: {
+      consents: Prisma.$ConsentPayload<ExtArgs>[]
+      auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      slug: string
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["tenant"]>
+    composites: {}
+  }
+
+  type TenantGetPayload<S extends boolean | null | undefined | TenantDefaultArgs> = $Result.GetResult<Prisma.$TenantPayload, S>
+
+  type TenantCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TenantFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TenantCountAggregateInputType | true
+    }
+
+  export interface TenantDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Tenant'], meta: { name: 'Tenant' } }
+    /**
+     * Find zero or one Tenant that matches the filter.
+     * @param {TenantFindUniqueArgs} args - Arguments to find a Tenant
+     * @example
+     * // Get one Tenant
+     * const tenant = await prisma.tenant.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TenantFindUniqueArgs>(args: SelectSubset<T, TenantFindUniqueArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Tenant that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TenantFindUniqueOrThrowArgs} args - Arguments to find a Tenant
+     * @example
+     * // Get one Tenant
+     * const tenant = await prisma.tenant.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TenantFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tenant that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantFindFirstArgs} args - Arguments to find a Tenant
+     * @example
+     * // Get one Tenant
+     * const tenant = await prisma.tenant.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TenantFindFirstArgs>(args?: SelectSubset<T, TenantFindFirstArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Tenant that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantFindFirstOrThrowArgs} args - Arguments to find a Tenant
+     * @example
+     * // Get one Tenant
+     * const tenant = await prisma.tenant.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TenantFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Tenants that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Tenants
+     * const tenants = await prisma.tenant.findMany()
+     * 
+     * // Get first 10 Tenants
+     * const tenants = await prisma.tenant.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tenantWithIdOnly = await prisma.tenant.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TenantFindManyArgs>(args?: SelectSubset<T, TenantFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Tenant.
+     * @param {TenantCreateArgs} args - Arguments to create a Tenant.
+     * @example
+     * // Create one Tenant
+     * const Tenant = await prisma.tenant.create({
+     *   data: {
+     *     // ... data to create a Tenant
+     *   }
+     * })
+     * 
+     */
+    create<T extends TenantCreateArgs>(args: SelectSubset<T, TenantCreateArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Tenants.
+     * @param {TenantCreateManyArgs} args - Arguments to create many Tenants.
+     * @example
+     * // Create many Tenants
+     * const tenant = await prisma.tenant.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TenantCreateManyArgs>(args?: SelectSubset<T, TenantCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Tenants and returns the data saved in the database.
+     * @param {TenantCreateManyAndReturnArgs} args - Arguments to create many Tenants.
+     * @example
+     * // Create many Tenants
+     * const tenant = await prisma.tenant.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Tenants and only return the `id`
+     * const tenantWithIdOnly = await prisma.tenant.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TenantCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Tenant.
+     * @param {TenantDeleteArgs} args - Arguments to delete one Tenant.
+     * @example
+     * // Delete one Tenant
+     * const Tenant = await prisma.tenant.delete({
+     *   where: {
+     *     // ... filter to delete one Tenant
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TenantDeleteArgs>(args: SelectSubset<T, TenantDeleteArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Tenant.
+     * @param {TenantUpdateArgs} args - Arguments to update one Tenant.
+     * @example
+     * // Update one Tenant
+     * const tenant = await prisma.tenant.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TenantUpdateArgs>(args: SelectSubset<T, TenantUpdateArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Tenants.
+     * @param {TenantDeleteManyArgs} args - Arguments to filter Tenants to delete.
+     * @example
+     * // Delete a few Tenants
+     * const { count } = await prisma.tenant.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TenantDeleteManyArgs>(args?: SelectSubset<T, TenantDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tenants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Tenants
+     * const tenant = await prisma.tenant.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TenantUpdateManyArgs>(args: SelectSubset<T, TenantUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Tenants and returns the data updated in the database.
+     * @param {TenantUpdateManyAndReturnArgs} args - Arguments to update many Tenants.
+     * @example
+     * // Update many Tenants
+     * const tenant = await prisma.tenant.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Tenants and only return the `id`
+     * const tenantWithIdOnly = await prisma.tenant.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TenantUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Tenant.
+     * @param {TenantUpsertArgs} args - Arguments to update or create a Tenant.
+     * @example
+     * // Update or create a Tenant
+     * const tenant = await prisma.tenant.upsert({
+     *   create: {
+     *     // ... data to create a Tenant
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Tenant we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TenantUpsertArgs>(args: SelectSubset<T, TenantUpsertArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Tenants.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantCountArgs} args - Arguments to filter Tenants to count.
+     * @example
+     * // Count the number of Tenants
+     * const count = await prisma.tenant.count({
+     *   where: {
+     *     // ... the filter for the Tenants we want to count
+     *   }
+     * })
+    **/
+    count<T extends TenantCountArgs>(
+      args?: Subset<T, TenantCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TenantCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Tenant.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TenantAggregateArgs>(args: Subset<T, TenantAggregateArgs>): Prisma.PrismaPromise<GetTenantAggregateType<T>>
+
+    /**
+     * Group by Tenant.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TenantGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TenantGroupByArgs['orderBy'] }
+        : { orderBy?: TenantGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TenantGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Tenant model
+   */
+  readonly fields: TenantFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Tenant.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TenantClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    consents<T extends Tenant$consentsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$consentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConsentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    auditLogs<T extends Tenant$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Tenant model
+   */
+  interface TenantFieldRefs {
+    readonly id: FieldRef<"Tenant", 'String'>
+    readonly name: FieldRef<"Tenant", 'String'>
+    readonly slug: FieldRef<"Tenant", 'String'>
+    readonly isActive: FieldRef<"Tenant", 'Boolean'>
+    readonly createdAt: FieldRef<"Tenant", 'DateTime'>
+    readonly updatedAt: FieldRef<"Tenant", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Tenant findUnique
+   */
+  export type TenantFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * Filter, which Tenant to fetch.
+     */
+    where: TenantWhereUniqueInput
+  }
+
+  /**
+   * Tenant findUniqueOrThrow
+   */
+  export type TenantFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * Filter, which Tenant to fetch.
+     */
+    where: TenantWhereUniqueInput
+  }
+
+  /**
+   * Tenant findFirst
+   */
+  export type TenantFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * Filter, which Tenant to fetch.
+     */
+    where?: TenantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tenants to fetch.
+     */
+    orderBy?: TenantOrderByWithRelationInput | TenantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tenants.
+     */
+    cursor?: TenantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tenants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tenants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tenants.
+     */
+    distinct?: TenantScalarFieldEnum | TenantScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant findFirstOrThrow
+   */
+  export type TenantFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * Filter, which Tenant to fetch.
+     */
+    where?: TenantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tenants to fetch.
+     */
+    orderBy?: TenantOrderByWithRelationInput | TenantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Tenants.
+     */
+    cursor?: TenantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tenants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tenants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tenants.
+     */
+    distinct?: TenantScalarFieldEnum | TenantScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant findMany
+   */
+  export type TenantFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * Filter, which Tenants to fetch.
+     */
+    where?: TenantWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Tenants to fetch.
+     */
+    orderBy?: TenantOrderByWithRelationInput | TenantOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Tenants.
+     */
+    cursor?: TenantWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Tenants from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Tenants.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Tenants.
+     */
+    distinct?: TenantScalarFieldEnum | TenantScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant create
+   */
+  export type TenantCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Tenant.
+     */
+    data: XOR<TenantCreateInput, TenantUncheckedCreateInput>
+  }
+
+  /**
+   * Tenant createMany
+   */
+  export type TenantCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Tenants.
+     */
+    data: TenantCreateManyInput | TenantCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tenant createManyAndReturn
+   */
+  export type TenantCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * The data used to create many Tenants.
+     */
+    data: TenantCreateManyInput | TenantCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Tenant update
+   */
+  export type TenantUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Tenant.
+     */
+    data: XOR<TenantUpdateInput, TenantUncheckedUpdateInput>
+    /**
+     * Choose, which Tenant to update.
+     */
+    where: TenantWhereUniqueInput
+  }
+
+  /**
+   * Tenant updateMany
+   */
+  export type TenantUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Tenants.
+     */
+    data: XOR<TenantUpdateManyMutationInput, TenantUncheckedUpdateManyInput>
+    /**
+     * Filter which Tenants to update
+     */
+    where?: TenantWhereInput
+    /**
+     * Limit how many Tenants to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tenant updateManyAndReturn
+   */
+  export type TenantUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * The data used to update Tenants.
+     */
+    data: XOR<TenantUpdateManyMutationInput, TenantUncheckedUpdateManyInput>
+    /**
+     * Filter which Tenants to update
+     */
+    where?: TenantWhereInput
+    /**
+     * Limit how many Tenants to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tenant upsert
+   */
+  export type TenantUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Tenant to update in case it exists.
+     */
+    where: TenantWhereUniqueInput
+    /**
+     * In case the Tenant found by the `where` argument doesn't exist, create a new Tenant with this data.
+     */
+    create: XOR<TenantCreateInput, TenantUncheckedCreateInput>
+    /**
+     * In case the Tenant was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TenantUpdateInput, TenantUncheckedUpdateInput>
+  }
+
+  /**
+   * Tenant delete
+   */
+  export type TenantDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+    /**
+     * Filter which Tenant to delete.
+     */
+    where: TenantWhereUniqueInput
+  }
+
+  /**
+   * Tenant deleteMany
+   */
+  export type TenantDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Tenants to delete
+     */
+    where?: TenantWhereInput
+    /**
+     * Limit how many Tenants to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Tenant.consents
+   */
+  export type Tenant$consentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Consent
+     */
+    select?: ConsentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Consent
+     */
+    omit?: ConsentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentInclude<ExtArgs> | null
+    where?: ConsentWhereInput
+    orderBy?: ConsentOrderByWithRelationInput | ConsentOrderByWithRelationInput[]
+    cursor?: ConsentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConsentScalarFieldEnum | ConsentScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.auditLogs
+   */
+  export type Tenant$auditLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the AuditLog
+     */
+    select?: AuditLogSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the AuditLog
+     */
+    omit?: AuditLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogInclude<ExtArgs> | null
+    where?: AuditLogWhereInput
+    orderBy?: AuditLogOrderByWithRelationInput | AuditLogOrderByWithRelationInput[]
+    cursor?: AuditLogWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AuditLogScalarFieldEnum | AuditLogScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant without action
+   */
+  export type TenantDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tenant
+     */
+    select?: TenantSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Tenant
+     */
+    omit?: TenantOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantInclude<ExtArgs> | null
+  }
+
 
   /**
    * Model Consent
@@ -1154,6 +2400,7 @@ export namespace Prisma {
     status?: boolean
     policyVersion?: boolean
     createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["consent"]>
 
   export type ConsentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1164,6 +2411,7 @@ export namespace Prisma {
     status?: boolean
     policyVersion?: boolean
     createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["consent"]>
 
   export type ConsentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1174,6 +2422,7 @@ export namespace Prisma {
     status?: boolean
     policyVersion?: boolean
     createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["consent"]>
 
   export type ConsentSelectScalar = {
@@ -1187,10 +2436,21 @@ export namespace Prisma {
   }
 
   export type ConsentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "userId" | "purpose" | "status" | "policyVersion" | "createdAt", ExtArgs["result"]["consent"]>
+  export type ConsentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type ConsentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type ConsentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
 
   export type $ConsentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Consent"
-    objects: {}
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       tenantId: string
@@ -1593,6 +2853,7 @@ export namespace Prisma {
    */
   export interface Prisma__ConsentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1646,6 +2907,10 @@ export namespace Prisma {
      */
     omit?: ConsentOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentInclude<ExtArgs> | null
+    /**
      * Filter, which Consent to fetch.
      */
     where: ConsentWhereUniqueInput
@@ -1664,6 +2929,10 @@ export namespace Prisma {
      */
     omit?: ConsentOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentInclude<ExtArgs> | null
+    /**
      * Filter, which Consent to fetch.
      */
     where: ConsentWhereUniqueInput
@@ -1681,6 +2950,10 @@ export namespace Prisma {
      * Omit specific fields from the Consent
      */
     omit?: ConsentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentInclude<ExtArgs> | null
     /**
      * Filter, which Consent to fetch.
      */
@@ -1730,6 +3003,10 @@ export namespace Prisma {
      */
     omit?: ConsentOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentInclude<ExtArgs> | null
+    /**
      * Filter, which Consent to fetch.
      */
     where?: ConsentWhereInput
@@ -1777,6 +3054,10 @@ export namespace Prisma {
      * Omit specific fields from the Consent
      */
     omit?: ConsentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentInclude<ExtArgs> | null
     /**
      * Filter, which Consents to fetch.
      */
@@ -1826,6 +3107,10 @@ export namespace Prisma {
      */
     omit?: ConsentOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentInclude<ExtArgs> | null
+    /**
      * The data needed to create a Consent.
      */
     data: XOR<ConsentCreateInput, ConsentUncheckedCreateInput>
@@ -1859,6 +3144,10 @@ export namespace Prisma {
      */
     data: ConsentCreateManyInput | ConsentCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -1873,6 +3162,10 @@ export namespace Prisma {
      * Omit specific fields from the Consent
      */
     omit?: ConsentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentInclude<ExtArgs> | null
     /**
      * The data needed to update a Consent.
      */
@@ -1925,6 +3218,10 @@ export namespace Prisma {
      * Limit how many Consents to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -1939,6 +3236,10 @@ export namespace Prisma {
      * Omit specific fields from the Consent
      */
     omit?: ConsentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentInclude<ExtArgs> | null
     /**
      * The filter to search for the Consent to update in case it exists.
      */
@@ -1965,6 +3266,10 @@ export namespace Prisma {
      * Omit specific fields from the Consent
      */
     omit?: ConsentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentInclude<ExtArgs> | null
     /**
      * Filter which Consent to delete.
      */
@@ -1997,6 +3302,10 @@ export namespace Prisma {
      * Omit specific fields from the Consent
      */
     omit?: ConsentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentInclude<ExtArgs> | null
   }
 
 
@@ -2176,6 +3485,7 @@ export namespace Prisma {
     purpose?: boolean
     metadata?: boolean
     createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["auditLog"]>
 
   export type AuditLogSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2186,6 +3496,7 @@ export namespace Prisma {
     purpose?: boolean
     metadata?: boolean
     createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["auditLog"]>
 
   export type AuditLogSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2196,6 +3507,7 @@ export namespace Prisma {
     purpose?: boolean
     metadata?: boolean
     createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["auditLog"]>
 
   export type AuditLogSelectScalar = {
@@ -2209,10 +3521,21 @@ export namespace Prisma {
   }
 
   export type AuditLogOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "userId" | "action" | "purpose" | "metadata" | "createdAt", ExtArgs["result"]["auditLog"]>
+  export type AuditLogInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type AuditLogIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type AuditLogIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
 
   export type $AuditLogPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "AuditLog"
-    objects: {}
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+    }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       tenantId: string
@@ -2615,6 +3938,7 @@ export namespace Prisma {
    */
   export interface Prisma__AuditLogClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2668,6 +3992,10 @@ export namespace Prisma {
      */
     omit?: AuditLogOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogInclude<ExtArgs> | null
+    /**
      * Filter, which AuditLog to fetch.
      */
     where: AuditLogWhereUniqueInput
@@ -2686,6 +4014,10 @@ export namespace Prisma {
      */
     omit?: AuditLogOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogInclude<ExtArgs> | null
+    /**
      * Filter, which AuditLog to fetch.
      */
     where: AuditLogWhereUniqueInput
@@ -2703,6 +4035,10 @@ export namespace Prisma {
      * Omit specific fields from the AuditLog
      */
     omit?: AuditLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogInclude<ExtArgs> | null
     /**
      * Filter, which AuditLog to fetch.
      */
@@ -2752,6 +4088,10 @@ export namespace Prisma {
      */
     omit?: AuditLogOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogInclude<ExtArgs> | null
+    /**
      * Filter, which AuditLog to fetch.
      */
     where?: AuditLogWhereInput
@@ -2799,6 +4139,10 @@ export namespace Prisma {
      * Omit specific fields from the AuditLog
      */
     omit?: AuditLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogInclude<ExtArgs> | null
     /**
      * Filter, which AuditLogs to fetch.
      */
@@ -2848,6 +4192,10 @@ export namespace Prisma {
      */
     omit?: AuditLogOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogInclude<ExtArgs> | null
+    /**
      * The data needed to create a AuditLog.
      */
     data: XOR<AuditLogCreateInput, AuditLogUncheckedCreateInput>
@@ -2881,6 +4229,10 @@ export namespace Prisma {
      */
     data: AuditLogCreateManyInput | AuditLogCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2895,6 +4247,10 @@ export namespace Prisma {
      * Omit specific fields from the AuditLog
      */
     omit?: AuditLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogInclude<ExtArgs> | null
     /**
      * The data needed to update a AuditLog.
      */
@@ -2947,6 +4303,10 @@ export namespace Prisma {
      * Limit how many AuditLogs to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2961,6 +4321,10 @@ export namespace Prisma {
      * Omit specific fields from the AuditLog
      */
     omit?: AuditLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogInclude<ExtArgs> | null
     /**
      * The filter to search for the AuditLog to update in case it exists.
      */
@@ -2987,6 +4351,10 @@ export namespace Prisma {
      * Omit specific fields from the AuditLog
      */
     omit?: AuditLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogInclude<ExtArgs> | null
     /**
      * Filter which AuditLog to delete.
      */
@@ -3019,6 +4387,10 @@ export namespace Prisma {
      * Omit specific fields from the AuditLog
      */
     omit?: AuditLogOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AuditLogInclude<ExtArgs> | null
   }
 
 
@@ -3034,6 +4406,18 @@ export namespace Prisma {
   };
 
   export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
+
+
+  export const TenantScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    slug: 'slug',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
 
 
   export const ConsentScalarFieldEnum: {
@@ -3123,16 +4507,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'ConsentStatus'
+   * Reference to a field of type 'Boolean'
    */
-  export type EnumConsentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConsentStatus'>
-    
-
-
-  /**
-   * Reference to a field of type 'ConsentStatus[]'
-   */
-  export type ListEnumConsentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConsentStatus[]'>
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
 
 
@@ -3147,6 +4524,20 @@ export namespace Prisma {
    * Reference to a field of type 'DateTime[]'
    */
   export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'ConsentStatus'
+   */
+  export type EnumConsentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConsentStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'ConsentStatus[]'
+   */
+  export type ListEnumConsentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConsentStatus[]'>
     
 
 
@@ -3181,6 +4572,69 @@ export namespace Prisma {
    */
 
 
+  export type TenantWhereInput = {
+    AND?: TenantWhereInput | TenantWhereInput[]
+    OR?: TenantWhereInput[]
+    NOT?: TenantWhereInput | TenantWhereInput[]
+    id?: StringFilter<"Tenant"> | string
+    name?: StringFilter<"Tenant"> | string
+    slug?: StringFilter<"Tenant"> | string
+    isActive?: BoolFilter<"Tenant"> | boolean
+    createdAt?: DateTimeFilter<"Tenant"> | Date | string
+    updatedAt?: DateTimeFilter<"Tenant"> | Date | string
+    consents?: ConsentListRelationFilter
+    auditLogs?: AuditLogListRelationFilter
+  }
+
+  export type TenantOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    consents?: ConsentOrderByRelationAggregateInput
+    auditLogs?: AuditLogOrderByRelationAggregateInput
+  }
+
+  export type TenantWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: TenantWhereInput | TenantWhereInput[]
+    OR?: TenantWhereInput[]
+    NOT?: TenantWhereInput | TenantWhereInput[]
+    name?: StringFilter<"Tenant"> | string
+    isActive?: BoolFilter<"Tenant"> | boolean
+    createdAt?: DateTimeFilter<"Tenant"> | Date | string
+    updatedAt?: DateTimeFilter<"Tenant"> | Date | string
+    consents?: ConsentListRelationFilter
+    auditLogs?: AuditLogListRelationFilter
+  }, "id" | "slug">
+
+  export type TenantOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TenantCountOrderByAggregateInput
+    _max?: TenantMaxOrderByAggregateInput
+    _min?: TenantMinOrderByAggregateInput
+  }
+
+  export type TenantScalarWhereWithAggregatesInput = {
+    AND?: TenantScalarWhereWithAggregatesInput | TenantScalarWhereWithAggregatesInput[]
+    OR?: TenantScalarWhereWithAggregatesInput[]
+    NOT?: TenantScalarWhereWithAggregatesInput | TenantScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Tenant"> | string
+    name?: StringWithAggregatesFilter<"Tenant"> | string
+    slug?: StringWithAggregatesFilter<"Tenant"> | string
+    isActive?: BoolWithAggregatesFilter<"Tenant"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
+  }
+
   export type ConsentWhereInput = {
     AND?: ConsentWhereInput | ConsentWhereInput[]
     OR?: ConsentWhereInput[]
@@ -3192,6 +4646,7 @@ export namespace Prisma {
     status?: EnumConsentStatusFilter<"Consent"> | $Enums.ConsentStatus
     policyVersion?: StringFilter<"Consent"> | string
     createdAt?: DateTimeFilter<"Consent"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
   }
 
   export type ConsentOrderByWithRelationInput = {
@@ -3202,6 +4657,7 @@ export namespace Prisma {
     status?: SortOrder
     policyVersion?: SortOrder
     createdAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
   }
 
   export type ConsentWhereUniqueInput = Prisma.AtLeast<{
@@ -3216,6 +4672,7 @@ export namespace Prisma {
     status?: EnumConsentStatusFilter<"Consent"> | $Enums.ConsentStatus
     policyVersion?: StringFilter<"Consent"> | string
     createdAt?: DateTimeFilter<"Consent"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
   }, "id" | "tenantId_userId_purpose">
 
   export type ConsentOrderByWithAggregationInput = {
@@ -3255,6 +4712,7 @@ export namespace Prisma {
     purpose?: StringNullableFilter<"AuditLog"> | string | null
     metadata?: JsonNullableFilter<"AuditLog">
     createdAt?: DateTimeFilter<"AuditLog"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
   }
 
   export type AuditLogOrderByWithRelationInput = {
@@ -3265,6 +4723,7 @@ export namespace Prisma {
     purpose?: SortOrderInput | SortOrder
     metadata?: SortOrderInput | SortOrder
     createdAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
   }
 
   export type AuditLogWhereUniqueInput = Prisma.AtLeast<{
@@ -3278,6 +4737,7 @@ export namespace Prisma {
     purpose?: StringNullableFilter<"AuditLog"> | string | null
     metadata?: JsonNullableFilter<"AuditLog">
     createdAt?: DateTimeFilter<"AuditLog"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
   }, "id">
 
   export type AuditLogOrderByWithAggregationInput = {
@@ -3306,14 +4766,85 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"AuditLog"> | Date | string
   }
 
+  export type TenantCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantCreateManyInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ConsentCreateInput = {
     id?: string
-    tenantId: string
     userId: string
     purpose: string
     status: $Enums.ConsentStatus
     policyVersion: string
     createdAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutConsentsInput
   }
 
   export type ConsentUncheckedCreateInput = {
@@ -3328,12 +4859,12 @@ export namespace Prisma {
 
   export type ConsentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
     policyVersion?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutConsentsNestedInput
   }
 
   export type ConsentUncheckedUpdateInput = {
@@ -3358,7 +4889,6 @@ export namespace Prisma {
 
   export type ConsentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
@@ -3378,12 +4908,12 @@ export namespace Prisma {
 
   export type AuditLogCreateInput = {
     id?: string
-    tenantId: string
     userId: string
     action: string
     purpose?: string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutAuditLogsInput
   }
 
   export type AuditLogUncheckedCreateInput = {
@@ -3398,12 +4928,12 @@ export namespace Prisma {
 
   export type AuditLogUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
     metadata?: NullableJsonNullValueInput | InputJsonValue
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutAuditLogsNestedInput
   }
 
   export type AuditLogUncheckedUpdateInput = {
@@ -3428,7 +4958,6 @@ export namespace Prisma {
 
   export type AuditLogUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
     action?: StringFieldUpdateOperationsInput | string
     purpose?: NullableStringFieldUpdateOperationsInput | string | null
@@ -3461,11 +4990,9 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type EnumConsentStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.ConsentStatus | EnumConsentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumConsentStatusFilter<$PrismaModel> | $Enums.ConsentStatus
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
@@ -3477,6 +5004,105 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  }
+
+  export type ConsentListRelationFilter = {
+    every?: ConsentWhereInput
+    some?: ConsentWhereInput
+    none?: ConsentWhereInput
+  }
+
+  export type AuditLogListRelationFilter = {
+    every?: AuditLogWhereInput
+    some?: AuditLogWhereInput
+    none?: AuditLogWhereInput
+  }
+
+  export type ConsentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AuditLogOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TenantCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type StringWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel>
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedStringFilter<$PrismaModel>
+    _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type EnumConsentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConsentStatus | EnumConsentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConsentStatusFilter<$PrismaModel> | $Enums.ConsentStatus
+  }
+
+  export type TenantScalarRelationFilter = {
+    is?: TenantWhereInput
+    isNot?: TenantWhereInput
   }
 
   export type ConsentTenantIdUserIdPurposeCompoundUniqueInput = {
@@ -3515,24 +5141,6 @@ export namespace Prisma {
     createdAt?: SortOrder
   }
 
-  export type StringWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[] | ListStringFieldRefInput<$PrismaModel>
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedStringFilter<$PrismaModel>
-    _max?: NestedStringFilter<$PrismaModel>
-  }
-
   export type EnumConsentStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.ConsentStatus | EnumConsentStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
@@ -3541,20 +5149,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumConsentStatusFilter<$PrismaModel>
     _max?: NestedEnumConsentStatusFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -3672,20 +5266,136 @@ export namespace Prisma {
     _max?: NestedJsonNullableFilter<$PrismaModel>
   }
 
+  export type ConsentCreateNestedManyWithoutTenantInput = {
+    create?: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput> | ConsentCreateWithoutTenantInput[] | ConsentUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ConsentCreateOrConnectWithoutTenantInput | ConsentCreateOrConnectWithoutTenantInput[]
+    createMany?: ConsentCreateManyTenantInputEnvelope
+    connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+  }
+
+  export type AuditLogCreateNestedManyWithoutTenantInput = {
+    create?: XOR<AuditLogCreateWithoutTenantInput, AuditLogUncheckedCreateWithoutTenantInput> | AuditLogCreateWithoutTenantInput[] | AuditLogUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: AuditLogCreateOrConnectWithoutTenantInput | AuditLogCreateOrConnectWithoutTenantInput[]
+    createMany?: AuditLogCreateManyTenantInputEnvelope
+    connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
+  }
+
+  export type ConsentUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput> | ConsentCreateWithoutTenantInput[] | ConsentUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ConsentCreateOrConnectWithoutTenantInput | ConsentCreateOrConnectWithoutTenantInput[]
+    createMany?: ConsentCreateManyTenantInputEnvelope
+    connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+  }
+
+  export type AuditLogUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<AuditLogCreateWithoutTenantInput, AuditLogUncheckedCreateWithoutTenantInput> | AuditLogCreateWithoutTenantInput[] | AuditLogUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: AuditLogCreateOrConnectWithoutTenantInput | AuditLogCreateOrConnectWithoutTenantInput[]
+    createMany?: AuditLogCreateManyTenantInputEnvelope
+    connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
-  export type EnumConsentStatusFieldUpdateOperationsInput = {
-    set?: $Enums.ConsentStatus
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
   }
 
+  export type ConsentUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput> | ConsentCreateWithoutTenantInput[] | ConsentUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ConsentCreateOrConnectWithoutTenantInput | ConsentCreateOrConnectWithoutTenantInput[]
+    upsert?: ConsentUpsertWithWhereUniqueWithoutTenantInput | ConsentUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: ConsentCreateManyTenantInputEnvelope
+    set?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    disconnect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    delete?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    update?: ConsentUpdateWithWhereUniqueWithoutTenantInput | ConsentUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: ConsentUpdateManyWithWhereWithoutTenantInput | ConsentUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: ConsentScalarWhereInput | ConsentScalarWhereInput[]
+  }
+
+  export type AuditLogUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<AuditLogCreateWithoutTenantInput, AuditLogUncheckedCreateWithoutTenantInput> | AuditLogCreateWithoutTenantInput[] | AuditLogUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: AuditLogCreateOrConnectWithoutTenantInput | AuditLogCreateOrConnectWithoutTenantInput[]
+    upsert?: AuditLogUpsertWithWhereUniqueWithoutTenantInput | AuditLogUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: AuditLogCreateManyTenantInputEnvelope
+    set?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
+    disconnect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
+    delete?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
+    connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
+    update?: AuditLogUpdateWithWhereUniqueWithoutTenantInput | AuditLogUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: AuditLogUpdateManyWithWhereWithoutTenantInput | AuditLogUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[]
+  }
+
+  export type ConsentUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput> | ConsentCreateWithoutTenantInput[] | ConsentUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: ConsentCreateOrConnectWithoutTenantInput | ConsentCreateOrConnectWithoutTenantInput[]
+    upsert?: ConsentUpsertWithWhereUniqueWithoutTenantInput | ConsentUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: ConsentCreateManyTenantInputEnvelope
+    set?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    disconnect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    delete?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    update?: ConsentUpdateWithWhereUniqueWithoutTenantInput | ConsentUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: ConsentUpdateManyWithWhereWithoutTenantInput | ConsentUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: ConsentScalarWhereInput | ConsentScalarWhereInput[]
+  }
+
+  export type AuditLogUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<AuditLogCreateWithoutTenantInput, AuditLogUncheckedCreateWithoutTenantInput> | AuditLogCreateWithoutTenantInput[] | AuditLogUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: AuditLogCreateOrConnectWithoutTenantInput | AuditLogCreateOrConnectWithoutTenantInput[]
+    upsert?: AuditLogUpsertWithWhereUniqueWithoutTenantInput | AuditLogUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: AuditLogCreateManyTenantInputEnvelope
+    set?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
+    disconnect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
+    delete?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
+    connect?: AuditLogWhereUniqueInput | AuditLogWhereUniqueInput[]
+    update?: AuditLogUpdateWithWhereUniqueWithoutTenantInput | AuditLogUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: AuditLogUpdateManyWithWhereWithoutTenantInput | AuditLogUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutConsentsInput = {
+    create?: XOR<TenantCreateWithoutConsentsInput, TenantUncheckedCreateWithoutConsentsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutConsentsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type EnumConsentStatusFieldUpdateOperationsInput = {
+    set?: $Enums.ConsentStatus
+  }
+
+  export type TenantUpdateOneRequiredWithoutConsentsNestedInput = {
+    create?: XOR<TenantCreateWithoutConsentsInput, TenantUncheckedCreateWithoutConsentsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutConsentsInput
+    upsert?: TenantUpsertWithoutConsentsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutConsentsInput, TenantUpdateWithoutConsentsInput>, TenantUncheckedUpdateWithoutConsentsInput>
+  }
+
+  export type TenantCreateNestedOneWithoutAuditLogsInput = {
+    create?: XOR<TenantCreateWithoutAuditLogsInput, TenantUncheckedCreateWithoutAuditLogsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutAuditLogsInput
+    connect?: TenantWhereUniqueInput
+  }
+
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type TenantUpdateOneRequiredWithoutAuditLogsNestedInput = {
+    create?: XOR<TenantCreateWithoutAuditLogsInput, TenantUncheckedCreateWithoutAuditLogsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutAuditLogsInput
+    upsert?: TenantUpsertWithoutAuditLogsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutAuditLogsInput, TenantUpdateWithoutAuditLogsInput>, TenantUncheckedUpdateWithoutAuditLogsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -3702,11 +5412,9 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
-  export type NestedEnumConsentStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.ConsentStatus | EnumConsentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumConsentStatusFilter<$PrismaModel> | $Enums.ConsentStatus
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
@@ -3748,14 +5456,12 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
-  export type NestedEnumConsentStatusWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: $Enums.ConsentStatus | EnumConsentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumConsentStatusWithAggregatesFilter<$PrismaModel> | $Enums.ConsentStatus
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedEnumConsentStatusFilter<$PrismaModel>
-    _max?: NestedEnumConsentStatusFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
@@ -3770,6 +5476,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumConsentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConsentStatus | EnumConsentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConsentStatusFilter<$PrismaModel> | $Enums.ConsentStatus
+  }
+
+  export type NestedEnumConsentStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConsentStatus | EnumConsentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConsentStatusWithAggregatesFilter<$PrismaModel> | $Enums.ConsentStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumConsentStatusFilter<$PrismaModel>
+    _max?: NestedEnumConsentStatusFilter<$PrismaModel>
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -3835,6 +5558,304 @@ export namespace Prisma {
     gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
     not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type ConsentCreateWithoutTenantInput = {
+    id?: string
+    userId: string
+    purpose: string
+    status: $Enums.ConsentStatus
+    policyVersion: string
+    createdAt?: Date | string
+  }
+
+  export type ConsentUncheckedCreateWithoutTenantInput = {
+    id?: string
+    userId: string
+    purpose: string
+    status: $Enums.ConsentStatus
+    policyVersion: string
+    createdAt?: Date | string
+  }
+
+  export type ConsentCreateOrConnectWithoutTenantInput = {
+    where: ConsentWhereUniqueInput
+    create: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput>
+  }
+
+  export type ConsentCreateManyTenantInputEnvelope = {
+    data: ConsentCreateManyTenantInput | ConsentCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AuditLogCreateWithoutTenantInput = {
+    id?: string
+    userId: string
+    action: string
+    purpose?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type AuditLogUncheckedCreateWithoutTenantInput = {
+    id?: string
+    userId: string
+    action: string
+    purpose?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type AuditLogCreateOrConnectWithoutTenantInput = {
+    where: AuditLogWhereUniqueInput
+    create: XOR<AuditLogCreateWithoutTenantInput, AuditLogUncheckedCreateWithoutTenantInput>
+  }
+
+  export type AuditLogCreateManyTenantInputEnvelope = {
+    data: AuditLogCreateManyTenantInput | AuditLogCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ConsentUpsertWithWhereUniqueWithoutTenantInput = {
+    where: ConsentWhereUniqueInput
+    update: XOR<ConsentUpdateWithoutTenantInput, ConsentUncheckedUpdateWithoutTenantInput>
+    create: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput>
+  }
+
+  export type ConsentUpdateWithWhereUniqueWithoutTenantInput = {
+    where: ConsentWhereUniqueInput
+    data: XOR<ConsentUpdateWithoutTenantInput, ConsentUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type ConsentUpdateManyWithWhereWithoutTenantInput = {
+    where: ConsentScalarWhereInput
+    data: XOR<ConsentUpdateManyMutationInput, ConsentUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type ConsentScalarWhereInput = {
+    AND?: ConsentScalarWhereInput | ConsentScalarWhereInput[]
+    OR?: ConsentScalarWhereInput[]
+    NOT?: ConsentScalarWhereInput | ConsentScalarWhereInput[]
+    id?: StringFilter<"Consent"> | string
+    tenantId?: StringFilter<"Consent"> | string
+    userId?: StringFilter<"Consent"> | string
+    purpose?: StringFilter<"Consent"> | string
+    status?: EnumConsentStatusFilter<"Consent"> | $Enums.ConsentStatus
+    policyVersion?: StringFilter<"Consent"> | string
+    createdAt?: DateTimeFilter<"Consent"> | Date | string
+  }
+
+  export type AuditLogUpsertWithWhereUniqueWithoutTenantInput = {
+    where: AuditLogWhereUniqueInput
+    update: XOR<AuditLogUpdateWithoutTenantInput, AuditLogUncheckedUpdateWithoutTenantInput>
+    create: XOR<AuditLogCreateWithoutTenantInput, AuditLogUncheckedCreateWithoutTenantInput>
+  }
+
+  export type AuditLogUpdateWithWhereUniqueWithoutTenantInput = {
+    where: AuditLogWhereUniqueInput
+    data: XOR<AuditLogUpdateWithoutTenantInput, AuditLogUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type AuditLogUpdateManyWithWhereWithoutTenantInput = {
+    where: AuditLogScalarWhereInput
+    data: XOR<AuditLogUpdateManyMutationInput, AuditLogUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type AuditLogScalarWhereInput = {
+    AND?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[]
+    OR?: AuditLogScalarWhereInput[]
+    NOT?: AuditLogScalarWhereInput | AuditLogScalarWhereInput[]
+    id?: StringFilter<"AuditLog"> | string
+    tenantId?: StringFilter<"AuditLog"> | string
+    userId?: StringFilter<"AuditLog"> | string
+    action?: StringFilter<"AuditLog"> | string
+    purpose?: StringNullableFilter<"AuditLog"> | string | null
+    metadata?: JsonNullableFilter<"AuditLog">
+    createdAt?: DateTimeFilter<"AuditLog"> | Date | string
+  }
+
+  export type TenantCreateWithoutConsentsInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutConsentsInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutConsentsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutConsentsInput, TenantUncheckedCreateWithoutConsentsInput>
+  }
+
+  export type TenantUpsertWithoutConsentsInput = {
+    update: XOR<TenantUpdateWithoutConsentsInput, TenantUncheckedUpdateWithoutConsentsInput>
+    create: XOR<TenantCreateWithoutConsentsInput, TenantUncheckedCreateWithoutConsentsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutConsentsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutConsentsInput, TenantUncheckedUpdateWithoutConsentsInput>
+  }
+
+  export type TenantUpdateWithoutConsentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutConsentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantCreateWithoutAuditLogsInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutAuditLogsInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutAuditLogsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutAuditLogsInput, TenantUncheckedCreateWithoutAuditLogsInput>
+  }
+
+  export type TenantUpsertWithoutAuditLogsInput = {
+    update: XOR<TenantUpdateWithoutAuditLogsInput, TenantUncheckedUpdateWithoutAuditLogsInput>
+    create: XOR<TenantCreateWithoutAuditLogsInput, TenantUncheckedCreateWithoutAuditLogsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutAuditLogsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutAuditLogsInput, TenantUncheckedUpdateWithoutAuditLogsInput>
+  }
+
+  export type TenantUpdateWithoutAuditLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutAuditLogsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type ConsentCreateManyTenantInput = {
+    id?: string
+    userId: string
+    purpose: string
+    status: $Enums.ConsentStatus
+    policyVersion: string
+    createdAt?: Date | string
+  }
+
+  export type AuditLogCreateManyTenantInput = {
+    id?: string
+    userId: string
+    action: string
+    purpose?: string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: Date | string
+  }
+
+  export type ConsentUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
+    policyVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConsentUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
+    policyVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConsentUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
+    policyVersion?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AuditLogUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AuditLogUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AuditLogUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    action?: StringFieldUpdateOperationsInput | string
+    purpose?: NullableStringFieldUpdateOperationsInput | string | null
+    metadata?: NullableJsonNullValueInput | InputJsonValue
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

@@ -14,9 +14,24 @@ enum ConsentStatus {
   REVOKED
 }
 
+model Tenant {
+  id        String   @id @default(cuid())
+  name      String
+  slug      String   @unique
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  consents  Consent[]
+  auditLogs AuditLog[]
+
+  @@index([isActive])
+}
+
 model Consent {
   id            String        @id @default(cuid())
   tenantId      String
+  tenant        Tenant        @relation(fields: [tenantId], references: [id], onDelete: Restrict)
   userId        String
   purpose       String
   status        ConsentStatus
@@ -24,6 +39,7 @@ model Consent {
   createdAt     DateTime      @default(now())
 
   @@unique([tenantId, userId, purpose])
+  @@index([tenantId])
   @@index([userId])
   @@index([purpose])
   @@index([userId, purpose])
@@ -32,11 +48,13 @@ model Consent {
 model AuditLog {
   id        String   @id @default(cuid())
   tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Restrict)
   userId    String
   action    String
   purpose   String?
   metadata  Json?
   createdAt DateTime @default(now())
 
+  @@index([tenantId])
   @@index([userId])
 }

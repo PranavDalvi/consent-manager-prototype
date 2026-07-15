@@ -8,6 +8,16 @@ export async function grantConsent(
   policyVersion: string
 ) {
   return prisma.$transaction(async (tx) => {
+    await tx.tenant.upsert({
+      where: { id: tenantId },
+      update: {},
+      create: {
+        id: tenantId,
+        name: tenantId,
+        slug: tenantId,
+      },
+    });
+
     const consent = await tx.consent.upsert({
       where: {
         tenantId_userId_purpose: {

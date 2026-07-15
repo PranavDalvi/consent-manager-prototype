@@ -120,6 +120,15 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.TenantScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ConsentScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -171,6 +180,7 @@ exports.ConsentStatus = exports.$Enums.ConsentStatus = {
 };
 
 exports.Prisma.ModelName = {
+  Tenant: 'Tenant',
   Consent: 'Consent',
   AuditLog: 'AuditLog'
 };
