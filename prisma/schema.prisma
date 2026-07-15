@@ -24,6 +24,7 @@ model Tenant {
 
   consents  Consent[]
   auditLogs AuditLog[]
+  apiKeys   ApiKey[]
 
   @@index([isActive])
 }
@@ -57,4 +58,23 @@ model AuditLog {
 
   @@index([tenantId])
   @@index([userId])
+}
+
+model ApiKey {
+  id         String    @id @default(cuid())
+  tenantId   String
+  name       String
+  keyPrefix  String
+  keyHash    String    @unique
+  isActive   Boolean   @default(true)
+  lastUsedAt DateTime?
+  expiresAt  DateTime?
+  revokedAt  DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  tenant     Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([tenantId])
+  @@index([keyPrefix])
 }

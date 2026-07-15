@@ -149,6 +149,20 @@ exports.Prisma.AuditLogScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.ApiKeyScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  keyPrefix: 'keyPrefix',
+  keyHash: 'keyHash',
+  isActive: 'isActive',
+  lastUsedAt: 'lastUsedAt',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -182,7 +196,8 @@ exports.ConsentStatus = exports.$Enums.ConsentStatus = {
 exports.Prisma.ModelName = {
   Tenant: 'Tenant',
   Consent: 'Consent',
-  AuditLog: 'AuditLog'
+  AuditLog: 'AuditLog',
+  ApiKey: 'ApiKey'
 };
 
 /**

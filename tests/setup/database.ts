@@ -38,6 +38,7 @@ export async function clearTestDatabase(): Promise<void> {
   await prisma.$transaction([
     prisma.auditLog.deleteMany(),
     prisma.consent.deleteMany(),
+    prisma.tenant.deleteMany(),
   ]);
 }
 
