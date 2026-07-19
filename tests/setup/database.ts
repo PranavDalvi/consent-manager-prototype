@@ -53,12 +53,6 @@ export async function createTenantWithApiKey(input: { tenantId: string; tenantNa
     },
   });
 
-  const tenantLookup = await prisma.tenant.findUnique({
-    where: { id: input.tenantId },
-  });
-
-
-
   const rawApiKey = generateApiKey();
 
   const apiKey = await prisma.apiKey.create({

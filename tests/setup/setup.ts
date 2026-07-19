@@ -13,19 +13,25 @@ function hasSafeTestDatabase(): boolean {
   );
 }
 
+const globalForTests = globalThis as typeof globalThis & {
+  __consentManagerTestDbCleared?: boolean;
+  __consentManagerTestDbDisconnected?: boolean;
+};
+
 beforeAll(async () => {
-  if (!hasSafeTestDatabase()) {
+  if (!hasSafeTestDatabase() || globalForTests.__consentManagerTestDbCleared) {
     return;
   }
 
+  globalForTests.__consentManagerTestDbCleared = true;
   await clearTestDatabase();
 });
 
 afterAll(async () => {
-  if (!hasSafeTestDatabase()) {
+  if (!hasSafeTestDatabase() || globalForTests.__consentManagerTestDbDisconnected) {
     return;
   }
 
-  await clearTestDatabase();
+  globalForTests.__consentManagerTestDbDisconnected = true;
   await disconnectTestDatabase();
 });

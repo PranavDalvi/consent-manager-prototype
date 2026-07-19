@@ -1,5 +1,6 @@
 import { ConsentStatus } from "../generated";
 import { prisma } from "../db/prisma";
+import { AppError } from "../utils/app-error";
 
 export async function grantConsent(
   tenantId: string,

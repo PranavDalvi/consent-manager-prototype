@@ -22,7 +22,7 @@ export const fetchAuditLogsHandler = async (req: Request, res: Response): Promis
 
     res.json({
       success: true,
-      data: logs,
+      data: logs ?? [],
     });
   } catch (error) {
     console.error("Failed to fetch audit logs:", error);

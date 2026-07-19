@@ -22,7 +22,6 @@ export async function apiKeyAuthMiddleware(
 
 
     if (!apiKeyHeader) {
-      console.log("[api-key-auth] missing header");
       res.status(401).json({
         success: false,
         message: "Invalid or missing API key",
@@ -33,14 +32,7 @@ export async function apiKeyAuthMiddleware(
 
     const rawApiKey = apiKeyHeader.trim();
 
-    console.log("[api-key-auth] final-check trace", {
-      headerPrefix: rawApiKey.slice(0, 15),
-      headerLength: rawApiKey.length,
-      route: req.method + " " + req.originalUrl,
-    });
-
     if (!rawApiKey) {
-      console.log("[api-key-auth] empty header after trim");
       res.status(401).json({
         success: false,
         message: "Invalid or missing API key",
@@ -50,9 +42,6 @@ export async function apiKeyAuthMiddleware(
     }
 
     if (!isValidApiKeyFormat(rawApiKey)) {
-      console.log("[api-key-auth] invalid format", {
-        headerPrefix: rawApiKey.slice(0, 15),
-      });
       res.status(401).json({
         success: false,
         message: "Invalid or missing API key",
@@ -66,9 +55,6 @@ export async function apiKeyAuthMiddleware(
     );
 
     if (!authContext) {
-      console.log("[api-key-auth] auth context null", {
-        headerPrefix: rawApiKey.slice(0, 15),
-      });
       res.status(401).json({
         success: false,
         message: "Invalid or missing API key",

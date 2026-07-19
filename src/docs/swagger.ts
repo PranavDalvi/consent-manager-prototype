@@ -14,6 +14,15 @@ const options: swaggerJsdoc.Options = {
         description: "Development server",
       },
     ],
+    components: {
+      securitySchemes: {
+        ApiKeyAuth: {
+          type: "apiKey",
+          in: "header",
+          name: "X-API-Key",
+        },
+      },
+    },
   },
   apis: ["./src/routes/*.ts"],
 };
