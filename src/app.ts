@@ -8,6 +8,7 @@ import swaggerUi from "swagger-ui-express";
 import auditRoutes from "./routes/audit.routes";
 import apiKeyRoutes from "./routes/api-key.routes";
 import policyRoutes from "./routes/policy.routes";
+import webhookRoutes from "./routes/webhook.routes";
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.use("/api/consents", consentRoutes);
 app.use("/api/policies", policyRoutes);
 app.use("/api/audit", auditRoutes);
 app.use("/api/api-keys", apiKeyRoutes);
+app.use("/api/webhooks", webhookRoutes);
 app.use(errorHandler);
 
 export default app;

@@ -26,6 +26,8 @@ model Tenant {
   policies  Policy[]
   auditLogs AuditLog[]
   apiKeys   ApiKey[]
+  webhooks  Webhook[]
+  internalEvents InternalEvent[]
 
   @@index([isActive])
 }
@@ -101,4 +103,37 @@ model ApiKey {
 
   @@index([tenantId])
   @@index([keyPrefix])
+}
+
+model Webhook {
+  id        String   @id @default(cuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  name      String
+  url       String
+  secret    String
+  events    String[]
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([tenantId, isActive])
+}
+
+model InternalEvent {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  type        String
+  payload     Json
+  status      String   @default("PENDING")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  dispatchedAt DateTime?
+  processedAt DateTime?
+
+  @@index([tenantId])
+  @@index([tenantId, type])
+  @@index([tenantId, status])
 }

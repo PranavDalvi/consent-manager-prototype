@@ -1,5 +1,6 @@
 import { prisma } from "../db/prisma";
 import { AppError } from "../utils/app-error";
+import { createInternalEvent, enqueueInternalEventDelivery } from "../events/internal-event.publisher";
 
 function requireTenantId(tenantId?: string): string {
   if (!tenantId) {
@@ -24,16 +25,28 @@ export async function createPolicy(input: {
 }) {
   const tenantId = requireTenantId(input.tenantId);
 
-  return prisma.policy.create({
-  data: {
-    tenantId,
-    title: input.title,
-    purpose: input.purpose,
-    version: input.version,
-    content: input.content,
-    isActive: true,
-  },
-});
+  const policy = await prisma.policy.create({
+    data: {
+      tenantId,
+      title: input.title,
+      purpose: input.purpose,
+      version: input.version,
+      content: input.content,
+      isActive: true,
+    },
+  });
+
+  const event = await prisma.$transaction(async (tx) => {
+    return createInternalEvent(tx, {
+      tenantId,
+      type: "POLICY_CREATED",
+      payload: { policy },
+    });
+  });
+
+  void enqueueInternalEventDelivery(event.id);
+
+  return policy;
 }
 
 export async function listPolicies(tenantId?: string) {
@@ -65,7 +78,18 @@ export async function archivePolicy(tenantId?: string, id?: string) {
 
   if (!policy.isActive) return policy;
 
-  return prisma.policy.update({ where: { id }, data: { isActive: false } });
+  const archived = await prisma.policy.update({ where: { id }, data: { isActive: false } });
+  const event = await prisma.$transaction(async (tx) => {
+    return createInternalEvent(tx, {
+      tenantId: resolvedTenantId,
+      type: "POLICY_ARCHIVED",
+      payload: { policy: archived },
+    });
+  });
+
+  void enqueueInternalEventDelivery(event.id);
+
+  return archived;
 }
 
 export async function createPolicyVersion(tenantId?: string, id?: string, content?: string) {
@@ -77,7 +101,9 @@ export async function createPolicyVersion(tenantId?: string, id?: string, conten
   if (!current) throw new AppError(404, "Policy not found");
   requirePolicyOwnership(current, resolvedTenantId);
 
-  const created = await prisma.$transaction(async (tx) => {
+  const normalizedContent = content;
+
+  const result = await prisma.$transaction(async (tx) => {
     const latest = await tx.policy.findFirst({
       where: { tenantId: resolvedTenantId, purpose: current.purpose },
       orderBy: [{ version: "desc" }, { createdAt: "desc" }],
@@ -85,19 +111,29 @@ export async function createPolicyVersion(tenantId?: string, id?: string, conten
 
     const nextVersion = (latest?.version ?? current.version) + 1;
 
-    return tx.policy.create({
+    const created = await tx.policy.create({
       data: {
         tenantId: resolvedTenantId,
         title: current.title,
         purpose: current.purpose,
         version: nextVersion,
-        content,
+        content: normalizedContent,
         isActive: true,
       },
     });
+
+    const event = await createInternalEvent(tx, {
+      tenantId: resolvedTenantId,
+      type: "POLICY_VERSION_CREATED",
+      payload: { policy: created, basePolicyId: current.id },
+    });
+
+    return { policy: created, eventId: event.id };
   });
 
-  return created;
+  void enqueueInternalEventDelivery(result.eventId);
+
+  return result.policy;
 }
 
 export async function listPolicyVersions(tenantId?: string, id?: string) {

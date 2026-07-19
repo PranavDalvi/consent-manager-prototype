@@ -1,13 +1,14 @@
 import { ConsentStatus } from "../generated";
 import { prisma } from "../db/prisma";
 import { AppError } from "../utils/app-error";
+import { createInternalEvent, enqueueInternalEventDelivery } from "../events/internal-event.publisher";
 
 export async function grantConsent(
   tenantId: string,
   userId: string,
   policyId: string
 ) {
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     const policy = await tx.policy.findUnique({ where: { id: policyId } });
     if (!policy || policy.tenantId !== tenantId) {
       throw new AppError(404, "Policy not found");
@@ -48,8 +49,25 @@ export async function grantConsent(
       },
     });
 
-    return consent;
+    const event = await createInternalEvent(tx, {
+      tenantId,
+      type: "CONSENT_GRANTED",
+      payload: {
+        consent,
+        policy: {
+          id: policy.id,
+          purpose: policy.purpose,
+          version: policy.version,
+        },
+      },
+    });
+
+    return { consent, eventId: event.id };
   });
+
+  void enqueueInternalEventDelivery(result.eventId);
+
+  return result.consent;
 }
 
 export async function fetchUserConsents(userId: string, tenantId: string) {
@@ -60,7 +78,7 @@ export async function fetchUserConsents(userId: string, tenantId: string) {
 }
 
 export async function revokeConsent(consentId: string) {
-  return prisma.$transaction(async (tx) => {
+  const result = await prisma.$transaction(async (tx) => {
     const consent = await tx.consent.findUnique({
       where: { id: consentId },
     });
@@ -70,7 +88,7 @@ export async function revokeConsent(consentId: string) {
     }
 
     if (consent.status === ConsentStatus.REVOKED) {
-      return consent;
+      return { consent, eventId: null as string | null };
     }
 
     const revokedConsent = await tx.consent.update({
@@ -87,8 +105,22 @@ export async function revokeConsent(consentId: string) {
       },
     });
 
-    return revokedConsent;
+    const event = await createInternalEvent(tx, {
+      tenantId: revokedConsent.tenantId,
+      type: "CONSENT_REVOKED",
+      payload: {
+        consent: revokedConsent,
+      },
+    });
+
+    return { consent: revokedConsent, eventId: event.id };
   });
+
+  if (result.eventId) {
+    void enqueueInternalEventDelivery(result.eventId);
+  }
+
+  return result.consent;
 }
 
 export async function checkConsent(

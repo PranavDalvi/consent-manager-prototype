@@ -22,6 +22,45 @@ const options: swaggerJsdoc.Options = {
           name: "X-API-Key",
         },
       },
+      schemas: {
+        WebhookDeliveryPayload: {
+          type: "object",
+          required: ["event", "timestamp", "tenantId", "data"],
+          properties: {
+            event: {
+              type: "string",
+              example: "CONSENT_GRANTED",
+            },
+            timestamp: {
+              type: "string",
+              format: "date-time",
+            },
+            tenantId: {
+              type: "string",
+            },
+            data: {
+              type: "object",
+              additionalProperties: true,
+            },
+          },
+        },
+        Webhook: {
+          type: "object",
+          properties: {
+            id: { type: "string" },
+            tenantId: { type: "string" },
+            name: { type: "string" },
+            url: { type: "string" },
+            events: {
+              type: "array",
+              items: { type: "string" },
+            },
+            isActive: { type: "boolean" },
+            createdAt: { type: "string", format: "date-time" },
+            updatedAt: { type: "string", format: "date-time" },
+          },
+        },
+      },
     },
   },
   apis: ["./src/routes/*.ts"],

@@ -27,6 +27,7 @@ describeAuditApi("Audit Logs API", () => {
   let tenantAKey: string;
   let tenantBKey: string;
   let consentId: string;
+  let policyId: string;
 
   beforeAll(async () => {
     const suffix = uniqueSuffix();
@@ -48,10 +49,22 @@ describeAuditApi("Audit Logs API", () => {
     tenantAKey = tenantA.rawApiKey;
     tenantBKey = tenantB.rawApiKey;
 
+    const policyResponse = await request(app)
+      .post("/api/policies")
+      .set("X-API-Key", tenantAKey)
+      .send({
+        title: "Privacy Policy",
+        purpose,
+        version: 1,
+        content: "v1",
+      });
+
+    policyId = policyResponse.body.data.id as string;
+
     const response = await request(app)
       .post("/api/consents")
       .set("X-API-Key", tenantAKey)
-      .send({ userId, purpose, policyVersion });
+      .send({ userId, policyId });
 
     expect(response.status).toBe(201);
     consentId = response.body.data.id as string;

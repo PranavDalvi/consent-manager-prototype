@@ -38,6 +38,16 @@ export type AuditLog = $Result.DefaultSelection<Prisma.$AuditLogPayload>
  * 
  */
 export type ApiKey = $Result.DefaultSelection<Prisma.$ApiKeyPayload>
+/**
+ * Model Webhook
+ * 
+ */
+export type Webhook = $Result.DefaultSelection<Prisma.$WebhookPayload>
+/**
+ * Model InternalEvent
+ * 
+ */
+export type InternalEvent = $Result.DefaultSelection<Prisma.$InternalEventPayload>
 
 /**
  * Enums
@@ -226,6 +236,26 @@ export class PrismaClient<
     * ```
     */
   get apiKey(): Prisma.ApiKeyDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.webhook`: Exposes CRUD operations for the **Webhook** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Webhooks
+    * const webhooks = await prisma.webhook.findMany()
+    * ```
+    */
+  get webhook(): Prisma.WebhookDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.internalEvent`: Exposes CRUD operations for the **InternalEvent** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more InternalEvents
+    * const internalEvents = await prisma.internalEvent.findMany()
+    * ```
+    */
+  get internalEvent(): Prisma.InternalEventDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -664,7 +694,9 @@ export namespace Prisma {
     Policy: 'Policy',
     Consent: 'Consent',
     AuditLog: 'AuditLog',
-    ApiKey: 'ApiKey'
+    ApiKey: 'ApiKey',
+    Webhook: 'Webhook',
+    InternalEvent: 'InternalEvent'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -680,7 +712,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tenant" | "policy" | "consent" | "auditLog" | "apiKey"
+      modelProps: "tenant" | "policy" | "consent" | "auditLog" | "apiKey" | "webhook" | "internalEvent"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1054,6 +1086,154 @@ export namespace Prisma {
           }
         }
       }
+      Webhook: {
+        payload: Prisma.$WebhookPayload<ExtArgs>
+        fields: Prisma.WebhookFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.WebhookFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.WebhookFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>
+          }
+          findFirst: {
+            args: Prisma.WebhookFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.WebhookFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>
+          }
+          findMany: {
+            args: Prisma.WebhookFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>[]
+          }
+          create: {
+            args: Prisma.WebhookCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>
+          }
+          createMany: {
+            args: Prisma.WebhookCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.WebhookCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>[]
+          }
+          delete: {
+            args: Prisma.WebhookDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>
+          }
+          update: {
+            args: Prisma.WebhookUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>
+          }
+          deleteMany: {
+            args: Prisma.WebhookDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.WebhookUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.WebhookUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>[]
+          }
+          upsert: {
+            args: Prisma.WebhookUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$WebhookPayload>
+          }
+          aggregate: {
+            args: Prisma.WebhookAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateWebhook>
+          }
+          groupBy: {
+            args: Prisma.WebhookGroupByArgs<ExtArgs>
+            result: $Utils.Optional<WebhookGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.WebhookCountArgs<ExtArgs>
+            result: $Utils.Optional<WebhookCountAggregateOutputType> | number
+          }
+        }
+      }
+      InternalEvent: {
+        payload: Prisma.$InternalEventPayload<ExtArgs>
+        fields: Prisma.InternalEventFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InternalEventFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InternalEventPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InternalEventFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InternalEventPayload>
+          }
+          findFirst: {
+            args: Prisma.InternalEventFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InternalEventPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InternalEventFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InternalEventPayload>
+          }
+          findMany: {
+            args: Prisma.InternalEventFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InternalEventPayload>[]
+          }
+          create: {
+            args: Prisma.InternalEventCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InternalEventPayload>
+          }
+          createMany: {
+            args: Prisma.InternalEventCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InternalEventCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InternalEventPayload>[]
+          }
+          delete: {
+            args: Prisma.InternalEventDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InternalEventPayload>
+          }
+          update: {
+            args: Prisma.InternalEventUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InternalEventPayload>
+          }
+          deleteMany: {
+            args: Prisma.InternalEventDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InternalEventUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InternalEventUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InternalEventPayload>[]
+          }
+          upsert: {
+            args: Prisma.InternalEventUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InternalEventPayload>
+          }
+          aggregate: {
+            args: Prisma.InternalEventAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInternalEvent>
+          }
+          groupBy: {
+            args: Prisma.InternalEventGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InternalEventGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InternalEventCountArgs<ExtArgs>
+            result: $Utils.Optional<InternalEventCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1167,6 +1347,8 @@ export namespace Prisma {
     consent?: ConsentOmit
     auditLog?: AuditLogOmit
     apiKey?: ApiKeyOmit
+    webhook?: WebhookOmit
+    internalEvent?: InternalEventOmit
   }
 
   /* Types for Logging */
@@ -1251,6 +1433,8 @@ export namespace Prisma {
     policies: number
     auditLogs: number
     apiKeys: number
+    webhooks: number
+    internalEvents: number
   }
 
   export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -1258,6 +1442,8 @@ export namespace Prisma {
     policies?: boolean | TenantCountOutputTypeCountPoliciesArgs
     auditLogs?: boolean | TenantCountOutputTypeCountAuditLogsArgs
     apiKeys?: boolean | TenantCountOutputTypeCountApiKeysArgs
+    webhooks?: boolean | TenantCountOutputTypeCountWebhooksArgs
+    internalEvents?: boolean | TenantCountOutputTypeCountInternalEventsArgs
   }
 
   // Custom InputTypes
@@ -1297,6 +1483,20 @@ export namespace Prisma {
    */
   export type TenantCountOutputTypeCountApiKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ApiKeyWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountWebhooksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WebhookWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountInternalEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InternalEventWhereInput
   }
 
 
@@ -1511,6 +1711,8 @@ export namespace Prisma {
     policies?: boolean | Tenant$policiesArgs<ExtArgs>
     auditLogs?: boolean | Tenant$auditLogsArgs<ExtArgs>
     apiKeys?: boolean | Tenant$apiKeysArgs<ExtArgs>
+    webhooks?: boolean | Tenant$webhooksArgs<ExtArgs>
+    internalEvents?: boolean | Tenant$internalEventsArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tenant"]>
 
@@ -1547,6 +1749,8 @@ export namespace Prisma {
     policies?: boolean | Tenant$policiesArgs<ExtArgs>
     auditLogs?: boolean | Tenant$auditLogsArgs<ExtArgs>
     apiKeys?: boolean | Tenant$apiKeysArgs<ExtArgs>
+    webhooks?: boolean | Tenant$webhooksArgs<ExtArgs>
+    internalEvents?: boolean | Tenant$internalEventsArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TenantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -1559,6 +1763,8 @@ export namespace Prisma {
       policies: Prisma.$PolicyPayload<ExtArgs>[]
       auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
       apiKeys: Prisma.$ApiKeyPayload<ExtArgs>[]
+      webhooks: Prisma.$WebhookPayload<ExtArgs>[]
+      internalEvents: Prisma.$InternalEventPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -1965,6 +2171,8 @@ export namespace Prisma {
     policies<T extends Tenant$policiesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$policiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     auditLogs<T extends Tenant$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     apiKeys<T extends Tenant$apiKeysArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    webhooks<T extends Tenant$webhooksArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$webhooksArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    internalEvents<T extends Tenant$internalEventsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$internalEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2486,6 +2694,54 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: ApiKeyScalarFieldEnum | ApiKeyScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.webhooks
+   */
+  export type Tenant$webhooksArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookInclude<ExtArgs> | null
+    where?: WebhookWhereInput
+    orderBy?: WebhookOrderByWithRelationInput | WebhookOrderByWithRelationInput[]
+    cursor?: WebhookWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: WebhookScalarFieldEnum | WebhookScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.internalEvents
+   */
+  export type Tenant$internalEventsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventInclude<ExtArgs> | null
+    where?: InternalEventWhereInput
+    orderBy?: InternalEventOrderByWithRelationInput | InternalEventOrderByWithRelationInput[]
+    cursor?: InternalEventWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InternalEventScalarFieldEnum | InternalEventScalarFieldEnum[]
   }
 
   /**
@@ -7057,6 +7313,2228 @@ export namespace Prisma {
 
 
   /**
+   * Model Webhook
+   */
+
+  export type AggregateWebhook = {
+    _count: WebhookCountAggregateOutputType | null
+    _min: WebhookMinAggregateOutputType | null
+    _max: WebhookMaxAggregateOutputType | null
+  }
+
+  export type WebhookMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    name: string | null
+    url: string | null
+    secret: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WebhookMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    name: string | null
+    url: string | null
+    secret: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type WebhookCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    name: number
+    url: number
+    secret: number
+    events: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type WebhookMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    url?: true
+    secret?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WebhookMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    url?: true
+    secret?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type WebhookCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    url?: true
+    secret?: true
+    events?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type WebhookAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Webhook to aggregate.
+     */
+    where?: WebhookWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Webhooks to fetch.
+     */
+    orderBy?: WebhookOrderByWithRelationInput | WebhookOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: WebhookWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Webhooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Webhooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Webhooks
+    **/
+    _count?: true | WebhookCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: WebhookMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: WebhookMaxAggregateInputType
+  }
+
+  export type GetWebhookAggregateType<T extends WebhookAggregateArgs> = {
+        [P in keyof T & keyof AggregateWebhook]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateWebhook[P]>
+      : GetScalarType<T[P], AggregateWebhook[P]>
+  }
+
+
+
+
+  export type WebhookGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: WebhookWhereInput
+    orderBy?: WebhookOrderByWithAggregationInput | WebhookOrderByWithAggregationInput[]
+    by: WebhookScalarFieldEnum[] | WebhookScalarFieldEnum
+    having?: WebhookScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: WebhookCountAggregateInputType | true
+    _min?: WebhookMinAggregateInputType
+    _max?: WebhookMaxAggregateInputType
+  }
+
+  export type WebhookGroupByOutputType = {
+    id: string
+    tenantId: string
+    name: string
+    url: string
+    secret: string
+    events: string[]
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: WebhookCountAggregateOutputType | null
+    _min: WebhookMinAggregateOutputType | null
+    _max: WebhookMaxAggregateOutputType | null
+  }
+
+  type GetWebhookGroupByPayload<T extends WebhookGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<WebhookGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof WebhookGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], WebhookGroupByOutputType[P]>
+            : GetScalarType<T[P], WebhookGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type WebhookSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    url?: boolean
+    secret?: boolean
+    events?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["webhook"]>
+
+  export type WebhookSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    url?: boolean
+    secret?: boolean
+    events?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["webhook"]>
+
+  export type WebhookSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    url?: boolean
+    secret?: boolean
+    events?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["webhook"]>
+
+  export type WebhookSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    url?: boolean
+    secret?: boolean
+    events?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type WebhookOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "url" | "secret" | "events" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["webhook"]>
+  export type WebhookInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type WebhookIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type WebhookIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $WebhookPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Webhook"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      name: string
+      url: string
+      secret: string
+      events: string[]
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["webhook"]>
+    composites: {}
+  }
+
+  type WebhookGetPayload<S extends boolean | null | undefined | WebhookDefaultArgs> = $Result.GetResult<Prisma.$WebhookPayload, S>
+
+  type WebhookCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<WebhookFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: WebhookCountAggregateInputType | true
+    }
+
+  export interface WebhookDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Webhook'], meta: { name: 'Webhook' } }
+    /**
+     * Find zero or one Webhook that matches the filter.
+     * @param {WebhookFindUniqueArgs} args - Arguments to find a Webhook
+     * @example
+     * // Get one Webhook
+     * const webhook = await prisma.webhook.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends WebhookFindUniqueArgs>(args: SelectSubset<T, WebhookFindUniqueArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Webhook that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {WebhookFindUniqueOrThrowArgs} args - Arguments to find a Webhook
+     * @example
+     * // Get one Webhook
+     * const webhook = await prisma.webhook.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends WebhookFindUniqueOrThrowArgs>(args: SelectSubset<T, WebhookFindUniqueOrThrowArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Webhook that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookFindFirstArgs} args - Arguments to find a Webhook
+     * @example
+     * // Get one Webhook
+     * const webhook = await prisma.webhook.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends WebhookFindFirstArgs>(args?: SelectSubset<T, WebhookFindFirstArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Webhook that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookFindFirstOrThrowArgs} args - Arguments to find a Webhook
+     * @example
+     * // Get one Webhook
+     * const webhook = await prisma.webhook.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends WebhookFindFirstOrThrowArgs>(args?: SelectSubset<T, WebhookFindFirstOrThrowArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Webhooks that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Webhooks
+     * const webhooks = await prisma.webhook.findMany()
+     * 
+     * // Get first 10 Webhooks
+     * const webhooks = await prisma.webhook.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const webhookWithIdOnly = await prisma.webhook.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends WebhookFindManyArgs>(args?: SelectSubset<T, WebhookFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Webhook.
+     * @param {WebhookCreateArgs} args - Arguments to create a Webhook.
+     * @example
+     * // Create one Webhook
+     * const Webhook = await prisma.webhook.create({
+     *   data: {
+     *     // ... data to create a Webhook
+     *   }
+     * })
+     * 
+     */
+    create<T extends WebhookCreateArgs>(args: SelectSubset<T, WebhookCreateArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Webhooks.
+     * @param {WebhookCreateManyArgs} args - Arguments to create many Webhooks.
+     * @example
+     * // Create many Webhooks
+     * const webhook = await prisma.webhook.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends WebhookCreateManyArgs>(args?: SelectSubset<T, WebhookCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Webhooks and returns the data saved in the database.
+     * @param {WebhookCreateManyAndReturnArgs} args - Arguments to create many Webhooks.
+     * @example
+     * // Create many Webhooks
+     * const webhook = await prisma.webhook.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Webhooks and only return the `id`
+     * const webhookWithIdOnly = await prisma.webhook.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends WebhookCreateManyAndReturnArgs>(args?: SelectSubset<T, WebhookCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Webhook.
+     * @param {WebhookDeleteArgs} args - Arguments to delete one Webhook.
+     * @example
+     * // Delete one Webhook
+     * const Webhook = await prisma.webhook.delete({
+     *   where: {
+     *     // ... filter to delete one Webhook
+     *   }
+     * })
+     * 
+     */
+    delete<T extends WebhookDeleteArgs>(args: SelectSubset<T, WebhookDeleteArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Webhook.
+     * @param {WebhookUpdateArgs} args - Arguments to update one Webhook.
+     * @example
+     * // Update one Webhook
+     * const webhook = await prisma.webhook.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends WebhookUpdateArgs>(args: SelectSubset<T, WebhookUpdateArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Webhooks.
+     * @param {WebhookDeleteManyArgs} args - Arguments to filter Webhooks to delete.
+     * @example
+     * // Delete a few Webhooks
+     * const { count } = await prisma.webhook.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends WebhookDeleteManyArgs>(args?: SelectSubset<T, WebhookDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Webhooks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Webhooks
+     * const webhook = await prisma.webhook.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends WebhookUpdateManyArgs>(args: SelectSubset<T, WebhookUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Webhooks and returns the data updated in the database.
+     * @param {WebhookUpdateManyAndReturnArgs} args - Arguments to update many Webhooks.
+     * @example
+     * // Update many Webhooks
+     * const webhook = await prisma.webhook.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Webhooks and only return the `id`
+     * const webhookWithIdOnly = await prisma.webhook.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends WebhookUpdateManyAndReturnArgs>(args: SelectSubset<T, WebhookUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Webhook.
+     * @param {WebhookUpsertArgs} args - Arguments to update or create a Webhook.
+     * @example
+     * // Update or create a Webhook
+     * const webhook = await prisma.webhook.upsert({
+     *   create: {
+     *     // ... data to create a Webhook
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Webhook we want to update
+     *   }
+     * })
+     */
+    upsert<T extends WebhookUpsertArgs>(args: SelectSubset<T, WebhookUpsertArgs<ExtArgs>>): Prisma__WebhookClient<$Result.GetResult<Prisma.$WebhookPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Webhooks.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookCountArgs} args - Arguments to filter Webhooks to count.
+     * @example
+     * // Count the number of Webhooks
+     * const count = await prisma.webhook.count({
+     *   where: {
+     *     // ... the filter for the Webhooks we want to count
+     *   }
+     * })
+    **/
+    count<T extends WebhookCountArgs>(
+      args?: Subset<T, WebhookCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], WebhookCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Webhook.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends WebhookAggregateArgs>(args: Subset<T, WebhookAggregateArgs>): Prisma.PrismaPromise<GetWebhookAggregateType<T>>
+
+    /**
+     * Group by Webhook.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {WebhookGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends WebhookGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: WebhookGroupByArgs['orderBy'] }
+        : { orderBy?: WebhookGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, WebhookGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetWebhookGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Webhook model
+   */
+  readonly fields: WebhookFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Webhook.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__WebhookClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Webhook model
+   */
+  interface WebhookFieldRefs {
+    readonly id: FieldRef<"Webhook", 'String'>
+    readonly tenantId: FieldRef<"Webhook", 'String'>
+    readonly name: FieldRef<"Webhook", 'String'>
+    readonly url: FieldRef<"Webhook", 'String'>
+    readonly secret: FieldRef<"Webhook", 'String'>
+    readonly events: FieldRef<"Webhook", 'String[]'>
+    readonly isActive: FieldRef<"Webhook", 'Boolean'>
+    readonly createdAt: FieldRef<"Webhook", 'DateTime'>
+    readonly updatedAt: FieldRef<"Webhook", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Webhook findUnique
+   */
+  export type WebhookFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookInclude<ExtArgs> | null
+    /**
+     * Filter, which Webhook to fetch.
+     */
+    where: WebhookWhereUniqueInput
+  }
+
+  /**
+   * Webhook findUniqueOrThrow
+   */
+  export type WebhookFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookInclude<ExtArgs> | null
+    /**
+     * Filter, which Webhook to fetch.
+     */
+    where: WebhookWhereUniqueInput
+  }
+
+  /**
+   * Webhook findFirst
+   */
+  export type WebhookFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookInclude<ExtArgs> | null
+    /**
+     * Filter, which Webhook to fetch.
+     */
+    where?: WebhookWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Webhooks to fetch.
+     */
+    orderBy?: WebhookOrderByWithRelationInput | WebhookOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Webhooks.
+     */
+    cursor?: WebhookWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Webhooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Webhooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Webhooks.
+     */
+    distinct?: WebhookScalarFieldEnum | WebhookScalarFieldEnum[]
+  }
+
+  /**
+   * Webhook findFirstOrThrow
+   */
+  export type WebhookFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookInclude<ExtArgs> | null
+    /**
+     * Filter, which Webhook to fetch.
+     */
+    where?: WebhookWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Webhooks to fetch.
+     */
+    orderBy?: WebhookOrderByWithRelationInput | WebhookOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Webhooks.
+     */
+    cursor?: WebhookWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Webhooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Webhooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Webhooks.
+     */
+    distinct?: WebhookScalarFieldEnum | WebhookScalarFieldEnum[]
+  }
+
+  /**
+   * Webhook findMany
+   */
+  export type WebhookFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookInclude<ExtArgs> | null
+    /**
+     * Filter, which Webhooks to fetch.
+     */
+    where?: WebhookWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Webhooks to fetch.
+     */
+    orderBy?: WebhookOrderByWithRelationInput | WebhookOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Webhooks.
+     */
+    cursor?: WebhookWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Webhooks from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Webhooks.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Webhooks.
+     */
+    distinct?: WebhookScalarFieldEnum | WebhookScalarFieldEnum[]
+  }
+
+  /**
+   * Webhook create
+   */
+  export type WebhookCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Webhook.
+     */
+    data: XOR<WebhookCreateInput, WebhookUncheckedCreateInput>
+  }
+
+  /**
+   * Webhook createMany
+   */
+  export type WebhookCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Webhooks.
+     */
+    data: WebhookCreateManyInput | WebhookCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Webhook createManyAndReturn
+   */
+  export type WebhookCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * The data used to create many Webhooks.
+     */
+    data: WebhookCreateManyInput | WebhookCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Webhook update
+   */
+  export type WebhookUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Webhook.
+     */
+    data: XOR<WebhookUpdateInput, WebhookUncheckedUpdateInput>
+    /**
+     * Choose, which Webhook to update.
+     */
+    where: WebhookWhereUniqueInput
+  }
+
+  /**
+   * Webhook updateMany
+   */
+  export type WebhookUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Webhooks.
+     */
+    data: XOR<WebhookUpdateManyMutationInput, WebhookUncheckedUpdateManyInput>
+    /**
+     * Filter which Webhooks to update
+     */
+    where?: WebhookWhereInput
+    /**
+     * Limit how many Webhooks to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Webhook updateManyAndReturn
+   */
+  export type WebhookUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * The data used to update Webhooks.
+     */
+    data: XOR<WebhookUpdateManyMutationInput, WebhookUncheckedUpdateManyInput>
+    /**
+     * Filter which Webhooks to update
+     */
+    where?: WebhookWhereInput
+    /**
+     * Limit how many Webhooks to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Webhook upsert
+   */
+  export type WebhookUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Webhook to update in case it exists.
+     */
+    where: WebhookWhereUniqueInput
+    /**
+     * In case the Webhook found by the `where` argument doesn't exist, create a new Webhook with this data.
+     */
+    create: XOR<WebhookCreateInput, WebhookUncheckedCreateInput>
+    /**
+     * In case the Webhook was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<WebhookUpdateInput, WebhookUncheckedUpdateInput>
+  }
+
+  /**
+   * Webhook delete
+   */
+  export type WebhookDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookInclude<ExtArgs> | null
+    /**
+     * Filter which Webhook to delete.
+     */
+    where: WebhookWhereUniqueInput
+  }
+
+  /**
+   * Webhook deleteMany
+   */
+  export type WebhookDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Webhooks to delete
+     */
+    where?: WebhookWhereInput
+    /**
+     * Limit how many Webhooks to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Webhook without action
+   */
+  export type WebhookDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Webhook
+     */
+    select?: WebhookSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Webhook
+     */
+    omit?: WebhookOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: WebhookInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model InternalEvent
+   */
+
+  export type AggregateInternalEvent = {
+    _count: InternalEventCountAggregateOutputType | null
+    _min: InternalEventMinAggregateOutputType | null
+    _max: InternalEventMaxAggregateOutputType | null
+  }
+
+  export type InternalEventMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    type: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    dispatchedAt: Date | null
+    processedAt: Date | null
+  }
+
+  export type InternalEventMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    type: string | null
+    status: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    dispatchedAt: Date | null
+    processedAt: Date | null
+  }
+
+  export type InternalEventCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    type: number
+    payload: number
+    status: number
+    createdAt: number
+    updatedAt: number
+    dispatchedAt: number
+    processedAt: number
+    _all: number
+  }
+
+
+  export type InternalEventMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    type?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    dispatchedAt?: true
+    processedAt?: true
+  }
+
+  export type InternalEventMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    type?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    dispatchedAt?: true
+    processedAt?: true
+  }
+
+  export type InternalEventCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    type?: true
+    payload?: true
+    status?: true
+    createdAt?: true
+    updatedAt?: true
+    dispatchedAt?: true
+    processedAt?: true
+    _all?: true
+  }
+
+  export type InternalEventAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InternalEvent to aggregate.
+     */
+    where?: InternalEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InternalEvents to fetch.
+     */
+    orderBy?: InternalEventOrderByWithRelationInput | InternalEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InternalEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InternalEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InternalEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned InternalEvents
+    **/
+    _count?: true | InternalEventCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InternalEventMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InternalEventMaxAggregateInputType
+  }
+
+  export type GetInternalEventAggregateType<T extends InternalEventAggregateArgs> = {
+        [P in keyof T & keyof AggregateInternalEvent]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInternalEvent[P]>
+      : GetScalarType<T[P], AggregateInternalEvent[P]>
+  }
+
+
+
+
+  export type InternalEventGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InternalEventWhereInput
+    orderBy?: InternalEventOrderByWithAggregationInput | InternalEventOrderByWithAggregationInput[]
+    by: InternalEventScalarFieldEnum[] | InternalEventScalarFieldEnum
+    having?: InternalEventScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InternalEventCountAggregateInputType | true
+    _min?: InternalEventMinAggregateInputType
+    _max?: InternalEventMaxAggregateInputType
+  }
+
+  export type InternalEventGroupByOutputType = {
+    id: string
+    tenantId: string
+    type: string
+    payload: JsonValue
+    status: string
+    createdAt: Date
+    updatedAt: Date
+    dispatchedAt: Date | null
+    processedAt: Date | null
+    _count: InternalEventCountAggregateOutputType | null
+    _min: InternalEventMinAggregateOutputType | null
+    _max: InternalEventMaxAggregateOutputType | null
+  }
+
+  type GetInternalEventGroupByPayload<T extends InternalEventGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InternalEventGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InternalEventGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InternalEventGroupByOutputType[P]>
+            : GetScalarType<T[P], InternalEventGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InternalEventSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    type?: boolean
+    payload?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    dispatchedAt?: boolean
+    processedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["internalEvent"]>
+
+  export type InternalEventSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    type?: boolean
+    payload?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    dispatchedAt?: boolean
+    processedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["internalEvent"]>
+
+  export type InternalEventSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    type?: boolean
+    payload?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    dispatchedAt?: boolean
+    processedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["internalEvent"]>
+
+  export type InternalEventSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    type?: boolean
+    payload?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    dispatchedAt?: boolean
+    processedAt?: boolean
+  }
+
+  export type InternalEventOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "type" | "payload" | "status" | "createdAt" | "updatedAt" | "dispatchedAt" | "processedAt", ExtArgs["result"]["internalEvent"]>
+  export type InternalEventInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type InternalEventIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type InternalEventIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $InternalEventPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "InternalEvent"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      type: string
+      payload: Prisma.JsonValue
+      status: string
+      createdAt: Date
+      updatedAt: Date
+      dispatchedAt: Date | null
+      processedAt: Date | null
+    }, ExtArgs["result"]["internalEvent"]>
+    composites: {}
+  }
+
+  type InternalEventGetPayload<S extends boolean | null | undefined | InternalEventDefaultArgs> = $Result.GetResult<Prisma.$InternalEventPayload, S>
+
+  type InternalEventCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InternalEventFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InternalEventCountAggregateInputType | true
+    }
+
+  export interface InternalEventDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['InternalEvent'], meta: { name: 'InternalEvent' } }
+    /**
+     * Find zero or one InternalEvent that matches the filter.
+     * @param {InternalEventFindUniqueArgs} args - Arguments to find a InternalEvent
+     * @example
+     * // Get one InternalEvent
+     * const internalEvent = await prisma.internalEvent.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InternalEventFindUniqueArgs>(args: SelectSubset<T, InternalEventFindUniqueArgs<ExtArgs>>): Prisma__InternalEventClient<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one InternalEvent that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InternalEventFindUniqueOrThrowArgs} args - Arguments to find a InternalEvent
+     * @example
+     * // Get one InternalEvent
+     * const internalEvent = await prisma.internalEvent.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InternalEventFindUniqueOrThrowArgs>(args: SelectSubset<T, InternalEventFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InternalEventClient<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InternalEvent that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InternalEventFindFirstArgs} args - Arguments to find a InternalEvent
+     * @example
+     * // Get one InternalEvent
+     * const internalEvent = await prisma.internalEvent.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InternalEventFindFirstArgs>(args?: SelectSubset<T, InternalEventFindFirstArgs<ExtArgs>>): Prisma__InternalEventClient<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first InternalEvent that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InternalEventFindFirstOrThrowArgs} args - Arguments to find a InternalEvent
+     * @example
+     * // Get one InternalEvent
+     * const internalEvent = await prisma.internalEvent.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InternalEventFindFirstOrThrowArgs>(args?: SelectSubset<T, InternalEventFindFirstOrThrowArgs<ExtArgs>>): Prisma__InternalEventClient<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more InternalEvents that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InternalEventFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all InternalEvents
+     * const internalEvents = await prisma.internalEvent.findMany()
+     * 
+     * // Get first 10 InternalEvents
+     * const internalEvents = await prisma.internalEvent.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const internalEventWithIdOnly = await prisma.internalEvent.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InternalEventFindManyArgs>(args?: SelectSubset<T, InternalEventFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a InternalEvent.
+     * @param {InternalEventCreateArgs} args - Arguments to create a InternalEvent.
+     * @example
+     * // Create one InternalEvent
+     * const InternalEvent = await prisma.internalEvent.create({
+     *   data: {
+     *     // ... data to create a InternalEvent
+     *   }
+     * })
+     * 
+     */
+    create<T extends InternalEventCreateArgs>(args: SelectSubset<T, InternalEventCreateArgs<ExtArgs>>): Prisma__InternalEventClient<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many InternalEvents.
+     * @param {InternalEventCreateManyArgs} args - Arguments to create many InternalEvents.
+     * @example
+     * // Create many InternalEvents
+     * const internalEvent = await prisma.internalEvent.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InternalEventCreateManyArgs>(args?: SelectSubset<T, InternalEventCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many InternalEvents and returns the data saved in the database.
+     * @param {InternalEventCreateManyAndReturnArgs} args - Arguments to create many InternalEvents.
+     * @example
+     * // Create many InternalEvents
+     * const internalEvent = await prisma.internalEvent.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many InternalEvents and only return the `id`
+     * const internalEventWithIdOnly = await prisma.internalEvent.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InternalEventCreateManyAndReturnArgs>(args?: SelectSubset<T, InternalEventCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a InternalEvent.
+     * @param {InternalEventDeleteArgs} args - Arguments to delete one InternalEvent.
+     * @example
+     * // Delete one InternalEvent
+     * const InternalEvent = await prisma.internalEvent.delete({
+     *   where: {
+     *     // ... filter to delete one InternalEvent
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InternalEventDeleteArgs>(args: SelectSubset<T, InternalEventDeleteArgs<ExtArgs>>): Prisma__InternalEventClient<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one InternalEvent.
+     * @param {InternalEventUpdateArgs} args - Arguments to update one InternalEvent.
+     * @example
+     * // Update one InternalEvent
+     * const internalEvent = await prisma.internalEvent.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InternalEventUpdateArgs>(args: SelectSubset<T, InternalEventUpdateArgs<ExtArgs>>): Prisma__InternalEventClient<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more InternalEvents.
+     * @param {InternalEventDeleteManyArgs} args - Arguments to filter InternalEvents to delete.
+     * @example
+     * // Delete a few InternalEvents
+     * const { count } = await prisma.internalEvent.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InternalEventDeleteManyArgs>(args?: SelectSubset<T, InternalEventDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InternalEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InternalEventUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many InternalEvents
+     * const internalEvent = await prisma.internalEvent.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InternalEventUpdateManyArgs>(args: SelectSubset<T, InternalEventUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more InternalEvents and returns the data updated in the database.
+     * @param {InternalEventUpdateManyAndReturnArgs} args - Arguments to update many InternalEvents.
+     * @example
+     * // Update many InternalEvents
+     * const internalEvent = await prisma.internalEvent.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more InternalEvents and only return the `id`
+     * const internalEventWithIdOnly = await prisma.internalEvent.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InternalEventUpdateManyAndReturnArgs>(args: SelectSubset<T, InternalEventUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one InternalEvent.
+     * @param {InternalEventUpsertArgs} args - Arguments to update or create a InternalEvent.
+     * @example
+     * // Update or create a InternalEvent
+     * const internalEvent = await prisma.internalEvent.upsert({
+     *   create: {
+     *     // ... data to create a InternalEvent
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the InternalEvent we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InternalEventUpsertArgs>(args: SelectSubset<T, InternalEventUpsertArgs<ExtArgs>>): Prisma__InternalEventClient<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of InternalEvents.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InternalEventCountArgs} args - Arguments to filter InternalEvents to count.
+     * @example
+     * // Count the number of InternalEvents
+     * const count = await prisma.internalEvent.count({
+     *   where: {
+     *     // ... the filter for the InternalEvents we want to count
+     *   }
+     * })
+    **/
+    count<T extends InternalEventCountArgs>(
+      args?: Subset<T, InternalEventCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InternalEventCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a InternalEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InternalEventAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InternalEventAggregateArgs>(args: Subset<T, InternalEventAggregateArgs>): Prisma.PrismaPromise<GetInternalEventAggregateType<T>>
+
+    /**
+     * Group by InternalEvent.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InternalEventGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InternalEventGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InternalEventGroupByArgs['orderBy'] }
+        : { orderBy?: InternalEventGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InternalEventGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInternalEventGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the InternalEvent model
+   */
+  readonly fields: InternalEventFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for InternalEvent.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InternalEventClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the InternalEvent model
+   */
+  interface InternalEventFieldRefs {
+    readonly id: FieldRef<"InternalEvent", 'String'>
+    readonly tenantId: FieldRef<"InternalEvent", 'String'>
+    readonly type: FieldRef<"InternalEvent", 'String'>
+    readonly payload: FieldRef<"InternalEvent", 'Json'>
+    readonly status: FieldRef<"InternalEvent", 'String'>
+    readonly createdAt: FieldRef<"InternalEvent", 'DateTime'>
+    readonly updatedAt: FieldRef<"InternalEvent", 'DateTime'>
+    readonly dispatchedAt: FieldRef<"InternalEvent", 'DateTime'>
+    readonly processedAt: FieldRef<"InternalEvent", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * InternalEvent findUnique
+   */
+  export type InternalEventFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventInclude<ExtArgs> | null
+    /**
+     * Filter, which InternalEvent to fetch.
+     */
+    where: InternalEventWhereUniqueInput
+  }
+
+  /**
+   * InternalEvent findUniqueOrThrow
+   */
+  export type InternalEventFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventInclude<ExtArgs> | null
+    /**
+     * Filter, which InternalEvent to fetch.
+     */
+    where: InternalEventWhereUniqueInput
+  }
+
+  /**
+   * InternalEvent findFirst
+   */
+  export type InternalEventFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventInclude<ExtArgs> | null
+    /**
+     * Filter, which InternalEvent to fetch.
+     */
+    where?: InternalEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InternalEvents to fetch.
+     */
+    orderBy?: InternalEventOrderByWithRelationInput | InternalEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InternalEvents.
+     */
+    cursor?: InternalEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InternalEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InternalEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InternalEvents.
+     */
+    distinct?: InternalEventScalarFieldEnum | InternalEventScalarFieldEnum[]
+  }
+
+  /**
+   * InternalEvent findFirstOrThrow
+   */
+  export type InternalEventFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventInclude<ExtArgs> | null
+    /**
+     * Filter, which InternalEvent to fetch.
+     */
+    where?: InternalEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InternalEvents to fetch.
+     */
+    orderBy?: InternalEventOrderByWithRelationInput | InternalEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for InternalEvents.
+     */
+    cursor?: InternalEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InternalEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InternalEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InternalEvents.
+     */
+    distinct?: InternalEventScalarFieldEnum | InternalEventScalarFieldEnum[]
+  }
+
+  /**
+   * InternalEvent findMany
+   */
+  export type InternalEventFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventInclude<ExtArgs> | null
+    /**
+     * Filter, which InternalEvents to fetch.
+     */
+    where?: InternalEventWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of InternalEvents to fetch.
+     */
+    orderBy?: InternalEventOrderByWithRelationInput | InternalEventOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing InternalEvents.
+     */
+    cursor?: InternalEventWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` InternalEvents from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` InternalEvents.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of InternalEvents.
+     */
+    distinct?: InternalEventScalarFieldEnum | InternalEventScalarFieldEnum[]
+  }
+
+  /**
+   * InternalEvent create
+   */
+  export type InternalEventCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventInclude<ExtArgs> | null
+    /**
+     * The data needed to create a InternalEvent.
+     */
+    data: XOR<InternalEventCreateInput, InternalEventUncheckedCreateInput>
+  }
+
+  /**
+   * InternalEvent createMany
+   */
+  export type InternalEventCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many InternalEvents.
+     */
+    data: InternalEventCreateManyInput | InternalEventCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * InternalEvent createManyAndReturn
+   */
+  export type InternalEventCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * The data used to create many InternalEvents.
+     */
+    data: InternalEventCreateManyInput | InternalEventCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InternalEvent update
+   */
+  export type InternalEventUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventInclude<ExtArgs> | null
+    /**
+     * The data needed to update a InternalEvent.
+     */
+    data: XOR<InternalEventUpdateInput, InternalEventUncheckedUpdateInput>
+    /**
+     * Choose, which InternalEvent to update.
+     */
+    where: InternalEventWhereUniqueInput
+  }
+
+  /**
+   * InternalEvent updateMany
+   */
+  export type InternalEventUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update InternalEvents.
+     */
+    data: XOR<InternalEventUpdateManyMutationInput, InternalEventUncheckedUpdateManyInput>
+    /**
+     * Filter which InternalEvents to update
+     */
+    where?: InternalEventWhereInput
+    /**
+     * Limit how many InternalEvents to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * InternalEvent updateManyAndReturn
+   */
+  export type InternalEventUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * The data used to update InternalEvents.
+     */
+    data: XOR<InternalEventUpdateManyMutationInput, InternalEventUncheckedUpdateManyInput>
+    /**
+     * Filter which InternalEvents to update
+     */
+    where?: InternalEventWhereInput
+    /**
+     * Limit how many InternalEvents to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * InternalEvent upsert
+   */
+  export type InternalEventUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventInclude<ExtArgs> | null
+    /**
+     * The filter to search for the InternalEvent to update in case it exists.
+     */
+    where: InternalEventWhereUniqueInput
+    /**
+     * In case the InternalEvent found by the `where` argument doesn't exist, create a new InternalEvent with this data.
+     */
+    create: XOR<InternalEventCreateInput, InternalEventUncheckedCreateInput>
+    /**
+     * In case the InternalEvent was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InternalEventUpdateInput, InternalEventUncheckedUpdateInput>
+  }
+
+  /**
+   * InternalEvent delete
+   */
+  export type InternalEventDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventInclude<ExtArgs> | null
+    /**
+     * Filter which InternalEvent to delete.
+     */
+    where: InternalEventWhereUniqueInput
+  }
+
+  /**
+   * InternalEvent deleteMany
+   */
+  export type InternalEventDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which InternalEvents to delete
+     */
+    where?: InternalEventWhereInput
+    /**
+     * Limit how many InternalEvents to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * InternalEvent without action
+   */
+  export type InternalEventDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the InternalEvent
+     */
+    select?: InternalEventSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the InternalEvent
+     */
+    omit?: InternalEventOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InternalEventInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7141,6 +9619,36 @@ export namespace Prisma {
   export type ApiKeyScalarFieldEnum = (typeof ApiKeyScalarFieldEnum)[keyof typeof ApiKeyScalarFieldEnum]
 
 
+  export const WebhookScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    name: 'name',
+    url: 'url',
+    secret: 'secret',
+    events: 'events',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type WebhookScalarFieldEnum = (typeof WebhookScalarFieldEnum)[keyof typeof WebhookScalarFieldEnum]
+
+
+  export const InternalEventScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    type: 'type',
+    payload: 'payload',
+    status: 'status',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    dispatchedAt: 'dispatchedAt',
+    processedAt: 'processedAt'
+  };
+
+  export type InternalEventScalarFieldEnum = (typeof InternalEventScalarFieldEnum)[keyof typeof InternalEventScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -7155,6 +9663,13 @@ export namespace Prisma {
   };
 
   export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -7295,6 +9810,8 @@ export namespace Prisma {
     policies?: PolicyListRelationFilter
     auditLogs?: AuditLogListRelationFilter
     apiKeys?: ApiKeyListRelationFilter
+    webhooks?: WebhookListRelationFilter
+    internalEvents?: InternalEventListRelationFilter
   }
 
   export type TenantOrderByWithRelationInput = {
@@ -7308,6 +9825,8 @@ export namespace Prisma {
     policies?: PolicyOrderByRelationAggregateInput
     auditLogs?: AuditLogOrderByRelationAggregateInput
     apiKeys?: ApiKeyOrderByRelationAggregateInput
+    webhooks?: WebhookOrderByRelationAggregateInput
+    internalEvents?: InternalEventOrderByRelationAggregateInput
   }
 
   export type TenantWhereUniqueInput = Prisma.AtLeast<{
@@ -7324,6 +9843,8 @@ export namespace Prisma {
     policies?: PolicyListRelationFilter
     auditLogs?: AuditLogListRelationFilter
     apiKeys?: ApiKeyListRelationFilter
+    webhooks?: WebhookListRelationFilter
+    internalEvents?: InternalEventListRelationFilter
   }, "id" | "slug">
 
   export type TenantOrderByWithAggregationInput = {
@@ -7657,6 +10178,156 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"ApiKey"> | Date | string
   }
 
+  export type WebhookWhereInput = {
+    AND?: WebhookWhereInput | WebhookWhereInput[]
+    OR?: WebhookWhereInput[]
+    NOT?: WebhookWhereInput | WebhookWhereInput[]
+    id?: StringFilter<"Webhook"> | string
+    tenantId?: StringFilter<"Webhook"> | string
+    name?: StringFilter<"Webhook"> | string
+    url?: StringFilter<"Webhook"> | string
+    secret?: StringFilter<"Webhook"> | string
+    events?: StringNullableListFilter<"Webhook">
+    isActive?: BoolFilter<"Webhook"> | boolean
+    createdAt?: DateTimeFilter<"Webhook"> | Date | string
+    updatedAt?: DateTimeFilter<"Webhook"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }
+
+  export type WebhookOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    url?: SortOrder
+    secret?: SortOrder
+    events?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+  }
+
+  export type WebhookWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: WebhookWhereInput | WebhookWhereInput[]
+    OR?: WebhookWhereInput[]
+    NOT?: WebhookWhereInput | WebhookWhereInput[]
+    tenantId?: StringFilter<"Webhook"> | string
+    name?: StringFilter<"Webhook"> | string
+    url?: StringFilter<"Webhook"> | string
+    secret?: StringFilter<"Webhook"> | string
+    events?: StringNullableListFilter<"Webhook">
+    isActive?: BoolFilter<"Webhook"> | boolean
+    createdAt?: DateTimeFilter<"Webhook"> | Date | string
+    updatedAt?: DateTimeFilter<"Webhook"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }, "id">
+
+  export type WebhookOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    url?: SortOrder
+    secret?: SortOrder
+    events?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: WebhookCountOrderByAggregateInput
+    _max?: WebhookMaxOrderByAggregateInput
+    _min?: WebhookMinOrderByAggregateInput
+  }
+
+  export type WebhookScalarWhereWithAggregatesInput = {
+    AND?: WebhookScalarWhereWithAggregatesInput | WebhookScalarWhereWithAggregatesInput[]
+    OR?: WebhookScalarWhereWithAggregatesInput[]
+    NOT?: WebhookScalarWhereWithAggregatesInput | WebhookScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Webhook"> | string
+    tenantId?: StringWithAggregatesFilter<"Webhook"> | string
+    name?: StringWithAggregatesFilter<"Webhook"> | string
+    url?: StringWithAggregatesFilter<"Webhook"> | string
+    secret?: StringWithAggregatesFilter<"Webhook"> | string
+    events?: StringNullableListFilter<"Webhook">
+    isActive?: BoolWithAggregatesFilter<"Webhook"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Webhook"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Webhook"> | Date | string
+  }
+
+  export type InternalEventWhereInput = {
+    AND?: InternalEventWhereInput | InternalEventWhereInput[]
+    OR?: InternalEventWhereInput[]
+    NOT?: InternalEventWhereInput | InternalEventWhereInput[]
+    id?: StringFilter<"InternalEvent"> | string
+    tenantId?: StringFilter<"InternalEvent"> | string
+    type?: StringFilter<"InternalEvent"> | string
+    payload?: JsonFilter<"InternalEvent">
+    status?: StringFilter<"InternalEvent"> | string
+    createdAt?: DateTimeFilter<"InternalEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"InternalEvent"> | Date | string
+    dispatchedAt?: DateTimeNullableFilter<"InternalEvent"> | Date | string | null
+    processedAt?: DateTimeNullableFilter<"InternalEvent"> | Date | string | null
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }
+
+  export type InternalEventOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    type?: SortOrder
+    payload?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    dispatchedAt?: SortOrderInput | SortOrder
+    processedAt?: SortOrderInput | SortOrder
+    tenant?: TenantOrderByWithRelationInput
+  }
+
+  export type InternalEventWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: InternalEventWhereInput | InternalEventWhereInput[]
+    OR?: InternalEventWhereInput[]
+    NOT?: InternalEventWhereInput | InternalEventWhereInput[]
+    tenantId?: StringFilter<"InternalEvent"> | string
+    type?: StringFilter<"InternalEvent"> | string
+    payload?: JsonFilter<"InternalEvent">
+    status?: StringFilter<"InternalEvent"> | string
+    createdAt?: DateTimeFilter<"InternalEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"InternalEvent"> | Date | string
+    dispatchedAt?: DateTimeNullableFilter<"InternalEvent"> | Date | string | null
+    processedAt?: DateTimeNullableFilter<"InternalEvent"> | Date | string | null
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }, "id">
+
+  export type InternalEventOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    type?: SortOrder
+    payload?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    dispatchedAt?: SortOrderInput | SortOrder
+    processedAt?: SortOrderInput | SortOrder
+    _count?: InternalEventCountOrderByAggregateInput
+    _max?: InternalEventMaxOrderByAggregateInput
+    _min?: InternalEventMinOrderByAggregateInput
+  }
+
+  export type InternalEventScalarWhereWithAggregatesInput = {
+    AND?: InternalEventScalarWhereWithAggregatesInput | InternalEventScalarWhereWithAggregatesInput[]
+    OR?: InternalEventScalarWhereWithAggregatesInput[]
+    NOT?: InternalEventScalarWhereWithAggregatesInput | InternalEventScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"InternalEvent"> | string
+    tenantId?: StringWithAggregatesFilter<"InternalEvent"> | string
+    type?: StringWithAggregatesFilter<"InternalEvent"> | string
+    payload?: JsonWithAggregatesFilter<"InternalEvent">
+    status?: StringWithAggregatesFilter<"InternalEvent"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"InternalEvent"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"InternalEvent"> | Date | string
+    dispatchedAt?: DateTimeNullableWithAggregatesFilter<"InternalEvent"> | Date | string | null
+    processedAt?: DateTimeNullableWithAggregatesFilter<"InternalEvent"> | Date | string | null
+  }
+
   export type TenantCreateInput = {
     id?: string
     name: string
@@ -7668,6 +10339,8 @@ export namespace Prisma {
     policies?: PolicyCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateInput = {
@@ -7681,6 +10354,8 @@ export namespace Prisma {
     policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookUncheckedCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUpdateInput = {
@@ -7694,6 +10369,8 @@ export namespace Prisma {
     policies?: PolicyUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateInput = {
@@ -7707,6 +10384,8 @@ export namespace Prisma {
     policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUncheckedUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateManyInput = {
@@ -8064,6 +10743,172 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type WebhookCreateInput = {
+    id?: string
+    name: string
+    url: string
+    secret: string
+    events?: WebhookCreateeventsInput | string[]
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutWebhooksInput
+  }
+
+  export type WebhookUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    name: string
+    url: string
+    secret: string
+    events?: WebhookCreateeventsInput | string[]
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WebhookUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: StringFieldUpdateOperationsInput | string
+    events?: WebhookUpdateeventsInput | string[]
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutWebhooksNestedInput
+  }
+
+  export type WebhookUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: StringFieldUpdateOperationsInput | string
+    events?: WebhookUpdateeventsInput | string[]
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WebhookCreateManyInput = {
+    id?: string
+    tenantId: string
+    name: string
+    url: string
+    secret: string
+    events?: WebhookCreateeventsInput | string[]
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WebhookUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: StringFieldUpdateOperationsInput | string
+    events?: WebhookUpdateeventsInput | string[]
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WebhookUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: StringFieldUpdateOperationsInput | string
+    events?: WebhookUpdateeventsInput | string[]
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InternalEventCreateInput = {
+    id?: string
+    type: string
+    payload: JsonNullValueInput | InputJsonValue
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    dispatchedAt?: Date | string | null
+    processedAt?: Date | string | null
+    tenant: TenantCreateNestedOneWithoutInternalEventsInput
+  }
+
+  export type InternalEventUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    type: string
+    payload: JsonNullValueInput | InputJsonValue
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    dispatchedAt?: Date | string | null
+    processedAt?: Date | string | null
+  }
+
+  export type InternalEventUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tenant?: TenantUpdateOneRequiredWithoutInternalEventsNestedInput
+  }
+
+  export type InternalEventUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type InternalEventCreateManyInput = {
+    id?: string
+    tenantId: string
+    type: string
+    payload: JsonNullValueInput | InputJsonValue
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    dispatchedAt?: Date | string | null
+    processedAt?: Date | string | null
+  }
+
+  export type InternalEventUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type InternalEventUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8119,6 +10964,18 @@ export namespace Prisma {
     none?: ApiKeyWhereInput
   }
 
+  export type WebhookListRelationFilter = {
+    every?: WebhookWhereInput
+    some?: WebhookWhereInput
+    none?: WebhookWhereInput
+  }
+
+  export type InternalEventListRelationFilter = {
+    every?: InternalEventWhereInput
+    some?: InternalEventWhereInput
+    none?: InternalEventWhereInput
+  }
+
   export type ConsentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -8132,6 +10989,14 @@ export namespace Prisma {
   }
 
   export type ApiKeyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type WebhookOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InternalEventOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8535,6 +11400,131 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
+  export type StringNullableListFilter<$PrismaModel = never> = {
+    equals?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    has?: string | StringFieldRefInput<$PrismaModel> | null
+    hasEvery?: string[] | ListStringFieldRefInput<$PrismaModel>
+    hasSome?: string[] | ListStringFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
+  export type WebhookCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    url?: SortOrder
+    secret?: SortOrder
+    events?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WebhookMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    url?: SortOrder
+    secret?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type WebhookMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    url?: SortOrder
+    secret?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type InternalEventCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    type?: SortOrder
+    payload?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    dispatchedAt?: SortOrder
+    processedAt?: SortOrder
+  }
+
+  export type InternalEventMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    dispatchedAt?: SortOrder
+    processedAt?: SortOrder
+  }
+
+  export type InternalEventMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    type?: SortOrder
+    status?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    dispatchedAt?: SortOrder
+    processedAt?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
   export type ConsentCreateNestedManyWithoutTenantInput = {
     create?: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput> | ConsentCreateWithoutTenantInput[] | ConsentUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: ConsentCreateOrConnectWithoutTenantInput | ConsentCreateOrConnectWithoutTenantInput[]
@@ -8563,6 +11553,20 @@ export namespace Prisma {
     connect?: ApiKeyWhereUniqueInput | ApiKeyWhereUniqueInput[]
   }
 
+  export type WebhookCreateNestedManyWithoutTenantInput = {
+    create?: XOR<WebhookCreateWithoutTenantInput, WebhookUncheckedCreateWithoutTenantInput> | WebhookCreateWithoutTenantInput[] | WebhookUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WebhookCreateOrConnectWithoutTenantInput | WebhookCreateOrConnectWithoutTenantInput[]
+    createMany?: WebhookCreateManyTenantInputEnvelope
+    connect?: WebhookWhereUniqueInput | WebhookWhereUniqueInput[]
+  }
+
+  export type InternalEventCreateNestedManyWithoutTenantInput = {
+    create?: XOR<InternalEventCreateWithoutTenantInput, InternalEventUncheckedCreateWithoutTenantInput> | InternalEventCreateWithoutTenantInput[] | InternalEventUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: InternalEventCreateOrConnectWithoutTenantInput | InternalEventCreateOrConnectWithoutTenantInput[]
+    createMany?: InternalEventCreateManyTenantInputEnvelope
+    connect?: InternalEventWhereUniqueInput | InternalEventWhereUniqueInput[]
+  }
+
   export type ConsentUncheckedCreateNestedManyWithoutTenantInput = {
     create?: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput> | ConsentCreateWithoutTenantInput[] | ConsentUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: ConsentCreateOrConnectWithoutTenantInput | ConsentCreateOrConnectWithoutTenantInput[]
@@ -8589,6 +11593,20 @@ export namespace Prisma {
     connectOrCreate?: ApiKeyCreateOrConnectWithoutTenantInput | ApiKeyCreateOrConnectWithoutTenantInput[]
     createMany?: ApiKeyCreateManyTenantInputEnvelope
     connect?: ApiKeyWhereUniqueInput | ApiKeyWhereUniqueInput[]
+  }
+
+  export type WebhookUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<WebhookCreateWithoutTenantInput, WebhookUncheckedCreateWithoutTenantInput> | WebhookCreateWithoutTenantInput[] | WebhookUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WebhookCreateOrConnectWithoutTenantInput | WebhookCreateOrConnectWithoutTenantInput[]
+    createMany?: WebhookCreateManyTenantInputEnvelope
+    connect?: WebhookWhereUniqueInput | WebhookWhereUniqueInput[]
+  }
+
+  export type InternalEventUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<InternalEventCreateWithoutTenantInput, InternalEventUncheckedCreateWithoutTenantInput> | InternalEventCreateWithoutTenantInput[] | InternalEventUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: InternalEventCreateOrConnectWithoutTenantInput | InternalEventCreateOrConnectWithoutTenantInput[]
+    createMany?: InternalEventCreateManyTenantInputEnvelope
+    connect?: InternalEventWhereUniqueInput | InternalEventWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -8659,6 +11677,34 @@ export namespace Prisma {
     deleteMany?: ApiKeyScalarWhereInput | ApiKeyScalarWhereInput[]
   }
 
+  export type WebhookUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<WebhookCreateWithoutTenantInput, WebhookUncheckedCreateWithoutTenantInput> | WebhookCreateWithoutTenantInput[] | WebhookUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WebhookCreateOrConnectWithoutTenantInput | WebhookCreateOrConnectWithoutTenantInput[]
+    upsert?: WebhookUpsertWithWhereUniqueWithoutTenantInput | WebhookUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: WebhookCreateManyTenantInputEnvelope
+    set?: WebhookWhereUniqueInput | WebhookWhereUniqueInput[]
+    disconnect?: WebhookWhereUniqueInput | WebhookWhereUniqueInput[]
+    delete?: WebhookWhereUniqueInput | WebhookWhereUniqueInput[]
+    connect?: WebhookWhereUniqueInput | WebhookWhereUniqueInput[]
+    update?: WebhookUpdateWithWhereUniqueWithoutTenantInput | WebhookUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: WebhookUpdateManyWithWhereWithoutTenantInput | WebhookUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: WebhookScalarWhereInput | WebhookScalarWhereInput[]
+  }
+
+  export type InternalEventUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<InternalEventCreateWithoutTenantInput, InternalEventUncheckedCreateWithoutTenantInput> | InternalEventCreateWithoutTenantInput[] | InternalEventUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: InternalEventCreateOrConnectWithoutTenantInput | InternalEventCreateOrConnectWithoutTenantInput[]
+    upsert?: InternalEventUpsertWithWhereUniqueWithoutTenantInput | InternalEventUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: InternalEventCreateManyTenantInputEnvelope
+    set?: InternalEventWhereUniqueInput | InternalEventWhereUniqueInput[]
+    disconnect?: InternalEventWhereUniqueInput | InternalEventWhereUniqueInput[]
+    delete?: InternalEventWhereUniqueInput | InternalEventWhereUniqueInput[]
+    connect?: InternalEventWhereUniqueInput | InternalEventWhereUniqueInput[]
+    update?: InternalEventUpdateWithWhereUniqueWithoutTenantInput | InternalEventUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: InternalEventUpdateManyWithWhereWithoutTenantInput | InternalEventUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: InternalEventScalarWhereInput | InternalEventScalarWhereInput[]
+  }
+
   export type ConsentUncheckedUpdateManyWithoutTenantNestedInput = {
     create?: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput> | ConsentCreateWithoutTenantInput[] | ConsentUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: ConsentCreateOrConnectWithoutTenantInput | ConsentCreateOrConnectWithoutTenantInput[]
@@ -8713,6 +11759,34 @@ export namespace Prisma {
     update?: ApiKeyUpdateWithWhereUniqueWithoutTenantInput | ApiKeyUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: ApiKeyUpdateManyWithWhereWithoutTenantInput | ApiKeyUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: ApiKeyScalarWhereInput | ApiKeyScalarWhereInput[]
+  }
+
+  export type WebhookUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<WebhookCreateWithoutTenantInput, WebhookUncheckedCreateWithoutTenantInput> | WebhookCreateWithoutTenantInput[] | WebhookUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: WebhookCreateOrConnectWithoutTenantInput | WebhookCreateOrConnectWithoutTenantInput[]
+    upsert?: WebhookUpsertWithWhereUniqueWithoutTenantInput | WebhookUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: WebhookCreateManyTenantInputEnvelope
+    set?: WebhookWhereUniqueInput | WebhookWhereUniqueInput[]
+    disconnect?: WebhookWhereUniqueInput | WebhookWhereUniqueInput[]
+    delete?: WebhookWhereUniqueInput | WebhookWhereUniqueInput[]
+    connect?: WebhookWhereUniqueInput | WebhookWhereUniqueInput[]
+    update?: WebhookUpdateWithWhereUniqueWithoutTenantInput | WebhookUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: WebhookUpdateManyWithWhereWithoutTenantInput | WebhookUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: WebhookScalarWhereInput | WebhookScalarWhereInput[]
+  }
+
+  export type InternalEventUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<InternalEventCreateWithoutTenantInput, InternalEventUncheckedCreateWithoutTenantInput> | InternalEventCreateWithoutTenantInput[] | InternalEventUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: InternalEventCreateOrConnectWithoutTenantInput | InternalEventCreateOrConnectWithoutTenantInput[]
+    upsert?: InternalEventUpsertWithWhereUniqueWithoutTenantInput | InternalEventUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: InternalEventCreateManyTenantInputEnvelope
+    set?: InternalEventWhereUniqueInput | InternalEventWhereUniqueInput[]
+    disconnect?: InternalEventWhereUniqueInput | InternalEventWhereUniqueInput[]
+    delete?: InternalEventWhereUniqueInput | InternalEventWhereUniqueInput[]
+    connect?: InternalEventWhereUniqueInput | InternalEventWhereUniqueInput[]
+    update?: InternalEventUpdateWithWhereUniqueWithoutTenantInput | InternalEventUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: InternalEventUpdateManyWithWhereWithoutTenantInput | InternalEventUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: InternalEventScalarWhereInput | InternalEventScalarWhereInput[]
   }
 
   export type TenantCreateNestedOneWithoutPoliciesInput = {
@@ -8845,6 +11919,43 @@ export namespace Prisma {
     upsert?: TenantUpsertWithoutApiKeysInput
     connect?: TenantWhereUniqueInput
     update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutApiKeysInput, TenantUpdateWithoutApiKeysInput>, TenantUncheckedUpdateWithoutApiKeysInput>
+  }
+
+  export type WebhookCreateeventsInput = {
+    set: string[]
+  }
+
+  export type TenantCreateNestedOneWithoutWebhooksInput = {
+    create?: XOR<TenantCreateWithoutWebhooksInput, TenantUncheckedCreateWithoutWebhooksInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutWebhooksInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type WebhookUpdateeventsInput = {
+    set?: string[]
+    push?: string | string[]
+  }
+
+  export type TenantUpdateOneRequiredWithoutWebhooksNestedInput = {
+    create?: XOR<TenantCreateWithoutWebhooksInput, TenantUncheckedCreateWithoutWebhooksInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutWebhooksInput
+    upsert?: TenantUpsertWithoutWebhooksInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutWebhooksInput, TenantUpdateWithoutWebhooksInput>, TenantUncheckedUpdateWithoutWebhooksInput>
+  }
+
+  export type TenantCreateNestedOneWithoutInternalEventsInput = {
+    create?: XOR<TenantCreateWithoutInternalEventsInput, TenantUncheckedCreateWithoutInternalEventsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutInternalEventsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type TenantUpdateOneRequiredWithoutInternalEventsNestedInput = {
+    create?: XOR<TenantCreateWithoutInternalEventsInput, TenantUncheckedCreateWithoutInternalEventsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutInternalEventsInput
+    upsert?: TenantUpsertWithoutInternalEventsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutInternalEventsInput, TenantUpdateWithoutInternalEventsInput>, TenantUncheckedUpdateWithoutInternalEventsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -9060,6 +12171,29 @@ export namespace Prisma {
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
 
   export type ConsentCreateWithoutTenantInput = {
     id?: string
@@ -9189,6 +12323,70 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type WebhookCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    url: string
+    secret: string
+    events?: WebhookCreateeventsInput | string[]
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WebhookUncheckedCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    url: string
+    secret: string
+    events?: WebhookCreateeventsInput | string[]
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type WebhookCreateOrConnectWithoutTenantInput = {
+    where: WebhookWhereUniqueInput
+    create: XOR<WebhookCreateWithoutTenantInput, WebhookUncheckedCreateWithoutTenantInput>
+  }
+
+  export type WebhookCreateManyTenantInputEnvelope = {
+    data: WebhookCreateManyTenantInput | WebhookCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InternalEventCreateWithoutTenantInput = {
+    id?: string
+    type: string
+    payload: JsonNullValueInput | InputJsonValue
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    dispatchedAt?: Date | string | null
+    processedAt?: Date | string | null
+  }
+
+  export type InternalEventUncheckedCreateWithoutTenantInput = {
+    id?: string
+    type: string
+    payload: JsonNullValueInput | InputJsonValue
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    dispatchedAt?: Date | string | null
+    processedAt?: Date | string | null
+  }
+
+  export type InternalEventCreateOrConnectWithoutTenantInput = {
+    where: InternalEventWhereUniqueInput
+    create: XOR<InternalEventCreateWithoutTenantInput, InternalEventUncheckedCreateWithoutTenantInput>
+  }
+
+  export type InternalEventCreateManyTenantInputEnvelope = {
+    data: InternalEventCreateManyTenantInput | InternalEventCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ConsentUpsertWithWhereUniqueWithoutTenantInput = {
     where: ConsentWhereUniqueInput
     update: XOR<ConsentUpdateWithoutTenantInput, ConsentUncheckedUpdateWithoutTenantInput>
@@ -9312,6 +12510,68 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ApiKey"> | Date | string
   }
 
+  export type WebhookUpsertWithWhereUniqueWithoutTenantInput = {
+    where: WebhookWhereUniqueInput
+    update: XOR<WebhookUpdateWithoutTenantInput, WebhookUncheckedUpdateWithoutTenantInput>
+    create: XOR<WebhookCreateWithoutTenantInput, WebhookUncheckedCreateWithoutTenantInput>
+  }
+
+  export type WebhookUpdateWithWhereUniqueWithoutTenantInput = {
+    where: WebhookWhereUniqueInput
+    data: XOR<WebhookUpdateWithoutTenantInput, WebhookUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type WebhookUpdateManyWithWhereWithoutTenantInput = {
+    where: WebhookScalarWhereInput
+    data: XOR<WebhookUpdateManyMutationInput, WebhookUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type WebhookScalarWhereInput = {
+    AND?: WebhookScalarWhereInput | WebhookScalarWhereInput[]
+    OR?: WebhookScalarWhereInput[]
+    NOT?: WebhookScalarWhereInput | WebhookScalarWhereInput[]
+    id?: StringFilter<"Webhook"> | string
+    tenantId?: StringFilter<"Webhook"> | string
+    name?: StringFilter<"Webhook"> | string
+    url?: StringFilter<"Webhook"> | string
+    secret?: StringFilter<"Webhook"> | string
+    events?: StringNullableListFilter<"Webhook">
+    isActive?: BoolFilter<"Webhook"> | boolean
+    createdAt?: DateTimeFilter<"Webhook"> | Date | string
+    updatedAt?: DateTimeFilter<"Webhook"> | Date | string
+  }
+
+  export type InternalEventUpsertWithWhereUniqueWithoutTenantInput = {
+    where: InternalEventWhereUniqueInput
+    update: XOR<InternalEventUpdateWithoutTenantInput, InternalEventUncheckedUpdateWithoutTenantInput>
+    create: XOR<InternalEventCreateWithoutTenantInput, InternalEventUncheckedCreateWithoutTenantInput>
+  }
+
+  export type InternalEventUpdateWithWhereUniqueWithoutTenantInput = {
+    where: InternalEventWhereUniqueInput
+    data: XOR<InternalEventUpdateWithoutTenantInput, InternalEventUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type InternalEventUpdateManyWithWhereWithoutTenantInput = {
+    where: InternalEventScalarWhereInput
+    data: XOR<InternalEventUpdateManyMutationInput, InternalEventUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type InternalEventScalarWhereInput = {
+    AND?: InternalEventScalarWhereInput | InternalEventScalarWhereInput[]
+    OR?: InternalEventScalarWhereInput[]
+    NOT?: InternalEventScalarWhereInput | InternalEventScalarWhereInput[]
+    id?: StringFilter<"InternalEvent"> | string
+    tenantId?: StringFilter<"InternalEvent"> | string
+    type?: StringFilter<"InternalEvent"> | string
+    payload?: JsonFilter<"InternalEvent">
+    status?: StringFilter<"InternalEvent"> | string
+    createdAt?: DateTimeFilter<"InternalEvent"> | Date | string
+    updatedAt?: DateTimeFilter<"InternalEvent"> | Date | string
+    dispatchedAt?: DateTimeNullableFilter<"InternalEvent"> | Date | string | null
+    processedAt?: DateTimeNullableFilter<"InternalEvent"> | Date | string | null
+  }
+
   export type TenantCreateWithoutPoliciesInput = {
     id?: string
     name: string
@@ -9322,6 +12582,8 @@ export namespace Prisma {
     consents?: ConsentCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutPoliciesInput = {
@@ -9334,6 +12596,8 @@ export namespace Prisma {
     consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookUncheckedCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutPoliciesInput = {
@@ -9392,6 +12656,8 @@ export namespace Prisma {
     consents?: ConsentUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutPoliciesInput = {
@@ -9404,6 +12670,8 @@ export namespace Prisma {
     consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUncheckedUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type ConsentUpsertWithWhereUniqueWithoutPolicyInput = {
@@ -9432,6 +12700,8 @@ export namespace Prisma {
     policies?: PolicyCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutConsentsInput = {
@@ -9444,6 +12714,8 @@ export namespace Prisma {
     policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookUncheckedCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutConsentsInput = {
@@ -9501,6 +12773,8 @@ export namespace Prisma {
     policies?: PolicyUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutConsentsInput = {
@@ -9513,6 +12787,8 @@ export namespace Prisma {
     policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUncheckedUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type PolicyUpsertWithoutConsentsInput = {
@@ -9560,6 +12836,8 @@ export namespace Prisma {
     consents?: ConsentCreateNestedManyWithoutTenantInput
     policies?: PolicyCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutAuditLogsInput = {
@@ -9572,6 +12850,8 @@ export namespace Prisma {
     consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
     policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookUncheckedCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutAuditLogsInput = {
@@ -9600,6 +12880,8 @@ export namespace Prisma {
     consents?: ConsentUpdateManyWithoutTenantNestedInput
     policies?: PolicyUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutAuditLogsInput = {
@@ -9612,6 +12894,8 @@ export namespace Prisma {
     consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
     policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUncheckedUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateWithoutApiKeysInput = {
@@ -9624,6 +12908,8 @@ export namespace Prisma {
     consents?: ConsentCreateNestedManyWithoutTenantInput
     policies?: PolicyCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutApiKeysInput = {
@@ -9636,6 +12922,8 @@ export namespace Prisma {
     consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
     policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookUncheckedCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutApiKeysInput = {
@@ -9664,6 +12952,8 @@ export namespace Prisma {
     consents?: ConsentUpdateManyWithoutTenantNestedInput
     policies?: PolicyUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutApiKeysInput = {
@@ -9676,6 +12966,152 @@ export namespace Prisma {
     consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
     policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUncheckedUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantCreateWithoutWebhooksInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentCreateNestedManyWithoutTenantInput
+    policies?: PolicyCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
+    apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutWebhooksInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
+    policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutWebhooksInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutWebhooksInput, TenantUncheckedCreateWithoutWebhooksInput>
+  }
+
+  export type TenantUpsertWithoutWebhooksInput = {
+    update: XOR<TenantUpdateWithoutWebhooksInput, TenantUncheckedUpdateWithoutWebhooksInput>
+    create: XOR<TenantCreateWithoutWebhooksInput, TenantUncheckedCreateWithoutWebhooksInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutWebhooksInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutWebhooksInput, TenantUncheckedUpdateWithoutWebhooksInput>
+  }
+
+  export type TenantUpdateWithoutWebhooksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
+    apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutWebhooksInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantCreateWithoutInternalEventsInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentCreateNestedManyWithoutTenantInput
+    policies?: PolicyCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
+    apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutInternalEventsInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
+    policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutInternalEventsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutInternalEventsInput, TenantUncheckedCreateWithoutInternalEventsInput>
+  }
+
+  export type TenantUpsertWithoutInternalEventsInput = {
+    update: XOR<TenantUpdateWithoutInternalEventsInput, TenantUncheckedUpdateWithoutInternalEventsInput>
+    create: XOR<TenantCreateWithoutInternalEventsInput, TenantUncheckedCreateWithoutInternalEventsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutInternalEventsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutInternalEventsInput, TenantUncheckedUpdateWithoutInternalEventsInput>
+  }
+
+  export type TenantUpdateWithoutInternalEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
+    apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutInternalEventsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type ConsentCreateManyTenantInput = {
@@ -9719,6 +13155,28 @@ export namespace Prisma {
     revokedAt?: Date | string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type WebhookCreateManyTenantInput = {
+    id?: string
+    name: string
+    url: string
+    secret: string
+    events?: WebhookCreateeventsInput | string[]
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InternalEventCreateManyTenantInput = {
+    id?: string
+    type: string
+    payload: JsonNullValueInput | InputJsonValue
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    dispatchedAt?: Date | string | null
+    processedAt?: Date | string | null
   }
 
   export type ConsentUpdateWithoutTenantInput = {
@@ -9850,6 +13308,72 @@ export namespace Prisma {
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WebhookUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: StringFieldUpdateOperationsInput | string
+    events?: WebhookUpdateeventsInput | string[]
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WebhookUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: StringFieldUpdateOperationsInput | string
+    events?: WebhookUpdateeventsInput | string[]
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type WebhookUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    url?: StringFieldUpdateOperationsInput | string
+    secret?: StringFieldUpdateOperationsInput | string
+    events?: WebhookUpdateeventsInput | string[]
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InternalEventUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type InternalEventUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type InternalEventUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    type?: StringFieldUpdateOperationsInput | string
+    payload?: JsonNullValueInput | InputJsonValue
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    dispatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ConsentCreateManyPolicyInput = {

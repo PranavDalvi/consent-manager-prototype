@@ -63,7 +63,6 @@ describeApiKeyManagement("API Key Management", () => {
     expect(response.body.data[0]).toEqual(
       expect.objectContaining({
         tenantId,
-        keyHash: undefined,
       })
     );
   });

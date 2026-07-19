@@ -31,6 +31,16 @@ services:
       timeout: 5s
       retries: 10
 
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+  redis-test:
+    image: redis:7-alpine
+    ports:
+      - "6380:6379"
+
   api:
     build:
       context: .
@@ -39,11 +49,30 @@ services:
       NODE_ENV: production
       PORT: 3000
       DATABASE_URL: postgresql://consent_user:consent_password@postgres:5432/consent_manager?schema=public
+      REDIS_URL: redis://redis:6379
     ports:
       - "3000:3000"
     depends_on:
       postgres:
         condition: service_healthy
+      redis:
+        condition: service_started
+    restart: unless-stopped
+
+  worker:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://consent_user:consent_password@postgres:5432/consent_manager?schema=public
+      REDIS_URL: redis://redis:6379
+    command: npm run start:worker
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_started
     restart: unless-stopped
 
   test:
@@ -54,11 +83,14 @@ services:
       NODE_ENV: test
       DATABASE_URL: postgresql://consent_user:consent_password@postgres-test:5432/consent_manager_test?schema=public
       TEST_DATABASE_URL: postgresql://consent_user:consent_password@postgres-test:5432/consent_manager_test?schema=public
+      REDIS_URL: redis://redis-test:6379
     command: >
       sh -c "npx prisma migrate deploy && npm test"
     depends_on:
       postgres-test:
         condition: service_healthy
+      redis-test:
+        condition: service_started
 
 volumes:
   postgres_data:

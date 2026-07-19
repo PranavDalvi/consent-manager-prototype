@@ -1,6 +1,7 @@
 import { prisma } from "../db/prisma";
 import { AppError } from "../utils/app-error";
 import { generateApiKey, getApiKeyPrefix, hashApiKey } from "../utils/api-key";
+import { createInternalEvent, enqueueInternalEventDelivery } from "../events/internal-event.publisher";
 
 function ensureTenantId(tenantId: string | undefined): string {
   if (!tenantId) {
@@ -57,6 +58,18 @@ export async function createTenantApiKey(input: { tenantId?: string; name: strin
       createdAt: true,
     },
   });
+
+  const event = await prisma.$transaction(async (tx) => {
+    return createInternalEvent(tx, {
+      tenantId,
+      type: "API_KEY_CREATED",
+      payload: {
+        apiKey,
+      },
+    });
+  });
+
+  void enqueueInternalEventDelivery(event.id);
 
   return { ...toPublicApiKey(apiKey), key: rawApiKey };
 }
@@ -146,6 +159,18 @@ export async function revokeTenantApiKey(tenantId?: string, id?: string) {
     },
   });
 
+  const event = await prisma.$transaction(async (tx) => {
+    return createInternalEvent(tx, {
+      tenantId: resolvedTenantId,
+      type: "API_KEY_REVOKED",
+      payload: {
+        apiKey: updated,
+      },
+    });
+  });
+
+  void enqueueInternalEventDelivery(event.id);
+
   return { ...updated, keyHash: undefined };
 }
 
@@ -153,7 +178,7 @@ export async function rotateTenantApiKey(tenantId?: string, id?: string) {
   const resolvedTenantId = ensureTenantId(tenantId);
   if (!id) throw new AppError(400, "id is required");
 
-  return prisma.$transaction(async (tx) => {
+  const { apiKey, key, eventId } = await prisma.$transaction(async (tx) => {
     const existing = await tx.apiKey.findFirst({ where: { id, tenantId: resolvedTenantId } });
     if (!existing) throw new AppError(404, "API key not found");
 
@@ -184,6 +209,19 @@ export async function rotateTenantApiKey(tenantId?: string, id?: string) {
       data: { isActive: false, revokedAt: new Date() },
     });
 
-    return { ...replacement, keyHash: undefined, key: rawApiKey };
+    const event = await createInternalEvent(tx, {
+      tenantId: resolvedTenantId,
+      type: "API_KEY_ROTATED",
+      payload: {
+        oldApiKeyId: existing.id,
+        apiKey: replacement,
+      },
+    });
+
+    return { apiKey: replacement, key: rawApiKey, eventId: event.id };
   });
+
+  void enqueueInternalEventDelivery(eventId);
+
+  return { ...apiKey, keyHash: undefined, key };
 }
