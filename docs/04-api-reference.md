@@ -41,7 +41,7 @@ http://localhost:3000/api
 | POST | `/consents` | Grant user consent |
 | POST | `/consents/revoke/:consentId` | Revoke user consent |
 | GET | `/consents/check` | Verify whether consent exists |
-| GET | `/consents/:tenantId/user/:userId` | Fetch all user consents |
+| GET | `/consents/user/:userId` | Fetch all user consents |
 | GET | `/audit` | Fetch audit logs |
 
 ---
@@ -200,7 +200,7 @@ When consent has been revoked
 ## Endpoint
 
 ```http
-GET /api/consents/:tenantId/user/:userId
+GET /api/consents/user/:userId
 ```
 
 ---

@@ -42,3 +42,11 @@ export function getApiKeyPrefix(
 ): string {
   return rawApiKey.slice(0, 15);
 }
+
+export function isValidApiKeyFormat(
+  rawApiKey: string
+): boolean {
+  return /^cm_live_[a-f0-9]{64}$/.test(
+    rawApiKey
+  );
+}

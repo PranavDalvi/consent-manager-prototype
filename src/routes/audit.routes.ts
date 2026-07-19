@@ -1,5 +1,6 @@
 import {Router} from "express";
 import {fetchAuditLogsHandler} from "../controllers/audit.controller";
+import { apiKeyAuthMiddleware } from "../middlewares/api-key-auth.middleware";
 import { fetchAuditLogsSchema } from "../middlewares/auditLog.validator";
 import { validate } from "../middlewares/validate.middleware";
 
@@ -9,18 +10,11 @@ const router = Router();
  * @swagger
  * /audit:
  *   get:
- *     summary: Fetch audit logs for a user
- *     description: Returns all audit log entries for a given tenant and user ordered by creation date.
+ *     summary: Fetch audit logs for the authenticated tenant
+ *     description: Returns all audit log entries for the authenticated tenant and user ordered by creation date.
  *     tags:
  *       - Audit Logs
  *     parameters:
- *       - in: query
- *         name: tenantId
- *         required: true
- *         schema:
- *           type: string
- *         description: Tenant identifier
- *         example: amazon
  *       - in: query
  *         name: userId
  *         required: true
@@ -73,10 +67,10 @@ const router = Router();
  *               properties:
  *                 message:
  *                   type: string
- *                   example: tenantId is required
+ *                   example: userId is required
  *       500:
  *         description: Internal Server Error
  */
-router.get("/", validate(fetchAuditLogsSchema, "query"), fetchAuditLogsHandler);
+router.get("/", apiKeyAuthMiddleware, validate(fetchAuditLogsSchema, "query"), fetchAuditLogsHandler);
 
 export default router;

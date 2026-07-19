@@ -61,21 +61,33 @@ export async function fetchUserConsents(userId: string, tenantId: string) {
 
 export async function revokeConsent(consentId: string) {
   return prisma.$transaction(async (tx) => {
-    const consent = await tx.consent.update({
+    const consent = await tx.consent.findUnique({
+      where: { id: consentId },
+    });
+
+    if (!consent) {
+      throw new Error("Consent not found");
+    }
+
+    if (consent.status === ConsentStatus.REVOKED) {
+      return consent;
+    }
+
+    const revokedConsent = await tx.consent.update({
       where: { id: consentId },
       data: { status: ConsentStatus.REVOKED },
     });
 
     await tx.auditLog.create({
       data: {
-        userId: consent.userId,
-        tenantId: consent.tenantId,
+        userId: revokedConsent.userId,
+        tenantId: revokedConsent.tenantId,
         action: "CONSENT_REVOKED",
-        purpose: consent.purpose,
+        purpose: revokedConsent.purpose,
       },
     });
 
-    return consent;
+    return revokedConsent;
   });
 }
 

@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { fetchAuditLogs } from "../services/auditLogs.service";
 export const fetchAuditLogsHandler = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { userId, tenantId } = req.query;
+    const { userId } = req.query;
 
     if (!userId) {
       res.status(400).json({
@@ -11,14 +11,14 @@ export const fetchAuditLogsHandler = async (req: Request, res: Response): Promis
       return;
     }
 
-    if (!tenantId) {
+    if (!req.auth?.tenantId) {
       res.status(400).json({
-        message: "tenantId is required",
+        message: "Authenticated tenant is required",
       });
       return;
     }
 
-    const logs = await fetchAuditLogs(userId as string, tenantId as string);
+    const logs = await fetchAuditLogs(userId as string, req.auth.tenantId);
 
     res.json({
       success: true,

@@ -135,7 +135,7 @@ A user represents an individual whose personal data is processed by a tenant.
 Example:
 
 ```text
-tenantId = amazon
+tenant = amazon
 userId = user-123
 ```
 

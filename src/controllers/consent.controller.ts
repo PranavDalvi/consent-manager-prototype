@@ -15,9 +15,9 @@ export async function grantConsentHandler(
   res: Response
 ): Promise<void> {
     const userId = requireString(req.body.userId, "userId, purpose and policyVersion are required");
-    const tenantId = requireString(req.body.tenantId, "tenantId is required");
     const purpose = requireString(req.body.purpose, "userId, purpose and policyVersion are required");
     const policyVersion = requireString(req.body.policyVersion, "userId, purpose and policyVersion are required");
+    const tenantId = requireString(req.auth?.tenantId, "Authenticated tenant is required");
 
     const consent = await grantConsent(tenantId, userId, purpose, policyVersion);
 
@@ -32,7 +32,7 @@ export async function fetchUserConsentsHandler(
     res: Response
 ): Promise<void> {
     const userId = requireString(req.params.userId, "userId is required");
-    const tenantId = requireString(req.params.tenantId, "tenantId is required");
+    const tenantId = requireString(req.auth?.tenantId, "Authenticated tenant is required");
 
     const consents = await fetchUserConsents(userId, tenantId);
 
@@ -61,8 +61,8 @@ export async function checkConsentHandler(
     res: Response
 ): Promise<void> {
     const userId = requireString(req.query.userId, "userId and purpose are required");
-    const tenantId = requireString(req.query.tenantId, "tenantId is required");
     const purpose = requireString(req.query.purpose, "userId and purpose are required");
+    const tenantId = requireString(req.auth?.tenantId, "Authenticated tenant is required");
 
     const hasConsent = await checkConsent(userId, purpose, tenantId);
 

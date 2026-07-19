@@ -9,7 +9,7 @@ export function requireConsent(purpose: string) {
     next: NextFunction
   ) => {
     const userId = req.body.userId;
-    const tenantId = req.body.tenantId;
+    const tenantId = req.auth?.tenantId;
 
     if (!userId) {
       return next(
@@ -24,7 +24,7 @@ export function requireConsent(purpose: string) {
       return next(
         new AppError(
           400,
-          "tenantId is required"
+          "Authenticated tenant is required"
         )
       );
     }

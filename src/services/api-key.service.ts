@@ -63,3 +63,51 @@ export async function createApiKey(
     key: rawApiKey,
   };
 }
+
+export async function authenticateApiKey(
+  rawApiKey: string
+) {
+  const keyHash = hashApiKey(rawApiKey);
+
+
+
+  const apiKey = await prisma.apiKey.findUnique({
+    where: {
+      keyHash,
+    },
+
+    include: {
+      tenant: true,
+    },
+  });
+
+
+
+  if (!apiKey) {
+    return null;
+  }
+
+  if (!apiKey.isActive) {
+    return null;
+  }
+
+  if (apiKey.revokedAt) {
+    return null;
+  }
+
+  if (
+    apiKey.expiresAt &&
+    apiKey.expiresAt <= new Date()
+  ) {
+    return null;
+  }
+
+  if (!apiKey.tenant.isActive) {
+    return null;
+  }
+
+  return {
+    tenantId: apiKey.tenantId,
+    apiKeyId: apiKey.id,
+  };
+}

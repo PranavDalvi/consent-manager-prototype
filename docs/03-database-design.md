@@ -238,7 +238,7 @@ Used when fetching all consents for a user.
 Example
 
 ```text
-tenantId = amazon
+tenant = amazon
 
 userId = user-123
 ```
@@ -258,7 +258,7 @@ Used during consent verification.
 Example
 
 ```text
-tenantId = amazon
+tenant = amazon
 
 userId = user-123
 
