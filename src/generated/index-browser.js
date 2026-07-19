@@ -129,10 +129,23 @@ exports.Prisma.TenantScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.PolicyScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  title: 'title',
+  purpose: 'purpose',
+  version: 'version',
+  content: 'content',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.ConsentScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
   userId: 'userId',
+  policyId: 'policyId',
   purpose: 'purpose',
   status: 'status',
   policyVersion: 'policyVersion',
@@ -195,6 +208,7 @@ exports.ConsentStatus = exports.$Enums.ConsentStatus = {
 
 exports.Prisma.ModelName = {
   Tenant: 'Tenant',
+  Policy: 'Policy',
   Consent: 'Consent',
   AuditLog: 'AuditLog',
   ApiKey: 'ApiKey'

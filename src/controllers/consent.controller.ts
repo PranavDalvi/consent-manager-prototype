@@ -14,12 +14,11 @@ export async function grantConsentHandler(
   req: Request,
   res: Response
 ): Promise<void> {
-    const userId = requireString(req.body.userId, "userId, purpose and policyVersion are required");
-    const purpose = requireString(req.body.purpose, "userId, purpose and policyVersion are required");
-    const policyVersion = requireString(req.body.policyVersion, "userId, purpose and policyVersion are required");
+    const userId = requireString(req.body.userId, "userId and policyId are required");
+    const policyId = requireString(req.body.policyId, "userId and policyId are required");
     const tenantId = requireString(req.auth?.tenantId, "Authenticated tenant is required");
 
-    const consent = await grantConsent(tenantId, userId, purpose, policyVersion);
+    const consent = await grantConsent(tenantId, userId, policyId);
 
     res.status(201).json({
         success: true,

@@ -5,37 +5,36 @@ import { AppError } from "../utils/app-error";
 export async function grantConsent(
   tenantId: string,
   userId: string,
-  purpose: string,
-  policyVersion: string
+  policyId: string
 ) {
   return prisma.$transaction(async (tx) => {
-    await tx.tenant.upsert({
-      where: { id: tenantId },
-      update: {},
-      create: {
-        id: tenantId,
-        name: tenantId,
-        slug: tenantId,
-      },
-    });
+    const policy = await tx.policy.findUnique({ where: { id: policyId } });
+    if (!policy || policy.tenantId !== tenantId) {
+      throw new AppError(404, "Policy not found");
+    }
+    if (!policy.isActive) {
+      throw new AppError(400, "Policy is archived");
+    }
 
     const consent = await tx.consent.upsert({
       where: {
         tenantId_userId_purpose: {
           tenantId,
           userId,
-          purpose,
+          purpose: policy.purpose,
         },
       },
       update: {
         status: ConsentStatus.GRANTED,
-        policyVersion,
+        policyId: policy.id,
+        policyVersion: policy.version,
       },
       create: {
         tenantId,
         userId,
-        purpose,
-        policyVersion,
+        policyId: policy.id,
+        purpose: policy.purpose,
+        policyVersion: policy.version,
         status: ConsentStatus.GRANTED,
       },
     });
@@ -45,7 +44,7 @@ export async function grantConsent(
         tenantId,
         userId,
         action: "CONSENT_GRANTED",
-        purpose,
+        purpose: policy.purpose,
       },
     });
 

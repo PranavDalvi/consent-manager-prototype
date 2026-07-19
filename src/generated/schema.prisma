@@ -23,10 +23,31 @@ model Tenant {
   updatedAt DateTime @updatedAt
 
   consents  Consent[]
+  policies  Policy[]
   auditLogs AuditLog[]
   apiKeys   ApiKey[]
 
   @@index([isActive])
+}
+
+model Policy {
+  id        String   @id @default(cuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  title     String
+  purpose   String
+  version   Int
+  content   String
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  consents Consent[]
+
+  @@unique([tenantId, purpose, version])
+  @@index([tenantId])
+  @@index([tenantId, purpose])
+  @@index([tenantId, purpose, version])
 }
 
 model Consent {
@@ -34,14 +55,17 @@ model Consent {
   tenantId      String
   tenant        Tenant        @relation(fields: [tenantId], references: [id], onDelete: Restrict)
   userId        String
+  policyId      String
+  policy        Policy        @relation(fields: [policyId], references: [id], onDelete: Restrict)
   purpose       String
   status        ConsentStatus
-  policyVersion String
+  policyVersion Int
   createdAt     DateTime      @default(now())
 
   @@unique([tenantId, userId, purpose])
   @@index([tenantId])
   @@index([userId])
+  @@index([policyId])
   @@index([purpose])
   @@index([userId, purpose])
 }

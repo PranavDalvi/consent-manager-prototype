@@ -11,6 +11,8 @@ const router = Router();
  * /consents:
  *   post:
  *     summary: Grant consent
+ *     security:
+ *       - ApiKeyAuth: []
  *     tags:
  *       - Consents
  *     requestBody:
@@ -21,14 +23,11 @@ const router = Router();
  *             type: object
  *             required:
  *               - userId
- *               - purpose
- *               - policyVersion
+ *               - policyId
  *             properties:
  *               userId:
  *                 type: string
- *               purpose:
- *                 type: string
- *               policyVersion:
+ *               policyId:
  *                 type: string
  *     responses:
  *       201:

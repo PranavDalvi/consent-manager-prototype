@@ -10,10 +10,8 @@ import {
 describe("consent validators", () => {
   it("accepts a valid grant payload", () => {
     const result = grantConsentSchema.safeParse({
-      tenantId: "tenant-1",
       userId: "user-1",
-      purpose: "marketing",
-      policyVersion: "v1",
+      policyId: "policy-1",
     });
 
     expect(result.success).toBe(true);

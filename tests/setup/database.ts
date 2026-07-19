@@ -36,10 +36,7 @@ function assertSafeTestDatabase(): void {
 export async function clearTestDatabase(): Promise<void> {
   assertSafeTestDatabase();
 
-  await prisma.auditLog.deleteMany();
-  await prisma.consent.deleteMany();
-  await prisma.apiKey.deleteMany();
-  await prisma.tenant.deleteMany();
+  await prisma.$executeRawUnsafe('TRUNCATE TABLE "Consent", "Policy", "AuditLog", "ApiKey", "Tenant" RESTART IDENTITY CASCADE');
 }
 
 export async function createTenantWithApiKey(input: { tenantId: string; tenantName: string; apiKeyName: string }) {

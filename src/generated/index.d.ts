@@ -19,6 +19,11 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Tenant = $Result.DefaultSelection<Prisma.$TenantPayload>
 /**
+ * Model Policy
+ * 
+ */
+export type Policy = $Result.DefaultSelection<Prisma.$PolicyPayload>
+/**
  * Model Consent
  * 
  */
@@ -181,6 +186,16 @@ export class PrismaClient<
     * ```
     */
   get tenant(): Prisma.TenantDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.policy`: Exposes CRUD operations for the **Policy** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Policies
+    * const policies = await prisma.policy.findMany()
+    * ```
+    */
+  get policy(): Prisma.PolicyDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.consent`: Exposes CRUD operations for the **Consent** model.
@@ -646,6 +661,7 @@ export namespace Prisma {
 
   export const ModelName: {
     Tenant: 'Tenant',
+    Policy: 'Policy',
     Consent: 'Consent',
     AuditLog: 'AuditLog',
     ApiKey: 'ApiKey'
@@ -664,7 +680,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tenant" | "consent" | "auditLog" | "apiKey"
+      modelProps: "tenant" | "policy" | "consent" | "auditLog" | "apiKey"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -739,6 +755,80 @@ export namespace Prisma {
           count: {
             args: Prisma.TenantCountArgs<ExtArgs>
             result: $Utils.Optional<TenantCountAggregateOutputType> | number
+          }
+        }
+      }
+      Policy: {
+        payload: Prisma.$PolicyPayload<ExtArgs>
+        fields: Prisma.PolicyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PolicyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PolicyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>
+          }
+          findFirst: {
+            args: Prisma.PolicyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PolicyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>
+          }
+          findMany: {
+            args: Prisma.PolicyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>[]
+          }
+          create: {
+            args: Prisma.PolicyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>
+          }
+          createMany: {
+            args: Prisma.PolicyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PolicyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>[]
+          }
+          delete: {
+            args: Prisma.PolicyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>
+          }
+          update: {
+            args: Prisma.PolicyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>
+          }
+          deleteMany: {
+            args: Prisma.PolicyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PolicyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PolicyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>[]
+          }
+          upsert: {
+            args: Prisma.PolicyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PolicyPayload>
+          }
+          aggregate: {
+            args: Prisma.PolicyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePolicy>
+          }
+          groupBy: {
+            args: Prisma.PolicyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PolicyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PolicyCountArgs<ExtArgs>
+            result: $Utils.Optional<PolicyCountAggregateOutputType> | number
           }
         }
       }
@@ -1073,6 +1163,7 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     tenant?: TenantOmit
+    policy?: PolicyOmit
     consent?: ConsentOmit
     auditLog?: AuditLogOmit
     apiKey?: ApiKeyOmit
@@ -1157,12 +1248,14 @@ export namespace Prisma {
 
   export type TenantCountOutputType = {
     consents: number
+    policies: number
     auditLogs: number
     apiKeys: number
   }
 
   export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     consents?: boolean | TenantCountOutputTypeCountConsentsArgs
+    policies?: boolean | TenantCountOutputTypeCountPoliciesArgs
     auditLogs?: boolean | TenantCountOutputTypeCountAuditLogsArgs
     apiKeys?: boolean | TenantCountOutputTypeCountApiKeysArgs
   }
@@ -1188,6 +1281,13 @@ export namespace Prisma {
   /**
    * TenantCountOutputType without action
    */
+  export type TenantCountOutputTypeCountPoliciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PolicyWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
   export type TenantCountOutputTypeCountAuditLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AuditLogWhereInput
   }
@@ -1197,6 +1297,37 @@ export namespace Prisma {
    */
   export type TenantCountOutputTypeCountApiKeysArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ApiKeyWhereInput
+  }
+
+
+  /**
+   * Count Type PolicyCountOutputType
+   */
+
+  export type PolicyCountOutputType = {
+    consents: number
+  }
+
+  export type PolicyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    consents?: boolean | PolicyCountOutputTypeCountConsentsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * PolicyCountOutputType without action
+   */
+  export type PolicyCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PolicyCountOutputType
+     */
+    select?: PolicyCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * PolicyCountOutputType without action
+   */
+  export type PolicyCountOutputTypeCountConsentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ConsentWhereInput
   }
 
 
@@ -1377,6 +1508,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     consents?: boolean | Tenant$consentsArgs<ExtArgs>
+    policies?: boolean | Tenant$policiesArgs<ExtArgs>
     auditLogs?: boolean | Tenant$auditLogsArgs<ExtArgs>
     apiKeys?: boolean | Tenant$apiKeysArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
@@ -1412,6 +1544,7 @@ export namespace Prisma {
   export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["tenant"]>
   export type TenantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     consents?: boolean | Tenant$consentsArgs<ExtArgs>
+    policies?: boolean | Tenant$policiesArgs<ExtArgs>
     auditLogs?: boolean | Tenant$auditLogsArgs<ExtArgs>
     apiKeys?: boolean | Tenant$apiKeysArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
@@ -1423,6 +1556,7 @@ export namespace Prisma {
     name: "Tenant"
     objects: {
       consents: Prisma.$ConsentPayload<ExtArgs>[]
+      policies: Prisma.$PolicyPayload<ExtArgs>[]
       auditLogs: Prisma.$AuditLogPayload<ExtArgs>[]
       apiKeys: Prisma.$ApiKeyPayload<ExtArgs>[]
     }
@@ -1828,6 +1962,7 @@ export namespace Prisma {
   export interface Prisma__TenantClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     consents<T extends Tenant$consentsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$consentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConsentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    policies<T extends Tenant$policiesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$policiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     auditLogs<T extends Tenant$auditLogsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$auditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     apiKeys<T extends Tenant$apiKeysArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -2282,6 +2417,30 @@ export namespace Prisma {
   }
 
   /**
+   * Tenant.policies
+   */
+  export type Tenant$policiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    where?: PolicyWhereInput
+    orderBy?: PolicyOrderByWithRelationInput | PolicyOrderByWithRelationInput[]
+    cursor?: PolicyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PolicyScalarFieldEnum | PolicyScalarFieldEnum[]
+  }
+
+  /**
    * Tenant.auditLogs
    */
   export type Tenant$auditLogsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2349,22 +2508,1212 @@ export namespace Prisma {
 
 
   /**
+   * Model Policy
+   */
+
+  export type AggregatePolicy = {
+    _count: PolicyCountAggregateOutputType | null
+    _avg: PolicyAvgAggregateOutputType | null
+    _sum: PolicySumAggregateOutputType | null
+    _min: PolicyMinAggregateOutputType | null
+    _max: PolicyMaxAggregateOutputType | null
+  }
+
+  export type PolicyAvgAggregateOutputType = {
+    version: number | null
+  }
+
+  export type PolicySumAggregateOutputType = {
+    version: number | null
+  }
+
+  export type PolicyMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    title: string | null
+    purpose: string | null
+    version: number | null
+    content: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PolicyMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    title: string | null
+    purpose: string | null
+    version: number | null
+    content: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type PolicyCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    title: number
+    purpose: number
+    version: number
+    content: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type PolicyAvgAggregateInputType = {
+    version?: true
+  }
+
+  export type PolicySumAggregateInputType = {
+    version?: true
+  }
+
+  export type PolicyMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    title?: true
+    purpose?: true
+    version?: true
+    content?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PolicyMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    title?: true
+    purpose?: true
+    version?: true
+    content?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type PolicyCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    title?: true
+    purpose?: true
+    version?: true
+    content?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type PolicyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Policy to aggregate.
+     */
+    where?: PolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Policies to fetch.
+     */
+    orderBy?: PolicyOrderByWithRelationInput | PolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Policies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Policies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Policies
+    **/
+    _count?: true | PolicyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: PolicyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: PolicySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PolicyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PolicyMaxAggregateInputType
+  }
+
+  export type GetPolicyAggregateType<T extends PolicyAggregateArgs> = {
+        [P in keyof T & keyof AggregatePolicy]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePolicy[P]>
+      : GetScalarType<T[P], AggregatePolicy[P]>
+  }
+
+
+
+
+  export type PolicyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PolicyWhereInput
+    orderBy?: PolicyOrderByWithAggregationInput | PolicyOrderByWithAggregationInput[]
+    by: PolicyScalarFieldEnum[] | PolicyScalarFieldEnum
+    having?: PolicyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PolicyCountAggregateInputType | true
+    _avg?: PolicyAvgAggregateInputType
+    _sum?: PolicySumAggregateInputType
+    _min?: PolicyMinAggregateInputType
+    _max?: PolicyMaxAggregateInputType
+  }
+
+  export type PolicyGroupByOutputType = {
+    id: string
+    tenantId: string
+    title: string
+    purpose: string
+    version: number
+    content: string
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: PolicyCountAggregateOutputType | null
+    _avg: PolicyAvgAggregateOutputType | null
+    _sum: PolicySumAggregateOutputType | null
+    _min: PolicyMinAggregateOutputType | null
+    _max: PolicyMaxAggregateOutputType | null
+  }
+
+  type GetPolicyGroupByPayload<T extends PolicyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PolicyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PolicyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PolicyGroupByOutputType[P]>
+            : GetScalarType<T[P], PolicyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PolicySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    title?: boolean
+    purpose?: boolean
+    version?: boolean
+    content?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    consents?: boolean | Policy$consentsArgs<ExtArgs>
+    _count?: boolean | PolicyCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["policy"]>
+
+  export type PolicySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    title?: boolean
+    purpose?: boolean
+    version?: boolean
+    content?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["policy"]>
+
+  export type PolicySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    title?: boolean
+    purpose?: boolean
+    version?: boolean
+    content?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["policy"]>
+
+  export type PolicySelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    title?: boolean
+    purpose?: boolean
+    version?: boolean
+    content?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type PolicyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "title" | "purpose" | "version" | "content" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["policy"]>
+  export type PolicyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    consents?: boolean | Policy$consentsArgs<ExtArgs>
+    _count?: boolean | PolicyCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type PolicyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type PolicyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $PolicyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Policy"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      consents: Prisma.$ConsentPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      title: string
+      purpose: string
+      version: number
+      content: string
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["policy"]>
+    composites: {}
+  }
+
+  type PolicyGetPayload<S extends boolean | null | undefined | PolicyDefaultArgs> = $Result.GetResult<Prisma.$PolicyPayload, S>
+
+  type PolicyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PolicyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PolicyCountAggregateInputType | true
+    }
+
+  export interface PolicyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Policy'], meta: { name: 'Policy' } }
+    /**
+     * Find zero or one Policy that matches the filter.
+     * @param {PolicyFindUniqueArgs} args - Arguments to find a Policy
+     * @example
+     * // Get one Policy
+     * const policy = await prisma.policy.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PolicyFindUniqueArgs>(args: SelectSubset<T, PolicyFindUniqueArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Policy that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PolicyFindUniqueOrThrowArgs} args - Arguments to find a Policy
+     * @example
+     * // Get one Policy
+     * const policy = await prisma.policy.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PolicyFindUniqueOrThrowArgs>(args: SelectSubset<T, PolicyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Policy that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyFindFirstArgs} args - Arguments to find a Policy
+     * @example
+     * // Get one Policy
+     * const policy = await prisma.policy.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PolicyFindFirstArgs>(args?: SelectSubset<T, PolicyFindFirstArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Policy that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyFindFirstOrThrowArgs} args - Arguments to find a Policy
+     * @example
+     * // Get one Policy
+     * const policy = await prisma.policy.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PolicyFindFirstOrThrowArgs>(args?: SelectSubset<T, PolicyFindFirstOrThrowArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Policies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Policies
+     * const policies = await prisma.policy.findMany()
+     * 
+     * // Get first 10 Policies
+     * const policies = await prisma.policy.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const policyWithIdOnly = await prisma.policy.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PolicyFindManyArgs>(args?: SelectSubset<T, PolicyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Policy.
+     * @param {PolicyCreateArgs} args - Arguments to create a Policy.
+     * @example
+     * // Create one Policy
+     * const Policy = await prisma.policy.create({
+     *   data: {
+     *     // ... data to create a Policy
+     *   }
+     * })
+     * 
+     */
+    create<T extends PolicyCreateArgs>(args: SelectSubset<T, PolicyCreateArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Policies.
+     * @param {PolicyCreateManyArgs} args - Arguments to create many Policies.
+     * @example
+     * // Create many Policies
+     * const policy = await prisma.policy.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PolicyCreateManyArgs>(args?: SelectSubset<T, PolicyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Policies and returns the data saved in the database.
+     * @param {PolicyCreateManyAndReturnArgs} args - Arguments to create many Policies.
+     * @example
+     * // Create many Policies
+     * const policy = await prisma.policy.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Policies and only return the `id`
+     * const policyWithIdOnly = await prisma.policy.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PolicyCreateManyAndReturnArgs>(args?: SelectSubset<T, PolicyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Policy.
+     * @param {PolicyDeleteArgs} args - Arguments to delete one Policy.
+     * @example
+     * // Delete one Policy
+     * const Policy = await prisma.policy.delete({
+     *   where: {
+     *     // ... filter to delete one Policy
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PolicyDeleteArgs>(args: SelectSubset<T, PolicyDeleteArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Policy.
+     * @param {PolicyUpdateArgs} args - Arguments to update one Policy.
+     * @example
+     * // Update one Policy
+     * const policy = await prisma.policy.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PolicyUpdateArgs>(args: SelectSubset<T, PolicyUpdateArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Policies.
+     * @param {PolicyDeleteManyArgs} args - Arguments to filter Policies to delete.
+     * @example
+     * // Delete a few Policies
+     * const { count } = await prisma.policy.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PolicyDeleteManyArgs>(args?: SelectSubset<T, PolicyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Policies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Policies
+     * const policy = await prisma.policy.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PolicyUpdateManyArgs>(args: SelectSubset<T, PolicyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Policies and returns the data updated in the database.
+     * @param {PolicyUpdateManyAndReturnArgs} args - Arguments to update many Policies.
+     * @example
+     * // Update many Policies
+     * const policy = await prisma.policy.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Policies and only return the `id`
+     * const policyWithIdOnly = await prisma.policy.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PolicyUpdateManyAndReturnArgs>(args: SelectSubset<T, PolicyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Policy.
+     * @param {PolicyUpsertArgs} args - Arguments to update or create a Policy.
+     * @example
+     * // Update or create a Policy
+     * const policy = await prisma.policy.upsert({
+     *   create: {
+     *     // ... data to create a Policy
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Policy we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PolicyUpsertArgs>(args: SelectSubset<T, PolicyUpsertArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Policies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyCountArgs} args - Arguments to filter Policies to count.
+     * @example
+     * // Count the number of Policies
+     * const count = await prisma.policy.count({
+     *   where: {
+     *     // ... the filter for the Policies we want to count
+     *   }
+     * })
+    **/
+    count<T extends PolicyCountArgs>(
+      args?: Subset<T, PolicyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PolicyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Policy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PolicyAggregateArgs>(args: Subset<T, PolicyAggregateArgs>): Prisma.PrismaPromise<GetPolicyAggregateType<T>>
+
+    /**
+     * Group by Policy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PolicyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PolicyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PolicyGroupByArgs['orderBy'] }
+        : { orderBy?: PolicyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PolicyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPolicyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Policy model
+   */
+  readonly fields: PolicyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Policy.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PolicyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    consents<T extends Policy$consentsArgs<ExtArgs> = {}>(args?: Subset<T, Policy$consentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConsentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Policy model
+   */
+  interface PolicyFieldRefs {
+    readonly id: FieldRef<"Policy", 'String'>
+    readonly tenantId: FieldRef<"Policy", 'String'>
+    readonly title: FieldRef<"Policy", 'String'>
+    readonly purpose: FieldRef<"Policy", 'String'>
+    readonly version: FieldRef<"Policy", 'Int'>
+    readonly content: FieldRef<"Policy", 'String'>
+    readonly isActive: FieldRef<"Policy", 'Boolean'>
+    readonly createdAt: FieldRef<"Policy", 'DateTime'>
+    readonly updatedAt: FieldRef<"Policy", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Policy findUnique
+   */
+  export type PolicyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which Policy to fetch.
+     */
+    where: PolicyWhereUniqueInput
+  }
+
+  /**
+   * Policy findUniqueOrThrow
+   */
+  export type PolicyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which Policy to fetch.
+     */
+    where: PolicyWhereUniqueInput
+  }
+
+  /**
+   * Policy findFirst
+   */
+  export type PolicyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which Policy to fetch.
+     */
+    where?: PolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Policies to fetch.
+     */
+    orderBy?: PolicyOrderByWithRelationInput | PolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Policies.
+     */
+    cursor?: PolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Policies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Policies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Policies.
+     */
+    distinct?: PolicyScalarFieldEnum | PolicyScalarFieldEnum[]
+  }
+
+  /**
+   * Policy findFirstOrThrow
+   */
+  export type PolicyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which Policy to fetch.
+     */
+    where?: PolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Policies to fetch.
+     */
+    orderBy?: PolicyOrderByWithRelationInput | PolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Policies.
+     */
+    cursor?: PolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Policies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Policies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Policies.
+     */
+    distinct?: PolicyScalarFieldEnum | PolicyScalarFieldEnum[]
+  }
+
+  /**
+   * Policy findMany
+   */
+  export type PolicyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which Policies to fetch.
+     */
+    where?: PolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Policies to fetch.
+     */
+    orderBy?: PolicyOrderByWithRelationInput | PolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Policies.
+     */
+    cursor?: PolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Policies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Policies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Policies.
+     */
+    distinct?: PolicyScalarFieldEnum | PolicyScalarFieldEnum[]
+  }
+
+  /**
+   * Policy create
+   */
+  export type PolicyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Policy.
+     */
+    data: XOR<PolicyCreateInput, PolicyUncheckedCreateInput>
+  }
+
+  /**
+   * Policy createMany
+   */
+  export type PolicyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Policies.
+     */
+    data: PolicyCreateManyInput | PolicyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Policy createManyAndReturn
+   */
+  export type PolicyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * The data used to create many Policies.
+     */
+    data: PolicyCreateManyInput | PolicyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Policy update
+   */
+  export type PolicyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Policy.
+     */
+    data: XOR<PolicyUpdateInput, PolicyUncheckedUpdateInput>
+    /**
+     * Choose, which Policy to update.
+     */
+    where: PolicyWhereUniqueInput
+  }
+
+  /**
+   * Policy updateMany
+   */
+  export type PolicyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Policies.
+     */
+    data: XOR<PolicyUpdateManyMutationInput, PolicyUncheckedUpdateManyInput>
+    /**
+     * Filter which Policies to update
+     */
+    where?: PolicyWhereInput
+    /**
+     * Limit how many Policies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Policy updateManyAndReturn
+   */
+  export type PolicyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * The data used to update Policies.
+     */
+    data: XOR<PolicyUpdateManyMutationInput, PolicyUncheckedUpdateManyInput>
+    /**
+     * Filter which Policies to update
+     */
+    where?: PolicyWhereInput
+    /**
+     * Limit how many Policies to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Policy upsert
+   */
+  export type PolicyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Policy to update in case it exists.
+     */
+    where: PolicyWhereUniqueInput
+    /**
+     * In case the Policy found by the `where` argument doesn't exist, create a new Policy with this data.
+     */
+    create: XOR<PolicyCreateInput, PolicyUncheckedCreateInput>
+    /**
+     * In case the Policy was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PolicyUpdateInput, PolicyUncheckedUpdateInput>
+  }
+
+  /**
+   * Policy delete
+   */
+  export type PolicyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+    /**
+     * Filter which Policy to delete.
+     */
+    where: PolicyWhereUniqueInput
+  }
+
+  /**
+   * Policy deleteMany
+   */
+  export type PolicyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Policies to delete
+     */
+    where?: PolicyWhereInput
+    /**
+     * Limit how many Policies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Policy.consents
+   */
+  export type Policy$consentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Consent
+     */
+    select?: ConsentSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Consent
+     */
+    omit?: ConsentOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ConsentInclude<ExtArgs> | null
+    where?: ConsentWhereInput
+    orderBy?: ConsentOrderByWithRelationInput | ConsentOrderByWithRelationInput[]
+    cursor?: ConsentWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ConsentScalarFieldEnum | ConsentScalarFieldEnum[]
+  }
+
+  /**
+   * Policy without action
+   */
+  export type PolicyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Policy
+     */
+    select?: PolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Policy
+     */
+    omit?: PolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PolicyInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Consent
    */
 
   export type AggregateConsent = {
     _count: ConsentCountAggregateOutputType | null
+    _avg: ConsentAvgAggregateOutputType | null
+    _sum: ConsentSumAggregateOutputType | null
     _min: ConsentMinAggregateOutputType | null
     _max: ConsentMaxAggregateOutputType | null
+  }
+
+  export type ConsentAvgAggregateOutputType = {
+    policyVersion: number | null
+  }
+
+  export type ConsentSumAggregateOutputType = {
+    policyVersion: number | null
   }
 
   export type ConsentMinAggregateOutputType = {
     id: string | null
     tenantId: string | null
     userId: string | null
+    policyId: string | null
     purpose: string | null
     status: $Enums.ConsentStatus | null
-    policyVersion: string | null
+    policyVersion: number | null
     createdAt: Date | null
   }
 
@@ -2372,9 +3721,10 @@ export namespace Prisma {
     id: string | null
     tenantId: string | null
     userId: string | null
+    policyId: string | null
     purpose: string | null
     status: $Enums.ConsentStatus | null
-    policyVersion: string | null
+    policyVersion: number | null
     createdAt: Date | null
   }
 
@@ -2382,6 +3732,7 @@ export namespace Prisma {
     id: number
     tenantId: number
     userId: number
+    policyId: number
     purpose: number
     status: number
     policyVersion: number
@@ -2390,10 +3741,19 @@ export namespace Prisma {
   }
 
 
+  export type ConsentAvgAggregateInputType = {
+    policyVersion?: true
+  }
+
+  export type ConsentSumAggregateInputType = {
+    policyVersion?: true
+  }
+
   export type ConsentMinAggregateInputType = {
     id?: true
     tenantId?: true
     userId?: true
+    policyId?: true
     purpose?: true
     status?: true
     policyVersion?: true
@@ -2404,6 +3764,7 @@ export namespace Prisma {
     id?: true
     tenantId?: true
     userId?: true
+    policyId?: true
     purpose?: true
     status?: true
     policyVersion?: true
@@ -2414,6 +3775,7 @@ export namespace Prisma {
     id?: true
     tenantId?: true
     userId?: true
+    policyId?: true
     purpose?: true
     status?: true
     policyVersion?: true
@@ -2459,6 +3821,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: ConsentAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ConsentSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: ConsentMinAggregateInputType
@@ -2489,6 +3863,8 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: ConsentCountAggregateInputType | true
+    _avg?: ConsentAvgAggregateInputType
+    _sum?: ConsentSumAggregateInputType
     _min?: ConsentMinAggregateInputType
     _max?: ConsentMaxAggregateInputType
   }
@@ -2497,11 +3873,14 @@ export namespace Prisma {
     id: string
     tenantId: string
     userId: string
+    policyId: string
     purpose: string
     status: $Enums.ConsentStatus
-    policyVersion: string
+    policyVersion: number
     createdAt: Date
     _count: ConsentCountAggregateOutputType | null
+    _avg: ConsentAvgAggregateOutputType | null
+    _sum: ConsentSumAggregateOutputType | null
     _min: ConsentMinAggregateOutputType | null
     _max: ConsentMaxAggregateOutputType | null
   }
@@ -2524,68 +3903,80 @@ export namespace Prisma {
     id?: boolean
     tenantId?: boolean
     userId?: boolean
+    policyId?: boolean
     purpose?: boolean
     status?: boolean
     policyVersion?: boolean
     createdAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["consent"]>
 
   export type ConsentSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     tenantId?: boolean
     userId?: boolean
+    policyId?: boolean
     purpose?: boolean
     status?: boolean
     policyVersion?: boolean
     createdAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["consent"]>
 
   export type ConsentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     tenantId?: boolean
     userId?: boolean
+    policyId?: boolean
     purpose?: boolean
     status?: boolean
     policyVersion?: boolean
     createdAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["consent"]>
 
   export type ConsentSelectScalar = {
     id?: boolean
     tenantId?: boolean
     userId?: boolean
+    policyId?: boolean
     purpose?: boolean
     status?: boolean
     policyVersion?: boolean
     createdAt?: boolean
   }
 
-  export type ConsentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "userId" | "purpose" | "status" | "policyVersion" | "createdAt", ExtArgs["result"]["consent"]>
+  export type ConsentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "userId" | "policyId" | "purpose" | "status" | "policyVersion" | "createdAt", ExtArgs["result"]["consent"]>
   export type ConsentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
   }
   export type ConsentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
   }
   export type ConsentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
   }
 
   export type $ConsentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Consent"
     objects: {
       tenant: Prisma.$TenantPayload<ExtArgs>
+      policy: Prisma.$PolicyPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       tenantId: string
       userId: string
+      policyId: string
       purpose: string
       status: $Enums.ConsentStatus
-      policyVersion: string
+      policyVersion: number
       createdAt: Date
     }, ExtArgs["result"]["consent"]>
     composites: {}
@@ -2982,6 +4373,7 @@ export namespace Prisma {
   export interface Prisma__ConsentClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    policy<T extends PolicyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PolicyDefaultArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3014,9 +4406,10 @@ export namespace Prisma {
     readonly id: FieldRef<"Consent", 'String'>
     readonly tenantId: FieldRef<"Consent", 'String'>
     readonly userId: FieldRef<"Consent", 'String'>
+    readonly policyId: FieldRef<"Consent", 'String'>
     readonly purpose: FieldRef<"Consent", 'String'>
     readonly status: FieldRef<"Consent", 'ConsentStatus'>
-    readonly policyVersion: FieldRef<"Consent", 'String'>
+    readonly policyVersion: FieldRef<"Consent", 'Int'>
     readonly createdAt: FieldRef<"Consent", 'DateTime'>
   }
     
@@ -5689,10 +7082,26 @@ export namespace Prisma {
   export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
 
 
+  export const PolicyScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    title: 'title',
+    purpose: 'purpose',
+    version: 'version',
+    content: 'content',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type PolicyScalarFieldEnum = (typeof PolicyScalarFieldEnum)[keyof typeof PolicyScalarFieldEnum]
+
+
   export const ConsentScalarFieldEnum: {
     id: 'id',
     tenantId: 'tenantId',
     userId: 'userId',
+    policyId: 'policyId',
     purpose: 'purpose',
     status: 'status',
     policyVersion: 'policyVersion',
@@ -5814,6 +7223,20 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int'
+   */
+  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+  /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'ConsentStatus'
    */
   export type EnumConsentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'ConsentStatus'>
@@ -5842,16 +7265,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Int'
+   * Reference to a field of type 'Float'
    */
-  export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
 
 
   /**
-   * Reference to a field of type 'Int[]'
+   * Reference to a field of type 'Float[]'
    */
-  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
   /**
    * Deep Input Types
@@ -5869,6 +7292,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeFilter<"Tenant"> | Date | string
     consents?: ConsentListRelationFilter
+    policies?: PolicyListRelationFilter
     auditLogs?: AuditLogListRelationFilter
     apiKeys?: ApiKeyListRelationFilter
   }
@@ -5881,6 +7305,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     consents?: ConsentOrderByRelationAggregateInput
+    policies?: PolicyOrderByRelationAggregateInput
     auditLogs?: AuditLogOrderByRelationAggregateInput
     apiKeys?: ApiKeyOrderByRelationAggregateInput
   }
@@ -5896,6 +7321,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeFilter<"Tenant"> | Date | string
     consents?: ConsentListRelationFilter
+    policies?: PolicyListRelationFilter
     auditLogs?: AuditLogListRelationFilter
     apiKeys?: ApiKeyListRelationFilter
   }, "id" | "slug">
@@ -5924,6 +7350,87 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
   }
 
+  export type PolicyWhereInput = {
+    AND?: PolicyWhereInput | PolicyWhereInput[]
+    OR?: PolicyWhereInput[]
+    NOT?: PolicyWhereInput | PolicyWhereInput[]
+    id?: StringFilter<"Policy"> | string
+    tenantId?: StringFilter<"Policy"> | string
+    title?: StringFilter<"Policy"> | string
+    purpose?: StringFilter<"Policy"> | string
+    version?: IntFilter<"Policy"> | number
+    content?: StringFilter<"Policy"> | string
+    isActive?: BoolFilter<"Policy"> | boolean
+    createdAt?: DateTimeFilter<"Policy"> | Date | string
+    updatedAt?: DateTimeFilter<"Policy"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    consents?: ConsentListRelationFilter
+  }
+
+  export type PolicyOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    title?: SortOrder
+    purpose?: SortOrder
+    version?: SortOrder
+    content?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    consents?: ConsentOrderByRelationAggregateInput
+  }
+
+  export type PolicyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_purpose_version?: PolicyTenantIdPurposeVersionCompoundUniqueInput
+    AND?: PolicyWhereInput | PolicyWhereInput[]
+    OR?: PolicyWhereInput[]
+    NOT?: PolicyWhereInput | PolicyWhereInput[]
+    tenantId?: StringFilter<"Policy"> | string
+    title?: StringFilter<"Policy"> | string
+    purpose?: StringFilter<"Policy"> | string
+    version?: IntFilter<"Policy"> | number
+    content?: StringFilter<"Policy"> | string
+    isActive?: BoolFilter<"Policy"> | boolean
+    createdAt?: DateTimeFilter<"Policy"> | Date | string
+    updatedAt?: DateTimeFilter<"Policy"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    consents?: ConsentListRelationFilter
+  }, "id" | "tenantId_purpose_version">
+
+  export type PolicyOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    title?: SortOrder
+    purpose?: SortOrder
+    version?: SortOrder
+    content?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: PolicyCountOrderByAggregateInput
+    _avg?: PolicyAvgOrderByAggregateInput
+    _max?: PolicyMaxOrderByAggregateInput
+    _min?: PolicyMinOrderByAggregateInput
+    _sum?: PolicySumOrderByAggregateInput
+  }
+
+  export type PolicyScalarWhereWithAggregatesInput = {
+    AND?: PolicyScalarWhereWithAggregatesInput | PolicyScalarWhereWithAggregatesInput[]
+    OR?: PolicyScalarWhereWithAggregatesInput[]
+    NOT?: PolicyScalarWhereWithAggregatesInput | PolicyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Policy"> | string
+    tenantId?: StringWithAggregatesFilter<"Policy"> | string
+    title?: StringWithAggregatesFilter<"Policy"> | string
+    purpose?: StringWithAggregatesFilter<"Policy"> | string
+    version?: IntWithAggregatesFilter<"Policy"> | number
+    content?: StringWithAggregatesFilter<"Policy"> | string
+    isActive?: BoolWithAggregatesFilter<"Policy"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Policy"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Policy"> | Date | string
+  }
+
   export type ConsentWhereInput = {
     AND?: ConsentWhereInput | ConsentWhereInput[]
     OR?: ConsentWhereInput[]
@@ -5931,22 +7438,26 @@ export namespace Prisma {
     id?: StringFilter<"Consent"> | string
     tenantId?: StringFilter<"Consent"> | string
     userId?: StringFilter<"Consent"> | string
+    policyId?: StringFilter<"Consent"> | string
     purpose?: StringFilter<"Consent"> | string
     status?: EnumConsentStatusFilter<"Consent"> | $Enums.ConsentStatus
-    policyVersion?: StringFilter<"Consent"> | string
+    policyVersion?: IntFilter<"Consent"> | number
     createdAt?: DateTimeFilter<"Consent"> | Date | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    policy?: XOR<PolicyScalarRelationFilter, PolicyWhereInput>
   }
 
   export type ConsentOrderByWithRelationInput = {
     id?: SortOrder
     tenantId?: SortOrder
     userId?: SortOrder
+    policyId?: SortOrder
     purpose?: SortOrder
     status?: SortOrder
     policyVersion?: SortOrder
     createdAt?: SortOrder
     tenant?: TenantOrderByWithRelationInput
+    policy?: PolicyOrderByWithRelationInput
   }
 
   export type ConsentWhereUniqueInput = Prisma.AtLeast<{
@@ -5957,24 +7468,29 @@ export namespace Prisma {
     NOT?: ConsentWhereInput | ConsentWhereInput[]
     tenantId?: StringFilter<"Consent"> | string
     userId?: StringFilter<"Consent"> | string
+    policyId?: StringFilter<"Consent"> | string
     purpose?: StringFilter<"Consent"> | string
     status?: EnumConsentStatusFilter<"Consent"> | $Enums.ConsentStatus
-    policyVersion?: StringFilter<"Consent"> | string
+    policyVersion?: IntFilter<"Consent"> | number
     createdAt?: DateTimeFilter<"Consent"> | Date | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    policy?: XOR<PolicyScalarRelationFilter, PolicyWhereInput>
   }, "id" | "tenantId_userId_purpose">
 
   export type ConsentOrderByWithAggregationInput = {
     id?: SortOrder
     tenantId?: SortOrder
     userId?: SortOrder
+    policyId?: SortOrder
     purpose?: SortOrder
     status?: SortOrder
     policyVersion?: SortOrder
     createdAt?: SortOrder
     _count?: ConsentCountOrderByAggregateInput
+    _avg?: ConsentAvgOrderByAggregateInput
     _max?: ConsentMaxOrderByAggregateInput
     _min?: ConsentMinOrderByAggregateInput
+    _sum?: ConsentSumOrderByAggregateInput
   }
 
   export type ConsentScalarWhereWithAggregatesInput = {
@@ -5984,9 +7500,10 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Consent"> | string
     tenantId?: StringWithAggregatesFilter<"Consent"> | string
     userId?: StringWithAggregatesFilter<"Consent"> | string
+    policyId?: StringWithAggregatesFilter<"Consent"> | string
     purpose?: StringWithAggregatesFilter<"Consent"> | string
     status?: EnumConsentStatusWithAggregatesFilter<"Consent"> | $Enums.ConsentStatus
-    policyVersion?: StringWithAggregatesFilter<"Consent"> | string
+    policyVersion?: IntWithAggregatesFilter<"Consent"> | number
     createdAt?: DateTimeWithAggregatesFilter<"Consent"> | Date | string
   }
 
@@ -6148,6 +7665,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     consents?: ConsentCreateNestedManyWithoutTenantInput
+    policies?: PolicyCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
   }
@@ -6160,6 +7678,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
+    policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
   }
@@ -6172,6 +7691,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     consents?: ConsentUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
   }
@@ -6184,6 +7704,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
   }
@@ -6215,23 +7736,112 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type PolicyCreateInput = {
+    id?: string
+    title: string
+    purpose: string
+    version: number
+    content: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutPoliciesInput
+    consents?: ConsentCreateNestedManyWithoutPolicyInput
+  }
+
+  export type PolicyUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    title: string
+    purpose: string
+    version: number
+    content: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentUncheckedCreateNestedManyWithoutPolicyInput
+  }
+
+  export type PolicyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutPoliciesNestedInput
+    consents?: ConsentUpdateManyWithoutPolicyNestedInput
+  }
+
+  export type PolicyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUncheckedUpdateManyWithoutPolicyNestedInput
+  }
+
+  export type PolicyCreateManyInput = {
+    id?: string
+    tenantId: string
+    title: string
+    purpose: string
+    version: number
+    content: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PolicyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PolicyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ConsentCreateInput = {
     id?: string
     userId: string
     purpose: string
     status: $Enums.ConsentStatus
-    policyVersion: string
+    policyVersion: number
     createdAt?: Date | string
     tenant: TenantCreateNestedOneWithoutConsentsInput
+    policy: PolicyCreateNestedOneWithoutConsentsInput
   }
 
   export type ConsentUncheckedCreateInput = {
     id?: string
     tenantId: string
     userId: string
+    policyId: string
     purpose: string
     status: $Enums.ConsentStatus
-    policyVersion: string
+    policyVersion: number
     createdAt?: Date | string
   }
 
@@ -6240,18 +7850,20 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
-    policyVersion?: StringFieldUpdateOperationsInput | string
+    policyVersion?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutConsentsNestedInput
+    policy?: PolicyUpdateOneRequiredWithoutConsentsNestedInput
   }
 
   export type ConsentUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    policyId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
-    policyVersion?: StringFieldUpdateOperationsInput | string
+    policyVersion?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6259,9 +7871,10 @@ export namespace Prisma {
     id?: string
     tenantId: string
     userId: string
+    policyId: string
     purpose: string
     status: $Enums.ConsentStatus
-    policyVersion: string
+    policyVersion: number
     createdAt?: Date | string
   }
 
@@ -6270,7 +7883,7 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
-    policyVersion?: StringFieldUpdateOperationsInput | string
+    policyVersion?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6278,9 +7891,10 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     tenantId?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    policyId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
-    policyVersion?: StringFieldUpdateOperationsInput | string
+    policyVersion?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -6487,6 +8101,12 @@ export namespace Prisma {
     none?: ConsentWhereInput
   }
 
+  export type PolicyListRelationFilter = {
+    every?: PolicyWhereInput
+    some?: PolicyWhereInput
+    none?: PolicyWhereInput
+  }
+
   export type AuditLogListRelationFilter = {
     every?: AuditLogWhereInput
     some?: AuditLogWhereInput
@@ -6500,6 +8120,10 @@ export namespace Prisma {
   }
 
   export type ConsentOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PolicyOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -6578,6 +8202,88 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type TenantScalarRelationFilter = {
+    is?: TenantWhereInput
+    isNot?: TenantWhereInput
+  }
+
+  export type PolicyTenantIdPurposeVersionCompoundUniqueInput = {
+    tenantId: string
+    purpose: string
+    version: number
+  }
+
+  export type PolicyCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    title?: SortOrder
+    purpose?: SortOrder
+    version?: SortOrder
+    content?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PolicyAvgOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type PolicyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    title?: SortOrder
+    purpose?: SortOrder
+    version?: SortOrder
+    content?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PolicyMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    title?: SortOrder
+    purpose?: SortOrder
+    version?: SortOrder
+    content?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type PolicySumOrderByAggregateInput = {
+    version?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type EnumConsentStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ConsentStatus | EnumConsentStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
@@ -6585,9 +8291,9 @@ export namespace Prisma {
     not?: NestedEnumConsentStatusFilter<$PrismaModel> | $Enums.ConsentStatus
   }
 
-  export type TenantScalarRelationFilter = {
-    is?: TenantWhereInput
-    isNot?: TenantWhereInput
+  export type PolicyScalarRelationFilter = {
+    is?: PolicyWhereInput
+    isNot?: PolicyWhereInput
   }
 
   export type ConsentTenantIdUserIdPurposeCompoundUniqueInput = {
@@ -6600,16 +8306,22 @@ export namespace Prisma {
     id?: SortOrder
     tenantId?: SortOrder
     userId?: SortOrder
+    policyId?: SortOrder
     purpose?: SortOrder
     status?: SortOrder
     policyVersion?: SortOrder
     createdAt?: SortOrder
   }
 
+  export type ConsentAvgOrderByAggregateInput = {
+    policyVersion?: SortOrder
+  }
+
   export type ConsentMaxOrderByAggregateInput = {
     id?: SortOrder
     tenantId?: SortOrder
     userId?: SortOrder
+    policyId?: SortOrder
     purpose?: SortOrder
     status?: SortOrder
     policyVersion?: SortOrder
@@ -6620,10 +8332,15 @@ export namespace Prisma {
     id?: SortOrder
     tenantId?: SortOrder
     userId?: SortOrder
+    policyId?: SortOrder
     purpose?: SortOrder
     status?: SortOrder
     policyVersion?: SortOrder
     createdAt?: SortOrder
+  }
+
+  export type ConsentSumOrderByAggregateInput = {
+    policyVersion?: SortOrder
   }
 
   export type EnumConsentStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -6825,6 +8542,13 @@ export namespace Prisma {
     connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
   }
 
+  export type PolicyCreateNestedManyWithoutTenantInput = {
+    create?: XOR<PolicyCreateWithoutTenantInput, PolicyUncheckedCreateWithoutTenantInput> | PolicyCreateWithoutTenantInput[] | PolicyUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: PolicyCreateOrConnectWithoutTenantInput | PolicyCreateOrConnectWithoutTenantInput[]
+    createMany?: PolicyCreateManyTenantInputEnvelope
+    connect?: PolicyWhereUniqueInput | PolicyWhereUniqueInput[]
+  }
+
   export type AuditLogCreateNestedManyWithoutTenantInput = {
     create?: XOR<AuditLogCreateWithoutTenantInput, AuditLogUncheckedCreateWithoutTenantInput> | AuditLogCreateWithoutTenantInput[] | AuditLogUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: AuditLogCreateOrConnectWithoutTenantInput | AuditLogCreateOrConnectWithoutTenantInput[]
@@ -6844,6 +8568,13 @@ export namespace Prisma {
     connectOrCreate?: ConsentCreateOrConnectWithoutTenantInput | ConsentCreateOrConnectWithoutTenantInput[]
     createMany?: ConsentCreateManyTenantInputEnvelope
     connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+  }
+
+  export type PolicyUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<PolicyCreateWithoutTenantInput, PolicyUncheckedCreateWithoutTenantInput> | PolicyCreateWithoutTenantInput[] | PolicyUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: PolicyCreateOrConnectWithoutTenantInput | PolicyCreateOrConnectWithoutTenantInput[]
+    createMany?: PolicyCreateManyTenantInputEnvelope
+    connect?: PolicyWhereUniqueInput | PolicyWhereUniqueInput[]
   }
 
   export type AuditLogUncheckedCreateNestedManyWithoutTenantInput = {
@@ -6884,6 +8615,20 @@ export namespace Prisma {
     update?: ConsentUpdateWithWhereUniqueWithoutTenantInput | ConsentUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: ConsentUpdateManyWithWhereWithoutTenantInput | ConsentUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: ConsentScalarWhereInput | ConsentScalarWhereInput[]
+  }
+
+  export type PolicyUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<PolicyCreateWithoutTenantInput, PolicyUncheckedCreateWithoutTenantInput> | PolicyCreateWithoutTenantInput[] | PolicyUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: PolicyCreateOrConnectWithoutTenantInput | PolicyCreateOrConnectWithoutTenantInput[]
+    upsert?: PolicyUpsertWithWhereUniqueWithoutTenantInput | PolicyUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: PolicyCreateManyTenantInputEnvelope
+    set?: PolicyWhereUniqueInput | PolicyWhereUniqueInput[]
+    disconnect?: PolicyWhereUniqueInput | PolicyWhereUniqueInput[]
+    delete?: PolicyWhereUniqueInput | PolicyWhereUniqueInput[]
+    connect?: PolicyWhereUniqueInput | PolicyWhereUniqueInput[]
+    update?: PolicyUpdateWithWhereUniqueWithoutTenantInput | PolicyUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: PolicyUpdateManyWithWhereWithoutTenantInput | PolicyUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: PolicyScalarWhereInput | PolicyScalarWhereInput[]
   }
 
   export type AuditLogUpdateManyWithoutTenantNestedInput = {
@@ -6928,6 +8673,20 @@ export namespace Prisma {
     deleteMany?: ConsentScalarWhereInput | ConsentScalarWhereInput[]
   }
 
+  export type PolicyUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<PolicyCreateWithoutTenantInput, PolicyUncheckedCreateWithoutTenantInput> | PolicyCreateWithoutTenantInput[] | PolicyUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: PolicyCreateOrConnectWithoutTenantInput | PolicyCreateOrConnectWithoutTenantInput[]
+    upsert?: PolicyUpsertWithWhereUniqueWithoutTenantInput | PolicyUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: PolicyCreateManyTenantInputEnvelope
+    set?: PolicyWhereUniqueInput | PolicyWhereUniqueInput[]
+    disconnect?: PolicyWhereUniqueInput | PolicyWhereUniqueInput[]
+    delete?: PolicyWhereUniqueInput | PolicyWhereUniqueInput[]
+    connect?: PolicyWhereUniqueInput | PolicyWhereUniqueInput[]
+    update?: PolicyUpdateWithWhereUniqueWithoutTenantInput | PolicyUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: PolicyUpdateManyWithWhereWithoutTenantInput | PolicyUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: PolicyScalarWhereInput | PolicyScalarWhereInput[]
+  }
+
   export type AuditLogUncheckedUpdateManyWithoutTenantNestedInput = {
     create?: XOR<AuditLogCreateWithoutTenantInput, AuditLogUncheckedCreateWithoutTenantInput> | AuditLogCreateWithoutTenantInput[] | AuditLogUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: AuditLogCreateOrConnectWithoutTenantInput | AuditLogCreateOrConnectWithoutTenantInput[]
@@ -6956,10 +8715,80 @@ export namespace Prisma {
     deleteMany?: ApiKeyScalarWhereInput | ApiKeyScalarWhereInput[]
   }
 
+  export type TenantCreateNestedOneWithoutPoliciesInput = {
+    create?: XOR<TenantCreateWithoutPoliciesInput, TenantUncheckedCreateWithoutPoliciesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutPoliciesInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type ConsentCreateNestedManyWithoutPolicyInput = {
+    create?: XOR<ConsentCreateWithoutPolicyInput, ConsentUncheckedCreateWithoutPolicyInput> | ConsentCreateWithoutPolicyInput[] | ConsentUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: ConsentCreateOrConnectWithoutPolicyInput | ConsentCreateOrConnectWithoutPolicyInput[]
+    createMany?: ConsentCreateManyPolicyInputEnvelope
+    connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+  }
+
+  export type ConsentUncheckedCreateNestedManyWithoutPolicyInput = {
+    create?: XOR<ConsentCreateWithoutPolicyInput, ConsentUncheckedCreateWithoutPolicyInput> | ConsentCreateWithoutPolicyInput[] | ConsentUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: ConsentCreateOrConnectWithoutPolicyInput | ConsentCreateOrConnectWithoutPolicyInput[]
+    createMany?: ConsentCreateManyPolicyInputEnvelope
+    connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type TenantUpdateOneRequiredWithoutPoliciesNestedInput = {
+    create?: XOR<TenantCreateWithoutPoliciesInput, TenantUncheckedCreateWithoutPoliciesInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutPoliciesInput
+    upsert?: TenantUpsertWithoutPoliciesInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutPoliciesInput, TenantUpdateWithoutPoliciesInput>, TenantUncheckedUpdateWithoutPoliciesInput>
+  }
+
+  export type ConsentUpdateManyWithoutPolicyNestedInput = {
+    create?: XOR<ConsentCreateWithoutPolicyInput, ConsentUncheckedCreateWithoutPolicyInput> | ConsentCreateWithoutPolicyInput[] | ConsentUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: ConsentCreateOrConnectWithoutPolicyInput | ConsentCreateOrConnectWithoutPolicyInput[]
+    upsert?: ConsentUpsertWithWhereUniqueWithoutPolicyInput | ConsentUpsertWithWhereUniqueWithoutPolicyInput[]
+    createMany?: ConsentCreateManyPolicyInputEnvelope
+    set?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    disconnect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    delete?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    update?: ConsentUpdateWithWhereUniqueWithoutPolicyInput | ConsentUpdateWithWhereUniqueWithoutPolicyInput[]
+    updateMany?: ConsentUpdateManyWithWhereWithoutPolicyInput | ConsentUpdateManyWithWhereWithoutPolicyInput[]
+    deleteMany?: ConsentScalarWhereInput | ConsentScalarWhereInput[]
+  }
+
+  export type ConsentUncheckedUpdateManyWithoutPolicyNestedInput = {
+    create?: XOR<ConsentCreateWithoutPolicyInput, ConsentUncheckedCreateWithoutPolicyInput> | ConsentCreateWithoutPolicyInput[] | ConsentUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: ConsentCreateOrConnectWithoutPolicyInput | ConsentCreateOrConnectWithoutPolicyInput[]
+    upsert?: ConsentUpsertWithWhereUniqueWithoutPolicyInput | ConsentUpsertWithWhereUniqueWithoutPolicyInput[]
+    createMany?: ConsentCreateManyPolicyInputEnvelope
+    set?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    disconnect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    delete?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+    update?: ConsentUpdateWithWhereUniqueWithoutPolicyInput | ConsentUpdateWithWhereUniqueWithoutPolicyInput[]
+    updateMany?: ConsentUpdateManyWithWhereWithoutPolicyInput | ConsentUpdateManyWithWhereWithoutPolicyInput[]
+    deleteMany?: ConsentScalarWhereInput | ConsentScalarWhereInput[]
+  }
+
   export type TenantCreateNestedOneWithoutConsentsInput = {
     create?: XOR<TenantCreateWithoutConsentsInput, TenantUncheckedCreateWithoutConsentsInput>
     connectOrCreate?: TenantCreateOrConnectWithoutConsentsInput
     connect?: TenantWhereUniqueInput
+  }
+
+  export type PolicyCreateNestedOneWithoutConsentsInput = {
+    create?: XOR<PolicyCreateWithoutConsentsInput, PolicyUncheckedCreateWithoutConsentsInput>
+    connectOrCreate?: PolicyCreateOrConnectWithoutConsentsInput
+    connect?: PolicyWhereUniqueInput
   }
 
   export type EnumConsentStatusFieldUpdateOperationsInput = {
@@ -6972,6 +8801,14 @@ export namespace Prisma {
     upsert?: TenantUpsertWithoutConsentsInput
     connect?: TenantWhereUniqueInput
     update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutConsentsInput, TenantUpdateWithoutConsentsInput>, TenantUncheckedUpdateWithoutConsentsInput>
+  }
+
+  export type PolicyUpdateOneRequiredWithoutConsentsNestedInput = {
+    create?: XOR<PolicyCreateWithoutConsentsInput, PolicyUncheckedCreateWithoutConsentsInput>
+    connectOrCreate?: PolicyCreateOrConnectWithoutConsentsInput
+    upsert?: PolicyUpsertWithoutConsentsInput
+    connect?: PolicyWhereUniqueInput
+    update?: XOR<XOR<PolicyUpdateToOneWithWhereWithoutConsentsInput, PolicyUpdateWithoutConsentsInput>, PolicyUncheckedUpdateWithoutConsentsInput>
   }
 
   export type TenantCreateNestedOneWithoutAuditLogsInput = {
@@ -7090,6 +8927,33 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type NestedEnumConsentStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.ConsentStatus | EnumConsentStatusFieldRefInput<$PrismaModel>
     in?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
@@ -7202,16 +9066,18 @@ export namespace Prisma {
     userId: string
     purpose: string
     status: $Enums.ConsentStatus
-    policyVersion: string
+    policyVersion: number
     createdAt?: Date | string
+    policy: PolicyCreateNestedOneWithoutConsentsInput
   }
 
   export type ConsentUncheckedCreateWithoutTenantInput = {
     id?: string
     userId: string
+    policyId: string
     purpose: string
     status: $Enums.ConsentStatus
-    policyVersion: string
+    policyVersion: number
     createdAt?: Date | string
   }
 
@@ -7222,6 +9088,40 @@ export namespace Prisma {
 
   export type ConsentCreateManyTenantInputEnvelope = {
     data: ConsentCreateManyTenantInput | ConsentCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PolicyCreateWithoutTenantInput = {
+    id?: string
+    title: string
+    purpose: string
+    version: number
+    content: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentCreateNestedManyWithoutPolicyInput
+  }
+
+  export type PolicyUncheckedCreateWithoutTenantInput = {
+    id?: string
+    title: string
+    purpose: string
+    version: number
+    content: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentUncheckedCreateNestedManyWithoutPolicyInput
+  }
+
+  export type PolicyCreateOrConnectWithoutTenantInput = {
+    where: PolicyWhereUniqueInput
+    create: XOR<PolicyCreateWithoutTenantInput, PolicyUncheckedCreateWithoutTenantInput>
+  }
+
+  export type PolicyCreateManyTenantInputEnvelope = {
+    data: PolicyCreateManyTenantInput | PolicyCreateManyTenantInput[]
     skipDuplicates?: boolean
   }
 
@@ -7312,10 +9212,42 @@ export namespace Prisma {
     id?: StringFilter<"Consent"> | string
     tenantId?: StringFilter<"Consent"> | string
     userId?: StringFilter<"Consent"> | string
+    policyId?: StringFilter<"Consent"> | string
     purpose?: StringFilter<"Consent"> | string
     status?: EnumConsentStatusFilter<"Consent"> | $Enums.ConsentStatus
-    policyVersion?: StringFilter<"Consent"> | string
+    policyVersion?: IntFilter<"Consent"> | number
     createdAt?: DateTimeFilter<"Consent"> | Date | string
+  }
+
+  export type PolicyUpsertWithWhereUniqueWithoutTenantInput = {
+    where: PolicyWhereUniqueInput
+    update: XOR<PolicyUpdateWithoutTenantInput, PolicyUncheckedUpdateWithoutTenantInput>
+    create: XOR<PolicyCreateWithoutTenantInput, PolicyUncheckedCreateWithoutTenantInput>
+  }
+
+  export type PolicyUpdateWithWhereUniqueWithoutTenantInput = {
+    where: PolicyWhereUniqueInput
+    data: XOR<PolicyUpdateWithoutTenantInput, PolicyUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type PolicyUpdateManyWithWhereWithoutTenantInput = {
+    where: PolicyScalarWhereInput
+    data: XOR<PolicyUpdateManyMutationInput, PolicyUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type PolicyScalarWhereInput = {
+    AND?: PolicyScalarWhereInput | PolicyScalarWhereInput[]
+    OR?: PolicyScalarWhereInput[]
+    NOT?: PolicyScalarWhereInput | PolicyScalarWhereInput[]
+    id?: StringFilter<"Policy"> | string
+    tenantId?: StringFilter<"Policy"> | string
+    title?: StringFilter<"Policy"> | string
+    purpose?: StringFilter<"Policy"> | string
+    version?: IntFilter<"Policy"> | number
+    content?: StringFilter<"Policy"> | string
+    isActive?: BoolFilter<"Policy"> | boolean
+    createdAt?: DateTimeFilter<"Policy"> | Date | string
+    updatedAt?: DateTimeFilter<"Policy"> | Date | string
   }
 
   export type AuditLogUpsertWithWhereUniqueWithoutTenantInput = {
@@ -7380,6 +9312,116 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"ApiKey"> | Date | string
   }
 
+  export type TenantCreateWithoutPoliciesInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
+    apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutPoliciesInput = {
+    id?: string
+    name: string
+    slug: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutPoliciesInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutPoliciesInput, TenantUncheckedCreateWithoutPoliciesInput>
+  }
+
+  export type ConsentCreateWithoutPolicyInput = {
+    id?: string
+    userId: string
+    purpose: string
+    status: $Enums.ConsentStatus
+    policyVersion: number
+    createdAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutConsentsInput
+  }
+
+  export type ConsentUncheckedCreateWithoutPolicyInput = {
+    id?: string
+    tenantId: string
+    userId: string
+    purpose: string
+    status: $Enums.ConsentStatus
+    policyVersion: number
+    createdAt?: Date | string
+  }
+
+  export type ConsentCreateOrConnectWithoutPolicyInput = {
+    where: ConsentWhereUniqueInput
+    create: XOR<ConsentCreateWithoutPolicyInput, ConsentUncheckedCreateWithoutPolicyInput>
+  }
+
+  export type ConsentCreateManyPolicyInputEnvelope = {
+    data: ConsentCreateManyPolicyInput | ConsentCreateManyPolicyInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutPoliciesInput = {
+    update: XOR<TenantUpdateWithoutPoliciesInput, TenantUncheckedUpdateWithoutPoliciesInput>
+    create: XOR<TenantCreateWithoutPoliciesInput, TenantUncheckedCreateWithoutPoliciesInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutPoliciesInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutPoliciesInput, TenantUncheckedUpdateWithoutPoliciesInput>
+  }
+
+  export type TenantUpdateWithoutPoliciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
+    apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutPoliciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type ConsentUpsertWithWhereUniqueWithoutPolicyInput = {
+    where: ConsentWhereUniqueInput
+    update: XOR<ConsentUpdateWithoutPolicyInput, ConsentUncheckedUpdateWithoutPolicyInput>
+    create: XOR<ConsentCreateWithoutPolicyInput, ConsentUncheckedCreateWithoutPolicyInput>
+  }
+
+  export type ConsentUpdateWithWhereUniqueWithoutPolicyInput = {
+    where: ConsentWhereUniqueInput
+    data: XOR<ConsentUpdateWithoutPolicyInput, ConsentUncheckedUpdateWithoutPolicyInput>
+  }
+
+  export type ConsentUpdateManyWithWhereWithoutPolicyInput = {
+    where: ConsentScalarWhereInput
+    data: XOR<ConsentUpdateManyMutationInput, ConsentUncheckedUpdateManyWithoutPolicyInput>
+  }
+
   export type TenantCreateWithoutConsentsInput = {
     id?: string
     name: string
@@ -7387,6 +9429,7 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    policies?: PolicyCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
   }
@@ -7398,6 +9441,7 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
   }
@@ -7405,6 +9449,35 @@ export namespace Prisma {
   export type TenantCreateOrConnectWithoutConsentsInput = {
     where: TenantWhereUniqueInput
     create: XOR<TenantCreateWithoutConsentsInput, TenantUncheckedCreateWithoutConsentsInput>
+  }
+
+  export type PolicyCreateWithoutConsentsInput = {
+    id?: string
+    title: string
+    purpose: string
+    version: number
+    content: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutPoliciesInput
+  }
+
+  export type PolicyUncheckedCreateWithoutConsentsInput = {
+    id?: string
+    tenantId: string
+    title: string
+    purpose: string
+    version: number
+    content: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type PolicyCreateOrConnectWithoutConsentsInput = {
+    where: PolicyWhereUniqueInput
+    create: XOR<PolicyCreateWithoutConsentsInput, PolicyUncheckedCreateWithoutConsentsInput>
   }
 
   export type TenantUpsertWithoutConsentsInput = {
@@ -7425,6 +9498,7 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    policies?: PolicyUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
   }
@@ -7436,8 +9510,44 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type PolicyUpsertWithoutConsentsInput = {
+    update: XOR<PolicyUpdateWithoutConsentsInput, PolicyUncheckedUpdateWithoutConsentsInput>
+    create: XOR<PolicyCreateWithoutConsentsInput, PolicyUncheckedCreateWithoutConsentsInput>
+    where?: PolicyWhereInput
+  }
+
+  export type PolicyUpdateToOneWithWhereWithoutConsentsInput = {
+    where?: PolicyWhereInput
+    data: XOR<PolicyUpdateWithoutConsentsInput, PolicyUncheckedUpdateWithoutConsentsInput>
+  }
+
+  export type PolicyUpdateWithoutConsentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutPoliciesNestedInput
+  }
+
+  export type PolicyUncheckedUpdateWithoutConsentsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type TenantCreateWithoutAuditLogsInput = {
@@ -7448,6 +9558,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     consents?: ConsentCreateNestedManyWithoutTenantInput
+    policies?: PolicyCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
   }
 
@@ -7459,6 +9570,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
+    policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
     apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
   }
 
@@ -7486,6 +9598,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     consents?: ConsentUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
   }
 
@@ -7497,6 +9610,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
     apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
   }
 
@@ -7508,6 +9622,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     consents?: ConsentCreateNestedManyWithoutTenantInput
+    policies?: PolicyCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
   }
 
@@ -7519,6 +9634,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
+    policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
     auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
   }
 
@@ -7546,6 +9662,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     consents?: ConsentUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
   }
 
@@ -7557,16 +9674,29 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
     auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type ConsentCreateManyTenantInput = {
     id?: string
     userId: string
+    policyId: string
     purpose: string
     status: $Enums.ConsentStatus
-    policyVersion: string
+    policyVersion: number
     createdAt?: Date | string
+  }
+
+  export type PolicyCreateManyTenantInput = {
+    id?: string
+    title: string
+    purpose: string
+    version: number
+    content: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AuditLogCreateManyTenantInput = {
@@ -7596,26 +9726,64 @@ export namespace Prisma {
     userId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
-    policyVersion?: StringFieldUpdateOperationsInput | string
+    policyVersion?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    policy?: PolicyUpdateOneRequiredWithoutConsentsNestedInput
   }
 
   export type ConsentUncheckedUpdateWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    policyId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
-    policyVersion?: StringFieldUpdateOperationsInput | string
+    policyVersion?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConsentUncheckedUpdateManyWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
+    policyId?: StringFieldUpdateOperationsInput | string
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
-    policyVersion?: StringFieldUpdateOperationsInput | string
+    policyVersion?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PolicyUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUpdateManyWithoutPolicyNestedInput
+  }
+
+  export type PolicyUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUncheckedUpdateManyWithoutPolicyNestedInput
+  }
+
+  export type PolicyUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AuditLogUpdateWithoutTenantInput = {
@@ -7682,6 +9850,46 @@ export namespace Prisma {
     revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConsentCreateManyPolicyInput = {
+    id?: string
+    tenantId: string
+    userId: string
+    purpose: string
+    status: $Enums.ConsentStatus
+    policyVersion: number
+    createdAt?: Date | string
+  }
+
+  export type ConsentUpdateWithoutPolicyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
+    policyVersion?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutConsentsNestedInput
+  }
+
+  export type ConsentUncheckedUpdateWithoutPolicyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
+    policyVersion?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ConsentUncheckedUpdateManyWithoutPolicyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
+    policyVersion?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
