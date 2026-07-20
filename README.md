@@ -224,6 +224,35 @@ Swagger can be used to:
 
 ---
 
+## Create API Key (Manual Testing)
+
+You can generate additional API keys using the bootstrapped key via `curl` (Linux/macOS) or PowerShell (Windows).
+
+### Linux/macOS (Bash / zsh)
+
+```bash
+curl -X POST http://localhost:3000/api/api-keys \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: cm_live_2ca0ea7386d4462eccac04b08ecbf8ba5921a171968b90beb4da40b532b78b9a" \
+  -d '{"name": "My New Integration Key"}'
+```
+
+### Windows PowerShell
+
+```powershell
+$headers = @{
+    "Content-Type" = "application/json"
+    "X-API-Key"    = "cm_live_2ca0ea7386d4462eccac04b08ecbf8ba5921a171968b90beb4da40b532b78b9a"
+}
+$body = @{
+    name = "My New Integration Key"
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "http://localhost:3000/api/api-keys" -Method Post -Headers $headers -Body $body
+```
+
+---
+
 # Docker Commands
 
 ## Start Existing Containers
