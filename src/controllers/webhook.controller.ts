@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 
 import { AppError } from "../utils/app-error";
-import { createWebhook, disableWebhook, enableWebhook, getWebhook, listWebhooks, updateWebhook } from "../services/webhook.service";
+import { createWebhook, disableWebhook, enableWebhook, getWebhook, listWebhooks, updateWebhook, deleteWebhook } from "../services/webhook.service";
 
 function requireTenantId(req: Request): string {
   if (!req.auth?.tenantId) {
@@ -62,6 +62,12 @@ export async function disableWebhookHandler(req: Request, res: Response): Promis
 
 export async function enableWebhookHandler(req: Request, res: Response): Promise<void> {
   const webhook = await enableWebhook(requireTenantId(req), requireString(req.params.id, "id is required"));
+
+  res.json({ success: true, data: webhook });
+}
+
+export async function deleteWebhookHandler(req: Request, res: Response): Promise<void> {
+  const webhook = await deleteWebhook(requireTenantId(req), requireString(req.params.id, "id is required"));
 
   res.json({ success: true, data: webhook });
 }

@@ -2,7 +2,7 @@ import { Router } from "express";
 
 import { apiKeyAuthMiddleware } from "../middlewares/api-key-auth.middleware";
 import { validate } from "../middlewares/validate.middleware";
-import { createWebhookHandler, disableWebhookHandler, enableWebhookHandler, getWebhookHandler, listWebhooksHandler, updateWebhookHandler } from "../controllers/webhook.controller";
+import { createWebhookHandler, disableWebhookHandler, enableWebhookHandler, getWebhookHandler, listWebhooksHandler, updateWebhookHandler, deleteWebhookHandler } from "../controllers/webhook.controller";
 import { createWebhookSchema, updateWebhookSchema, webhookIdSchema } from "../validators/webhook.validator";
 
 const router = Router();
@@ -88,5 +88,7 @@ router.patch("/:id/disable", apiKeyAuthMiddleware, validate(webhookIdSchema, "pa
  *       - Webhooks
  */
 router.patch("/:id/enable", apiKeyAuthMiddleware, validate(webhookIdSchema, "params"), enableWebhookHandler);
+
+router.delete("/:id", apiKeyAuthMiddleware, validate(webhookIdSchema, "params"), deleteWebhookHandler);
 
 export default router;

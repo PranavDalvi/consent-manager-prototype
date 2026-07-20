@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
-import { checkConsent, fetchUserConsents, grantConsent, revokeConsent } from "../services/consent.service";
+import { checkConsent, fetchUserConsents, grantConsent, revokeConsent, listConsents } from "../services/consent.service";
 import { AppError } from "../utils/app-error";
+import { ConsentStatus } from "../generated";
 
 function requireString(value: unknown, message: string): string {
     if (typeof value !== "string") {
@@ -70,5 +71,31 @@ export async function checkConsentHandler(
         data: {
             hasConsent,
         },
+    });
+}
+
+export async function listConsentsHandler(
+    req: Request,
+    res: Response
+): Promise<void> {
+    const tenantId = req.auth?.tenantId;
+    if (!tenantId) {
+        throw new AppError(400, "Authenticated tenant is required");
+    }
+
+    const { userId, purpose, status, page, limit } = req.query;
+
+    const result = await listConsents(tenantId, {
+        userId: typeof userId === "string" ? userId : undefined,
+        purpose: typeof purpose === "string" ? purpose : undefined,
+        status: (status === "GRANTED" || status === "REVOKED") ? (status as ConsentStatus) : undefined,
+        page: page ? Number(page) : undefined,
+        limit: limit ? Number(limit) : undefined,
+    });
+
+    res.json({
+        success: true,
+        data: result.items,
+        pagination: result.pagination,
     });
 }

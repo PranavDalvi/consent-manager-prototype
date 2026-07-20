@@ -136,3 +136,14 @@ export async function enableWebhook(tenantId?: string, id?: string) {
     select: webhookSelect,
   });
 }
+
+export async function deleteWebhook(tenantId?: string, id?: string) {
+  const resolvedTenantId = requireTenantId(tenantId);
+  const resolvedWebhookId = requireWebhookId(id);
+  await findWebhookOrThrow(resolvedTenantId, resolvedWebhookId);
+
+  return prisma.webhook.delete({
+    where: { id: resolvedWebhookId },
+    select: webhookSelect,
+  });
+}

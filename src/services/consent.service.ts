@@ -77,6 +77,49 @@ export async function fetchUserConsents(userId: string, tenantId: string) {
   });
 }
 
+export async function listConsents(
+  tenantId: string,
+  filters: { userId?: string; purpose?: string; status?: ConsentStatus; page?: number; limit?: number }
+) {
+  const page = Number(filters.page) || 1;
+  const limit = Number(filters.limit) || 10;
+  const skip = (page - 1) * limit;
+
+  const where: any = { tenantId };
+  if (filters.userId) {
+    where.userId = { contains: filters.userId, mode: "insensitive" };
+  }
+  if (filters.purpose) {
+    where.purpose = filters.purpose;
+  }
+  if (filters.status) {
+    where.status = filters.status;
+  }
+
+  const [total, items] = await Promise.all([
+    prisma.consent.count({ where }),
+    prisma.consent.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      skip,
+      take: limit,
+      include: {
+        policy: true,
+      },
+    }),
+  ]);
+
+  return {
+    items,
+    pagination: {
+      total,
+      page,
+      limit,
+      totalPages: Math.ceil(total / limit),
+    },
+  };
+}
+
 export async function revokeConsent(consentId: string) {
   const result = await prisma.$transaction(async (tx) => {
     const consent = await tx.consent.findUnique({

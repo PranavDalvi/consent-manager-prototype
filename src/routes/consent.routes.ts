@@ -1,10 +1,12 @@
 import { Router } from "express";
-import { checkConsentHandler, fetchUserConsentsHandler, grantConsentHandler, revokeConsentHandler } from "../controllers/consent.controller";
+import { checkConsentHandler, fetchUserConsentsHandler, grantConsentHandler, revokeConsentHandler, listConsentsHandler } from "../controllers/consent.controller";
 import { apiKeyAuthMiddleware } from "../middlewares/api-key-auth.middleware";
 import { validate } from "../middlewares/validate.middleware";
 import { checkConsentSchema, fetchUserConsentsSchema, grantConsentSchema, revokeConsentSchema } from "../validators/consent.validator";
 
 const router = Router();
+
+router.get("/", apiKeyAuthMiddleware, listConsentsHandler);
 
 /**
  * @swagger

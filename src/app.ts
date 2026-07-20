@@ -9,6 +9,7 @@ import auditRoutes from "./routes/audit.routes";
 import apiKeyRoutes from "./routes/api-key.routes";
 import policyRoutes from "./routes/policy.routes";
 import webhookRoutes from "./routes/webhook.routes";
+import eventRoutes from "./routes/event.routes";
 
 const app = express();
 
@@ -35,6 +36,7 @@ app.use("/api/policies", policyRoutes);
 app.use("/api/audit", auditRoutes);
 app.use("/api/api-keys", apiKeyRoutes);
 app.use("/api/webhooks", webhookRoutes);
+app.use("/api/events", eventRoutes);
 app.use(errorHandler);
 
 export default app;

@@ -7,5 +7,8 @@ export const createAuditLogSchema = z.object({
 });
 
 export const fetchAuditLogsSchema = z.object({
-  userId: z.string().min(1),
+  userId: z.string().optional(),
+  action: z.string().optional(),
+  page: z.string().optional(),
+  limit: z.string().optional(),
 });
