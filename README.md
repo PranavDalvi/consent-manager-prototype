@@ -841,13 +841,32 @@ The Platform Observability milestone provides production-grade monitoring, Prome
 
 ## Super Admin Bootstrapping CLI
 
-To create a Super Admin user interactively:
+To create a Super Admin user interactively on your host machine:
 
 ```bash
 npm run admin:create
 ```
 
-Follow the prompts to enter Email, Name, and Password.
+To run inside a Podman container:
+
+```bash
+# 1. Start containers
+podman compose up -d
+
+# 2. Run interactive Super Admin creation CLI inside API container
+podman compose exec -it api npm run admin:create
+```
+
+Follow the interactive prompts to enter Email, Name, and Password.
+
+## Super Admin Frontend Web Portal
+
+The platform operator portal is separate from tenant administration:
+
+- **Super Admin Login Portal**: [http://localhost:5173/platform/login](http://localhost:5173/platform/login)
+- **Super Admin Dashboard**: [http://localhost:5173/platform](http://localhost:5173/platform)
+
+Log in using the Super Admin credentials created via the CLI tool.
 
 ## Platform Routes & Endpoints
 
