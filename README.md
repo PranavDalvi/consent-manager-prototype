@@ -832,3 +832,44 @@ The following features are planned:
 - Production multi-stage Docker image
 - Docker Compose profiles
 - CI test automation
+
+---
+
+# Platform Observability & Super Admin Dashboard
+
+The Platform Observability milestone provides production-grade monitoring, Prometheus metrics scraping, OpenTelemetry distributed tracing, structured Pino logging, and a dedicated Super Admin operator dashboard.
+
+## Super Admin Bootstrapping CLI
+
+To create a Super Admin user interactively:
+
+```bash
+npm run admin:create
+```
+
+Follow the prompts to enter Email, Name, and Password.
+
+## Platform Routes & Endpoints
+
+| Endpoint | Method | Description |
+| --- | --- | --- |
+| `/metrics` | `GET` | Prometheus plain text metric scraping endpoint |
+| `/health` | `GET` | Liveness probe (verifies API process status) |
+| `/ready` | `GET` | Readiness probe (verifies Database, Redis, and Queue status) |
+| `/platform/login` | Frontend | Dedicated Super Admin login portal |
+| `/platform` | Frontend | Platform Operator Dashboard (5s auto-refresh) |
+| `/api/platform/auth/login` | `POST` | Super Admin JWT authentication |
+| `/api/platform/overview` | `GET` | Aggregated platform dashboard stats |
+| `/api/platform/metrics` | `GET` | Granular HTTP traffic and error rate metrics |
+| `/api/platform/health` | `GET` | Infrastructure component health breakdown |
+| `/api/platform/queues` | `GET` | BullMQ queue job states |
+| `/api/platform/webhooks` | `GET` | Webhook delivery latency & success statistics |
+| `/api/platform/tenants` | `GET` | Per-tenant usage, requests, API keys, and rate-limit hits |
+| `/api/platform/logs` | `GET` | Filtered structured log search |
+
+## Observability Headers
+
+All API responses automatically attach observability tracking headers:
+- `X-Correlation-ID`: End-to-end request correlation ID (accepted if sent by caller, generated if missing)
+- `X-Request-ID`: Unique request ID
+

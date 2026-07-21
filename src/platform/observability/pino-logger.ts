@@ -1,0 +1,17 @@
+import pino from "pino";
+
+export const logger = pino({
+  level: process.env.LOG_LEVEL || "info",
+  base: {
+    env: process.env.NODE_ENV || "development",
+  },
+  timestamp: pino.stdTimeFunctions.isoTime,
+});
+
+export function createRequestLogger(context: {
+  requestId: string;
+  correlationId: string;
+  tenantId?: string;
+}) {
+  return logger.child(context);
+}

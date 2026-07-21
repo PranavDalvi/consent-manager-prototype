@@ -200,6 +200,18 @@ exports.Prisma.InternalEventScalarFieldEnum = {
   processedAt: 'processedAt'
 };
 
+exports.Prisma.SuperAdminScalarFieldEnum = {
+  id: 'id',
+  email: 'email',
+  name: 'name',
+  role: 'role',
+  passwordHash: 'passwordHash',
+  isActive: 'isActive',
+  lastLoginAt: 'lastLoginAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -241,7 +253,8 @@ exports.Prisma.ModelName = {
   AuditLog: 'AuditLog',
   ApiKey: 'ApiKey',
   Webhook: 'Webhook',
-  InternalEvent: 'InternalEvent'
+  InternalEvent: 'InternalEvent',
+  SuperAdmin: 'SuperAdmin'
 };
 
 /**

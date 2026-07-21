@@ -7,6 +7,13 @@ declare global {
         tenantId: string;
         apiKeyId: string;
       };
+      superAdmin?: {
+        id: string;
+        email: string;
+        role: string;
+      };
+      requestId?: string;
+      correlationId?: string;
     }
   }
 }

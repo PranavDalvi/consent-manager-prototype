@@ -7,7 +7,7 @@ export const createAuditLogSchema = z.object({
 });
 
 export const fetchAuditLogsSchema = z.object({
-  userId: z.string().optional(),
+  userId: z.string().min(1, "userId is required"),
   action: z.string().optional(),
   page: z.string().optional(),
   limit: z.string().optional(),

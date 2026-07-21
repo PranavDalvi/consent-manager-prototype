@@ -48,6 +48,11 @@ export type Webhook = $Result.DefaultSelection<Prisma.$WebhookPayload>
  * 
  */
 export type InternalEvent = $Result.DefaultSelection<Prisma.$InternalEventPayload>
+/**
+ * Model SuperAdmin
+ * 
+ */
+export type SuperAdmin = $Result.DefaultSelection<Prisma.$SuperAdminPayload>
 
 /**
  * Enums
@@ -256,6 +261,16 @@ export class PrismaClient<
     * ```
     */
   get internalEvent(): Prisma.InternalEventDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.superAdmin`: Exposes CRUD operations for the **SuperAdmin** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SuperAdmins
+    * const superAdmins = await prisma.superAdmin.findMany()
+    * ```
+    */
+  get superAdmin(): Prisma.SuperAdminDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -696,7 +711,8 @@ export namespace Prisma {
     AuditLog: 'AuditLog',
     ApiKey: 'ApiKey',
     Webhook: 'Webhook',
-    InternalEvent: 'InternalEvent'
+    InternalEvent: 'InternalEvent',
+    SuperAdmin: 'SuperAdmin'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -712,7 +728,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tenant" | "policy" | "consent" | "auditLog" | "apiKey" | "webhook" | "internalEvent"
+      modelProps: "tenant" | "policy" | "consent" | "auditLog" | "apiKey" | "webhook" | "internalEvent" | "superAdmin"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1234,6 +1250,80 @@ export namespace Prisma {
           }
         }
       }
+      SuperAdmin: {
+        payload: Prisma.$SuperAdminPayload<ExtArgs>
+        fields: Prisma.SuperAdminFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SuperAdminFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuperAdminPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SuperAdminFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuperAdminPayload>
+          }
+          findFirst: {
+            args: Prisma.SuperAdminFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuperAdminPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SuperAdminFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuperAdminPayload>
+          }
+          findMany: {
+            args: Prisma.SuperAdminFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuperAdminPayload>[]
+          }
+          create: {
+            args: Prisma.SuperAdminCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuperAdminPayload>
+          }
+          createMany: {
+            args: Prisma.SuperAdminCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SuperAdminCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuperAdminPayload>[]
+          }
+          delete: {
+            args: Prisma.SuperAdminDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuperAdminPayload>
+          }
+          update: {
+            args: Prisma.SuperAdminUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuperAdminPayload>
+          }
+          deleteMany: {
+            args: Prisma.SuperAdminDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SuperAdminUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SuperAdminUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuperAdminPayload>[]
+          }
+          upsert: {
+            args: Prisma.SuperAdminUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SuperAdminPayload>
+          }
+          aggregate: {
+            args: Prisma.SuperAdminAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSuperAdmin>
+          }
+          groupBy: {
+            args: Prisma.SuperAdminGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SuperAdminGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SuperAdminCountArgs<ExtArgs>
+            result: $Utils.Optional<SuperAdminCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1349,6 +1439,7 @@ export namespace Prisma {
     apiKey?: ApiKeyOmit
     webhook?: WebhookOmit
     internalEvent?: InternalEventOmit
+    superAdmin?: SuperAdminOmit
   }
 
   /* Types for Logging */
@@ -9535,6 +9626,1058 @@ export namespace Prisma {
 
 
   /**
+   * Model SuperAdmin
+   */
+
+  export type AggregateSuperAdmin = {
+    _count: SuperAdminCountAggregateOutputType | null
+    _min: SuperAdminMinAggregateOutputType | null
+    _max: SuperAdminMaxAggregateOutputType | null
+  }
+
+  export type SuperAdminMinAggregateOutputType = {
+    id: string | null
+    email: string | null
+    name: string | null
+    role: string | null
+    passwordHash: string | null
+    isActive: boolean | null
+    lastLoginAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SuperAdminMaxAggregateOutputType = {
+    id: string | null
+    email: string | null
+    name: string | null
+    role: string | null
+    passwordHash: string | null
+    isActive: boolean | null
+    lastLoginAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SuperAdminCountAggregateOutputType = {
+    id: number
+    email: number
+    name: number
+    role: number
+    passwordHash: number
+    isActive: number
+    lastLoginAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SuperAdminMinAggregateInputType = {
+    id?: true
+    email?: true
+    name?: true
+    role?: true
+    passwordHash?: true
+    isActive?: true
+    lastLoginAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SuperAdminMaxAggregateInputType = {
+    id?: true
+    email?: true
+    name?: true
+    role?: true
+    passwordHash?: true
+    isActive?: true
+    lastLoginAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SuperAdminCountAggregateInputType = {
+    id?: true
+    email?: true
+    name?: true
+    role?: true
+    passwordHash?: true
+    isActive?: true
+    lastLoginAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SuperAdminAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SuperAdmin to aggregate.
+     */
+    where?: SuperAdminWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SuperAdmins to fetch.
+     */
+    orderBy?: SuperAdminOrderByWithRelationInput | SuperAdminOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SuperAdminWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SuperAdmins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SuperAdmins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SuperAdmins
+    **/
+    _count?: true | SuperAdminCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SuperAdminMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SuperAdminMaxAggregateInputType
+  }
+
+  export type GetSuperAdminAggregateType<T extends SuperAdminAggregateArgs> = {
+        [P in keyof T & keyof AggregateSuperAdmin]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSuperAdmin[P]>
+      : GetScalarType<T[P], AggregateSuperAdmin[P]>
+  }
+
+
+
+
+  export type SuperAdminGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SuperAdminWhereInput
+    orderBy?: SuperAdminOrderByWithAggregationInput | SuperAdminOrderByWithAggregationInput[]
+    by: SuperAdminScalarFieldEnum[] | SuperAdminScalarFieldEnum
+    having?: SuperAdminScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SuperAdminCountAggregateInputType | true
+    _min?: SuperAdminMinAggregateInputType
+    _max?: SuperAdminMaxAggregateInputType
+  }
+
+  export type SuperAdminGroupByOutputType = {
+    id: string
+    email: string
+    name: string | null
+    role: string
+    passwordHash: string
+    isActive: boolean
+    lastLoginAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: SuperAdminCountAggregateOutputType | null
+    _min: SuperAdminMinAggregateOutputType | null
+    _max: SuperAdminMaxAggregateOutputType | null
+  }
+
+  type GetSuperAdminGroupByPayload<T extends SuperAdminGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SuperAdminGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SuperAdminGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SuperAdminGroupByOutputType[P]>
+            : GetScalarType<T[P], SuperAdminGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SuperAdminSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    name?: boolean
+    role?: boolean
+    passwordHash?: boolean
+    isActive?: boolean
+    lastLoginAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["superAdmin"]>
+
+  export type SuperAdminSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    name?: boolean
+    role?: boolean
+    passwordHash?: boolean
+    isActive?: boolean
+    lastLoginAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["superAdmin"]>
+
+  export type SuperAdminSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    email?: boolean
+    name?: boolean
+    role?: boolean
+    passwordHash?: boolean
+    isActive?: boolean
+    lastLoginAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["superAdmin"]>
+
+  export type SuperAdminSelectScalar = {
+    id?: boolean
+    email?: boolean
+    name?: boolean
+    role?: boolean
+    passwordHash?: boolean
+    isActive?: boolean
+    lastLoginAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SuperAdminOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "name" | "role" | "passwordHash" | "isActive" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["superAdmin"]>
+
+  export type $SuperAdminPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SuperAdmin"
+    objects: {}
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      email: string
+      name: string | null
+      role: string
+      passwordHash: string
+      isActive: boolean
+      lastLoginAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["superAdmin"]>
+    composites: {}
+  }
+
+  type SuperAdminGetPayload<S extends boolean | null | undefined | SuperAdminDefaultArgs> = $Result.GetResult<Prisma.$SuperAdminPayload, S>
+
+  type SuperAdminCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SuperAdminFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SuperAdminCountAggregateInputType | true
+    }
+
+  export interface SuperAdminDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SuperAdmin'], meta: { name: 'SuperAdmin' } }
+    /**
+     * Find zero or one SuperAdmin that matches the filter.
+     * @param {SuperAdminFindUniqueArgs} args - Arguments to find a SuperAdmin
+     * @example
+     * // Get one SuperAdmin
+     * const superAdmin = await prisma.superAdmin.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SuperAdminFindUniqueArgs>(args: SelectSubset<T, SuperAdminFindUniqueArgs<ExtArgs>>): Prisma__SuperAdminClient<$Result.GetResult<Prisma.$SuperAdminPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SuperAdmin that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SuperAdminFindUniqueOrThrowArgs} args - Arguments to find a SuperAdmin
+     * @example
+     * // Get one SuperAdmin
+     * const superAdmin = await prisma.superAdmin.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SuperAdminFindUniqueOrThrowArgs>(args: SelectSubset<T, SuperAdminFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SuperAdminClient<$Result.GetResult<Prisma.$SuperAdminPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SuperAdmin that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuperAdminFindFirstArgs} args - Arguments to find a SuperAdmin
+     * @example
+     * // Get one SuperAdmin
+     * const superAdmin = await prisma.superAdmin.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SuperAdminFindFirstArgs>(args?: SelectSubset<T, SuperAdminFindFirstArgs<ExtArgs>>): Prisma__SuperAdminClient<$Result.GetResult<Prisma.$SuperAdminPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SuperAdmin that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuperAdminFindFirstOrThrowArgs} args - Arguments to find a SuperAdmin
+     * @example
+     * // Get one SuperAdmin
+     * const superAdmin = await prisma.superAdmin.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SuperAdminFindFirstOrThrowArgs>(args?: SelectSubset<T, SuperAdminFindFirstOrThrowArgs<ExtArgs>>): Prisma__SuperAdminClient<$Result.GetResult<Prisma.$SuperAdminPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SuperAdmins that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuperAdminFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SuperAdmins
+     * const superAdmins = await prisma.superAdmin.findMany()
+     * 
+     * // Get first 10 SuperAdmins
+     * const superAdmins = await prisma.superAdmin.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const superAdminWithIdOnly = await prisma.superAdmin.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SuperAdminFindManyArgs>(args?: SelectSubset<T, SuperAdminFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuperAdminPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SuperAdmin.
+     * @param {SuperAdminCreateArgs} args - Arguments to create a SuperAdmin.
+     * @example
+     * // Create one SuperAdmin
+     * const SuperAdmin = await prisma.superAdmin.create({
+     *   data: {
+     *     // ... data to create a SuperAdmin
+     *   }
+     * })
+     * 
+     */
+    create<T extends SuperAdminCreateArgs>(args: SelectSubset<T, SuperAdminCreateArgs<ExtArgs>>): Prisma__SuperAdminClient<$Result.GetResult<Prisma.$SuperAdminPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SuperAdmins.
+     * @param {SuperAdminCreateManyArgs} args - Arguments to create many SuperAdmins.
+     * @example
+     * // Create many SuperAdmins
+     * const superAdmin = await prisma.superAdmin.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SuperAdminCreateManyArgs>(args?: SelectSubset<T, SuperAdminCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SuperAdmins and returns the data saved in the database.
+     * @param {SuperAdminCreateManyAndReturnArgs} args - Arguments to create many SuperAdmins.
+     * @example
+     * // Create many SuperAdmins
+     * const superAdmin = await prisma.superAdmin.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SuperAdmins and only return the `id`
+     * const superAdminWithIdOnly = await prisma.superAdmin.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SuperAdminCreateManyAndReturnArgs>(args?: SelectSubset<T, SuperAdminCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuperAdminPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SuperAdmin.
+     * @param {SuperAdminDeleteArgs} args - Arguments to delete one SuperAdmin.
+     * @example
+     * // Delete one SuperAdmin
+     * const SuperAdmin = await prisma.superAdmin.delete({
+     *   where: {
+     *     // ... filter to delete one SuperAdmin
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SuperAdminDeleteArgs>(args: SelectSubset<T, SuperAdminDeleteArgs<ExtArgs>>): Prisma__SuperAdminClient<$Result.GetResult<Prisma.$SuperAdminPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SuperAdmin.
+     * @param {SuperAdminUpdateArgs} args - Arguments to update one SuperAdmin.
+     * @example
+     * // Update one SuperAdmin
+     * const superAdmin = await prisma.superAdmin.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SuperAdminUpdateArgs>(args: SelectSubset<T, SuperAdminUpdateArgs<ExtArgs>>): Prisma__SuperAdminClient<$Result.GetResult<Prisma.$SuperAdminPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SuperAdmins.
+     * @param {SuperAdminDeleteManyArgs} args - Arguments to filter SuperAdmins to delete.
+     * @example
+     * // Delete a few SuperAdmins
+     * const { count } = await prisma.superAdmin.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SuperAdminDeleteManyArgs>(args?: SelectSubset<T, SuperAdminDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SuperAdmins.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuperAdminUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SuperAdmins
+     * const superAdmin = await prisma.superAdmin.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SuperAdminUpdateManyArgs>(args: SelectSubset<T, SuperAdminUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SuperAdmins and returns the data updated in the database.
+     * @param {SuperAdminUpdateManyAndReturnArgs} args - Arguments to update many SuperAdmins.
+     * @example
+     * // Update many SuperAdmins
+     * const superAdmin = await prisma.superAdmin.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SuperAdmins and only return the `id`
+     * const superAdminWithIdOnly = await prisma.superAdmin.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SuperAdminUpdateManyAndReturnArgs>(args: SelectSubset<T, SuperAdminUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SuperAdminPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SuperAdmin.
+     * @param {SuperAdminUpsertArgs} args - Arguments to update or create a SuperAdmin.
+     * @example
+     * // Update or create a SuperAdmin
+     * const superAdmin = await prisma.superAdmin.upsert({
+     *   create: {
+     *     // ... data to create a SuperAdmin
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SuperAdmin we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SuperAdminUpsertArgs>(args: SelectSubset<T, SuperAdminUpsertArgs<ExtArgs>>): Prisma__SuperAdminClient<$Result.GetResult<Prisma.$SuperAdminPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SuperAdmins.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuperAdminCountArgs} args - Arguments to filter SuperAdmins to count.
+     * @example
+     * // Count the number of SuperAdmins
+     * const count = await prisma.superAdmin.count({
+     *   where: {
+     *     // ... the filter for the SuperAdmins we want to count
+     *   }
+     * })
+    **/
+    count<T extends SuperAdminCountArgs>(
+      args?: Subset<T, SuperAdminCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SuperAdminCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SuperAdmin.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuperAdminAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SuperAdminAggregateArgs>(args: Subset<T, SuperAdminAggregateArgs>): Prisma.PrismaPromise<GetSuperAdminAggregateType<T>>
+
+    /**
+     * Group by SuperAdmin.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SuperAdminGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SuperAdminGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SuperAdminGroupByArgs['orderBy'] }
+        : { orderBy?: SuperAdminGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SuperAdminGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSuperAdminGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SuperAdmin model
+   */
+  readonly fields: SuperAdminFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SuperAdmin.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SuperAdminClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SuperAdmin model
+   */
+  interface SuperAdminFieldRefs {
+    readonly id: FieldRef<"SuperAdmin", 'String'>
+    readonly email: FieldRef<"SuperAdmin", 'String'>
+    readonly name: FieldRef<"SuperAdmin", 'String'>
+    readonly role: FieldRef<"SuperAdmin", 'String'>
+    readonly passwordHash: FieldRef<"SuperAdmin", 'String'>
+    readonly isActive: FieldRef<"SuperAdmin", 'Boolean'>
+    readonly lastLoginAt: FieldRef<"SuperAdmin", 'DateTime'>
+    readonly createdAt: FieldRef<"SuperAdmin", 'DateTime'>
+    readonly updatedAt: FieldRef<"SuperAdmin", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SuperAdmin findUnique
+   */
+  export type SuperAdminFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuperAdmin
+     */
+    select?: SuperAdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuperAdmin
+     */
+    omit?: SuperAdminOmit<ExtArgs> | null
+    /**
+     * Filter, which SuperAdmin to fetch.
+     */
+    where: SuperAdminWhereUniqueInput
+  }
+
+  /**
+   * SuperAdmin findUniqueOrThrow
+   */
+  export type SuperAdminFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuperAdmin
+     */
+    select?: SuperAdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuperAdmin
+     */
+    omit?: SuperAdminOmit<ExtArgs> | null
+    /**
+     * Filter, which SuperAdmin to fetch.
+     */
+    where: SuperAdminWhereUniqueInput
+  }
+
+  /**
+   * SuperAdmin findFirst
+   */
+  export type SuperAdminFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuperAdmin
+     */
+    select?: SuperAdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuperAdmin
+     */
+    omit?: SuperAdminOmit<ExtArgs> | null
+    /**
+     * Filter, which SuperAdmin to fetch.
+     */
+    where?: SuperAdminWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SuperAdmins to fetch.
+     */
+    orderBy?: SuperAdminOrderByWithRelationInput | SuperAdminOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SuperAdmins.
+     */
+    cursor?: SuperAdminWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SuperAdmins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SuperAdmins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SuperAdmins.
+     */
+    distinct?: SuperAdminScalarFieldEnum | SuperAdminScalarFieldEnum[]
+  }
+
+  /**
+   * SuperAdmin findFirstOrThrow
+   */
+  export type SuperAdminFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuperAdmin
+     */
+    select?: SuperAdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuperAdmin
+     */
+    omit?: SuperAdminOmit<ExtArgs> | null
+    /**
+     * Filter, which SuperAdmin to fetch.
+     */
+    where?: SuperAdminWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SuperAdmins to fetch.
+     */
+    orderBy?: SuperAdminOrderByWithRelationInput | SuperAdminOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SuperAdmins.
+     */
+    cursor?: SuperAdminWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SuperAdmins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SuperAdmins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SuperAdmins.
+     */
+    distinct?: SuperAdminScalarFieldEnum | SuperAdminScalarFieldEnum[]
+  }
+
+  /**
+   * SuperAdmin findMany
+   */
+  export type SuperAdminFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuperAdmin
+     */
+    select?: SuperAdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuperAdmin
+     */
+    omit?: SuperAdminOmit<ExtArgs> | null
+    /**
+     * Filter, which SuperAdmins to fetch.
+     */
+    where?: SuperAdminWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SuperAdmins to fetch.
+     */
+    orderBy?: SuperAdminOrderByWithRelationInput | SuperAdminOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SuperAdmins.
+     */
+    cursor?: SuperAdminWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SuperAdmins from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SuperAdmins.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SuperAdmins.
+     */
+    distinct?: SuperAdminScalarFieldEnum | SuperAdminScalarFieldEnum[]
+  }
+
+  /**
+   * SuperAdmin create
+   */
+  export type SuperAdminCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuperAdmin
+     */
+    select?: SuperAdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuperAdmin
+     */
+    omit?: SuperAdminOmit<ExtArgs> | null
+    /**
+     * The data needed to create a SuperAdmin.
+     */
+    data: XOR<SuperAdminCreateInput, SuperAdminUncheckedCreateInput>
+  }
+
+  /**
+   * SuperAdmin createMany
+   */
+  export type SuperAdminCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SuperAdmins.
+     */
+    data: SuperAdminCreateManyInput | SuperAdminCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SuperAdmin createManyAndReturn
+   */
+  export type SuperAdminCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuperAdmin
+     */
+    select?: SuperAdminSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuperAdmin
+     */
+    omit?: SuperAdminOmit<ExtArgs> | null
+    /**
+     * The data used to create many SuperAdmins.
+     */
+    data: SuperAdminCreateManyInput | SuperAdminCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SuperAdmin update
+   */
+  export type SuperAdminUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuperAdmin
+     */
+    select?: SuperAdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuperAdmin
+     */
+    omit?: SuperAdminOmit<ExtArgs> | null
+    /**
+     * The data needed to update a SuperAdmin.
+     */
+    data: XOR<SuperAdminUpdateInput, SuperAdminUncheckedUpdateInput>
+    /**
+     * Choose, which SuperAdmin to update.
+     */
+    where: SuperAdminWhereUniqueInput
+  }
+
+  /**
+   * SuperAdmin updateMany
+   */
+  export type SuperAdminUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SuperAdmins.
+     */
+    data: XOR<SuperAdminUpdateManyMutationInput, SuperAdminUncheckedUpdateManyInput>
+    /**
+     * Filter which SuperAdmins to update
+     */
+    where?: SuperAdminWhereInput
+    /**
+     * Limit how many SuperAdmins to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SuperAdmin updateManyAndReturn
+   */
+  export type SuperAdminUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuperAdmin
+     */
+    select?: SuperAdminSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuperAdmin
+     */
+    omit?: SuperAdminOmit<ExtArgs> | null
+    /**
+     * The data used to update SuperAdmins.
+     */
+    data: XOR<SuperAdminUpdateManyMutationInput, SuperAdminUncheckedUpdateManyInput>
+    /**
+     * Filter which SuperAdmins to update
+     */
+    where?: SuperAdminWhereInput
+    /**
+     * Limit how many SuperAdmins to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SuperAdmin upsert
+   */
+  export type SuperAdminUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuperAdmin
+     */
+    select?: SuperAdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuperAdmin
+     */
+    omit?: SuperAdminOmit<ExtArgs> | null
+    /**
+     * The filter to search for the SuperAdmin to update in case it exists.
+     */
+    where: SuperAdminWhereUniqueInput
+    /**
+     * In case the SuperAdmin found by the `where` argument doesn't exist, create a new SuperAdmin with this data.
+     */
+    create: XOR<SuperAdminCreateInput, SuperAdminUncheckedCreateInput>
+    /**
+     * In case the SuperAdmin was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SuperAdminUpdateInput, SuperAdminUncheckedUpdateInput>
+  }
+
+  /**
+   * SuperAdmin delete
+   */
+  export type SuperAdminDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuperAdmin
+     */
+    select?: SuperAdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuperAdmin
+     */
+    omit?: SuperAdminOmit<ExtArgs> | null
+    /**
+     * Filter which SuperAdmin to delete.
+     */
+    where: SuperAdminWhereUniqueInput
+  }
+
+  /**
+   * SuperAdmin deleteMany
+   */
+  export type SuperAdminDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SuperAdmins to delete
+     */
+    where?: SuperAdminWhereInput
+    /**
+     * Limit how many SuperAdmins to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SuperAdmin without action
+   */
+  export type SuperAdminDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SuperAdmin
+     */
+    select?: SuperAdminSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SuperAdmin
+     */
+    omit?: SuperAdminOmit<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -9647,6 +10790,21 @@ export namespace Prisma {
   };
 
   export type InternalEventScalarFieldEnum = (typeof InternalEventScalarFieldEnum)[keyof typeof InternalEventScalarFieldEnum]
+
+
+  export const SuperAdminScalarFieldEnum: {
+    id: 'id',
+    email: 'email',
+    name: 'name',
+    role: 'role',
+    passwordHash: 'passwordHash',
+    isActive: 'isActive',
+    lastLoginAt: 'lastLoginAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SuperAdminScalarFieldEnum = (typeof SuperAdminScalarFieldEnum)[keyof typeof SuperAdminScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -10328,6 +11486,78 @@ export namespace Prisma {
     processedAt?: DateTimeNullableWithAggregatesFilter<"InternalEvent"> | Date | string | null
   }
 
+  export type SuperAdminWhereInput = {
+    AND?: SuperAdminWhereInput | SuperAdminWhereInput[]
+    OR?: SuperAdminWhereInput[]
+    NOT?: SuperAdminWhereInput | SuperAdminWhereInput[]
+    id?: StringFilter<"SuperAdmin"> | string
+    email?: StringFilter<"SuperAdmin"> | string
+    name?: StringNullableFilter<"SuperAdmin"> | string | null
+    role?: StringFilter<"SuperAdmin"> | string
+    passwordHash?: StringFilter<"SuperAdmin"> | string
+    isActive?: BoolFilter<"SuperAdmin"> | boolean
+    lastLoginAt?: DateTimeNullableFilter<"SuperAdmin"> | Date | string | null
+    createdAt?: DateTimeFilter<"SuperAdmin"> | Date | string
+    updatedAt?: DateTimeFilter<"SuperAdmin"> | Date | string
+  }
+
+  export type SuperAdminOrderByWithRelationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrderInput | SortOrder
+    role?: SortOrder
+    passwordHash?: SortOrder
+    isActive?: SortOrder
+    lastLoginAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SuperAdminWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    email?: string
+    AND?: SuperAdminWhereInput | SuperAdminWhereInput[]
+    OR?: SuperAdminWhereInput[]
+    NOT?: SuperAdminWhereInput | SuperAdminWhereInput[]
+    name?: StringNullableFilter<"SuperAdmin"> | string | null
+    role?: StringFilter<"SuperAdmin"> | string
+    passwordHash?: StringFilter<"SuperAdmin"> | string
+    isActive?: BoolFilter<"SuperAdmin"> | boolean
+    lastLoginAt?: DateTimeNullableFilter<"SuperAdmin"> | Date | string | null
+    createdAt?: DateTimeFilter<"SuperAdmin"> | Date | string
+    updatedAt?: DateTimeFilter<"SuperAdmin"> | Date | string
+  }, "id" | "email">
+
+  export type SuperAdminOrderByWithAggregationInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrderInput | SortOrder
+    role?: SortOrder
+    passwordHash?: SortOrder
+    isActive?: SortOrder
+    lastLoginAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SuperAdminCountOrderByAggregateInput
+    _max?: SuperAdminMaxOrderByAggregateInput
+    _min?: SuperAdminMinOrderByAggregateInput
+  }
+
+  export type SuperAdminScalarWhereWithAggregatesInput = {
+    AND?: SuperAdminScalarWhereWithAggregatesInput | SuperAdminScalarWhereWithAggregatesInput[]
+    OR?: SuperAdminScalarWhereWithAggregatesInput[]
+    NOT?: SuperAdminScalarWhereWithAggregatesInput | SuperAdminScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SuperAdmin"> | string
+    email?: StringWithAggregatesFilter<"SuperAdmin"> | string
+    name?: StringNullableWithAggregatesFilter<"SuperAdmin"> | string | null
+    role?: StringWithAggregatesFilter<"SuperAdmin"> | string
+    passwordHash?: StringWithAggregatesFilter<"SuperAdmin"> | string
+    isActive?: BoolWithAggregatesFilter<"SuperAdmin"> | boolean
+    lastLoginAt?: DateTimeNullableWithAggregatesFilter<"SuperAdmin"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"SuperAdmin"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SuperAdmin"> | Date | string
+  }
+
   export type TenantCreateInput = {
     id?: string
     name: string
@@ -10907,6 +12137,90 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     dispatchedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     processedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SuperAdminCreateInput = {
+    id?: string
+    email: string
+    name?: string | null
+    role?: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SuperAdminUncheckedCreateInput = {
+    id?: string
+    email: string
+    name?: string | null
+    role?: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SuperAdminUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SuperAdminUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SuperAdminCreateManyInput = {
+    id?: string
+    email: string
+    name?: string | null
+    role?: string
+    passwordHash: string
+    isActive?: boolean
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SuperAdminUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SuperAdminUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -11523,6 +12837,42 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedJsonFilter<$PrismaModel>
     _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type SuperAdminCountOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrder
+    role?: SortOrder
+    passwordHash?: SortOrder
+    isActive?: SortOrder
+    lastLoginAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SuperAdminMaxOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrder
+    role?: SortOrder
+    passwordHash?: SortOrder
+    isActive?: SortOrder
+    lastLoginAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SuperAdminMinOrderByAggregateInput = {
+    id?: SortOrder
+    email?: SortOrder
+    name?: SortOrder
+    role?: SortOrder
+    passwordHash?: SortOrder
+    isActive?: SortOrder
+    lastLoginAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type ConsentCreateNestedManyWithoutTenantInput = {
