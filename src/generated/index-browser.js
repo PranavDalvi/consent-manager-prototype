@@ -129,6 +129,81 @@ exports.Prisma.TenantScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.OutboxEventScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  eventType: 'eventType',
+  aggregateId: 'aggregateId',
+  payload: 'payload',
+  status: 'status',
+  retryCount: 'retryCount',
+  lastError: 'lastError',
+  createdAt: 'createdAt',
+  processedAt: 'processedAt'
+};
+
+exports.Prisma.WebhookCircuitBreakerScalarFieldEnum = {
+  id: 'id',
+  webhookId: 'webhookId',
+  state: 'state',
+  consecutiveFailures: 'consecutiveFailures',
+  openedAt: 'openedAt',
+  lastTestedAt: 'lastTestedAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.WebhookDeliveryScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  webhookId: 'webhookId',
+  eventId: 'eventId',
+  attempt: 'attempt',
+  status: 'status',
+  httpStatus: 'httpStatus',
+  responseBody: 'responseBody',
+  responseHeaders: 'responseHeaders',
+  duration: 'duration',
+  errorMessage: 'errorMessage',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.WebhookRetryHistoryScalarFieldEnum = {
+  id: 'id',
+  deliveryId: 'deliveryId',
+  attempt: 'attempt',
+  reason: 'reason',
+  scheduledAt: 'scheduledAt',
+  executedAt: 'executedAt',
+  result: 'result',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.ReplayHistoryScalarFieldEnum = {
+  id: 'id',
+  targetType: 'targetType',
+  targetId: 'targetId',
+  originalJobId: 'originalJobId',
+  newJobId: 'newJobId',
+  reason: 'reason',
+  result: 'result',
+  operatorId: 'operatorId',
+  replayCount: 'replayCount',
+  maxReplayAttempts: 'maxReplayAttempts',
+  replayedAt: 'replayedAt'
+};
+
+exports.Prisma.CleanupExecutionScalarFieldEnum = {
+  id: 'id',
+  jobName: 'jobName',
+  startedAt: 'startedAt',
+  completedAt: 'completedAt',
+  status: 'status',
+  itemsProcessed: 'itemsProcessed',
+  itemsDeleted: 'itemsDeleted',
+  durationMs: 'durationMs',
+  errorMessage: 'errorMessage'
+};
+
 exports.Prisma.PolicyScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -217,12 +292,12 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
-exports.Prisma.NullableJsonNullValueInput = {
-  DbNull: Prisma.DbNull,
+exports.Prisma.JsonNullValueInput = {
   JsonNull: Prisma.JsonNull
 };
 
-exports.Prisma.JsonNullValueInput = {
+exports.Prisma.NullableJsonNullValueInput = {
+  DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull
 };
 
@@ -241,6 +316,12 @@ exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
 };
+exports.CircuitBreakerState = exports.$Enums.CircuitBreakerState = {
+  CLOSED: 'CLOSED',
+  OPEN: 'OPEN',
+  HALF_OPEN: 'HALF_OPEN'
+};
+
 exports.ConsentStatus = exports.$Enums.ConsentStatus = {
   GRANTED: 'GRANTED',
   REVOKED: 'REVOKED'
@@ -248,6 +329,12 @@ exports.ConsentStatus = exports.$Enums.ConsentStatus = {
 
 exports.Prisma.ModelName = {
   Tenant: 'Tenant',
+  OutboxEvent: 'OutboxEvent',
+  WebhookCircuitBreaker: 'WebhookCircuitBreaker',
+  WebhookDelivery: 'WebhookDelivery',
+  WebhookRetryHistory: 'WebhookRetryHistory',
+  ReplayHistory: 'ReplayHistory',
+  CleanupExecution: 'CleanupExecution',
   Policy: 'Policy',
   Consent: 'Consent',
   AuditLog: 'AuditLog',

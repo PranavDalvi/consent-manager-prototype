@@ -1,7 +1,10 @@
 import { prisma } from "../db/prisma";
+import { Prisma } from "../generated";
 import { buildWebhookPayload } from "../utils/webhook-payload";
 import { generateWebhookSignature } from "../utils/webhook-signature";
 import { AppError } from "../utils/app-error";
+import { getCircuitBreakerState, recordWebhookSuccess, recordWebhookFailure } from "./circuit-breaker.service";
+import { webhookDeliveriesTotal, webhookDeliveryDurationSeconds } from "../platform/metrics/prom-client";
 
 type InternalEventRecord = {
   id: string;
@@ -31,10 +34,10 @@ async function getEventOrThrow(eventId: string): Promise<InternalEventRecord> {
   return event;
 }
 
-export async function deliverWebhookEvent(eventId: string): Promise<void> {
+export async function deliverWebhookEvent(eventId: string, attemptCount: number = 1): Promise<void> {
   const event = await getEventOrThrow(eventId);
 
-  const webhooks = await prisma.webhook.findMany({
+  const webhooks = (await prisma.webhook.findMany({
     where: {
       tenantId: event.tenantId,
       isActive: true,
@@ -42,7 +45,7 @@ export async function deliverWebhookEvent(eventId: string): Promise<void> {
         has: event.type,
       },
     },
-  }) as WebhookRecord[];
+  })) as WebhookRecord[];
 
   if (webhooks.length === 0) {
     await prisma.internalEvent.update({
@@ -52,7 +55,6 @@ export async function deliverWebhookEvent(eventId: string): Promise<void> {
         status: "PROCESSED",
       },
     });
-
     return;
   }
 
@@ -67,21 +69,106 @@ export async function deliverWebhookEvent(eventId: string): Promise<void> {
 
   const results = await Promise.allSettled(
     webhooks.map(async (webhook) => {
-      const signature = generateWebhookSignature(webhook.secret, timestamp, rawBody);
+      // Check Circuit Breaker
+      const cbState = await getCircuitBreakerState(webhook.id);
+      if (cbState.state === "OPEN") {
+        // Record skipped attempt due to open circuit breaker
+        await prisma.webhookDelivery.create({
+          data: {
+            tenantId: event.tenantId,
+            webhookId: webhook.id,
+            eventId: event.id,
+            attempt: attemptCount,
+            status: "FAILED",
+            duration: 0,
+            errorMessage: "Circuit Breaker is OPEN. Delivery skipped to avoid hammering destination.",
+          },
+        });
+        webhookDeliveriesTotal.inc({ status: "circuit_open" });
+        throw new Error(`Circuit Breaker OPEN for webhook ${webhook.id}`);
+      }
 
-      const response = await fetch(webhook.url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Webhook-Signature": signature,
-          "X-Webhook-Timestamp": timestamp,
-          "X-Webhook-Event": payload.event,
-        },
-        body: rawBody,
-      });
+      const startTime = Date.now();
+      let httpStatus: number | null = null;
+      let responseBody: string | null = null;
+      let responseHeaders: Record<string, string> | null = null;
+      let deliveryStatus = "FAILED";
+      let errorMsg: string | null = null;
 
-      if (!response.ok) {
-        throw new Error(`Webhook ${webhook.id} returned ${response.status}`);
+      try {
+        const signature = generateWebhookSignature(webhook.secret, timestamp, rawBody);
+        const response = await fetch(webhook.url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-Webhook-Signature": signature,
+            "X-Webhook-Timestamp": timestamp,
+            "X-Webhook-Event": payload.event,
+          },
+          body: rawBody,
+        });
+
+        httpStatus = response.status;
+        const duration = Date.now() - startTime;
+        webhookDeliveryDurationSeconds.observe(duration / 1000);
+
+        try {
+          responseBody = await response.text();
+        } catch {
+          responseBody = null;
+        }
+
+        const headersObj: Record<string, string> = {};
+        response.headers.forEach((val, key) => {
+          headersObj[key] = val;
+        });
+        responseHeaders = headersObj;
+
+        if (response.ok) {
+          deliveryStatus = "SUCCESS";
+          await recordWebhookSuccess(webhook.id);
+          webhookDeliveriesTotal.inc({ status: "success" });
+        } else {
+          errorMsg = `HTTP Error ${response.status}: ${responseBody?.slice(0, 200) ?? ""}`;
+          await recordWebhookFailure(webhook.id);
+          webhookDeliveriesTotal.inc({ status: "failed" });
+        }
+      } catch (err: unknown) {
+        const duration = Date.now() - startTime;
+        errorMsg = err instanceof Error ? err.message : String(err);
+        await recordWebhookFailure(webhook.id);
+        webhookDeliveriesTotal.inc({ status: "error" });
+      } finally {
+        const delivery = await prisma.webhookDelivery.create({
+          data: {
+            tenantId: event.tenantId,
+            webhookId: webhook.id,
+            eventId: event.id,
+            attempt: attemptCount,
+            status: deliveryStatus,
+            httpStatus,
+            responseBody: responseBody ? responseBody.slice(0, 2000) : null,
+            responseHeaders: responseHeaders ? (responseHeaders as unknown as Prisma.InputJsonValue) : Prisma.JsonNull,
+            duration: Date.now() - startTime,
+            errorMessage: errorMsg,
+          },
+        });
+
+        // Record WebhookRetryHistory
+        await prisma.webhookRetryHistory.create({
+          data: {
+            deliveryId: delivery.id,
+            attempt: attemptCount,
+            reason: errorMsg ? errorMsg.slice(0, 255) : "Execution",
+            scheduledAt: new Date(startTime),
+            executedAt: new Date(),
+            result: deliveryStatus,
+          },
+        });
+      }
+
+      if (deliveryStatus !== "SUCCESS") {
+        throw new Error(errorMsg ?? `Delivery failed for webhook ${webhook.id}`);
       }
     })
   );

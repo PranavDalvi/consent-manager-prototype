@@ -26,6 +26,10 @@ export const PlatformLayout: React.FC = () => {
 
   const navItems = [
     { label: "Overview", path: "/platform", icon: LayoutDashboard },
+    { label: "Dead Letter Queue", path: "/platform/dlq", icon: ShieldAlert },
+    { label: "Failed Webhooks", path: "/platform/failed-webhooks", icon: Webhook },
+    { label: "Failed Events", path: "/platform/failed-events", icon: Layers },
+    { label: "Scheduled Jobs", path: "/platform/scheduled-jobs", icon: Cpu },
     { label: "Metrics", path: "/platform/metrics", icon: Activity },
     { label: "Tenants", path: "/platform/tenants", icon: Users },
     { label: "Queues", path: "/platform/queues", icon: Layers },

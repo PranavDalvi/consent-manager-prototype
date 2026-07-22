@@ -22,14 +22,125 @@ model Tenant {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  consents       Consent[]
-  policies       Policy[]
-  auditLogs      AuditLog[]
-  apiKeys        ApiKey[]
-  webhooks       Webhook[]
-  internalEvents InternalEvent[]
+  consents          Consent[]
+  policies          Policy[]
+  auditLogs         AuditLog[]
+  apiKeys           ApiKey[]
+  webhooks          Webhook[]
+  internalEvents    InternalEvent[]
+  outboxEvents      OutboxEvent[]
+  webhookDeliveries WebhookDelivery[]
 
   @@index([isActive])
+}
+
+enum CircuitBreakerState {
+  CLOSED
+  OPEN
+  HALF_OPEN
+}
+
+model OutboxEvent {
+  id          String    @id @default(cuid())
+  tenantId    String
+  tenant      Tenant    @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  eventType   String
+  aggregateId String?
+  payload     Json
+  status      String    @default("PENDING")
+  retryCount  Int       @default(0)
+  lastError   String?
+  createdAt   DateTime  @default(now())
+  processedAt DateTime?
+
+  @@index([tenantId])
+  @@index([status])
+  @@index([status, createdAt])
+}
+
+model WebhookCircuitBreaker {
+  id                  String              @id @default(cuid())
+  webhookId           String              @unique
+  webhook             Webhook             @relation(fields: [webhookId], references: [id], onDelete: Cascade)
+  state               CircuitBreakerState @default(CLOSED)
+  consecutiveFailures Int                 @default(0)
+  openedAt            DateTime?
+  lastTestedAt        DateTime?
+  updatedAt           DateTime            @updatedAt
+
+  @@index([webhookId])
+  @@index([state])
+}
+
+model WebhookDelivery {
+  id              String   @id @default(cuid())
+  tenantId        String
+  tenant          Tenant   @relation(fields: [tenantId], references: [id], onDelete: Restrict)
+  webhookId       String
+  webhook         Webhook  @relation(fields: [webhookId], references: [id], onDelete: Cascade)
+  eventId         String
+  attempt         Int      @default(1)
+  status          String // SUCCESS | FAILED
+  httpStatus      Int?
+  responseBody    String?
+  responseHeaders Json?
+  duration        Int // in ms
+  errorMessage    String?
+  createdAt       DateTime @default(now())
+
+  retryHistories WebhookRetryHistory[]
+
+  @@index([tenantId])
+  @@index([webhookId])
+  @@index([eventId])
+  @@index([status])
+  @@index([createdAt])
+}
+
+model WebhookRetryHistory {
+  id          String          @id @default(cuid())
+  deliveryId  String
+  delivery    WebhookDelivery @relation(fields: [deliveryId], references: [id], onDelete: Cascade)
+  attempt     Int
+  reason      String?
+  scheduledAt DateTime
+  executedAt  DateTime?
+  result      String? // SUCCESS | FAILED | PENDING
+  createdAt   DateTime        @default(now())
+
+  @@index([deliveryId])
+}
+
+model ReplayHistory {
+  id                String   @id @default(cuid())
+  targetType        String // WEBHOOK | INTERNAL_EVENT | DLQ_JOB
+  targetId          String
+  originalJobId     String?
+  newJobId          String?
+  reason            String?
+  result            String // SUCCESS | FAILED
+  operatorId        String?
+  replayCount       Int      @default(1)
+  maxReplayAttempts Int      @default(5)
+  replayedAt        DateTime @default(now())
+
+  @@index([targetType, targetId])
+  @@index([replayedAt])
+}
+
+model CleanupExecution {
+  id             String    @id @default(cuid())
+  jobName        String
+  startedAt      DateTime  @default(now())
+  completedAt    DateTime?
+  status         String // SUCCESS | FAILED | RUNNING
+  itemsProcessed Int       @default(0)
+  itemsDeleted   Int       @default(0)
+  durationMs     Int?
+  errorMessage   String?
+
+  @@index([jobName])
+  @@index([startedAt])
 }
 
 model Policy {
@@ -116,6 +227,9 @@ model Webhook {
   isActive  Boolean  @default(true)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  circuitBreaker WebhookCircuitBreaker?
+  deliveries     WebhookDelivery[]
 
   @@index([tenantId])
   @@index([tenantId, isActive])

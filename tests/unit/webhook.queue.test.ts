@@ -30,7 +30,7 @@ describe("webhook queue", () => {
 
     expect(mocks.queueAdd).toHaveBeenCalledWith(
       "deliver-webhook-event",
-      { eventId: "event-1" },
+      expect.objectContaining({ eventId: "event-1" }),
       expect.objectContaining({
         jobId: "event-1",
         attempts: 5,

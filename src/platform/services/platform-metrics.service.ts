@@ -51,6 +51,21 @@ export interface PlatformDashboardMetrics {
     totalConsents: number;
     totalAuditLogs: number;
   };
+  reliability: {
+    dlqSize: number;
+    failedWebhooks: number;
+    failedEvents: number;
+    replayCount: number;
+    retryCount: number;
+    oldestFailedJob: string | null;
+    lastReplay: string | null;
+    cleanupStatus: string;
+    circuitBreakersOpen: number;
+    replaySuccessRate: number;
+    replayFailures: number;
+    outboxBacklog: number;
+    cleanupDurationMs: number;
+  };
 }
 
 export class PlatformMetricsService {
@@ -98,6 +113,35 @@ export class PlatformMetricsService {
       redisStatus = "Unhealthy";
       queueStatus = "Unhealthy";
     }
+
+    // Reliability aggregates from Prisma
+    const [
+      failedWebhooksCount,
+      failedEventsCount,
+      totalReplaysCount,
+      totalReplayFailuresCount,
+      totalReplaySuccessCount,
+      retryCount,
+      circuitBreakersOpenCount,
+      outboxBacklogCount,
+      lastReplayRecord,
+      lastCleanupRecord,
+      oldestFailedDelivery,
+    ] = await Promise.all([
+      prisma.webhookDelivery.count({ where: { status: "FAILED" } }).catch(() => 0),
+      prisma.internalEvent.count({ where: { status: "FAILED" } }).catch(() => 0),
+      prisma.replayHistory.count().catch(() => 0),
+      prisma.replayHistory.count({ where: { result: "FAILED" } }).catch(() => 0),
+      prisma.replayHistory.count({ where: { result: "SUCCESS" } }).catch(() => 0),
+      prisma.webhookRetryHistory.count().catch(() => 0),
+      prisma.webhookCircuitBreaker.count({ where: { state: "OPEN" } }).catch(() => 0),
+      prisma.outboxEvent.count({ where: { status: { in: ["PENDING", "FAILED"] } } }).catch(() => 0),
+      prisma.replayHistory.findFirst({ orderBy: { replayedAt: "desc" } }).catch(() => null),
+      prisma.cleanupExecution.findFirst({ orderBy: { startedAt: "desc" } }).catch(() => null),
+      prisma.webhookDelivery.findFirst({ where: { status: "FAILED" }, orderBy: { createdAt: "asc" } }).catch(() => null),
+    ]);
+
+    const replaySuccessRate = totalReplaysCount > 0 ? Number(((totalReplaySuccessCount / totalReplaysCount) * 100).toFixed(1)) : 100;
 
     // Platform database entity counts
     const [totalTenants, activeApiKeys, totalPolicies, totalConsents, totalAuditLogs, activeWebhooksCount] = await Promise.all([
@@ -174,6 +218,21 @@ export class PlatformMetricsService {
         totalPolicies,
         totalConsents,
         totalAuditLogs,
+      },
+      reliability: {
+        dlqSize: queueJobCounts.failed,
+        failedWebhooks: failedWebhooksCount,
+        failedEvents: failedEventsCount,
+        replayCount: totalReplaysCount,
+        retryCount,
+        oldestFailedJob: oldestFailedDelivery ? oldestFailedDelivery.createdAt.toISOString() : null,
+        lastReplay: lastReplayRecord ? lastReplayRecord.replayedAt.toISOString() : null,
+        cleanupStatus: lastCleanupRecord?.status ?? "IDLE",
+        circuitBreakersOpen: circuitBreakersOpenCount,
+        replaySuccessRate,
+        replayFailures: totalReplayFailuresCount,
+        outboxBacklog: outboxBacklogCount,
+        cleanupDurationMs: lastCleanupRecord?.durationMs ?? 0,
       },
     };
   }

@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('docker', 'podman', 'logs')]
+    [ValidateSet('docker', 'podman', 'logs', 'local-db')]
     [string]$Mode
 )
 
@@ -76,5 +76,11 @@ switch ($Mode) {
         }
 
         throw 'Neither docker, podman-compose, nor podman is available on PATH.'
+    }
+    'local-db' {
+        Write-Host "Running Prisma generation and schema push for local development..." -ForegroundColor Cyan
+        npx prisma generate
+        npx prisma db push
+        Write-Host "Local database schema push complete!" -ForegroundColor Green
     }
 }

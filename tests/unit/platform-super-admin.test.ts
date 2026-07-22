@@ -10,12 +10,11 @@ describe("Super Admin Platform API & Auth", () => {
   let jwtToken = "";
 
   beforeAll(async () => {
-    // Clean up test admin if exists
-    await prisma.superAdmin.deleteMany({ where: { email: adminEmail } });
-
     const passwordHash = await bcrypt.hash(adminPassword, 10);
-    await prisma.superAdmin.create({
-      data: {
+    await prisma.superAdmin.upsert({
+      where: { email: adminEmail },
+      update: { passwordHash, isActive: true },
+      create: {
         email: adminEmail,
         name: "Test Platform Operator",
         passwordHash,

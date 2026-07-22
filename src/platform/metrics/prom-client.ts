@@ -81,6 +81,54 @@ export const tenantRateLimitHitsTotal = new client.Counter({
   registers: [register],
 });
 
+export const dlqJobsTotal = new client.Gauge({
+  name: "dlq_jobs_total",
+  help: "Total number of jobs in Dead Letter Queues",
+  labelNames: ["queue"],
+  registers: [register],
+});
+
+export const replayTotal = new client.Counter({
+  name: "replay_total",
+  help: "Total number of replay requests initiated",
+  labelNames: ["target_type", "status"],
+  registers: [register],
+});
+
+export const replayFailedTotal = new client.Counter({
+  name: "replay_failed_total",
+  help: "Total number of failed replay executions",
+  labelNames: ["target_type"],
+  registers: [register],
+});
+
+export const cleanupDurationSeconds = new client.Histogram({
+  name: "cleanup_duration_seconds",
+  help: "Duration of scheduled cleanup jobs in seconds",
+  labelNames: ["job_name"],
+  buckets: [0.05, 0.1, 0.5, 1, 5, 10, 30, 60],
+  registers: [register],
+});
+
+export const cleanupFailuresTotal = new client.Counter({
+  name: "cleanup_failures_total",
+  help: "Total number of scheduled cleanup execution failures",
+  labelNames: ["job_name"],
+  registers: [register],
+});
+
+export const outboxBacklog = new client.Gauge({
+  name: "outbox_backlog",
+  help: "Number of unprocessed/pending outbox events",
+  registers: [register],
+});
+
+export const circuitBreakerOpenTotal = new client.Gauge({
+  name: "circuit_breaker_open_total",
+  help: "Total number of webhooks currently in OPEN circuit breaker state",
+  registers: [register],
+});
+
 export function prometheusMetricsMiddleware(req: Request, res: Response, next: NextFunction): void {
   httpActiveRequests.inc();
   const startTime = Date.now();

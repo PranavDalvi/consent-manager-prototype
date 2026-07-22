@@ -17,6 +17,10 @@ import { PlatformTenants } from "./pages/platform/PlatformTenants";
 import { PlatformLogViewer } from "./pages/platform/PlatformLogViewer";
 import { PlatformMetricsView } from "./pages/platform/PlatformMetricsView";
 import { PlatformQueuesView } from "./pages/platform/PlatformQueuesView";
+import { DeadLetterQueueView } from "./pages/platform/DeadLetterQueueView";
+import { FailedWebhooksView } from "./pages/platform/FailedWebhooksView";
+import { FailedEventsView } from "./pages/platform/FailedEventsView";
+import { ScheduledJobsView } from "./pages/platform/ScheduledJobsView";
 
 import { ProtectedRoute, PlatformProtectedRoute } from "./routes";
 import { ErrorBoundary } from "./components/UI";
@@ -125,6 +129,10 @@ export default function App() {
             <Route path="/platform/login" element={<PlatformLogin />} />
             <Route element={<PlatformProtectedRoute />}>
               <Route path="/platform" element={<PlatformDashboard />} />
+              <Route path="/platform/dlq" element={<DeadLetterQueueView />} />
+              <Route path="/platform/failed-webhooks" element={<FailedWebhooksView />} />
+              <Route path="/platform/failed-events" element={<FailedEventsView />} />
+              <Route path="/platform/scheduled-jobs" element={<ScheduledJobsView />} />
               <Route path="/platform/metrics" element={<PlatformMetricsView />} />
               <Route path="/platform/tenants" element={<PlatformTenants />} />
               <Route path="/platform/queues" element={<PlatformQueuesView />} />

@@ -129,6 +129,41 @@ export const PlatformDashboard: React.FC = () => {
         </div>
       </div>
 
+      {/* Reliability & Recovery Overview Section */}
+      {data.reliability && (
+        <div className="bg-slate-900/80 border border-slate-800 p-6 rounded-2xl space-y-4">
+          <h2 className="text-sm font-bold text-white flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-indigo-400" /> Reliability & Failure Recovery Overview
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-3">
+            <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+              <span className="text-[10px] text-slate-400 uppercase font-semibold">DLQ Size</span>
+              <p className="text-lg font-bold text-rose-400 mt-0.5">{data.reliability.dlqSize}</p>
+            </div>
+            <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+              <span className="text-[10px] text-slate-400 uppercase font-semibold">Failed Webhooks</span>
+              <p className="text-lg font-bold text-amber-400 mt-0.5">{data.reliability.failedWebhooks}</p>
+            </div>
+            <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+              <span className="text-[10px] text-slate-400 uppercase font-semibold">Failed Events</span>
+              <p className="text-lg font-bold text-indigo-400 mt-0.5">{data.reliability.failedEvents}</p>
+            </div>
+            <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+              <span className="text-[10px] text-slate-400 uppercase font-semibold">CB Open</span>
+              <p className="text-lg font-bold text-rose-400 mt-0.5">{data.reliability.circuitBreakersOpen}</p>
+            </div>
+            <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+              <span className="text-[10px] text-slate-400 uppercase font-semibold">Outbox Backlog</span>
+              <p className="text-lg font-bold text-amber-300 mt-0.5">{data.reliability.outboxBacklog}</p>
+            </div>
+            <div className="bg-slate-950/60 p-3 rounded-xl border border-slate-800">
+              <span className="text-[10px] text-slate-400 uppercase font-semibold">Replay Success</span>
+              <p className="text-lg font-bold text-emerald-400 mt-0.5">{data.reliability.replaySuccessRate}%</p>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Grid Section: Queues & Infrastructure */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Queues Breakdown */}

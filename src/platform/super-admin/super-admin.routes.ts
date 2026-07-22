@@ -12,6 +12,24 @@ import {
 } from "./super-admin.controller";
 import { superAdminAuthMiddleware } from "./super-admin.middleware";
 
+import {
+  getDLQJobsHandler,
+  deleteDLQJobHandler,
+  replayDLQJobHandler,
+  bulkReplayDLQJobsHandler,
+  getFailedWebhooksHandler,
+  replayWebhookDeliveryHandler,
+  bulkReplayWebhookDeliveriesHandler,
+  getFailedEventsHandler,
+  replayInternalEventHandler,
+  bulkReplayInternalEventsHandler,
+  getRetriesHandler,
+  getScheduledJobsHandler,
+  getReplaysHandler,
+  getOutboxHandler,
+  getCircuitBreakersHandler,
+} from "../controllers/reliability.controller";
+
 const router = Router();
 
 /**
@@ -55,5 +73,25 @@ router.get("/webhooks", superAdminAuthMiddleware, getPlatformWebhooksHandler);
 router.get("/system", superAdminAuthMiddleware, getPlatformSystemHandler);
 router.get("/tenants", superAdminAuthMiddleware, getPlatformTenantsHandler);
 router.get("/logs", superAdminAuthMiddleware, getPlatformLogsHandler);
+
+// Reliability Platform Endpoints
+router.get("/dlq", superAdminAuthMiddleware, getDLQJobsHandler);
+router.delete("/dlq/:jobId", superAdminAuthMiddleware, deleteDLQJobHandler);
+router.post("/dlq/:jobId/replay", superAdminAuthMiddleware, replayDLQJobHandler);
+router.post("/dlq/replay", superAdminAuthMiddleware, bulkReplayDLQJobsHandler);
+
+router.get("/webhooks/failed", superAdminAuthMiddleware, getFailedWebhooksHandler);
+router.post("/webhooks/:deliveryId/replay", superAdminAuthMiddleware, replayWebhookDeliveryHandler);
+router.post("/webhooks/replay", superAdminAuthMiddleware, bulkReplayWebhookDeliveriesHandler);
+
+router.get("/events/failed", superAdminAuthMiddleware, getFailedEventsHandler);
+router.post("/events/:eventId/replay", superAdminAuthMiddleware, replayInternalEventHandler);
+router.post("/events/replay", superAdminAuthMiddleware, bulkReplayInternalEventsHandler);
+
+router.get("/retries", superAdminAuthMiddleware, getRetriesHandler);
+router.get("/scheduled-jobs", superAdminAuthMiddleware, getScheduledJobsHandler);
+router.get("/replays", superAdminAuthMiddleware, getReplaysHandler);
+router.get("/outbox", superAdminAuthMiddleware, getOutboxHandler);
+router.get("/circuit-breakers", superAdminAuthMiddleware, getCircuitBreakersHandler);
 
 export default router;
