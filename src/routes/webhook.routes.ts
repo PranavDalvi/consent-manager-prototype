@@ -1,6 +1,5 @@
 import { Router } from "express";
-
-import { apiKeyAuthMiddleware } from "../middlewares/api-key-auth.middleware";
+import { tenantAuthMiddleware } from "../middlewares/tenant-auth.middleware";
 import { validate } from "../middlewares/validate.middleware";
 import { createWebhookHandler, disableWebhookHandler, enableWebhookHandler, getWebhookHandler, listWebhooksHandler, updateWebhookHandler, deleteWebhookHandler } from "../controllers/webhook.controller";
 import { createWebhookSchema, updateWebhookSchema, webhookIdSchema } from "../validators/webhook.validator";
@@ -27,7 +26,7 @@ const router = Router();
  *               - url
  *               - events
  */
-router.post("/", apiKeyAuthMiddleware, validate(createWebhookSchema, "body"), createWebhookHandler);
+router.post("/", tenantAuthMiddleware, validate(createWebhookSchema, "body"), createWebhookHandler);
 
 /**
  * @swagger
@@ -39,7 +38,7 @@ router.post("/", apiKeyAuthMiddleware, validate(createWebhookSchema, "body"), cr
  *     tags:
  *       - Webhooks
  */
-router.get("/", apiKeyAuthMiddleware, listWebhooksHandler);
+router.get("/", tenantAuthMiddleware, listWebhooksHandler);
 
 /**
  * @swagger
@@ -51,7 +50,7 @@ router.get("/", apiKeyAuthMiddleware, listWebhooksHandler);
  *     tags:
  *       - Webhooks
  */
-router.get("/:id", apiKeyAuthMiddleware, validate(webhookIdSchema, "params"), getWebhookHandler);
+router.get("/:id", tenantAuthMiddleware, validate(webhookIdSchema, "params"), getWebhookHandler);
 
 /**
  * @swagger
@@ -63,7 +62,7 @@ router.get("/:id", apiKeyAuthMiddleware, validate(webhookIdSchema, "params"), ge
  *     tags:
  *       - Webhooks
  */
-router.patch("/:id", apiKeyAuthMiddleware, validate(webhookIdSchema, "params"), validate(updateWebhookSchema, "body"), updateWebhookHandler);
+router.patch("/:id", tenantAuthMiddleware, validate(webhookIdSchema, "params"), validate(updateWebhookSchema, "body"), updateWebhookHandler);
 
 /**
  * @swagger
@@ -75,7 +74,7 @@ router.patch("/:id", apiKeyAuthMiddleware, validate(webhookIdSchema, "params"), 
  *     tags:
  *       - Webhooks
  */
-router.patch("/:id/disable", apiKeyAuthMiddleware, validate(webhookIdSchema, "params"), disableWebhookHandler);
+router.patch("/:id/disable", tenantAuthMiddleware, validate(webhookIdSchema, "params"), disableWebhookHandler);
 
 /**
  * @swagger
@@ -87,8 +86,8 @@ router.patch("/:id/disable", apiKeyAuthMiddleware, validate(webhookIdSchema, "pa
  *     tags:
  *       - Webhooks
  */
-router.patch("/:id/enable", apiKeyAuthMiddleware, validate(webhookIdSchema, "params"), enableWebhookHandler);
+router.patch("/:id/enable", tenantAuthMiddleware, validate(webhookIdSchema, "params"), enableWebhookHandler);
 
-router.delete("/:id", apiKeyAuthMiddleware, validate(webhookIdSchema, "params"), deleteWebhookHandler);
+router.delete("/:id", tenantAuthMiddleware, validate(webhookIdSchema, "params"), deleteWebhookHandler);
 
 export default router;

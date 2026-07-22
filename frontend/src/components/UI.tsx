@@ -5,18 +5,26 @@ import { AlertTriangle, CheckCircle, XCircle, Info, Loader2 } from "lucide-react
 // --- BUTTON ---
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary" | "danger" | "ghost" | "outline";
+  size?: "sm" | "md" | "lg";
   loading?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = ({
   children,
   variant = "primary",
+  size = "md",
   loading = false,
   className = "",
   disabled,
   ...props
 }) => {
-  const baseStyle = "px-4 py-2 rounded-md font-medium text-sm transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2";
+  const baseStyle = "rounded-md font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none flex items-center justify-center gap-2";
+
+  const sizeStyles = {
+    sm: "px-2.5 py-1 text-xs",
+    md: "px-4 py-2 text-sm",
+    lg: "px-6 py-3 text-base",
+  };
   
   const variants = {
     primary: "bg-primary text-primary-foreground hover:bg-primary/90 focus:ring-primary",
@@ -29,7 +37,7 @@ export const Button: React.FC<ButtonProps> = ({
   return (
     <button
       disabled={disabled || loading}
-      className={`${baseStyle} ${variants[variant]} ${className}`}
+      className={`${baseStyle} ${sizeStyles[size]} ${variants[variant]} ${className}`}
       {...props}
     >
       {loading && <Loader2 className="w-4 h-4 animate-spin" />}
@@ -191,6 +199,31 @@ export const Dialog: React.FC<DialogProps> = ({ isOpen, onClose, title, children
         {children}
       </div>
     </div>
+  );
+};
+
+export const Modal = Dialog;
+
+// --- BADGE ---
+export const Badge: React.FC<{
+  children: ReactNode;
+  variant?: "default" | "secondary" | "success" | "danger" | "destructive" | "outline" | "info" | "warning";
+  className?: string;
+}> = ({ children, variant = "default", className = "" }) => {
+  const variants = {
+    default: "bg-primary text-primary-foreground",
+    secondary: "bg-secondary text-secondary-foreground",
+    success: "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400",
+    danger: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400",
+    destructive: "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400",
+    info: "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400",
+    warning: "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400",
+    outline: "border border-input text-foreground",
+  };
+  return (
+    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${variants[variant]} ${className}`}>
+      {children}
+    </span>
   );
 };
 

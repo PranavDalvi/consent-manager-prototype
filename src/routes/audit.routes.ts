@@ -1,6 +1,6 @@
 import {Router} from "express";
 import {fetchAuditLogsHandler} from "../controllers/audit.controller";
-import { apiKeyAuthMiddleware } from "../middlewares/api-key-auth.middleware";
+import { tenantAuthMiddleware } from "../middlewares/tenant-auth.middleware";
 import { fetchAuditLogsSchema } from "../middlewares/auditLog.validator";
 import { validate } from "../middlewares/validate.middleware";
 
@@ -71,6 +71,6 @@ const router = Router();
  *       500:
  *         description: Internal Server Error
  */
-router.get("/", apiKeyAuthMiddleware, validate(fetchAuditLogsSchema, "query"), fetchAuditLogsHandler);
+router.get("/", tenantAuthMiddleware, validate(fetchAuditLogsSchema, "query"), fetchAuditLogsHandler);
 
 export default router;

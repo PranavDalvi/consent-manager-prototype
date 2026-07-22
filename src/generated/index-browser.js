@@ -124,9 +124,61 @@ exports.Prisma.TenantScalarFieldEnum = {
   id: 'id',
   name: 'name',
   slug: 'slug',
+  status: 'status',
   isActive: 'isActive',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TenantUserScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  email: 'email',
+  passwordHash: 'passwordHash',
+  firstName: 'firstName',
+  lastName: 'lastName',
+  role: 'role',
+  isActive: 'isActive',
+  failedLogins: 'failedLogins',
+  lockedUntil: 'lockedUntil',
+  lastLoginAt: 'lastLoginAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.SessionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  refreshTokenHash: 'refreshTokenHash',
+  device: 'device',
+  ipAddress: 'ipAddress',
+  userAgent: 'userAgent',
+  createdAt: 'createdAt',
+  lastUsedAt: 'lastUsedAt',
+  expiresAt: 'expiresAt',
+  revokedAt: 'revokedAt',
+  replacedBy: 'replacedBy'
+};
+
+exports.Prisma.InvitationScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  email: 'email',
+  role: 'role',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  acceptedAt: 'acceptedAt',
+  createdBy: 'createdBy',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.PasswordResetTokenScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  tokenHash: 'tokenHash',
+  expiresAt: 'expiresAt',
+  usedAt: 'usedAt',
+  createdAt: 'createdAt'
 };
 
 exports.Prisma.OutboxEventScalarFieldEnum = {
@@ -306,16 +358,30 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 exports.Prisma.JsonNullValueFilter = {
   DbNull: Prisma.DbNull,
   JsonNull: Prisma.JsonNull,
   AnyNull: Prisma.AnyNull
 };
-
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
+exports.TenantStatus = exports.$Enums.TenantStatus = {
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  ARCHIVED: 'ARCHIVED',
+  DELETED: 'DELETED'
 };
+
+exports.TenantUserRole = exports.$Enums.TenantUserRole = {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  DEVELOPER: 'DEVELOPER',
+  VIEWER: 'VIEWER'
+};
+
 exports.CircuitBreakerState = exports.$Enums.CircuitBreakerState = {
   CLOSED: 'CLOSED',
   OPEN: 'OPEN',
@@ -329,6 +395,10 @@ exports.ConsentStatus = exports.$Enums.ConsentStatus = {
 
 exports.Prisma.ModelName = {
   Tenant: 'Tenant',
+  TenantUser: 'TenantUser',
+  Session: 'Session',
+  Invitation: 'Invitation',
+  PasswordResetToken: 'PasswordResetToken',
   OutboxEvent: 'OutboxEvent',
   WebhookCircuitBreaker: 'WebhookCircuitBreaker',
   WebhookDelivery: 'WebhookDelivery',

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { apiKeyAuthMiddleware } from "../middlewares/api-key-auth.middleware";
+import { tenantAuthMiddleware } from "../middlewares/tenant-auth.middleware";
 import { validate } from "../middlewares/validate.middleware";
 import { apiKeyIdSchema, createApiKeySchema } from "../validators/api-key.validator";
 import { createApiKeyHandler, getApiKeyHandler, listApiKeysHandler, revokeApiKeyHandler, rotateApiKeyHandler } from "../controllers/api-key-management.controller";
@@ -21,7 +21,7 @@ const router = Router();
  *       201:
  *         description: API key created
  */
-router.post("/", apiKeyAuthMiddleware, validate(createApiKeySchema, "body"), createApiKeyHandler);
+router.post("/", tenantAuthMiddleware, validate(createApiKeySchema, "body"), createApiKeyHandler);
 
 /**
  * @swagger
@@ -33,7 +33,7 @@ router.post("/", apiKeyAuthMiddleware, validate(createApiKeySchema, "body"), cre
  *     security:
  *       - ApiKeyAuth: []
  */
-router.get("/", apiKeyAuthMiddleware, listApiKeysHandler);
+router.get("/", tenantAuthMiddleware, listApiKeysHandler);
 
 /**
  * @swagger
@@ -45,7 +45,7 @@ router.get("/", apiKeyAuthMiddleware, listApiKeysHandler);
  *     security:
  *       - ApiKeyAuth: []
  */
-router.get("/:id", apiKeyAuthMiddleware, validate(apiKeyIdSchema, "params"), getApiKeyHandler);
+router.get("/:id", tenantAuthMiddleware, validate(apiKeyIdSchema, "params"), getApiKeyHandler);
 
 /**
  * @swagger
@@ -57,7 +57,7 @@ router.get("/:id", apiKeyAuthMiddleware, validate(apiKeyIdSchema, "params"), get
  *     security:
  *       - ApiKeyAuth: []
  */
-router.patch("/:id/revoke", apiKeyAuthMiddleware, validate(apiKeyIdSchema, "params"), revokeApiKeyHandler);
+router.patch("/:id/revoke", tenantAuthMiddleware, validate(apiKeyIdSchema, "params"), revokeApiKeyHandler);
 
 /**
  * @swagger
@@ -69,6 +69,6 @@ router.patch("/:id/revoke", apiKeyAuthMiddleware, validate(apiKeyIdSchema, "para
  *     security:
  *       - ApiKeyAuth: []
  */
-router.post("/:id/rotate", apiKeyAuthMiddleware, validate(apiKeyIdSchema, "params"), rotateApiKeyHandler);
+router.post("/:id/rotate", tenantAuthMiddleware, validate(apiKeyIdSchema, "params"), rotateApiKeyHandler);
 
 export default router;

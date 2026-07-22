@@ -237,3 +237,47 @@ export class PlatformMetricsService {
     };
   }
 }
+
+// In-memory counter fallbacks if prom-client is used
+let loginSuccessCount = 0;
+let loginFailureCount = 0;
+let registrationCount = 0;
+let passwordResetCount = 0;
+let tokenRefreshCount = 0;
+let sessionsCount = 0;
+let sessionRevocationsCount = 0;
+let invitationsAcceptedCount = 0;
+
+export function recordLoginSuccess() { loginSuccessCount++; }
+export function recordLoginFailure() { loginFailureCount++; }
+export function recordRegistration() { registrationCount++; }
+export function recordPasswordReset() { passwordResetCount++; }
+export function recordTokenRefresh() { tokenRefreshCount++; }
+export function recordSessionCreated() { sessionsCount++; }
+export function recordSessionRevocation() { sessionRevocationsCount++; }
+export function recordInvitationAccepted() { invitationsAcceptedCount++; }
+
+export async function getAuthObservabilityMetrics() {
+  const [activeUsers, lockedAccounts, activeRefreshSessions, pendingInvitations] = await Promise.all([
+    prisma.tenantUser.count({ where: { isActive: true } }).catch(() => 0),
+    prisma.tenantUser.count({ where: { lockedUntil: { gt: new Date() } } }).catch(() => 0),
+    prisma.session.count({ where: { revokedAt: null, expiresAt: { gt: new Date() } } }).catch(() => 0),
+    prisma.invitation.count({ where: { acceptedAt: null, expiresAt: { gt: new Date() } } }).catch(() => 0),
+  ]);
+
+  return {
+    auth_login_success_total: loginSuccessCount,
+    auth_login_failure_total: loginFailureCount,
+    auth_registrations_total: registrationCount,
+    auth_password_resets_total: passwordResetCount,
+    auth_token_refreshes_total: tokenRefreshCount,
+    auth_sessions_total: sessionsCount,
+    auth_session_revocations_total: sessionRevocationsCount,
+    auth_invitations_accepted_total: invitationsAcceptedCount,
+    active_users: activeUsers,
+    locked_accounts: lockedAccounts,
+    active_refresh_sessions: activeRefreshSessions,
+    auth_invitations_pending: pendingInvitations,
+  };
+}
+

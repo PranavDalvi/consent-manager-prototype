@@ -19,6 +19,26 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type Tenant = $Result.DefaultSelection<Prisma.$TenantPayload>
 /**
+ * Model TenantUser
+ * 
+ */
+export type TenantUser = $Result.DefaultSelection<Prisma.$TenantUserPayload>
+/**
+ * Model Session
+ * 
+ */
+export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
+/**
+ * Model Invitation
+ * 
+ */
+export type Invitation = $Result.DefaultSelection<Prisma.$InvitationPayload>
+/**
+ * Model PasswordResetToken
+ * 
+ */
+export type PasswordResetToken = $Result.DefaultSelection<Prisma.$PasswordResetTokenPayload>
+/**
  * Model OutboxEvent
  * 
  */
@@ -96,6 +116,26 @@ export namespace $Enums {
 export type ConsentStatus = (typeof ConsentStatus)[keyof typeof ConsentStatus]
 
 
+export const TenantStatus: {
+  ACTIVE: 'ACTIVE',
+  SUSPENDED: 'SUSPENDED',
+  ARCHIVED: 'ARCHIVED',
+  DELETED: 'DELETED'
+};
+
+export type TenantStatus = (typeof TenantStatus)[keyof typeof TenantStatus]
+
+
+export const TenantUserRole: {
+  OWNER: 'OWNER',
+  ADMIN: 'ADMIN',
+  DEVELOPER: 'DEVELOPER',
+  VIEWER: 'VIEWER'
+};
+
+export type TenantUserRole = (typeof TenantUserRole)[keyof typeof TenantUserRole]
+
+
 export const CircuitBreakerState: {
   CLOSED: 'CLOSED',
   OPEN: 'OPEN',
@@ -109,6 +149,14 @@ export type CircuitBreakerState = (typeof CircuitBreakerState)[keyof typeof Circ
 export type ConsentStatus = $Enums.ConsentStatus
 
 export const ConsentStatus: typeof $Enums.ConsentStatus
+
+export type TenantStatus = $Enums.TenantStatus
+
+export const TenantStatus: typeof $Enums.TenantStatus
+
+export type TenantUserRole = $Enums.TenantUserRole
+
+export const TenantUserRole: typeof $Enums.TenantUserRole
 
 export type CircuitBreakerState = $Enums.CircuitBreakerState
 
@@ -244,6 +292,46 @@ export class PrismaClient<
     * ```
     */
   get tenant(): Prisma.TenantDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.tenantUser`: Exposes CRUD operations for the **TenantUser** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TenantUsers
+    * const tenantUsers = await prisma.tenantUser.findMany()
+    * ```
+    */
+  get tenantUser(): Prisma.TenantUserDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.session`: Exposes CRUD operations for the **Session** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sessions
+    * const sessions = await prisma.session.findMany()
+    * ```
+    */
+  get session(): Prisma.SessionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.invitation`: Exposes CRUD operations for the **Invitation** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Invitations
+    * const invitations = await prisma.invitation.findMany()
+    * ```
+    */
+  get invitation(): Prisma.InvitationDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.passwordResetToken`: Exposes CRUD operations for the **PasswordResetToken** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more PasswordResetTokens
+    * const passwordResetTokens = await prisma.passwordResetToken.findMany()
+    * ```
+    */
+  get passwordResetToken(): Prisma.PasswordResetTokenDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.outboxEvent`: Exposes CRUD operations for the **OutboxEvent** model.
@@ -809,6 +897,10 @@ export namespace Prisma {
 
   export const ModelName: {
     Tenant: 'Tenant',
+    TenantUser: 'TenantUser',
+    Session: 'Session',
+    Invitation: 'Invitation',
+    PasswordResetToken: 'PasswordResetToken',
     OutboxEvent: 'OutboxEvent',
     WebhookCircuitBreaker: 'WebhookCircuitBreaker',
     WebhookDelivery: 'WebhookDelivery',
@@ -837,7 +929,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tenant" | "outboxEvent" | "webhookCircuitBreaker" | "webhookDelivery" | "webhookRetryHistory" | "replayHistory" | "cleanupExecution" | "policy" | "consent" | "auditLog" | "apiKey" | "webhook" | "internalEvent" | "superAdmin"
+      modelProps: "tenant" | "tenantUser" | "session" | "invitation" | "passwordResetToken" | "outboxEvent" | "webhookCircuitBreaker" | "webhookDelivery" | "webhookRetryHistory" | "replayHistory" | "cleanupExecution" | "policy" | "consent" | "auditLog" | "apiKey" | "webhook" | "internalEvent" | "superAdmin"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -912,6 +1004,302 @@ export namespace Prisma {
           count: {
             args: Prisma.TenantCountArgs<ExtArgs>
             result: $Utils.Optional<TenantCountAggregateOutputType> | number
+          }
+        }
+      }
+      TenantUser: {
+        payload: Prisma.$TenantUserPayload<ExtArgs>
+        fields: Prisma.TenantUserFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TenantUserFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantUserPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TenantUserFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantUserPayload>
+          }
+          findFirst: {
+            args: Prisma.TenantUserFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantUserPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TenantUserFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantUserPayload>
+          }
+          findMany: {
+            args: Prisma.TenantUserFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantUserPayload>[]
+          }
+          create: {
+            args: Prisma.TenantUserCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantUserPayload>
+          }
+          createMany: {
+            args: Prisma.TenantUserCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TenantUserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantUserPayload>[]
+          }
+          delete: {
+            args: Prisma.TenantUserDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantUserPayload>
+          }
+          update: {
+            args: Prisma.TenantUserUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantUserPayload>
+          }
+          deleteMany: {
+            args: Prisma.TenantUserDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TenantUserUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TenantUserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantUserPayload>[]
+          }
+          upsert: {
+            args: Prisma.TenantUserUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TenantUserPayload>
+          }
+          aggregate: {
+            args: Prisma.TenantUserAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTenantUser>
+          }
+          groupBy: {
+            args: Prisma.TenantUserGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TenantUserGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TenantUserCountArgs<ExtArgs>
+            result: $Utils.Optional<TenantUserCountAggregateOutputType> | number
+          }
+        }
+      }
+      Session: {
+        payload: Prisma.$SessionPayload<ExtArgs>
+        fields: Prisma.SessionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SessionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SessionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          findFirst: {
+            args: Prisma.SessionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SessionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          findMany: {
+            args: Prisma.SessionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>[]
+          }
+          create: {
+            args: Prisma.SessionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          createMany: {
+            args: Prisma.SessionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SessionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>[]
+          }
+          delete: {
+            args: Prisma.SessionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          update: {
+            args: Prisma.SessionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          deleteMany: {
+            args: Prisma.SessionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SessionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SessionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>[]
+          }
+          upsert: {
+            args: Prisma.SessionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SessionPayload>
+          }
+          aggregate: {
+            args: Prisma.SessionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSession>
+          }
+          groupBy: {
+            args: Prisma.SessionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SessionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SessionCountArgs<ExtArgs>
+            result: $Utils.Optional<SessionCountAggregateOutputType> | number
+          }
+        }
+      }
+      Invitation: {
+        payload: Prisma.$InvitationPayload<ExtArgs>
+        fields: Prisma.InvitationFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.InvitationFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.InvitationFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          findFirst: {
+            args: Prisma.InvitationFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.InvitationFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          findMany: {
+            args: Prisma.InvitationFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>[]
+          }
+          create: {
+            args: Prisma.InvitationCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          createMany: {
+            args: Prisma.InvitationCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.InvitationCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>[]
+          }
+          delete: {
+            args: Prisma.InvitationDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          update: {
+            args: Prisma.InvitationUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          deleteMany: {
+            args: Prisma.InvitationDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.InvitationUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.InvitationUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>[]
+          }
+          upsert: {
+            args: Prisma.InvitationUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$InvitationPayload>
+          }
+          aggregate: {
+            args: Prisma.InvitationAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateInvitation>
+          }
+          groupBy: {
+            args: Prisma.InvitationGroupByArgs<ExtArgs>
+            result: $Utils.Optional<InvitationGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.InvitationCountArgs<ExtArgs>
+            result: $Utils.Optional<InvitationCountAggregateOutputType> | number
+          }
+        }
+      }
+      PasswordResetToken: {
+        payload: Prisma.$PasswordResetTokenPayload<ExtArgs>
+        fields: Prisma.PasswordResetTokenFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.PasswordResetTokenFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.PasswordResetTokenFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenPayload>
+          }
+          findFirst: {
+            args: Prisma.PasswordResetTokenFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.PasswordResetTokenFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenPayload>
+          }
+          findMany: {
+            args: Prisma.PasswordResetTokenFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenPayload>[]
+          }
+          create: {
+            args: Prisma.PasswordResetTokenCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenPayload>
+          }
+          createMany: {
+            args: Prisma.PasswordResetTokenCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.PasswordResetTokenCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenPayload>[]
+          }
+          delete: {
+            args: Prisma.PasswordResetTokenDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenPayload>
+          }
+          update: {
+            args: Prisma.PasswordResetTokenUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenPayload>
+          }
+          deleteMany: {
+            args: Prisma.PasswordResetTokenDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.PasswordResetTokenUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.PasswordResetTokenUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenPayload>[]
+          }
+          upsert: {
+            args: Prisma.PasswordResetTokenUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$PasswordResetTokenPayload>
+          }
+          aggregate: {
+            args: Prisma.PasswordResetTokenAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregatePasswordResetToken>
+          }
+          groupBy: {
+            args: Prisma.PasswordResetTokenGroupByArgs<ExtArgs>
+            result: $Utils.Optional<PasswordResetTokenGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.PasswordResetTokenCountArgs<ExtArgs>
+            result: $Utils.Optional<PasswordResetTokenCountAggregateOutputType> | number
           }
         }
       }
@@ -1986,6 +2374,10 @@ export namespace Prisma {
   }
   export type GlobalOmitConfig = {
     tenant?: TenantOmit
+    tenantUser?: TenantUserOmit
+    session?: SessionOmit
+    invitation?: InvitationOmit
+    passwordResetToken?: PasswordResetTokenOmit
     outboxEvent?: OutboxEventOmit
     webhookCircuitBreaker?: WebhookCircuitBreakerOmit
     webhookDelivery?: WebhookDeliveryOmit
@@ -2087,6 +2479,8 @@ export namespace Prisma {
     internalEvents: number
     outboxEvents: number
     webhookDeliveries: number
+    users: number
+    invitations: number
   }
 
   export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2098,6 +2492,8 @@ export namespace Prisma {
     internalEvents?: boolean | TenantCountOutputTypeCountInternalEventsArgs
     outboxEvents?: boolean | TenantCountOutputTypeCountOutboxEventsArgs
     webhookDeliveries?: boolean | TenantCountOutputTypeCountWebhookDeliveriesArgs
+    users?: boolean | TenantCountOutputTypeCountUsersArgs
+    invitations?: boolean | TenantCountOutputTypeCountInvitationsArgs
   }
 
   // Custom InputTypes
@@ -2165,6 +2561,60 @@ export namespace Prisma {
    */
   export type TenantCountOutputTypeCountWebhookDeliveriesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: WebhookDeliveryWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountUsersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TenantUserWhereInput
+  }
+
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountInvitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvitationWhereInput
+  }
+
+
+  /**
+   * Count Type TenantUserCountOutputType
+   */
+
+  export type TenantUserCountOutputType = {
+    sessions: number
+    passwordResetTokens: number
+  }
+
+  export type TenantUserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sessions?: boolean | TenantUserCountOutputTypeCountSessionsArgs
+    passwordResetTokens?: boolean | TenantUserCountOutputTypeCountPasswordResetTokensArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TenantUserCountOutputType without action
+   */
+  export type TenantUserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUserCountOutputType
+     */
+    select?: TenantUserCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TenantUserCountOutputType without action
+   */
+  export type TenantUserCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
+  }
+
+  /**
+   * TenantUserCountOutputType without action
+   */
+  export type TenantUserCountOutputTypeCountPasswordResetTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PasswordResetTokenWhereInput
   }
 
 
@@ -2279,6 +2729,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     slug: string | null
+    status: $Enums.TenantStatus | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2288,6 +2739,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     slug: string | null
+    status: $Enums.TenantStatus | null
     isActive: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -2297,6 +2749,7 @@ export namespace Prisma {
     id: number
     name: number
     slug: number
+    status: number
     isActive: number
     createdAt: number
     updatedAt: number
@@ -2308,6 +2761,7 @@ export namespace Prisma {
     id?: true
     name?: true
     slug?: true
+    status?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -2317,6 +2771,7 @@ export namespace Prisma {
     id?: true
     name?: true
     slug?: true
+    status?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -2326,6 +2781,7 @@ export namespace Prisma {
     id?: true
     name?: true
     slug?: true
+    status?: true
     isActive?: true
     createdAt?: true
     updatedAt?: true
@@ -2408,6 +2864,7 @@ export namespace Prisma {
     id: string
     name: string
     slug: string
+    status: $Enums.TenantStatus
     isActive: boolean
     createdAt: Date
     updatedAt: Date
@@ -2434,6 +2891,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     slug?: boolean
+    status?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2445,6 +2903,8 @@ export namespace Prisma {
     internalEvents?: boolean | Tenant$internalEventsArgs<ExtArgs>
     outboxEvents?: boolean | Tenant$outboxEventsArgs<ExtArgs>
     webhookDeliveries?: boolean | Tenant$webhookDeliveriesArgs<ExtArgs>
+    users?: boolean | Tenant$usersArgs<ExtArgs>
+    invitations?: boolean | Tenant$invitationsArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tenant"]>
 
@@ -2452,6 +2912,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     slug?: boolean
+    status?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2461,6 +2922,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     slug?: boolean
+    status?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -2470,12 +2932,13 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     slug?: boolean
+    status?: boolean
     isActive?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["tenant"]>
+  export type TenantOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "status" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["tenant"]>
   export type TenantInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     consents?: boolean | Tenant$consentsArgs<ExtArgs>
     policies?: boolean | Tenant$policiesArgs<ExtArgs>
@@ -2485,6 +2948,8 @@ export namespace Prisma {
     internalEvents?: boolean | Tenant$internalEventsArgs<ExtArgs>
     outboxEvents?: boolean | Tenant$outboxEventsArgs<ExtArgs>
     webhookDeliveries?: boolean | Tenant$webhookDeliveriesArgs<ExtArgs>
+    users?: boolean | Tenant$usersArgs<ExtArgs>
+    invitations?: boolean | Tenant$invitationsArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TenantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2501,11 +2966,14 @@ export namespace Prisma {
       internalEvents: Prisma.$InternalEventPayload<ExtArgs>[]
       outboxEvents: Prisma.$OutboxEventPayload<ExtArgs>[]
       webhookDeliveries: Prisma.$WebhookDeliveryPayload<ExtArgs>[]
+      users: Prisma.$TenantUserPayload<ExtArgs>[]
+      invitations: Prisma.$InvitationPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
       slug: string
+      status: $Enums.TenantStatus
       isActive: boolean
       createdAt: Date
       updatedAt: Date
@@ -2911,6 +3379,8 @@ export namespace Prisma {
     internalEvents<T extends Tenant$internalEventsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$internalEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InternalEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     outboxEvents<T extends Tenant$outboxEventsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$outboxEventsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OutboxEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     webhookDeliveries<T extends Tenant$webhookDeliveriesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$webhookDeliveriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebhookDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    users<T extends Tenant$usersArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    invitations<T extends Tenant$invitationsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2943,6 +3413,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Tenant", 'String'>
     readonly name: FieldRef<"Tenant", 'String'>
     readonly slug: FieldRef<"Tenant", 'String'>
+    readonly status: FieldRef<"Tenant", 'TenantStatus'>
     readonly isActive: FieldRef<"Tenant", 'Boolean'>
     readonly createdAt: FieldRef<"Tenant", 'DateTime'>
     readonly updatedAt: FieldRef<"Tenant", 'DateTime'>
@@ -3531,6 +4002,54 @@ export namespace Prisma {
   }
 
   /**
+   * Tenant.users
+   */
+  export type Tenant$usersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserInclude<ExtArgs> | null
+    where?: TenantUserWhereInput
+    orderBy?: TenantUserOrderByWithRelationInput | TenantUserOrderByWithRelationInput[]
+    cursor?: TenantUserWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TenantUserScalarFieldEnum | TenantUserScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.invitations
+   */
+  export type Tenant$invitationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    where?: InvitationWhereInput
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    cursor?: InvitationWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
    * Tenant without action
    */
   export type TenantDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3546,6 +4065,4597 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: TenantInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TenantUser
+   */
+
+  export type AggregateTenantUser = {
+    _count: TenantUserCountAggregateOutputType | null
+    _avg: TenantUserAvgAggregateOutputType | null
+    _sum: TenantUserSumAggregateOutputType | null
+    _min: TenantUserMinAggregateOutputType | null
+    _max: TenantUserMaxAggregateOutputType | null
+  }
+
+  export type TenantUserAvgAggregateOutputType = {
+    failedLogins: number | null
+  }
+
+  export type TenantUserSumAggregateOutputType = {
+    failedLogins: number | null
+  }
+
+  export type TenantUserMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    email: string | null
+    passwordHash: string | null
+    firstName: string | null
+    lastName: string | null
+    role: $Enums.TenantUserRole | null
+    isActive: boolean | null
+    failedLogins: number | null
+    lockedUntil: Date | null
+    lastLoginAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantUserMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    email: string | null
+    passwordHash: string | null
+    firstName: string | null
+    lastName: string | null
+    role: $Enums.TenantUserRole | null
+    isActive: boolean | null
+    failedLogins: number | null
+    lockedUntil: Date | null
+    lastLoginAt: Date | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TenantUserCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    email: number
+    passwordHash: number
+    firstName: number
+    lastName: number
+    role: number
+    isActive: number
+    failedLogins: number
+    lockedUntil: number
+    lastLoginAt: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TenantUserAvgAggregateInputType = {
+    failedLogins?: true
+  }
+
+  export type TenantUserSumAggregateInputType = {
+    failedLogins?: true
+  }
+
+  export type TenantUserMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    email?: true
+    passwordHash?: true
+    firstName?: true
+    lastName?: true
+    role?: true
+    isActive?: true
+    failedLogins?: true
+    lockedUntil?: true
+    lastLoginAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantUserMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    email?: true
+    passwordHash?: true
+    firstName?: true
+    lastName?: true
+    role?: true
+    isActive?: true
+    failedLogins?: true
+    lockedUntil?: true
+    lastLoginAt?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TenantUserCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    email?: true
+    passwordHash?: true
+    firstName?: true
+    lastName?: true
+    role?: true
+    isActive?: true
+    failedLogins?: true
+    lockedUntil?: true
+    lastLoginAt?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TenantUserAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TenantUser to aggregate.
+     */
+    where?: TenantUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantUsers to fetch.
+     */
+    orderBy?: TenantUserOrderByWithRelationInput | TenantUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TenantUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TenantUsers
+    **/
+    _count?: true | TenantUserCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TenantUserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TenantUserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TenantUserMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TenantUserMaxAggregateInputType
+  }
+
+  export type GetTenantUserAggregateType<T extends TenantUserAggregateArgs> = {
+        [P in keyof T & keyof AggregateTenantUser]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTenantUser[P]>
+      : GetScalarType<T[P], AggregateTenantUser[P]>
+  }
+
+
+
+
+  export type TenantUserGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TenantUserWhereInput
+    orderBy?: TenantUserOrderByWithAggregationInput | TenantUserOrderByWithAggregationInput[]
+    by: TenantUserScalarFieldEnum[] | TenantUserScalarFieldEnum
+    having?: TenantUserScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TenantUserCountAggregateInputType | true
+    _avg?: TenantUserAvgAggregateInputType
+    _sum?: TenantUserSumAggregateInputType
+    _min?: TenantUserMinAggregateInputType
+    _max?: TenantUserMaxAggregateInputType
+  }
+
+  export type TenantUserGroupByOutputType = {
+    id: string
+    tenantId: string
+    email: string
+    passwordHash: string
+    firstName: string | null
+    lastName: string | null
+    role: $Enums.TenantUserRole
+    isActive: boolean
+    failedLogins: number
+    lockedUntil: Date | null
+    lastLoginAt: Date | null
+    createdAt: Date
+    updatedAt: Date
+    _count: TenantUserCountAggregateOutputType | null
+    _avg: TenantUserAvgAggregateOutputType | null
+    _sum: TenantUserSumAggregateOutputType | null
+    _min: TenantUserMinAggregateOutputType | null
+    _max: TenantUserMaxAggregateOutputType | null
+  }
+
+  type GetTenantUserGroupByPayload<T extends TenantUserGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TenantUserGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TenantUserGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TenantUserGroupByOutputType[P]>
+            : GetScalarType<T[P], TenantUserGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TenantUserSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    email?: boolean
+    passwordHash?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    role?: boolean
+    isActive?: boolean
+    failedLogins?: boolean
+    lockedUntil?: boolean
+    lastLoginAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    sessions?: boolean | TenantUser$sessionsArgs<ExtArgs>
+    passwordResetTokens?: boolean | TenantUser$passwordResetTokensArgs<ExtArgs>
+    _count?: boolean | TenantUserCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantUser"]>
+
+  export type TenantUserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    email?: boolean
+    passwordHash?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    role?: boolean
+    isActive?: boolean
+    failedLogins?: boolean
+    lockedUntil?: boolean
+    lastLoginAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantUser"]>
+
+  export type TenantUserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    email?: boolean
+    passwordHash?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    role?: boolean
+    isActive?: boolean
+    failedLogins?: boolean
+    lockedUntil?: boolean
+    lastLoginAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tenantUser"]>
+
+  export type TenantUserSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    email?: boolean
+    passwordHash?: boolean
+    firstName?: boolean
+    lastName?: boolean
+    role?: boolean
+    isActive?: boolean
+    failedLogins?: boolean
+    lockedUntil?: boolean
+    lastLoginAt?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TenantUserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "email" | "passwordHash" | "firstName" | "lastName" | "role" | "isActive" | "failedLogins" | "lockedUntil" | "lastLoginAt" | "createdAt" | "updatedAt", ExtArgs["result"]["tenantUser"]>
+  export type TenantUserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    sessions?: boolean | TenantUser$sessionsArgs<ExtArgs>
+    passwordResetTokens?: boolean | TenantUser$passwordResetTokensArgs<ExtArgs>
+    _count?: boolean | TenantUserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TenantUserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type TenantUserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $TenantUserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TenantUser"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      sessions: Prisma.$SessionPayload<ExtArgs>[]
+      passwordResetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      email: string
+      passwordHash: string
+      firstName: string | null
+      lastName: string | null
+      role: $Enums.TenantUserRole
+      isActive: boolean
+      failedLogins: number
+      lockedUntil: Date | null
+      lastLoginAt: Date | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["tenantUser"]>
+    composites: {}
+  }
+
+  type TenantUserGetPayload<S extends boolean | null | undefined | TenantUserDefaultArgs> = $Result.GetResult<Prisma.$TenantUserPayload, S>
+
+  type TenantUserCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TenantUserFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TenantUserCountAggregateInputType | true
+    }
+
+  export interface TenantUserDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TenantUser'], meta: { name: 'TenantUser' } }
+    /**
+     * Find zero or one TenantUser that matches the filter.
+     * @param {TenantUserFindUniqueArgs} args - Arguments to find a TenantUser
+     * @example
+     * // Get one TenantUser
+     * const tenantUser = await prisma.tenantUser.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TenantUserFindUniqueArgs>(args: SelectSubset<T, TenantUserFindUniqueArgs<ExtArgs>>): Prisma__TenantUserClient<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TenantUser that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TenantUserFindUniqueOrThrowArgs} args - Arguments to find a TenantUser
+     * @example
+     * // Get one TenantUser
+     * const tenantUser = await prisma.tenantUser.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TenantUserFindUniqueOrThrowArgs>(args: SelectSubset<T, TenantUserFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TenantUserClient<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TenantUser that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantUserFindFirstArgs} args - Arguments to find a TenantUser
+     * @example
+     * // Get one TenantUser
+     * const tenantUser = await prisma.tenantUser.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TenantUserFindFirstArgs>(args?: SelectSubset<T, TenantUserFindFirstArgs<ExtArgs>>): Prisma__TenantUserClient<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TenantUser that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantUserFindFirstOrThrowArgs} args - Arguments to find a TenantUser
+     * @example
+     * // Get one TenantUser
+     * const tenantUser = await prisma.tenantUser.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TenantUserFindFirstOrThrowArgs>(args?: SelectSubset<T, TenantUserFindFirstOrThrowArgs<ExtArgs>>): Prisma__TenantUserClient<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TenantUsers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantUserFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TenantUsers
+     * const tenantUsers = await prisma.tenantUser.findMany()
+     * 
+     * // Get first 10 TenantUsers
+     * const tenantUsers = await prisma.tenantUser.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tenantUserWithIdOnly = await prisma.tenantUser.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TenantUserFindManyArgs>(args?: SelectSubset<T, TenantUserFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TenantUser.
+     * @param {TenantUserCreateArgs} args - Arguments to create a TenantUser.
+     * @example
+     * // Create one TenantUser
+     * const TenantUser = await prisma.tenantUser.create({
+     *   data: {
+     *     // ... data to create a TenantUser
+     *   }
+     * })
+     * 
+     */
+    create<T extends TenantUserCreateArgs>(args: SelectSubset<T, TenantUserCreateArgs<ExtArgs>>): Prisma__TenantUserClient<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TenantUsers.
+     * @param {TenantUserCreateManyArgs} args - Arguments to create many TenantUsers.
+     * @example
+     * // Create many TenantUsers
+     * const tenantUser = await prisma.tenantUser.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TenantUserCreateManyArgs>(args?: SelectSubset<T, TenantUserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TenantUsers and returns the data saved in the database.
+     * @param {TenantUserCreateManyAndReturnArgs} args - Arguments to create many TenantUsers.
+     * @example
+     * // Create many TenantUsers
+     * const tenantUser = await prisma.tenantUser.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TenantUsers and only return the `id`
+     * const tenantUserWithIdOnly = await prisma.tenantUser.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TenantUserCreateManyAndReturnArgs>(args?: SelectSubset<T, TenantUserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TenantUser.
+     * @param {TenantUserDeleteArgs} args - Arguments to delete one TenantUser.
+     * @example
+     * // Delete one TenantUser
+     * const TenantUser = await prisma.tenantUser.delete({
+     *   where: {
+     *     // ... filter to delete one TenantUser
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TenantUserDeleteArgs>(args: SelectSubset<T, TenantUserDeleteArgs<ExtArgs>>): Prisma__TenantUserClient<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TenantUser.
+     * @param {TenantUserUpdateArgs} args - Arguments to update one TenantUser.
+     * @example
+     * // Update one TenantUser
+     * const tenantUser = await prisma.tenantUser.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TenantUserUpdateArgs>(args: SelectSubset<T, TenantUserUpdateArgs<ExtArgs>>): Prisma__TenantUserClient<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TenantUsers.
+     * @param {TenantUserDeleteManyArgs} args - Arguments to filter TenantUsers to delete.
+     * @example
+     * // Delete a few TenantUsers
+     * const { count } = await prisma.tenantUser.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TenantUserDeleteManyArgs>(args?: SelectSubset<T, TenantUserDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TenantUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantUserUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TenantUsers
+     * const tenantUser = await prisma.tenantUser.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TenantUserUpdateManyArgs>(args: SelectSubset<T, TenantUserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TenantUsers and returns the data updated in the database.
+     * @param {TenantUserUpdateManyAndReturnArgs} args - Arguments to update many TenantUsers.
+     * @example
+     * // Update many TenantUsers
+     * const tenantUser = await prisma.tenantUser.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TenantUsers and only return the `id`
+     * const tenantUserWithIdOnly = await prisma.tenantUser.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TenantUserUpdateManyAndReturnArgs>(args: SelectSubset<T, TenantUserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TenantUser.
+     * @param {TenantUserUpsertArgs} args - Arguments to update or create a TenantUser.
+     * @example
+     * // Update or create a TenantUser
+     * const tenantUser = await prisma.tenantUser.upsert({
+     *   create: {
+     *     // ... data to create a TenantUser
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TenantUser we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TenantUserUpsertArgs>(args: SelectSubset<T, TenantUserUpsertArgs<ExtArgs>>): Prisma__TenantUserClient<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TenantUsers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantUserCountArgs} args - Arguments to filter TenantUsers to count.
+     * @example
+     * // Count the number of TenantUsers
+     * const count = await prisma.tenantUser.count({
+     *   where: {
+     *     // ... the filter for the TenantUsers we want to count
+     *   }
+     * })
+    **/
+    count<T extends TenantUserCountArgs>(
+      args?: Subset<T, TenantUserCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TenantUserCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TenantUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantUserAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TenantUserAggregateArgs>(args: Subset<T, TenantUserAggregateArgs>): Prisma.PrismaPromise<GetTenantUserAggregateType<T>>
+
+    /**
+     * Group by TenantUser.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TenantUserGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TenantUserGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TenantUserGroupByArgs['orderBy'] }
+        : { orderBy?: TenantUserGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TenantUserGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTenantUserGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TenantUser model
+   */
+  readonly fields: TenantUserFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TenantUser.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TenantUserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sessions<T extends TenantUser$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, TenantUser$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    passwordResetTokens<T extends TenantUser$passwordResetTokensArgs<ExtArgs> = {}>(args?: Subset<T, TenantUser$passwordResetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TenantUser model
+   */
+  interface TenantUserFieldRefs {
+    readonly id: FieldRef<"TenantUser", 'String'>
+    readonly tenantId: FieldRef<"TenantUser", 'String'>
+    readonly email: FieldRef<"TenantUser", 'String'>
+    readonly passwordHash: FieldRef<"TenantUser", 'String'>
+    readonly firstName: FieldRef<"TenantUser", 'String'>
+    readonly lastName: FieldRef<"TenantUser", 'String'>
+    readonly role: FieldRef<"TenantUser", 'TenantUserRole'>
+    readonly isActive: FieldRef<"TenantUser", 'Boolean'>
+    readonly failedLogins: FieldRef<"TenantUser", 'Int'>
+    readonly lockedUntil: FieldRef<"TenantUser", 'DateTime'>
+    readonly lastLoginAt: FieldRef<"TenantUser", 'DateTime'>
+    readonly createdAt: FieldRef<"TenantUser", 'DateTime'>
+    readonly updatedAt: FieldRef<"TenantUser", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TenantUser findUnique
+   */
+  export type TenantUserFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantUser to fetch.
+     */
+    where: TenantUserWhereUniqueInput
+  }
+
+  /**
+   * TenantUser findUniqueOrThrow
+   */
+  export type TenantUserFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantUser to fetch.
+     */
+    where: TenantUserWhereUniqueInput
+  }
+
+  /**
+   * TenantUser findFirst
+   */
+  export type TenantUserFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantUser to fetch.
+     */
+    where?: TenantUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantUsers to fetch.
+     */
+    orderBy?: TenantUserOrderByWithRelationInput | TenantUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TenantUsers.
+     */
+    cursor?: TenantUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantUsers.
+     */
+    distinct?: TenantUserScalarFieldEnum | TenantUserScalarFieldEnum[]
+  }
+
+  /**
+   * TenantUser findFirstOrThrow
+   */
+  export type TenantUserFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantUser to fetch.
+     */
+    where?: TenantUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantUsers to fetch.
+     */
+    orderBy?: TenantUserOrderByWithRelationInput | TenantUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TenantUsers.
+     */
+    cursor?: TenantUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantUsers.
+     */
+    distinct?: TenantUserScalarFieldEnum | TenantUserScalarFieldEnum[]
+  }
+
+  /**
+   * TenantUser findMany
+   */
+  export type TenantUserFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserInclude<ExtArgs> | null
+    /**
+     * Filter, which TenantUsers to fetch.
+     */
+    where?: TenantUserWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TenantUsers to fetch.
+     */
+    orderBy?: TenantUserOrderByWithRelationInput | TenantUserOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TenantUsers.
+     */
+    cursor?: TenantUserWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TenantUsers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TenantUsers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TenantUsers.
+     */
+    distinct?: TenantUserScalarFieldEnum | TenantUserScalarFieldEnum[]
+  }
+
+  /**
+   * TenantUser create
+   */
+  export type TenantUserCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TenantUser.
+     */
+    data: XOR<TenantUserCreateInput, TenantUserUncheckedCreateInput>
+  }
+
+  /**
+   * TenantUser createMany
+   */
+  export type TenantUserCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TenantUsers.
+     */
+    data: TenantUserCreateManyInput | TenantUserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TenantUser createManyAndReturn
+   */
+  export type TenantUserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * The data used to create many TenantUsers.
+     */
+    data: TenantUserCreateManyInput | TenantUserCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TenantUser update
+   */
+  export type TenantUserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TenantUser.
+     */
+    data: XOR<TenantUserUpdateInput, TenantUserUncheckedUpdateInput>
+    /**
+     * Choose, which TenantUser to update.
+     */
+    where: TenantUserWhereUniqueInput
+  }
+
+  /**
+   * TenantUser updateMany
+   */
+  export type TenantUserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TenantUsers.
+     */
+    data: XOR<TenantUserUpdateManyMutationInput, TenantUserUncheckedUpdateManyInput>
+    /**
+     * Filter which TenantUsers to update
+     */
+    where?: TenantUserWhereInput
+    /**
+     * Limit how many TenantUsers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TenantUser updateManyAndReturn
+   */
+  export type TenantUserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * The data used to update TenantUsers.
+     */
+    data: XOR<TenantUserUpdateManyMutationInput, TenantUserUncheckedUpdateManyInput>
+    /**
+     * Filter which TenantUsers to update
+     */
+    where?: TenantUserWhereInput
+    /**
+     * Limit how many TenantUsers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TenantUser upsert
+   */
+  export type TenantUserUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TenantUser to update in case it exists.
+     */
+    where: TenantUserWhereUniqueInput
+    /**
+     * In case the TenantUser found by the `where` argument doesn't exist, create a new TenantUser with this data.
+     */
+    create: XOR<TenantUserCreateInput, TenantUserUncheckedCreateInput>
+    /**
+     * In case the TenantUser was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TenantUserUpdateInput, TenantUserUncheckedUpdateInput>
+  }
+
+  /**
+   * TenantUser delete
+   */
+  export type TenantUserDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserInclude<ExtArgs> | null
+    /**
+     * Filter which TenantUser to delete.
+     */
+    where: TenantUserWhereUniqueInput
+  }
+
+  /**
+   * TenantUser deleteMany
+   */
+  export type TenantUserDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TenantUsers to delete
+     */
+    where?: TenantUserWhereInput
+    /**
+     * Limit how many TenantUsers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TenantUser.sessions
+   */
+  export type TenantUser$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    cursor?: SessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * TenantUser.passwordResetTokens
+   */
+  export type TenantUser$passwordResetTokensArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenInclude<ExtArgs> | null
+    where?: PasswordResetTokenWhereInput
+    orderBy?: PasswordResetTokenOrderByWithRelationInput | PasswordResetTokenOrderByWithRelationInput[]
+    cursor?: PasswordResetTokenWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: PasswordResetTokenScalarFieldEnum | PasswordResetTokenScalarFieldEnum[]
+  }
+
+  /**
+   * TenantUser without action
+   */
+  export type TenantUserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TenantUser
+     */
+    select?: TenantUserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TenantUser
+     */
+    omit?: TenantUserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TenantUserInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Session
+   */
+
+  export type AggregateSession = {
+    _count: SessionCountAggregateOutputType | null
+    _min: SessionMinAggregateOutputType | null
+    _max: SessionMaxAggregateOutputType | null
+  }
+
+  export type SessionMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    refreshTokenHash: string | null
+    device: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    createdAt: Date | null
+    lastUsedAt: Date | null
+    expiresAt: Date | null
+    revokedAt: Date | null
+    replacedBy: string | null
+  }
+
+  export type SessionMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    refreshTokenHash: string | null
+    device: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    createdAt: Date | null
+    lastUsedAt: Date | null
+    expiresAt: Date | null
+    revokedAt: Date | null
+    replacedBy: string | null
+  }
+
+  export type SessionCountAggregateOutputType = {
+    id: number
+    userId: number
+    refreshTokenHash: number
+    device: number
+    ipAddress: number
+    userAgent: number
+    createdAt: number
+    lastUsedAt: number
+    expiresAt: number
+    revokedAt: number
+    replacedBy: number
+    _all: number
+  }
+
+
+  export type SessionMinAggregateInputType = {
+    id?: true
+    userId?: true
+    refreshTokenHash?: true
+    device?: true
+    ipAddress?: true
+    userAgent?: true
+    createdAt?: true
+    lastUsedAt?: true
+    expiresAt?: true
+    revokedAt?: true
+    replacedBy?: true
+  }
+
+  export type SessionMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    refreshTokenHash?: true
+    device?: true
+    ipAddress?: true
+    userAgent?: true
+    createdAt?: true
+    lastUsedAt?: true
+    expiresAt?: true
+    revokedAt?: true
+    replacedBy?: true
+  }
+
+  export type SessionCountAggregateInputType = {
+    id?: true
+    userId?: true
+    refreshTokenHash?: true
+    device?: true
+    ipAddress?: true
+    userAgent?: true
+    createdAt?: true
+    lastUsedAt?: true
+    expiresAt?: true
+    revokedAt?: true
+    replacedBy?: true
+    _all?: true
+  }
+
+  export type SessionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Session to aggregate.
+     */
+    where?: SessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sessions to fetch.
+     */
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Sessions
+    **/
+    _count?: true | SessionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SessionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SessionMaxAggregateInputType
+  }
+
+  export type GetSessionAggregateType<T extends SessionAggregateArgs> = {
+        [P in keyof T & keyof AggregateSession]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSession[P]>
+      : GetScalarType<T[P], AggregateSession[P]>
+  }
+
+
+
+
+  export type SessionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SessionWhereInput
+    orderBy?: SessionOrderByWithAggregationInput | SessionOrderByWithAggregationInput[]
+    by: SessionScalarFieldEnum[] | SessionScalarFieldEnum
+    having?: SessionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SessionCountAggregateInputType | true
+    _min?: SessionMinAggregateInputType
+    _max?: SessionMaxAggregateInputType
+  }
+
+  export type SessionGroupByOutputType = {
+    id: string
+    userId: string
+    refreshTokenHash: string
+    device: string | null
+    ipAddress: string | null
+    userAgent: string | null
+    createdAt: Date
+    lastUsedAt: Date
+    expiresAt: Date
+    revokedAt: Date | null
+    replacedBy: string | null
+    _count: SessionCountAggregateOutputType | null
+    _min: SessionMinAggregateOutputType | null
+    _max: SessionMaxAggregateOutputType | null
+  }
+
+  type GetSessionGroupByPayload<T extends SessionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SessionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SessionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SessionGroupByOutputType[P]>
+            : GetScalarType<T[P], SessionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    refreshTokenHash?: boolean
+    device?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    lastUsedAt?: boolean
+    expiresAt?: boolean
+    revokedAt?: boolean
+    replacedBy?: boolean
+    user?: boolean | TenantUserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session"]>
+
+  export type SessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    refreshTokenHash?: boolean
+    device?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    lastUsedAt?: boolean
+    expiresAt?: boolean
+    revokedAt?: boolean
+    replacedBy?: boolean
+    user?: boolean | TenantUserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session"]>
+
+  export type SessionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    refreshTokenHash?: boolean
+    device?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    lastUsedAt?: boolean
+    expiresAt?: boolean
+    revokedAt?: boolean
+    replacedBy?: boolean
+    user?: boolean | TenantUserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["session"]>
+
+  export type SessionSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    refreshTokenHash?: boolean
+    device?: boolean
+    ipAddress?: boolean
+    userAgent?: boolean
+    createdAt?: boolean
+    lastUsedAt?: boolean
+    expiresAt?: boolean
+    revokedAt?: boolean
+    replacedBy?: boolean
+  }
+
+  export type SessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "refreshTokenHash" | "device" | "ipAddress" | "userAgent" | "createdAt" | "lastUsedAt" | "expiresAt" | "revokedAt" | "replacedBy", ExtArgs["result"]["session"]>
+  export type SessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | TenantUserDefaultArgs<ExtArgs>
+  }
+  export type SessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | TenantUserDefaultArgs<ExtArgs>
+  }
+  export type SessionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | TenantUserDefaultArgs<ExtArgs>
+  }
+
+  export type $SessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Session"
+    objects: {
+      user: Prisma.$TenantUserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      refreshTokenHash: string
+      device: string | null
+      ipAddress: string | null
+      userAgent: string | null
+      createdAt: Date
+      lastUsedAt: Date
+      expiresAt: Date
+      revokedAt: Date | null
+      replacedBy: string | null
+    }, ExtArgs["result"]["session"]>
+    composites: {}
+  }
+
+  type SessionGetPayload<S extends boolean | null | undefined | SessionDefaultArgs> = $Result.GetResult<Prisma.$SessionPayload, S>
+
+  type SessionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SessionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SessionCountAggregateInputType | true
+    }
+
+  export interface SessionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Session'], meta: { name: 'Session' } }
+    /**
+     * Find zero or one Session that matches the filter.
+     * @param {SessionFindUniqueArgs} args - Arguments to find a Session
+     * @example
+     * // Get one Session
+     * const session = await prisma.session.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SessionFindUniqueArgs>(args: SelectSubset<T, SessionFindUniqueArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Session that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SessionFindUniqueOrThrowArgs} args - Arguments to find a Session
+     * @example
+     * // Get one Session
+     * const session = await prisma.session.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SessionFindUniqueOrThrowArgs>(args: SelectSubset<T, SessionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Session that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionFindFirstArgs} args - Arguments to find a Session
+     * @example
+     * // Get one Session
+     * const session = await prisma.session.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SessionFindFirstArgs>(args?: SelectSubset<T, SessionFindFirstArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Session that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionFindFirstOrThrowArgs} args - Arguments to find a Session
+     * @example
+     * // Get one Session
+     * const session = await prisma.session.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SessionFindFirstOrThrowArgs>(args?: SelectSubset<T, SessionFindFirstOrThrowArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Sessions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Sessions
+     * const sessions = await prisma.session.findMany()
+     * 
+     * // Get first 10 Sessions
+     * const sessions = await prisma.session.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sessionWithIdOnly = await prisma.session.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SessionFindManyArgs>(args?: SelectSubset<T, SessionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Session.
+     * @param {SessionCreateArgs} args - Arguments to create a Session.
+     * @example
+     * // Create one Session
+     * const Session = await prisma.session.create({
+     *   data: {
+     *     // ... data to create a Session
+     *   }
+     * })
+     * 
+     */
+    create<T extends SessionCreateArgs>(args: SelectSubset<T, SessionCreateArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Sessions.
+     * @param {SessionCreateManyArgs} args - Arguments to create many Sessions.
+     * @example
+     * // Create many Sessions
+     * const session = await prisma.session.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SessionCreateManyArgs>(args?: SelectSubset<T, SessionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Sessions and returns the data saved in the database.
+     * @param {SessionCreateManyAndReturnArgs} args - Arguments to create many Sessions.
+     * @example
+     * // Create many Sessions
+     * const session = await prisma.session.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Sessions and only return the `id`
+     * const sessionWithIdOnly = await prisma.session.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SessionCreateManyAndReturnArgs>(args?: SelectSubset<T, SessionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Session.
+     * @param {SessionDeleteArgs} args - Arguments to delete one Session.
+     * @example
+     * // Delete one Session
+     * const Session = await prisma.session.delete({
+     *   where: {
+     *     // ... filter to delete one Session
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SessionDeleteArgs>(args: SelectSubset<T, SessionDeleteArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Session.
+     * @param {SessionUpdateArgs} args - Arguments to update one Session.
+     * @example
+     * // Update one Session
+     * const session = await prisma.session.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SessionUpdateArgs>(args: SelectSubset<T, SessionUpdateArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Sessions.
+     * @param {SessionDeleteManyArgs} args - Arguments to filter Sessions to delete.
+     * @example
+     * // Delete a few Sessions
+     * const { count } = await prisma.session.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SessionDeleteManyArgs>(args?: SelectSubset<T, SessionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Sessions
+     * const session = await prisma.session.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SessionUpdateManyArgs>(args: SelectSubset<T, SessionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sessions and returns the data updated in the database.
+     * @param {SessionUpdateManyAndReturnArgs} args - Arguments to update many Sessions.
+     * @example
+     * // Update many Sessions
+     * const session = await prisma.session.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Sessions and only return the `id`
+     * const sessionWithIdOnly = await prisma.session.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SessionUpdateManyAndReturnArgs>(args: SelectSubset<T, SessionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Session.
+     * @param {SessionUpsertArgs} args - Arguments to update or create a Session.
+     * @example
+     * // Update or create a Session
+     * const session = await prisma.session.upsert({
+     *   create: {
+     *     // ... data to create a Session
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Session we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SessionUpsertArgs>(args: SelectSubset<T, SessionUpsertArgs<ExtArgs>>): Prisma__SessionClient<$Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Sessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionCountArgs} args - Arguments to filter Sessions to count.
+     * @example
+     * // Count the number of Sessions
+     * const count = await prisma.session.count({
+     *   where: {
+     *     // ... the filter for the Sessions we want to count
+     *   }
+     * })
+    **/
+    count<T extends SessionCountArgs>(
+      args?: Subset<T, SessionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SessionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Session.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SessionAggregateArgs>(args: Subset<T, SessionAggregateArgs>): Prisma.PrismaPromise<GetSessionAggregateType<T>>
+
+    /**
+     * Group by Session.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SessionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SessionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SessionGroupByArgs['orderBy'] }
+        : { orderBy?: SessionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SessionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSessionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Session model
+   */
+  readonly fields: SessionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Session.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends TenantUserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantUserDefaultArgs<ExtArgs>>): Prisma__TenantUserClient<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Session model
+   */
+  interface SessionFieldRefs {
+    readonly id: FieldRef<"Session", 'String'>
+    readonly userId: FieldRef<"Session", 'String'>
+    readonly refreshTokenHash: FieldRef<"Session", 'String'>
+    readonly device: FieldRef<"Session", 'String'>
+    readonly ipAddress: FieldRef<"Session", 'String'>
+    readonly userAgent: FieldRef<"Session", 'String'>
+    readonly createdAt: FieldRef<"Session", 'DateTime'>
+    readonly lastUsedAt: FieldRef<"Session", 'DateTime'>
+    readonly expiresAt: FieldRef<"Session", 'DateTime'>
+    readonly revokedAt: FieldRef<"Session", 'DateTime'>
+    readonly replacedBy: FieldRef<"Session", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Session findUnique
+   */
+  export type SessionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Session to fetch.
+     */
+    where: SessionWhereUniqueInput
+  }
+
+  /**
+   * Session findUniqueOrThrow
+   */
+  export type SessionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Session to fetch.
+     */
+    where: SessionWhereUniqueInput
+  }
+
+  /**
+   * Session findFirst
+   */
+  export type SessionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Session to fetch.
+     */
+    where?: SessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sessions to fetch.
+     */
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sessions.
+     */
+    cursor?: SessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sessions.
+     */
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * Session findFirstOrThrow
+   */
+  export type SessionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Session to fetch.
+     */
+    where?: SessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sessions to fetch.
+     */
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sessions.
+     */
+    cursor?: SessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sessions.
+     */
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * Session findMany
+   */
+  export type SessionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter, which Sessions to fetch.
+     */
+    where?: SessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sessions to fetch.
+     */
+    orderBy?: SessionOrderByWithRelationInput | SessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Sessions.
+     */
+    cursor?: SessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sessions.
+     */
+    distinct?: SessionScalarFieldEnum | SessionScalarFieldEnum[]
+  }
+
+  /**
+   * Session create
+   */
+  export type SessionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Session.
+     */
+    data: XOR<SessionCreateInput, SessionUncheckedCreateInput>
+  }
+
+  /**
+   * Session createMany
+   */
+  export type SessionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Sessions.
+     */
+    data: SessionCreateManyInput | SessionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Session createManyAndReturn
+   */
+  export type SessionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Sessions.
+     */
+    data: SessionCreateManyInput | SessionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Session update
+   */
+  export type SessionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Session.
+     */
+    data: XOR<SessionUpdateInput, SessionUncheckedUpdateInput>
+    /**
+     * Choose, which Session to update.
+     */
+    where: SessionWhereUniqueInput
+  }
+
+  /**
+   * Session updateMany
+   */
+  export type SessionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Sessions.
+     */
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyInput>
+    /**
+     * Filter which Sessions to update
+     */
+    where?: SessionWhereInput
+    /**
+     * Limit how many Sessions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Session updateManyAndReturn
+   */
+  export type SessionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * The data used to update Sessions.
+     */
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyInput>
+    /**
+     * Filter which Sessions to update
+     */
+    where?: SessionWhereInput
+    /**
+     * Limit how many Sessions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Session upsert
+   */
+  export type SessionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Session to update in case it exists.
+     */
+    where: SessionWhereUniqueInput
+    /**
+     * In case the Session found by the `where` argument doesn't exist, create a new Session with this data.
+     */
+    create: XOR<SessionCreateInput, SessionUncheckedCreateInput>
+    /**
+     * In case the Session was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SessionUpdateInput, SessionUncheckedUpdateInput>
+  }
+
+  /**
+   * Session delete
+   */
+  export type SessionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+    /**
+     * Filter which Session to delete.
+     */
+    where: SessionWhereUniqueInput
+  }
+
+  /**
+   * Session deleteMany
+   */
+  export type SessionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Sessions to delete
+     */
+    where?: SessionWhereInput
+    /**
+     * Limit how many Sessions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Session without action
+   */
+  export type SessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Session
+     */
+    select?: SessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Session
+     */
+    omit?: SessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SessionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Invitation
+   */
+
+  export type AggregateInvitation = {
+    _count: InvitationCountAggregateOutputType | null
+    _min: InvitationMinAggregateOutputType | null
+    _max: InvitationMaxAggregateOutputType | null
+  }
+
+  export type InvitationMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    email: string | null
+    role: $Enums.TenantUserRole | null
+    tokenHash: string | null
+    expiresAt: Date | null
+    acceptedAt: Date | null
+    createdBy: string | null
+    createdAt: Date | null
+  }
+
+  export type InvitationMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    email: string | null
+    role: $Enums.TenantUserRole | null
+    tokenHash: string | null
+    expiresAt: Date | null
+    acceptedAt: Date | null
+    createdBy: string | null
+    createdAt: Date | null
+  }
+
+  export type InvitationCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    email: number
+    role: number
+    tokenHash: number
+    expiresAt: number
+    acceptedAt: number
+    createdBy: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type InvitationMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    email?: true
+    role?: true
+    tokenHash?: true
+    expiresAt?: true
+    acceptedAt?: true
+    createdBy?: true
+    createdAt?: true
+  }
+
+  export type InvitationMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    email?: true
+    role?: true
+    tokenHash?: true
+    expiresAt?: true
+    acceptedAt?: true
+    createdBy?: true
+    createdAt?: true
+  }
+
+  export type InvitationCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    email?: true
+    role?: true
+    tokenHash?: true
+    expiresAt?: true
+    acceptedAt?: true
+    createdBy?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type InvitationAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invitation to aggregate.
+     */
+    where?: InvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invitations to fetch.
+     */
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: InvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Invitations
+    **/
+    _count?: true | InvitationCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: InvitationMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: InvitationMaxAggregateInputType
+  }
+
+  export type GetInvitationAggregateType<T extends InvitationAggregateArgs> = {
+        [P in keyof T & keyof AggregateInvitation]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateInvitation[P]>
+      : GetScalarType<T[P], AggregateInvitation[P]>
+  }
+
+
+
+
+  export type InvitationGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: InvitationWhereInput
+    orderBy?: InvitationOrderByWithAggregationInput | InvitationOrderByWithAggregationInput[]
+    by: InvitationScalarFieldEnum[] | InvitationScalarFieldEnum
+    having?: InvitationScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: InvitationCountAggregateInputType | true
+    _min?: InvitationMinAggregateInputType
+    _max?: InvitationMaxAggregateInputType
+  }
+
+  export type InvitationGroupByOutputType = {
+    id: string
+    tenantId: string
+    email: string
+    role: $Enums.TenantUserRole
+    tokenHash: string
+    expiresAt: Date
+    acceptedAt: Date | null
+    createdBy: string
+    createdAt: Date
+    _count: InvitationCountAggregateOutputType | null
+    _min: InvitationMinAggregateOutputType | null
+    _max: InvitationMaxAggregateOutputType | null
+  }
+
+  type GetInvitationGroupByPayload<T extends InvitationGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<InvitationGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof InvitationGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], InvitationGroupByOutputType[P]>
+            : GetScalarType<T[P], InvitationGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type InvitationSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    email?: boolean
+    role?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    acceptedAt?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invitation"]>
+
+  export type InvitationSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    email?: boolean
+    role?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    acceptedAt?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invitation"]>
+
+  export type InvitationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    email?: boolean
+    role?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    acceptedAt?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["invitation"]>
+
+  export type InvitationSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    email?: boolean
+    role?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    acceptedAt?: boolean
+    createdBy?: boolean
+    createdAt?: boolean
+  }
+
+  export type InvitationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "email" | "role" | "tokenHash" | "expiresAt" | "acceptedAt" | "createdBy" | "createdAt", ExtArgs["result"]["invitation"]>
+  export type InvitationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type InvitationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type InvitationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $InvitationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Invitation"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      email: string
+      role: $Enums.TenantUserRole
+      tokenHash: string
+      expiresAt: Date
+      acceptedAt: Date | null
+      createdBy: string
+      createdAt: Date
+    }, ExtArgs["result"]["invitation"]>
+    composites: {}
+  }
+
+  type InvitationGetPayload<S extends boolean | null | undefined | InvitationDefaultArgs> = $Result.GetResult<Prisma.$InvitationPayload, S>
+
+  type InvitationCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<InvitationFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: InvitationCountAggregateInputType | true
+    }
+
+  export interface InvitationDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Invitation'], meta: { name: 'Invitation' } }
+    /**
+     * Find zero or one Invitation that matches the filter.
+     * @param {InvitationFindUniqueArgs} args - Arguments to find a Invitation
+     * @example
+     * // Get one Invitation
+     * const invitation = await prisma.invitation.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends InvitationFindUniqueArgs>(args: SelectSubset<T, InvitationFindUniqueArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Invitation that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {InvitationFindUniqueOrThrowArgs} args - Arguments to find a Invitation
+     * @example
+     * // Get one Invitation
+     * const invitation = await prisma.invitation.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends InvitationFindUniqueOrThrowArgs>(args: SelectSubset<T, InvitationFindUniqueOrThrowArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invitation that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationFindFirstArgs} args - Arguments to find a Invitation
+     * @example
+     * // Get one Invitation
+     * const invitation = await prisma.invitation.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends InvitationFindFirstArgs>(args?: SelectSubset<T, InvitationFindFirstArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Invitation that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationFindFirstOrThrowArgs} args - Arguments to find a Invitation
+     * @example
+     * // Get one Invitation
+     * const invitation = await prisma.invitation.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends InvitationFindFirstOrThrowArgs>(args?: SelectSubset<T, InvitationFindFirstOrThrowArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Invitations that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Invitations
+     * const invitations = await prisma.invitation.findMany()
+     * 
+     * // Get first 10 Invitations
+     * const invitations = await prisma.invitation.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const invitationWithIdOnly = await prisma.invitation.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends InvitationFindManyArgs>(args?: SelectSubset<T, InvitationFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Invitation.
+     * @param {InvitationCreateArgs} args - Arguments to create a Invitation.
+     * @example
+     * // Create one Invitation
+     * const Invitation = await prisma.invitation.create({
+     *   data: {
+     *     // ... data to create a Invitation
+     *   }
+     * })
+     * 
+     */
+    create<T extends InvitationCreateArgs>(args: SelectSubset<T, InvitationCreateArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Invitations.
+     * @param {InvitationCreateManyArgs} args - Arguments to create many Invitations.
+     * @example
+     * // Create many Invitations
+     * const invitation = await prisma.invitation.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends InvitationCreateManyArgs>(args?: SelectSubset<T, InvitationCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Invitations and returns the data saved in the database.
+     * @param {InvitationCreateManyAndReturnArgs} args - Arguments to create many Invitations.
+     * @example
+     * // Create many Invitations
+     * const invitation = await prisma.invitation.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Invitations and only return the `id`
+     * const invitationWithIdOnly = await prisma.invitation.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends InvitationCreateManyAndReturnArgs>(args?: SelectSubset<T, InvitationCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Invitation.
+     * @param {InvitationDeleteArgs} args - Arguments to delete one Invitation.
+     * @example
+     * // Delete one Invitation
+     * const Invitation = await prisma.invitation.delete({
+     *   where: {
+     *     // ... filter to delete one Invitation
+     *   }
+     * })
+     * 
+     */
+    delete<T extends InvitationDeleteArgs>(args: SelectSubset<T, InvitationDeleteArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Invitation.
+     * @param {InvitationUpdateArgs} args - Arguments to update one Invitation.
+     * @example
+     * // Update one Invitation
+     * const invitation = await prisma.invitation.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends InvitationUpdateArgs>(args: SelectSubset<T, InvitationUpdateArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Invitations.
+     * @param {InvitationDeleteManyArgs} args - Arguments to filter Invitations to delete.
+     * @example
+     * // Delete a few Invitations
+     * const { count } = await prisma.invitation.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends InvitationDeleteManyArgs>(args?: SelectSubset<T, InvitationDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Invitations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Invitations
+     * const invitation = await prisma.invitation.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends InvitationUpdateManyArgs>(args: SelectSubset<T, InvitationUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Invitations and returns the data updated in the database.
+     * @param {InvitationUpdateManyAndReturnArgs} args - Arguments to update many Invitations.
+     * @example
+     * // Update many Invitations
+     * const invitation = await prisma.invitation.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Invitations and only return the `id`
+     * const invitationWithIdOnly = await prisma.invitation.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends InvitationUpdateManyAndReturnArgs>(args: SelectSubset<T, InvitationUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Invitation.
+     * @param {InvitationUpsertArgs} args - Arguments to update or create a Invitation.
+     * @example
+     * // Update or create a Invitation
+     * const invitation = await prisma.invitation.upsert({
+     *   create: {
+     *     // ... data to create a Invitation
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Invitation we want to update
+     *   }
+     * })
+     */
+    upsert<T extends InvitationUpsertArgs>(args: SelectSubset<T, InvitationUpsertArgs<ExtArgs>>): Prisma__InvitationClient<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Invitations.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationCountArgs} args - Arguments to filter Invitations to count.
+     * @example
+     * // Count the number of Invitations
+     * const count = await prisma.invitation.count({
+     *   where: {
+     *     // ... the filter for the Invitations we want to count
+     *   }
+     * })
+    **/
+    count<T extends InvitationCountArgs>(
+      args?: Subset<T, InvitationCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], InvitationCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Invitation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends InvitationAggregateArgs>(args: Subset<T, InvitationAggregateArgs>): Prisma.PrismaPromise<GetInvitationAggregateType<T>>
+
+    /**
+     * Group by Invitation.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {InvitationGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends InvitationGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: InvitationGroupByArgs['orderBy'] }
+        : { orderBy?: InvitationGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, InvitationGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetInvitationGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Invitation model
+   */
+  readonly fields: InvitationFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Invitation.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__InvitationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Invitation model
+   */
+  interface InvitationFieldRefs {
+    readonly id: FieldRef<"Invitation", 'String'>
+    readonly tenantId: FieldRef<"Invitation", 'String'>
+    readonly email: FieldRef<"Invitation", 'String'>
+    readonly role: FieldRef<"Invitation", 'TenantUserRole'>
+    readonly tokenHash: FieldRef<"Invitation", 'String'>
+    readonly expiresAt: FieldRef<"Invitation", 'DateTime'>
+    readonly acceptedAt: FieldRef<"Invitation", 'DateTime'>
+    readonly createdBy: FieldRef<"Invitation", 'String'>
+    readonly createdAt: FieldRef<"Invitation", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Invitation findUnique
+   */
+  export type InvitationFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitation to fetch.
+     */
+    where: InvitationWhereUniqueInput
+  }
+
+  /**
+   * Invitation findUniqueOrThrow
+   */
+  export type InvitationFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitation to fetch.
+     */
+    where: InvitationWhereUniqueInput
+  }
+
+  /**
+   * Invitation findFirst
+   */
+  export type InvitationFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitation to fetch.
+     */
+    where?: InvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invitations to fetch.
+     */
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invitations.
+     */
+    cursor?: InvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invitations.
+     */
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * Invitation findFirstOrThrow
+   */
+  export type InvitationFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitation to fetch.
+     */
+    where?: InvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invitations to fetch.
+     */
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Invitations.
+     */
+    cursor?: InvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invitations.
+     */
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * Invitation findMany
+   */
+  export type InvitationFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter, which Invitations to fetch.
+     */
+    where?: InvitationWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Invitations to fetch.
+     */
+    orderBy?: InvitationOrderByWithRelationInput | InvitationOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Invitations.
+     */
+    cursor?: InvitationWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Invitations from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Invitations.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Invitations.
+     */
+    distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * Invitation create
+   */
+  export type InvitationCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Invitation.
+     */
+    data: XOR<InvitationCreateInput, InvitationUncheckedCreateInput>
+  }
+
+  /**
+   * Invitation createMany
+   */
+  export type InvitationCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Invitations.
+     */
+    data: InvitationCreateManyInput | InvitationCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Invitation createManyAndReturn
+   */
+  export type InvitationCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * The data used to create many Invitations.
+     */
+    data: InvitationCreateManyInput | InvitationCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Invitation update
+   */
+  export type InvitationUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Invitation.
+     */
+    data: XOR<InvitationUpdateInput, InvitationUncheckedUpdateInput>
+    /**
+     * Choose, which Invitation to update.
+     */
+    where: InvitationWhereUniqueInput
+  }
+
+  /**
+   * Invitation updateMany
+   */
+  export type InvitationUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Invitations.
+     */
+    data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyInput>
+    /**
+     * Filter which Invitations to update
+     */
+    where?: InvitationWhereInput
+    /**
+     * Limit how many Invitations to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invitation updateManyAndReturn
+   */
+  export type InvitationUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * The data used to update Invitations.
+     */
+    data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyInput>
+    /**
+     * Filter which Invitations to update
+     */
+    where?: InvitationWhereInput
+    /**
+     * Limit how many Invitations to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Invitation upsert
+   */
+  export type InvitationUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Invitation to update in case it exists.
+     */
+    where: InvitationWhereUniqueInput
+    /**
+     * In case the Invitation found by the `where` argument doesn't exist, create a new Invitation with this data.
+     */
+    create: XOR<InvitationCreateInput, InvitationUncheckedCreateInput>
+    /**
+     * In case the Invitation was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<InvitationUpdateInput, InvitationUncheckedUpdateInput>
+  }
+
+  /**
+   * Invitation delete
+   */
+  export type InvitationDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+    /**
+     * Filter which Invitation to delete.
+     */
+    where: InvitationWhereUniqueInput
+  }
+
+  /**
+   * Invitation deleteMany
+   */
+  export type InvitationDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Invitations to delete
+     */
+    where?: InvitationWhereInput
+    /**
+     * Limit how many Invitations to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Invitation without action
+   */
+  export type InvitationDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Invitation
+     */
+    select?: InvitationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Invitation
+     */
+    omit?: InvitationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: InvitationInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model PasswordResetToken
+   */
+
+  export type AggregatePasswordResetToken = {
+    _count: PasswordResetTokenCountAggregateOutputType | null
+    _min: PasswordResetTokenMinAggregateOutputType | null
+    _max: PasswordResetTokenMaxAggregateOutputType | null
+  }
+
+  export type PasswordResetTokenMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    tokenHash: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type PasswordResetTokenMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    tokenHash: string | null
+    expiresAt: Date | null
+    usedAt: Date | null
+    createdAt: Date | null
+  }
+
+  export type PasswordResetTokenCountAggregateOutputType = {
+    id: number
+    userId: number
+    tokenHash: number
+    expiresAt: number
+    usedAt: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type PasswordResetTokenMinAggregateInputType = {
+    id?: true
+    userId?: true
+    tokenHash?: true
+    expiresAt?: true
+    usedAt?: true
+    createdAt?: true
+  }
+
+  export type PasswordResetTokenMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    tokenHash?: true
+    expiresAt?: true
+    usedAt?: true
+    createdAt?: true
+  }
+
+  export type PasswordResetTokenCountAggregateInputType = {
+    id?: true
+    userId?: true
+    tokenHash?: true
+    expiresAt?: true
+    usedAt?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type PasswordResetTokenAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PasswordResetToken to aggregate.
+     */
+    where?: PasswordResetTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PasswordResetTokens to fetch.
+     */
+    orderBy?: PasswordResetTokenOrderByWithRelationInput | PasswordResetTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: PasswordResetTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PasswordResetTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PasswordResetTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned PasswordResetTokens
+    **/
+    _count?: true | PasswordResetTokenCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: PasswordResetTokenMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: PasswordResetTokenMaxAggregateInputType
+  }
+
+  export type GetPasswordResetTokenAggregateType<T extends PasswordResetTokenAggregateArgs> = {
+        [P in keyof T & keyof AggregatePasswordResetToken]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregatePasswordResetToken[P]>
+      : GetScalarType<T[P], AggregatePasswordResetToken[P]>
+  }
+
+
+
+
+  export type PasswordResetTokenGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: PasswordResetTokenWhereInput
+    orderBy?: PasswordResetTokenOrderByWithAggregationInput | PasswordResetTokenOrderByWithAggregationInput[]
+    by: PasswordResetTokenScalarFieldEnum[] | PasswordResetTokenScalarFieldEnum
+    having?: PasswordResetTokenScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: PasswordResetTokenCountAggregateInputType | true
+    _min?: PasswordResetTokenMinAggregateInputType
+    _max?: PasswordResetTokenMaxAggregateInputType
+  }
+
+  export type PasswordResetTokenGroupByOutputType = {
+    id: string
+    userId: string
+    tokenHash: string
+    expiresAt: Date
+    usedAt: Date | null
+    createdAt: Date
+    _count: PasswordResetTokenCountAggregateOutputType | null
+    _min: PasswordResetTokenMinAggregateOutputType | null
+    _max: PasswordResetTokenMaxAggregateOutputType | null
+  }
+
+  type GetPasswordResetTokenGroupByPayload<T extends PasswordResetTokenGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<PasswordResetTokenGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof PasswordResetTokenGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], PasswordResetTokenGroupByOutputType[P]>
+            : GetScalarType<T[P], PasswordResetTokenGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type PasswordResetTokenSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | TenantUserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["passwordResetToken"]>
+
+  export type PasswordResetTokenSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | TenantUserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["passwordResetToken"]>
+
+  export type PasswordResetTokenSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    createdAt?: boolean
+    user?: boolean | TenantUserDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["passwordResetToken"]>
+
+  export type PasswordResetTokenSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    tokenHash?: boolean
+    expiresAt?: boolean
+    usedAt?: boolean
+    createdAt?: boolean
+  }
+
+  export type PasswordResetTokenOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "tokenHash" | "expiresAt" | "usedAt" | "createdAt", ExtArgs["result"]["passwordResetToken"]>
+  export type PasswordResetTokenInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | TenantUserDefaultArgs<ExtArgs>
+  }
+  export type PasswordResetTokenIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | TenantUserDefaultArgs<ExtArgs>
+  }
+  export type PasswordResetTokenIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | TenantUserDefaultArgs<ExtArgs>
+  }
+
+  export type $PasswordResetTokenPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "PasswordResetToken"
+    objects: {
+      user: Prisma.$TenantUserPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      tokenHash: string
+      expiresAt: Date
+      usedAt: Date | null
+      createdAt: Date
+    }, ExtArgs["result"]["passwordResetToken"]>
+    composites: {}
+  }
+
+  type PasswordResetTokenGetPayload<S extends boolean | null | undefined | PasswordResetTokenDefaultArgs> = $Result.GetResult<Prisma.$PasswordResetTokenPayload, S>
+
+  type PasswordResetTokenCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<PasswordResetTokenFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: PasswordResetTokenCountAggregateInputType | true
+    }
+
+  export interface PasswordResetTokenDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['PasswordResetToken'], meta: { name: 'PasswordResetToken' } }
+    /**
+     * Find zero or one PasswordResetToken that matches the filter.
+     * @param {PasswordResetTokenFindUniqueArgs} args - Arguments to find a PasswordResetToken
+     * @example
+     * // Get one PasswordResetToken
+     * const passwordResetToken = await prisma.passwordResetToken.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends PasswordResetTokenFindUniqueArgs>(args: SelectSubset<T, PasswordResetTokenFindUniqueArgs<ExtArgs>>): Prisma__PasswordResetTokenClient<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one PasswordResetToken that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {PasswordResetTokenFindUniqueOrThrowArgs} args - Arguments to find a PasswordResetToken
+     * @example
+     * // Get one PasswordResetToken
+     * const passwordResetToken = await prisma.passwordResetToken.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends PasswordResetTokenFindUniqueOrThrowArgs>(args: SelectSubset<T, PasswordResetTokenFindUniqueOrThrowArgs<ExtArgs>>): Prisma__PasswordResetTokenClient<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PasswordResetToken that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordResetTokenFindFirstArgs} args - Arguments to find a PasswordResetToken
+     * @example
+     * // Get one PasswordResetToken
+     * const passwordResetToken = await prisma.passwordResetToken.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends PasswordResetTokenFindFirstArgs>(args?: SelectSubset<T, PasswordResetTokenFindFirstArgs<ExtArgs>>): Prisma__PasswordResetTokenClient<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first PasswordResetToken that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordResetTokenFindFirstOrThrowArgs} args - Arguments to find a PasswordResetToken
+     * @example
+     * // Get one PasswordResetToken
+     * const passwordResetToken = await prisma.passwordResetToken.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends PasswordResetTokenFindFirstOrThrowArgs>(args?: SelectSubset<T, PasswordResetTokenFindFirstOrThrowArgs<ExtArgs>>): Prisma__PasswordResetTokenClient<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more PasswordResetTokens that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordResetTokenFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all PasswordResetTokens
+     * const passwordResetTokens = await prisma.passwordResetToken.findMany()
+     * 
+     * // Get first 10 PasswordResetTokens
+     * const passwordResetTokens = await prisma.passwordResetToken.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const passwordResetTokenWithIdOnly = await prisma.passwordResetToken.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends PasswordResetTokenFindManyArgs>(args?: SelectSubset<T, PasswordResetTokenFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a PasswordResetToken.
+     * @param {PasswordResetTokenCreateArgs} args - Arguments to create a PasswordResetToken.
+     * @example
+     * // Create one PasswordResetToken
+     * const PasswordResetToken = await prisma.passwordResetToken.create({
+     *   data: {
+     *     // ... data to create a PasswordResetToken
+     *   }
+     * })
+     * 
+     */
+    create<T extends PasswordResetTokenCreateArgs>(args: SelectSubset<T, PasswordResetTokenCreateArgs<ExtArgs>>): Prisma__PasswordResetTokenClient<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many PasswordResetTokens.
+     * @param {PasswordResetTokenCreateManyArgs} args - Arguments to create many PasswordResetTokens.
+     * @example
+     * // Create many PasswordResetTokens
+     * const passwordResetToken = await prisma.passwordResetToken.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends PasswordResetTokenCreateManyArgs>(args?: SelectSubset<T, PasswordResetTokenCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many PasswordResetTokens and returns the data saved in the database.
+     * @param {PasswordResetTokenCreateManyAndReturnArgs} args - Arguments to create many PasswordResetTokens.
+     * @example
+     * // Create many PasswordResetTokens
+     * const passwordResetToken = await prisma.passwordResetToken.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many PasswordResetTokens and only return the `id`
+     * const passwordResetTokenWithIdOnly = await prisma.passwordResetToken.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends PasswordResetTokenCreateManyAndReturnArgs>(args?: SelectSubset<T, PasswordResetTokenCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a PasswordResetToken.
+     * @param {PasswordResetTokenDeleteArgs} args - Arguments to delete one PasswordResetToken.
+     * @example
+     * // Delete one PasswordResetToken
+     * const PasswordResetToken = await prisma.passwordResetToken.delete({
+     *   where: {
+     *     // ... filter to delete one PasswordResetToken
+     *   }
+     * })
+     * 
+     */
+    delete<T extends PasswordResetTokenDeleteArgs>(args: SelectSubset<T, PasswordResetTokenDeleteArgs<ExtArgs>>): Prisma__PasswordResetTokenClient<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one PasswordResetToken.
+     * @param {PasswordResetTokenUpdateArgs} args - Arguments to update one PasswordResetToken.
+     * @example
+     * // Update one PasswordResetToken
+     * const passwordResetToken = await prisma.passwordResetToken.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends PasswordResetTokenUpdateArgs>(args: SelectSubset<T, PasswordResetTokenUpdateArgs<ExtArgs>>): Prisma__PasswordResetTokenClient<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more PasswordResetTokens.
+     * @param {PasswordResetTokenDeleteManyArgs} args - Arguments to filter PasswordResetTokens to delete.
+     * @example
+     * // Delete a few PasswordResetTokens
+     * const { count } = await prisma.passwordResetToken.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends PasswordResetTokenDeleteManyArgs>(args?: SelectSubset<T, PasswordResetTokenDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PasswordResetTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordResetTokenUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many PasswordResetTokens
+     * const passwordResetToken = await prisma.passwordResetToken.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends PasswordResetTokenUpdateManyArgs>(args: SelectSubset<T, PasswordResetTokenUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more PasswordResetTokens and returns the data updated in the database.
+     * @param {PasswordResetTokenUpdateManyAndReturnArgs} args - Arguments to update many PasswordResetTokens.
+     * @example
+     * // Update many PasswordResetTokens
+     * const passwordResetToken = await prisma.passwordResetToken.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more PasswordResetTokens and only return the `id`
+     * const passwordResetTokenWithIdOnly = await prisma.passwordResetToken.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends PasswordResetTokenUpdateManyAndReturnArgs>(args: SelectSubset<T, PasswordResetTokenUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one PasswordResetToken.
+     * @param {PasswordResetTokenUpsertArgs} args - Arguments to update or create a PasswordResetToken.
+     * @example
+     * // Update or create a PasswordResetToken
+     * const passwordResetToken = await prisma.passwordResetToken.upsert({
+     *   create: {
+     *     // ... data to create a PasswordResetToken
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the PasswordResetToken we want to update
+     *   }
+     * })
+     */
+    upsert<T extends PasswordResetTokenUpsertArgs>(args: SelectSubset<T, PasswordResetTokenUpsertArgs<ExtArgs>>): Prisma__PasswordResetTokenClient<$Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of PasswordResetTokens.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordResetTokenCountArgs} args - Arguments to filter PasswordResetTokens to count.
+     * @example
+     * // Count the number of PasswordResetTokens
+     * const count = await prisma.passwordResetToken.count({
+     *   where: {
+     *     // ... the filter for the PasswordResetTokens we want to count
+     *   }
+     * })
+    **/
+    count<T extends PasswordResetTokenCountArgs>(
+      args?: Subset<T, PasswordResetTokenCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], PasswordResetTokenCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a PasswordResetToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordResetTokenAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends PasswordResetTokenAggregateArgs>(args: Subset<T, PasswordResetTokenAggregateArgs>): Prisma.PrismaPromise<GetPasswordResetTokenAggregateType<T>>
+
+    /**
+     * Group by PasswordResetToken.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {PasswordResetTokenGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends PasswordResetTokenGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: PasswordResetTokenGroupByArgs['orderBy'] }
+        : { orderBy?: PasswordResetTokenGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, PasswordResetTokenGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetPasswordResetTokenGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the PasswordResetToken model
+   */
+  readonly fields: PasswordResetTokenFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for PasswordResetToken.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__PasswordResetTokenClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    user<T extends TenantUserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantUserDefaultArgs<ExtArgs>>): Prisma__TenantUserClient<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the PasswordResetToken model
+   */
+  interface PasswordResetTokenFieldRefs {
+    readonly id: FieldRef<"PasswordResetToken", 'String'>
+    readonly userId: FieldRef<"PasswordResetToken", 'String'>
+    readonly tokenHash: FieldRef<"PasswordResetToken", 'String'>
+    readonly expiresAt: FieldRef<"PasswordResetToken", 'DateTime'>
+    readonly usedAt: FieldRef<"PasswordResetToken", 'DateTime'>
+    readonly createdAt: FieldRef<"PasswordResetToken", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * PasswordResetToken findUnique
+   */
+  export type PasswordResetTokenFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PasswordResetToken to fetch.
+     */
+    where: PasswordResetTokenWhereUniqueInput
+  }
+
+  /**
+   * PasswordResetToken findUniqueOrThrow
+   */
+  export type PasswordResetTokenFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PasswordResetToken to fetch.
+     */
+    where: PasswordResetTokenWhereUniqueInput
+  }
+
+  /**
+   * PasswordResetToken findFirst
+   */
+  export type PasswordResetTokenFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PasswordResetToken to fetch.
+     */
+    where?: PasswordResetTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PasswordResetTokens to fetch.
+     */
+    orderBy?: PasswordResetTokenOrderByWithRelationInput | PasswordResetTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PasswordResetTokens.
+     */
+    cursor?: PasswordResetTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PasswordResetTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PasswordResetTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PasswordResetTokens.
+     */
+    distinct?: PasswordResetTokenScalarFieldEnum | PasswordResetTokenScalarFieldEnum[]
+  }
+
+  /**
+   * PasswordResetToken findFirstOrThrow
+   */
+  export type PasswordResetTokenFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PasswordResetToken to fetch.
+     */
+    where?: PasswordResetTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PasswordResetTokens to fetch.
+     */
+    orderBy?: PasswordResetTokenOrderByWithRelationInput | PasswordResetTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for PasswordResetTokens.
+     */
+    cursor?: PasswordResetTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PasswordResetTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PasswordResetTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PasswordResetTokens.
+     */
+    distinct?: PasswordResetTokenScalarFieldEnum | PasswordResetTokenScalarFieldEnum[]
+  }
+
+  /**
+   * PasswordResetToken findMany
+   */
+  export type PasswordResetTokenFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * Filter, which PasswordResetTokens to fetch.
+     */
+    where?: PasswordResetTokenWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of PasswordResetTokens to fetch.
+     */
+    orderBy?: PasswordResetTokenOrderByWithRelationInput | PasswordResetTokenOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing PasswordResetTokens.
+     */
+    cursor?: PasswordResetTokenWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` PasswordResetTokens from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` PasswordResetTokens.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of PasswordResetTokens.
+     */
+    distinct?: PasswordResetTokenScalarFieldEnum | PasswordResetTokenScalarFieldEnum[]
+  }
+
+  /**
+   * PasswordResetToken create
+   */
+  export type PasswordResetTokenCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to create a PasswordResetToken.
+     */
+    data: XOR<PasswordResetTokenCreateInput, PasswordResetTokenUncheckedCreateInput>
+  }
+
+  /**
+   * PasswordResetToken createMany
+   */
+  export type PasswordResetTokenCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many PasswordResetTokens.
+     */
+    data: PasswordResetTokenCreateManyInput | PasswordResetTokenCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * PasswordResetToken createManyAndReturn
+   */
+  export type PasswordResetTokenCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * The data used to create many PasswordResetTokens.
+     */
+    data: PasswordResetTokenCreateManyInput | PasswordResetTokenCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PasswordResetToken update
+   */
+  export type PasswordResetTokenUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * The data needed to update a PasswordResetToken.
+     */
+    data: XOR<PasswordResetTokenUpdateInput, PasswordResetTokenUncheckedUpdateInput>
+    /**
+     * Choose, which PasswordResetToken to update.
+     */
+    where: PasswordResetTokenWhereUniqueInput
+  }
+
+  /**
+   * PasswordResetToken updateMany
+   */
+  export type PasswordResetTokenUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update PasswordResetTokens.
+     */
+    data: XOR<PasswordResetTokenUpdateManyMutationInput, PasswordResetTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which PasswordResetTokens to update
+     */
+    where?: PasswordResetTokenWhereInput
+    /**
+     * Limit how many PasswordResetTokens to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * PasswordResetToken updateManyAndReturn
+   */
+  export type PasswordResetTokenUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * The data used to update PasswordResetTokens.
+     */
+    data: XOR<PasswordResetTokenUpdateManyMutationInput, PasswordResetTokenUncheckedUpdateManyInput>
+    /**
+     * Filter which PasswordResetTokens to update
+     */
+    where?: PasswordResetTokenWhereInput
+    /**
+     * Limit how many PasswordResetTokens to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * PasswordResetToken upsert
+   */
+  export type PasswordResetTokenUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * The filter to search for the PasswordResetToken to update in case it exists.
+     */
+    where: PasswordResetTokenWhereUniqueInput
+    /**
+     * In case the PasswordResetToken found by the `where` argument doesn't exist, create a new PasswordResetToken with this data.
+     */
+    create: XOR<PasswordResetTokenCreateInput, PasswordResetTokenUncheckedCreateInput>
+    /**
+     * In case the PasswordResetToken was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<PasswordResetTokenUpdateInput, PasswordResetTokenUncheckedUpdateInput>
+  }
+
+  /**
+   * PasswordResetToken delete
+   */
+  export type PasswordResetTokenDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenInclude<ExtArgs> | null
+    /**
+     * Filter which PasswordResetToken to delete.
+     */
+    where: PasswordResetTokenWhereUniqueInput
+  }
+
+  /**
+   * PasswordResetToken deleteMany
+   */
+  export type PasswordResetTokenDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which PasswordResetTokens to delete
+     */
+    where?: PasswordResetTokenWhereInput
+    /**
+     * Limit how many PasswordResetTokens to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * PasswordResetToken without action
+   */
+  export type PasswordResetTokenDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the PasswordResetToken
+     */
+    select?: PasswordResetTokenSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the PasswordResetToken
+     */
+    omit?: PasswordResetTokenOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: PasswordResetTokenInclude<ExtArgs> | null
   }
 
 
@@ -18300,12 +23410,76 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     slug: 'slug',
+    status: 'status',
     isActive: 'isActive',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type TenantScalarFieldEnum = (typeof TenantScalarFieldEnum)[keyof typeof TenantScalarFieldEnum]
+
+
+  export const TenantUserScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    email: 'email',
+    passwordHash: 'passwordHash',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    role: 'role',
+    isActive: 'isActive',
+    failedLogins: 'failedLogins',
+    lockedUntil: 'lockedUntil',
+    lastLoginAt: 'lastLoginAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TenantUserScalarFieldEnum = (typeof TenantUserScalarFieldEnum)[keyof typeof TenantUserScalarFieldEnum]
+
+
+  export const SessionScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    refreshTokenHash: 'refreshTokenHash',
+    device: 'device',
+    ipAddress: 'ipAddress',
+    userAgent: 'userAgent',
+    createdAt: 'createdAt',
+    lastUsedAt: 'lastUsedAt',
+    expiresAt: 'expiresAt',
+    revokedAt: 'revokedAt',
+    replacedBy: 'replacedBy'
+  };
+
+  export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeof SessionScalarFieldEnum]
+
+
+  export const InvitationScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    email: 'email',
+    role: 'role',
+    tokenHash: 'tokenHash',
+    expiresAt: 'expiresAt',
+    acceptedAt: 'acceptedAt',
+    createdBy: 'createdBy',
+    createdAt: 'createdAt'
+  };
+
+  export type InvitationScalarFieldEnum = (typeof InvitationScalarFieldEnum)[keyof typeof InvitationScalarFieldEnum]
+
+
+  export const PasswordResetTokenScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    tokenHash: 'tokenHash',
+    expiresAt: 'expiresAt',
+    usedAt: 'usedAt',
+    createdAt: 'createdAt'
+  };
+
+  export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
 
 
   export const OutboxEventScalarFieldEnum: {
@@ -18536,6 +23710,14 @@ export namespace Prisma {
   export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
+  export const NullsOrder: {
+    first: 'first',
+    last: 'last'
+  };
+
+  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
   export const JsonNullValueFilter: {
     DbNull: typeof DbNull,
     JsonNull: typeof JsonNull,
@@ -18543,14 +23725,6 @@ export namespace Prisma {
   };
 
   export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
-
-
-  export const NullsOrder: {
-    first: 'first',
-    last: 'last'
-  };
-
-  export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
   /**
@@ -18569,6 +23743,20 @@ export namespace Prisma {
    * Reference to a field of type 'String[]'
    */
   export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TenantStatus'
+   */
+  export type EnumTenantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantStatus'>
+    
+
+
+  /**
+   * Reference to a field of type 'TenantStatus[]'
+   */
+  export type ListEnumTenantStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantStatus[]'>
     
 
 
@@ -18594,16 +23782,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Json'
+   * Reference to a field of type 'TenantUserRole'
    */
-  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+  export type EnumTenantUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantUserRole'>
     
 
 
   /**
-   * Reference to a field of type 'QueryMode'
+   * Reference to a field of type 'TenantUserRole[]'
    */
-  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
+  export type ListEnumTenantUserRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TenantUserRole[]'>
     
 
 
@@ -18618,6 +23806,20 @@ export namespace Prisma {
    * Reference to a field of type 'Int[]'
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -18673,6 +23875,7 @@ export namespace Prisma {
     id?: StringFilter<"Tenant"> | string
     name?: StringFilter<"Tenant"> | string
     slug?: StringFilter<"Tenant"> | string
+    status?: EnumTenantStatusFilter<"Tenant"> | $Enums.TenantStatus
     isActive?: BoolFilter<"Tenant"> | boolean
     createdAt?: DateTimeFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeFilter<"Tenant"> | Date | string
@@ -18684,12 +23887,15 @@ export namespace Prisma {
     internalEvents?: InternalEventListRelationFilter
     outboxEvents?: OutboxEventListRelationFilter
     webhookDeliveries?: WebhookDeliveryListRelationFilter
+    users?: TenantUserListRelationFilter
+    invitations?: InvitationListRelationFilter
   }
 
   export type TenantOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     slug?: SortOrder
+    status?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -18701,6 +23907,8 @@ export namespace Prisma {
     internalEvents?: InternalEventOrderByRelationAggregateInput
     outboxEvents?: OutboxEventOrderByRelationAggregateInput
     webhookDeliveries?: WebhookDeliveryOrderByRelationAggregateInput
+    users?: TenantUserOrderByRelationAggregateInput
+    invitations?: InvitationOrderByRelationAggregateInput
   }
 
   export type TenantWhereUniqueInput = Prisma.AtLeast<{
@@ -18710,6 +23918,7 @@ export namespace Prisma {
     OR?: TenantWhereInput[]
     NOT?: TenantWhereInput | TenantWhereInput[]
     name?: StringFilter<"Tenant"> | string
+    status?: EnumTenantStatusFilter<"Tenant"> | $Enums.TenantStatus
     isActive?: BoolFilter<"Tenant"> | boolean
     createdAt?: DateTimeFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeFilter<"Tenant"> | Date | string
@@ -18721,12 +23930,15 @@ export namespace Prisma {
     internalEvents?: InternalEventListRelationFilter
     outboxEvents?: OutboxEventListRelationFilter
     webhookDeliveries?: WebhookDeliveryListRelationFilter
+    users?: TenantUserListRelationFilter
+    invitations?: InvitationListRelationFilter
   }, "id" | "slug">
 
   export type TenantOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     slug?: SortOrder
+    status?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -18742,9 +23954,334 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Tenant"> | string
     name?: StringWithAggregatesFilter<"Tenant"> | string
     slug?: StringWithAggregatesFilter<"Tenant"> | string
+    status?: EnumTenantStatusWithAggregatesFilter<"Tenant"> | $Enums.TenantStatus
     isActive?: BoolWithAggregatesFilter<"Tenant"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Tenant"> | Date | string
+  }
+
+  export type TenantUserWhereInput = {
+    AND?: TenantUserWhereInput | TenantUserWhereInput[]
+    OR?: TenantUserWhereInput[]
+    NOT?: TenantUserWhereInput | TenantUserWhereInput[]
+    id?: StringFilter<"TenantUser"> | string
+    tenantId?: StringFilter<"TenantUser"> | string
+    email?: StringFilter<"TenantUser"> | string
+    passwordHash?: StringFilter<"TenantUser"> | string
+    firstName?: StringNullableFilter<"TenantUser"> | string | null
+    lastName?: StringNullableFilter<"TenantUser"> | string | null
+    role?: EnumTenantUserRoleFilter<"TenantUser"> | $Enums.TenantUserRole
+    isActive?: BoolFilter<"TenantUser"> | boolean
+    failedLogins?: IntFilter<"TenantUser"> | number
+    lockedUntil?: DateTimeNullableFilter<"TenantUser"> | Date | string | null
+    lastLoginAt?: DateTimeNullableFilter<"TenantUser"> | Date | string | null
+    createdAt?: DateTimeFilter<"TenantUser"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantUser"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    sessions?: SessionListRelationFilter
+    passwordResetTokens?: PasswordResetTokenListRelationFilter
+  }
+
+  export type TenantUserOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    firstName?: SortOrderInput | SortOrder
+    lastName?: SortOrderInput | SortOrder
+    role?: SortOrder
+    isActive?: SortOrder
+    failedLogins?: SortOrder
+    lockedUntil?: SortOrderInput | SortOrder
+    lastLoginAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    sessions?: SessionOrderByRelationAggregateInput
+    passwordResetTokens?: PasswordResetTokenOrderByRelationAggregateInput
+  }
+
+  export type TenantUserWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_email?: TenantUserTenantIdEmailCompoundUniqueInput
+    AND?: TenantUserWhereInput | TenantUserWhereInput[]
+    OR?: TenantUserWhereInput[]
+    NOT?: TenantUserWhereInput | TenantUserWhereInput[]
+    tenantId?: StringFilter<"TenantUser"> | string
+    email?: StringFilter<"TenantUser"> | string
+    passwordHash?: StringFilter<"TenantUser"> | string
+    firstName?: StringNullableFilter<"TenantUser"> | string | null
+    lastName?: StringNullableFilter<"TenantUser"> | string | null
+    role?: EnumTenantUserRoleFilter<"TenantUser"> | $Enums.TenantUserRole
+    isActive?: BoolFilter<"TenantUser"> | boolean
+    failedLogins?: IntFilter<"TenantUser"> | number
+    lockedUntil?: DateTimeNullableFilter<"TenantUser"> | Date | string | null
+    lastLoginAt?: DateTimeNullableFilter<"TenantUser"> | Date | string | null
+    createdAt?: DateTimeFilter<"TenantUser"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantUser"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    sessions?: SessionListRelationFilter
+    passwordResetTokens?: PasswordResetTokenListRelationFilter
+  }, "id" | "tenantId_email">
+
+  export type TenantUserOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    firstName?: SortOrderInput | SortOrder
+    lastName?: SortOrderInput | SortOrder
+    role?: SortOrder
+    isActive?: SortOrder
+    failedLogins?: SortOrder
+    lockedUntil?: SortOrderInput | SortOrder
+    lastLoginAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TenantUserCountOrderByAggregateInput
+    _avg?: TenantUserAvgOrderByAggregateInput
+    _max?: TenantUserMaxOrderByAggregateInput
+    _min?: TenantUserMinOrderByAggregateInput
+    _sum?: TenantUserSumOrderByAggregateInput
+  }
+
+  export type TenantUserScalarWhereWithAggregatesInput = {
+    AND?: TenantUserScalarWhereWithAggregatesInput | TenantUserScalarWhereWithAggregatesInput[]
+    OR?: TenantUserScalarWhereWithAggregatesInput[]
+    NOT?: TenantUserScalarWhereWithAggregatesInput | TenantUserScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TenantUser"> | string
+    tenantId?: StringWithAggregatesFilter<"TenantUser"> | string
+    email?: StringWithAggregatesFilter<"TenantUser"> | string
+    passwordHash?: StringWithAggregatesFilter<"TenantUser"> | string
+    firstName?: StringNullableWithAggregatesFilter<"TenantUser"> | string | null
+    lastName?: StringNullableWithAggregatesFilter<"TenantUser"> | string | null
+    role?: EnumTenantUserRoleWithAggregatesFilter<"TenantUser"> | $Enums.TenantUserRole
+    isActive?: BoolWithAggregatesFilter<"TenantUser"> | boolean
+    failedLogins?: IntWithAggregatesFilter<"TenantUser"> | number
+    lockedUntil?: DateTimeNullableWithAggregatesFilter<"TenantUser"> | Date | string | null
+    lastLoginAt?: DateTimeNullableWithAggregatesFilter<"TenantUser"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"TenantUser"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"TenantUser"> | Date | string
+  }
+
+  export type SessionWhereInput = {
+    AND?: SessionWhereInput | SessionWhereInput[]
+    OR?: SessionWhereInput[]
+    NOT?: SessionWhereInput | SessionWhereInput[]
+    id?: StringFilter<"Session"> | string
+    userId?: StringFilter<"Session"> | string
+    refreshTokenHash?: StringFilter<"Session"> | string
+    device?: StringNullableFilter<"Session"> | string | null
+    ipAddress?: StringNullableFilter<"Session"> | string | null
+    userAgent?: StringNullableFilter<"Session"> | string | null
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastUsedAt?: DateTimeFilter<"Session"> | Date | string
+    expiresAt?: DateTimeFilter<"Session"> | Date | string
+    revokedAt?: DateTimeNullableFilter<"Session"> | Date | string | null
+    replacedBy?: StringNullableFilter<"Session"> | string | null
+    user?: XOR<TenantUserScalarRelationFilter, TenantUserWhereInput>
+  }
+
+  export type SessionOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    refreshTokenHash?: SortOrder
+    device?: SortOrderInput | SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
+    expiresAt?: SortOrder
+    revokedAt?: SortOrderInput | SortOrder
+    replacedBy?: SortOrderInput | SortOrder
+    user?: TenantUserOrderByWithRelationInput
+  }
+
+  export type SessionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    refreshTokenHash?: string
+    AND?: SessionWhereInput | SessionWhereInput[]
+    OR?: SessionWhereInput[]
+    NOT?: SessionWhereInput | SessionWhereInput[]
+    userId?: StringFilter<"Session"> | string
+    device?: StringNullableFilter<"Session"> | string | null
+    ipAddress?: StringNullableFilter<"Session"> | string | null
+    userAgent?: StringNullableFilter<"Session"> | string | null
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastUsedAt?: DateTimeFilter<"Session"> | Date | string
+    expiresAt?: DateTimeFilter<"Session"> | Date | string
+    revokedAt?: DateTimeNullableFilter<"Session"> | Date | string | null
+    replacedBy?: StringNullableFilter<"Session"> | string | null
+    user?: XOR<TenantUserScalarRelationFilter, TenantUserWhereInput>
+  }, "id" | "refreshTokenHash">
+
+  export type SessionOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    refreshTokenHash?: SortOrder
+    device?: SortOrderInput | SortOrder
+    ipAddress?: SortOrderInput | SortOrder
+    userAgent?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
+    expiresAt?: SortOrder
+    revokedAt?: SortOrderInput | SortOrder
+    replacedBy?: SortOrderInput | SortOrder
+    _count?: SessionCountOrderByAggregateInput
+    _max?: SessionMaxOrderByAggregateInput
+    _min?: SessionMinOrderByAggregateInput
+  }
+
+  export type SessionScalarWhereWithAggregatesInput = {
+    AND?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
+    OR?: SessionScalarWhereWithAggregatesInput[]
+    NOT?: SessionScalarWhereWithAggregatesInput | SessionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Session"> | string
+    userId?: StringWithAggregatesFilter<"Session"> | string
+    refreshTokenHash?: StringWithAggregatesFilter<"Session"> | string
+    device?: StringNullableWithAggregatesFilter<"Session"> | string | null
+    ipAddress?: StringNullableWithAggregatesFilter<"Session"> | string | null
+    userAgent?: StringNullableWithAggregatesFilter<"Session"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    lastUsedAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    expiresAt?: DateTimeWithAggregatesFilter<"Session"> | Date | string
+    revokedAt?: DateTimeNullableWithAggregatesFilter<"Session"> | Date | string | null
+    replacedBy?: StringNullableWithAggregatesFilter<"Session"> | string | null
+  }
+
+  export type InvitationWhereInput = {
+    AND?: InvitationWhereInput | InvitationWhereInput[]
+    OR?: InvitationWhereInput[]
+    NOT?: InvitationWhereInput | InvitationWhereInput[]
+    id?: StringFilter<"Invitation"> | string
+    tenantId?: StringFilter<"Invitation"> | string
+    email?: StringFilter<"Invitation"> | string
+    role?: EnumTenantUserRoleFilter<"Invitation"> | $Enums.TenantUserRole
+    tokenHash?: StringFilter<"Invitation"> | string
+    expiresAt?: DateTimeFilter<"Invitation"> | Date | string
+    acceptedAt?: DateTimeNullableFilter<"Invitation"> | Date | string | null
+    createdBy?: StringFilter<"Invitation"> | string
+    createdAt?: DateTimeFilter<"Invitation"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }
+
+  export type InvitationOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    acceptedAt?: SortOrderInput | SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+  }
+
+  export type InvitationWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tokenHash?: string
+    AND?: InvitationWhereInput | InvitationWhereInput[]
+    OR?: InvitationWhereInput[]
+    NOT?: InvitationWhereInput | InvitationWhereInput[]
+    tenantId?: StringFilter<"Invitation"> | string
+    email?: StringFilter<"Invitation"> | string
+    role?: EnumTenantUserRoleFilter<"Invitation"> | $Enums.TenantUserRole
+    expiresAt?: DateTimeFilter<"Invitation"> | Date | string
+    acceptedAt?: DateTimeNullableFilter<"Invitation"> | Date | string | null
+    createdBy?: StringFilter<"Invitation"> | string
+    createdAt?: DateTimeFilter<"Invitation"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+  }, "id" | "tokenHash">
+
+  export type InvitationOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    acceptedAt?: SortOrderInput | SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+    _count?: InvitationCountOrderByAggregateInput
+    _max?: InvitationMaxOrderByAggregateInput
+    _min?: InvitationMinOrderByAggregateInput
+  }
+
+  export type InvitationScalarWhereWithAggregatesInput = {
+    AND?: InvitationScalarWhereWithAggregatesInput | InvitationScalarWhereWithAggregatesInput[]
+    OR?: InvitationScalarWhereWithAggregatesInput[]
+    NOT?: InvitationScalarWhereWithAggregatesInput | InvitationScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Invitation"> | string
+    tenantId?: StringWithAggregatesFilter<"Invitation"> | string
+    email?: StringWithAggregatesFilter<"Invitation"> | string
+    role?: EnumTenantUserRoleWithAggregatesFilter<"Invitation"> | $Enums.TenantUserRole
+    tokenHash?: StringWithAggregatesFilter<"Invitation"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"Invitation"> | Date | string
+    acceptedAt?: DateTimeNullableWithAggregatesFilter<"Invitation"> | Date | string | null
+    createdBy?: StringWithAggregatesFilter<"Invitation"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Invitation"> | Date | string
+  }
+
+  export type PasswordResetTokenWhereInput = {
+    AND?: PasswordResetTokenWhereInput | PasswordResetTokenWhereInput[]
+    OR?: PasswordResetTokenWhereInput[]
+    NOT?: PasswordResetTokenWhereInput | PasswordResetTokenWhereInput[]
+    id?: StringFilter<"PasswordResetToken"> | string
+    userId?: StringFilter<"PasswordResetToken"> | string
+    tokenHash?: StringFilter<"PasswordResetToken"> | string
+    expiresAt?: DateTimeFilter<"PasswordResetToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"PasswordResetToken"> | Date | string | null
+    createdAt?: DateTimeFilter<"PasswordResetToken"> | Date | string
+    user?: XOR<TenantUserScalarRelationFilter, TenantUserWhereInput>
+  }
+
+  export type PasswordResetTokenOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    user?: TenantUserOrderByWithRelationInput
+  }
+
+  export type PasswordResetTokenWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tokenHash?: string
+    AND?: PasswordResetTokenWhereInput | PasswordResetTokenWhereInput[]
+    OR?: PasswordResetTokenWhereInput[]
+    NOT?: PasswordResetTokenWhereInput | PasswordResetTokenWhereInput[]
+    userId?: StringFilter<"PasswordResetToken"> | string
+    expiresAt?: DateTimeFilter<"PasswordResetToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"PasswordResetToken"> | Date | string | null
+    createdAt?: DateTimeFilter<"PasswordResetToken"> | Date | string
+    user?: XOR<TenantUserScalarRelationFilter, TenantUserWhereInput>
+  }, "id" | "tokenHash">
+
+  export type PasswordResetTokenOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: PasswordResetTokenCountOrderByAggregateInput
+    _max?: PasswordResetTokenMaxOrderByAggregateInput
+    _min?: PasswordResetTokenMinOrderByAggregateInput
+  }
+
+  export type PasswordResetTokenScalarWhereWithAggregatesInput = {
+    AND?: PasswordResetTokenScalarWhereWithAggregatesInput | PasswordResetTokenScalarWhereWithAggregatesInput[]
+    OR?: PasswordResetTokenScalarWhereWithAggregatesInput[]
+    NOT?: PasswordResetTokenScalarWhereWithAggregatesInput | PasswordResetTokenScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"PasswordResetToken"> | string
+    userId?: StringWithAggregatesFilter<"PasswordResetToken"> | string
+    tokenHash?: StringWithAggregatesFilter<"PasswordResetToken"> | string
+    expiresAt?: DateTimeWithAggregatesFilter<"PasswordResetToken"> | Date | string
+    usedAt?: DateTimeNullableWithAggregatesFilter<"PasswordResetToken"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"PasswordResetToken"> | Date | string
   }
 
   export type OutboxEventWhereInput = {
@@ -19763,6 +25300,7 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19774,12 +25312,15 @@ export namespace Prisma {
     internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
+    users?: TenantUserCreateNestedManyWithoutTenantInput
+    invitations?: InvitationCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19791,12 +25332,15 @@ export namespace Prisma {
     internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
+    users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19808,12 +25352,15 @@ export namespace Prisma {
     internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19825,12 +25372,15 @@ export namespace Prisma {
     internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateManyInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -19840,6 +25390,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -19849,9 +25400,371 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantUserCreateInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    firstName?: string | null
+    lastName?: string | null
+    role?: $Enums.TenantUserRole
+    isActive?: boolean
+    failedLogins?: number
+    lockedUntil?: Date | string | null
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutUsersInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
+  }
+
+  export type TenantUserUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    email: string
+    passwordHash: string
+    firstName?: string | null
+    lastName?: string | null
+    role?: $Enums.TenantUserRole
+    isActive?: boolean
+    failedLogins?: number
+    lockedUntil?: Date | string | null
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type TenantUserUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    failedLogins?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
+  }
+
+  export type TenantUserUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    failedLogins?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type TenantUserCreateManyInput = {
+    id?: string
+    tenantId: string
+    email: string
+    passwordHash: string
+    firstName?: string | null
+    lastName?: string | null
+    role?: $Enums.TenantUserRole
+    isActive?: boolean
+    failedLogins?: number
+    lockedUntil?: Date | string | null
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TenantUserUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    failedLogins?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantUserUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    failedLogins?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionCreateInput = {
+    id?: string
+    refreshTokenHash: string
+    device?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    lastUsedAt?: Date | string
+    expiresAt: Date | string
+    revokedAt?: Date | string | null
+    replacedBy?: string | null
+    user: TenantUserCreateNestedOneWithoutSessionsInput
+  }
+
+  export type SessionUncheckedCreateInput = {
+    id?: string
+    userId: string
+    refreshTokenHash: string
+    device?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    lastUsedAt?: Date | string
+    expiresAt: Date | string
+    revokedAt?: Date | string | null
+    replacedBy?: string | null
+  }
+
+  export type SessionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refreshTokenHash?: StringFieldUpdateOperationsInput | string
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    replacedBy?: NullableStringFieldUpdateOperationsInput | string | null
+    user?: TenantUserUpdateOneRequiredWithoutSessionsNestedInput
+  }
+
+  export type SessionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    refreshTokenHash?: StringFieldUpdateOperationsInput | string
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    replacedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SessionCreateManyInput = {
+    id?: string
+    userId: string
+    refreshTokenHash: string
+    device?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    lastUsedAt?: Date | string
+    expiresAt: Date | string
+    revokedAt?: Date | string | null
+    replacedBy?: string | null
+  }
+
+  export type SessionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refreshTokenHash?: StringFieldUpdateOperationsInput | string
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    replacedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SessionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    refreshTokenHash?: StringFieldUpdateOperationsInput | string
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    replacedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type InvitationCreateInput = {
+    id?: string
+    email: string
+    role?: $Enums.TenantUserRole
+    tokenHash: string
+    expiresAt: Date | string
+    acceptedAt?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutInvitationsInput
+  }
+
+  export type InvitationUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    email: string
+    role?: $Enums.TenantUserRole
+    tokenHash: string
+    expiresAt: Date | string
+    acceptedAt?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+  }
+
+  export type InvitationUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutInvitationsNestedInput
+  }
+
+  export type InvitationUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvitationCreateManyInput = {
+    id?: string
+    tenantId: string
+    email: string
+    role?: $Enums.TenantUserRole
+    tokenHash: string
+    expiresAt: Date | string
+    acceptedAt?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+  }
+
+  export type InvitationUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvitationUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PasswordResetTokenCreateInput = {
+    id?: string
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+    user: TenantUserCreateNestedOneWithoutPasswordResetTokensInput
+  }
+
+  export type PasswordResetTokenUncheckedCreateInput = {
+    id?: string
+    userId: string
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type PasswordResetTokenUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: TenantUserUpdateOneRequiredWithoutPasswordResetTokensNestedInput
+  }
+
+  export type PasswordResetTokenUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PasswordResetTokenCreateManyInput = {
+    id?: string
+    userId: string
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type PasswordResetTokenUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PasswordResetTokenUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OutboxEventCreateInput = {
@@ -20979,6 +26892,13 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type EnumTenantStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantStatus | EnumTenantStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantStatusFilter<$PrismaModel> | $Enums.TenantStatus
+  }
+
   export type BoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -21043,6 +26963,18 @@ export namespace Prisma {
     none?: WebhookDeliveryWhereInput
   }
 
+  export type TenantUserListRelationFilter = {
+    every?: TenantUserWhereInput
+    some?: TenantUserWhereInput
+    none?: TenantUserWhereInput
+  }
+
+  export type InvitationListRelationFilter = {
+    every?: InvitationWhereInput
+    some?: InvitationWhereInput
+    none?: InvitationWhereInput
+  }
+
   export type ConsentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -21075,10 +27007,19 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type TenantUserOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type InvitationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type TenantCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     slug?: SortOrder
+    status?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -21088,6 +27029,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     slug?: SortOrder
+    status?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -21097,6 +27039,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     slug?: SortOrder
+    status?: SortOrder
     isActive?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -21118,6 +27061,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
     _max?: NestedStringFilter<$PrismaModel>
+  }
+
+  export type EnumTenantStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantStatus | EnumTenantStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantStatusWithAggregatesFilter<$PrismaModel> | $Enums.TenantStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTenantStatusFilter<$PrismaModel>
+    _max?: NestedEnumTenantStatusFilter<$PrismaModel>
   }
 
   export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -21156,28 +27109,12 @@ export namespace Prisma {
     mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
-  export type JsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<JsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
 
-  export type JsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  export type EnumTenantUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantUserRole | EnumTenantUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantUserRole[] | ListEnumTenantUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantUserRole[] | ListEnumTenantUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantUserRoleFilter<$PrismaModel> | $Enums.TenantUserRole
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -21207,9 +27144,281 @@ export namespace Prisma {
     isNot?: TenantWhereInput
   }
 
+  export type SessionListRelationFilter = {
+    every?: SessionWhereInput
+    some?: SessionWhereInput
+    none?: SessionWhereInput
+  }
+
+  export type PasswordResetTokenListRelationFilter = {
+    every?: PasswordResetTokenWhereInput
+    some?: PasswordResetTokenWhereInput
+    none?: PasswordResetTokenWhereInput
+  }
+
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type SessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type PasswordResetTokenOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TenantUserTenantIdEmailCompoundUniqueInput = {
+    tenantId: string
+    email: string
+  }
+
+  export type TenantUserCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    role?: SortOrder
+    isActive?: SortOrder
+    failedLogins?: SortOrder
+    lockedUntil?: SortOrder
+    lastLoginAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantUserAvgOrderByAggregateInput = {
+    failedLogins?: SortOrder
+  }
+
+  export type TenantUserMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    role?: SortOrder
+    isActive?: SortOrder
+    failedLogins?: SortOrder
+    lockedUntil?: SortOrder
+    lastLoginAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantUserMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    email?: SortOrder
+    passwordHash?: SortOrder
+    firstName?: SortOrder
+    lastName?: SortOrder
+    role?: SortOrder
+    isActive?: SortOrder
+    failedLogins?: SortOrder
+    lockedUntil?: SortOrder
+    lastLoginAt?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TenantUserSumOrderByAggregateInput = {
+    failedLogins?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type EnumTenantUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantUserRole | EnumTenantUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantUserRole[] | ListEnumTenantUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantUserRole[] | ListEnumTenantUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.TenantUserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTenantUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumTenantUserRoleFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedDateTimeNullableFilter<$PrismaModel>
+    _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+
+  export type TenantUserScalarRelationFilter = {
+    is?: TenantUserWhereInput
+    isNot?: TenantUserWhereInput
+  }
+
+  export type SessionCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    refreshTokenHash?: SortOrder
+    device?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
+    expiresAt?: SortOrder
+    revokedAt?: SortOrder
+    replacedBy?: SortOrder
+  }
+
+  export type SessionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    refreshTokenHash?: SortOrder
+    device?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
+    expiresAt?: SortOrder
+    revokedAt?: SortOrder
+    replacedBy?: SortOrder
+  }
+
+  export type SessionMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    refreshTokenHash?: SortOrder
+    device?: SortOrder
+    ipAddress?: SortOrder
+    userAgent?: SortOrder
+    createdAt?: SortOrder
+    lastUsedAt?: SortOrder
+    expiresAt?: SortOrder
+    revokedAt?: SortOrder
+    replacedBy?: SortOrder
+  }
+
+  export type InvitationCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    acceptedAt?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InvitationMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    acceptedAt?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type InvitationMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    email?: SortOrder
+    role?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    acceptedAt?: SortOrder
+    createdBy?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PasswordResetTokenCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PasswordResetTokenMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type PasswordResetTokenMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    tokenHash?: SortOrder
+    expiresAt?: SortOrder
+    usedAt?: SortOrder
+    createdAt?: SortOrder
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type OutboxEventCountOrderByAggregateInput = {
@@ -21256,24 +27465,6 @@ export namespace Prisma {
   export type OutboxEventSumOrderByAggregateInput = {
     retryCount?: SortOrder
   }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
-  }
   export type JsonWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
@@ -21299,36 +27490,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedJsonFilter<$PrismaModel>
     _max?: NestedJsonFilter<$PrismaModel>
-  }
-
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
-  }
-
-  export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeNullableWithAggregatesFilter<$PrismaModel> | Date | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedDateTimeNullableFilter<$PrismaModel>
-    _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
   export type EnumCircuitBreakerStateFilter<$PrismaModel = never> = {
@@ -22040,6 +28201,20 @@ export namespace Prisma {
     connect?: WebhookDeliveryWhereUniqueInput | WebhookDeliveryWhereUniqueInput[]
   }
 
+  export type TenantUserCreateNestedManyWithoutTenantInput = {
+    create?: XOR<TenantUserCreateWithoutTenantInput, TenantUserUncheckedCreateWithoutTenantInput> | TenantUserCreateWithoutTenantInput[] | TenantUserUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantUserCreateOrConnectWithoutTenantInput | TenantUserCreateOrConnectWithoutTenantInput[]
+    createMany?: TenantUserCreateManyTenantInputEnvelope
+    connect?: TenantUserWhereUniqueInput | TenantUserWhereUniqueInput[]
+  }
+
+  export type InvitationCreateNestedManyWithoutTenantInput = {
+    create?: XOR<InvitationCreateWithoutTenantInput, InvitationUncheckedCreateWithoutTenantInput> | InvitationCreateWithoutTenantInput[] | InvitationUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutTenantInput | InvitationCreateOrConnectWithoutTenantInput[]
+    createMany?: InvitationCreateManyTenantInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+  }
+
   export type ConsentUncheckedCreateNestedManyWithoutTenantInput = {
     create?: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput> | ConsentCreateWithoutTenantInput[] | ConsentUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: ConsentCreateOrConnectWithoutTenantInput | ConsentCreateOrConnectWithoutTenantInput[]
@@ -22096,8 +28271,26 @@ export namespace Prisma {
     connect?: WebhookDeliveryWhereUniqueInput | WebhookDeliveryWhereUniqueInput[]
   }
 
+  export type TenantUserUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<TenantUserCreateWithoutTenantInput, TenantUserUncheckedCreateWithoutTenantInput> | TenantUserCreateWithoutTenantInput[] | TenantUserUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantUserCreateOrConnectWithoutTenantInput | TenantUserCreateOrConnectWithoutTenantInput[]
+    createMany?: TenantUserCreateManyTenantInputEnvelope
+    connect?: TenantUserWhereUniqueInput | TenantUserWhereUniqueInput[]
+  }
+
+  export type InvitationUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<InvitationCreateWithoutTenantInput, InvitationUncheckedCreateWithoutTenantInput> | InvitationCreateWithoutTenantInput[] | InvitationUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutTenantInput | InvitationCreateOrConnectWithoutTenantInput[]
+    createMany?: InvitationCreateManyTenantInputEnvelope
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+  }
+
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type EnumTenantStatusFieldUpdateOperationsInput = {
+    set?: $Enums.TenantStatus
   }
 
   export type BoolFieldUpdateOperationsInput = {
@@ -22220,6 +28413,34 @@ export namespace Prisma {
     deleteMany?: WebhookDeliveryScalarWhereInput | WebhookDeliveryScalarWhereInput[]
   }
 
+  export type TenantUserUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<TenantUserCreateWithoutTenantInput, TenantUserUncheckedCreateWithoutTenantInput> | TenantUserCreateWithoutTenantInput[] | TenantUserUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantUserCreateOrConnectWithoutTenantInput | TenantUserCreateOrConnectWithoutTenantInput[]
+    upsert?: TenantUserUpsertWithWhereUniqueWithoutTenantInput | TenantUserUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: TenantUserCreateManyTenantInputEnvelope
+    set?: TenantUserWhereUniqueInput | TenantUserWhereUniqueInput[]
+    disconnect?: TenantUserWhereUniqueInput | TenantUserWhereUniqueInput[]
+    delete?: TenantUserWhereUniqueInput | TenantUserWhereUniqueInput[]
+    connect?: TenantUserWhereUniqueInput | TenantUserWhereUniqueInput[]
+    update?: TenantUserUpdateWithWhereUniqueWithoutTenantInput | TenantUserUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: TenantUserUpdateManyWithWhereWithoutTenantInput | TenantUserUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: TenantUserScalarWhereInput | TenantUserScalarWhereInput[]
+  }
+
+  export type InvitationUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<InvitationCreateWithoutTenantInput, InvitationUncheckedCreateWithoutTenantInput> | InvitationCreateWithoutTenantInput[] | InvitationUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutTenantInput | InvitationCreateOrConnectWithoutTenantInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutTenantInput | InvitationUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: InvitationCreateManyTenantInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutTenantInput | InvitationUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutTenantInput | InvitationUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
   export type ConsentUncheckedUpdateManyWithoutTenantNestedInput = {
     create?: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput> | ConsentCreateWithoutTenantInput[] | ConsentUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: ConsentCreateOrConnectWithoutTenantInput | ConsentCreateOrConnectWithoutTenantInput[]
@@ -22332,14 +28553,74 @@ export namespace Prisma {
     deleteMany?: WebhookDeliveryScalarWhereInput | WebhookDeliveryScalarWhereInput[]
   }
 
-  export type TenantCreateNestedOneWithoutOutboxEventsInput = {
-    create?: XOR<TenantCreateWithoutOutboxEventsInput, TenantUncheckedCreateWithoutOutboxEventsInput>
-    connectOrCreate?: TenantCreateOrConnectWithoutOutboxEventsInput
+  export type TenantUserUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<TenantUserCreateWithoutTenantInput, TenantUserUncheckedCreateWithoutTenantInput> | TenantUserCreateWithoutTenantInput[] | TenantUserUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TenantUserCreateOrConnectWithoutTenantInput | TenantUserCreateOrConnectWithoutTenantInput[]
+    upsert?: TenantUserUpsertWithWhereUniqueWithoutTenantInput | TenantUserUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: TenantUserCreateManyTenantInputEnvelope
+    set?: TenantUserWhereUniqueInput | TenantUserWhereUniqueInput[]
+    disconnect?: TenantUserWhereUniqueInput | TenantUserWhereUniqueInput[]
+    delete?: TenantUserWhereUniqueInput | TenantUserWhereUniqueInput[]
+    connect?: TenantUserWhereUniqueInput | TenantUserWhereUniqueInput[]
+    update?: TenantUserUpdateWithWhereUniqueWithoutTenantInput | TenantUserUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: TenantUserUpdateManyWithWhereWithoutTenantInput | TenantUserUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: TenantUserScalarWhereInput | TenantUserScalarWhereInput[]
+  }
+
+  export type InvitationUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<InvitationCreateWithoutTenantInput, InvitationUncheckedCreateWithoutTenantInput> | InvitationCreateWithoutTenantInput[] | InvitationUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: InvitationCreateOrConnectWithoutTenantInput | InvitationCreateOrConnectWithoutTenantInput[]
+    upsert?: InvitationUpsertWithWhereUniqueWithoutTenantInput | InvitationUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: InvitationCreateManyTenantInputEnvelope
+    set?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    disconnect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    delete?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+    update?: InvitationUpdateWithWhereUniqueWithoutTenantInput | InvitationUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: InvitationUpdateManyWithWhereWithoutTenantInput | InvitationUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutUsersInput = {
+    create?: XOR<TenantCreateWithoutUsersInput, TenantUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutUsersInput
     connect?: TenantWhereUniqueInput
+  }
+
+  export type SessionCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type PasswordResetTokenCreateNestedManyWithoutUserInput = {
+    create?: XOR<PasswordResetTokenCreateWithoutUserInput, PasswordResetTokenUncheckedCreateWithoutUserInput> | PasswordResetTokenCreateWithoutUserInput[] | PasswordResetTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PasswordResetTokenCreateOrConnectWithoutUserInput | PasswordResetTokenCreateOrConnectWithoutUserInput[]
+    createMany?: PasswordResetTokenCreateManyUserInputEnvelope
+    connect?: PasswordResetTokenWhereUniqueInput | PasswordResetTokenWhereUniqueInput[]
+  }
+
+  export type SessionUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+  }
+
+  export type PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<PasswordResetTokenCreateWithoutUserInput, PasswordResetTokenUncheckedCreateWithoutUserInput> | PasswordResetTokenCreateWithoutUserInput[] | PasswordResetTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PasswordResetTokenCreateOrConnectWithoutUserInput | PasswordResetTokenCreateOrConnectWithoutUserInput[]
+    createMany?: PasswordResetTokenCreateManyUserInputEnvelope
+    connect?: PasswordResetTokenWhereUniqueInput | PasswordResetTokenWhereUniqueInput[]
   }
 
   export type NullableStringFieldUpdateOperationsInput = {
     set?: string | null
+  }
+
+  export type EnumTenantUserRoleFieldUpdateOperationsInput = {
+    set?: $Enums.TenantUserRole
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -22352,6 +28633,118 @@ export namespace Prisma {
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
     set?: Date | string | null
+  }
+
+  export type TenantUpdateOneRequiredWithoutUsersNestedInput = {
+    create?: XOR<TenantCreateWithoutUsersInput, TenantUncheckedCreateWithoutUsersInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutUsersInput
+    upsert?: TenantUpsertWithoutUsersInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutUsersInput, TenantUpdateWithoutUsersInput>, TenantUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type SessionUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
+  export type PasswordResetTokenUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PasswordResetTokenCreateWithoutUserInput, PasswordResetTokenUncheckedCreateWithoutUserInput> | PasswordResetTokenCreateWithoutUserInput[] | PasswordResetTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PasswordResetTokenCreateOrConnectWithoutUserInput | PasswordResetTokenCreateOrConnectWithoutUserInput[]
+    upsert?: PasswordResetTokenUpsertWithWhereUniqueWithoutUserInput | PasswordResetTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PasswordResetTokenCreateManyUserInputEnvelope
+    set?: PasswordResetTokenWhereUniqueInput | PasswordResetTokenWhereUniqueInput[]
+    disconnect?: PasswordResetTokenWhereUniqueInput | PasswordResetTokenWhereUniqueInput[]
+    delete?: PasswordResetTokenWhereUniqueInput | PasswordResetTokenWhereUniqueInput[]
+    connect?: PasswordResetTokenWhereUniqueInput | PasswordResetTokenWhereUniqueInput[]
+    update?: PasswordResetTokenUpdateWithWhereUniqueWithoutUserInput | PasswordResetTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PasswordResetTokenUpdateManyWithWhereWithoutUserInput | PasswordResetTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PasswordResetTokenScalarWhereInput | PasswordResetTokenScalarWhereInput[]
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput> | SessionCreateWithoutUserInput[] | SessionUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: SessionCreateOrConnectWithoutUserInput | SessionCreateOrConnectWithoutUserInput[]
+    upsert?: SessionUpsertWithWhereUniqueWithoutUserInput | SessionUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: SessionCreateManyUserInputEnvelope
+    set?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    disconnect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    delete?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    connect?: SessionWhereUniqueInput | SessionWhereUniqueInput[]
+    update?: SessionUpdateWithWhereUniqueWithoutUserInput | SessionUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: SessionUpdateManyWithWhereWithoutUserInput | SessionUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: SessionScalarWhereInput | SessionScalarWhereInput[]
+  }
+
+  export type PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<PasswordResetTokenCreateWithoutUserInput, PasswordResetTokenUncheckedCreateWithoutUserInput> | PasswordResetTokenCreateWithoutUserInput[] | PasswordResetTokenUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: PasswordResetTokenCreateOrConnectWithoutUserInput | PasswordResetTokenCreateOrConnectWithoutUserInput[]
+    upsert?: PasswordResetTokenUpsertWithWhereUniqueWithoutUserInput | PasswordResetTokenUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: PasswordResetTokenCreateManyUserInputEnvelope
+    set?: PasswordResetTokenWhereUniqueInput | PasswordResetTokenWhereUniqueInput[]
+    disconnect?: PasswordResetTokenWhereUniqueInput | PasswordResetTokenWhereUniqueInput[]
+    delete?: PasswordResetTokenWhereUniqueInput | PasswordResetTokenWhereUniqueInput[]
+    connect?: PasswordResetTokenWhereUniqueInput | PasswordResetTokenWhereUniqueInput[]
+    update?: PasswordResetTokenUpdateWithWhereUniqueWithoutUserInput | PasswordResetTokenUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: PasswordResetTokenUpdateManyWithWhereWithoutUserInput | PasswordResetTokenUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: PasswordResetTokenScalarWhereInput | PasswordResetTokenScalarWhereInput[]
+  }
+
+  export type TenantUserCreateNestedOneWithoutSessionsInput = {
+    create?: XOR<TenantUserCreateWithoutSessionsInput, TenantUserUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: TenantUserCreateOrConnectWithoutSessionsInput
+    connect?: TenantUserWhereUniqueInput
+  }
+
+  export type TenantUserUpdateOneRequiredWithoutSessionsNestedInput = {
+    create?: XOR<TenantUserCreateWithoutSessionsInput, TenantUserUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: TenantUserCreateOrConnectWithoutSessionsInput
+    upsert?: TenantUserUpsertWithoutSessionsInput
+    connect?: TenantUserWhereUniqueInput
+    update?: XOR<XOR<TenantUserUpdateToOneWithWhereWithoutSessionsInput, TenantUserUpdateWithoutSessionsInput>, TenantUserUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type TenantCreateNestedOneWithoutInvitationsInput = {
+    create?: XOR<TenantCreateWithoutInvitationsInput, TenantUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutInvitationsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type TenantUpdateOneRequiredWithoutInvitationsNestedInput = {
+    create?: XOR<TenantCreateWithoutInvitationsInput, TenantUncheckedCreateWithoutInvitationsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutInvitationsInput
+    upsert?: TenantUpsertWithoutInvitationsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutInvitationsInput, TenantUpdateWithoutInvitationsInput>, TenantUncheckedUpdateWithoutInvitationsInput>
+  }
+
+  export type TenantUserCreateNestedOneWithoutPasswordResetTokensInput = {
+    create?: XOR<TenantUserCreateWithoutPasswordResetTokensInput, TenantUserUncheckedCreateWithoutPasswordResetTokensInput>
+    connectOrCreate?: TenantUserCreateOrConnectWithoutPasswordResetTokensInput
+    connect?: TenantUserWhereUniqueInput
+  }
+
+  export type TenantUserUpdateOneRequiredWithoutPasswordResetTokensNestedInput = {
+    create?: XOR<TenantUserCreateWithoutPasswordResetTokensInput, TenantUserUncheckedCreateWithoutPasswordResetTokensInput>
+    connectOrCreate?: TenantUserCreateOrConnectWithoutPasswordResetTokensInput
+    upsert?: TenantUserUpsertWithoutPasswordResetTokensInput
+    connect?: TenantUserWhereUniqueInput
+    update?: XOR<XOR<TenantUserUpdateToOneWithWhereWithoutPasswordResetTokensInput, TenantUserUpdateWithoutPasswordResetTokensInput>, TenantUserUncheckedUpdateWithoutPasswordResetTokensInput>
+  }
+
+  export type TenantCreateNestedOneWithoutOutboxEventsInput = {
+    create?: XOR<TenantCreateWithoutOutboxEventsInput, TenantUncheckedCreateWithoutOutboxEventsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutOutboxEventsInput
+    connect?: TenantWhereUniqueInput
   }
 
   export type TenantUpdateOneRequiredWithoutOutboxEventsNestedInput = {
@@ -22713,6 +29106,13 @@ export namespace Prisma {
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
+  export type NestedEnumTenantStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantStatus | EnumTenantStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantStatusFilter<$PrismaModel> | $Enums.TenantStatus
+  }
+
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -22757,6 +29157,16 @@ export namespace Prisma {
     not?: NestedIntFilter<$PrismaModel> | number
   }
 
+  export type NestedEnumTenantStatusWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantStatus | EnumTenantStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantStatus[] | ListEnumTenantStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantStatusWithAggregatesFilter<$PrismaModel> | $Enums.TenantStatus
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTenantStatusFilter<$PrismaModel>
+    _max?: NestedEnumTenantStatusFilter<$PrismaModel>
+  }
+
   export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
@@ -22791,6 +29201,13 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedEnumTenantUserRoleFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantUserRole | EnumTenantUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantUserRole[] | ListEnumTenantUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantUserRole[] | ListEnumTenantUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantUserRoleFilter<$PrismaModel> | $Enums.TenantUserRole
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -22831,28 +29248,15 @@ export namespace Prisma {
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
-  export type NestedJsonFilter<$PrismaModel = never> =
-    | PatchUndefined<
-        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
-        Required<NestedJsonFilterBase<$PrismaModel>>
-      >
-    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
 
-  export type NestedJsonFilterBase<$PrismaModel = never> = {
-    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
-    path?: string[]
-    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
-    string_contains?: string | StringFieldRefInput<$PrismaModel>
-    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
-    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
-    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
-    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
-    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  export type NestedEnumTenantUserRoleWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TenantUserRole | EnumTenantUserRoleFieldRefInput<$PrismaModel>
+    in?: $Enums.TenantUserRole[] | ListEnumTenantUserRoleFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TenantUserRole[] | ListEnumTenantUserRoleFieldRefInput<$PrismaModel>
+    not?: NestedEnumTenantUserRoleWithAggregatesFilter<$PrismaModel> | $Enums.TenantUserRole
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTenantUserRoleFilter<$PrismaModel>
+    _max?: NestedEnumTenantUserRoleFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -22894,6 +29298,29 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type NestedEnumCircuitBreakerStateFilter<$PrismaModel = never> = {
@@ -23250,6 +29677,82 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type TenantUserCreateWithoutTenantInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    firstName?: string | null
+    lastName?: string | null
+    role?: $Enums.TenantUserRole
+    isActive?: boolean
+    failedLogins?: number
+    lockedUntil?: Date | string | null
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
+  }
+
+  export type TenantUserUncheckedCreateWithoutTenantInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    firstName?: string | null
+    lastName?: string | null
+    role?: $Enums.TenantUserRole
+    isActive?: boolean
+    failedLogins?: number
+    lockedUntil?: Date | string | null
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type TenantUserCreateOrConnectWithoutTenantInput = {
+    where: TenantUserWhereUniqueInput
+    create: XOR<TenantUserCreateWithoutTenantInput, TenantUserUncheckedCreateWithoutTenantInput>
+  }
+
+  export type TenantUserCreateManyTenantInputEnvelope = {
+    data: TenantUserCreateManyTenantInput | TenantUserCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type InvitationCreateWithoutTenantInput = {
+    id?: string
+    email: string
+    role?: $Enums.TenantUserRole
+    tokenHash: string
+    expiresAt: Date | string
+    acceptedAt?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+  }
+
+  export type InvitationUncheckedCreateWithoutTenantInput = {
+    id?: string
+    email: string
+    role?: $Enums.TenantUserRole
+    tokenHash: string
+    expiresAt: Date | string
+    acceptedAt?: Date | string | null
+    createdBy: string
+    createdAt?: Date | string
+  }
+
+  export type InvitationCreateOrConnectWithoutTenantInput = {
+    where: InvitationWhereUniqueInput
+    create: XOR<InvitationCreateWithoutTenantInput, InvitationUncheckedCreateWithoutTenantInput>
+  }
+
+  export type InvitationCreateManyTenantInputEnvelope = {
+    data: InvitationCreateManyTenantInput | InvitationCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
   export type ConsentUpsertWithWhereUniqueWithoutTenantInput = {
     where: ConsentWhereUniqueInput
     update: XOR<ConsentUpdateWithoutTenantInput, ConsentUncheckedUpdateWithoutTenantInput>
@@ -23501,10 +30004,552 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"WebhookDelivery"> | Date | string
   }
 
+  export type TenantUserUpsertWithWhereUniqueWithoutTenantInput = {
+    where: TenantUserWhereUniqueInput
+    update: XOR<TenantUserUpdateWithoutTenantInput, TenantUserUncheckedUpdateWithoutTenantInput>
+    create: XOR<TenantUserCreateWithoutTenantInput, TenantUserUncheckedCreateWithoutTenantInput>
+  }
+
+  export type TenantUserUpdateWithWhereUniqueWithoutTenantInput = {
+    where: TenantUserWhereUniqueInput
+    data: XOR<TenantUserUpdateWithoutTenantInput, TenantUserUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type TenantUserUpdateManyWithWhereWithoutTenantInput = {
+    where: TenantUserScalarWhereInput
+    data: XOR<TenantUserUpdateManyMutationInput, TenantUserUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type TenantUserScalarWhereInput = {
+    AND?: TenantUserScalarWhereInput | TenantUserScalarWhereInput[]
+    OR?: TenantUserScalarWhereInput[]
+    NOT?: TenantUserScalarWhereInput | TenantUserScalarWhereInput[]
+    id?: StringFilter<"TenantUser"> | string
+    tenantId?: StringFilter<"TenantUser"> | string
+    email?: StringFilter<"TenantUser"> | string
+    passwordHash?: StringFilter<"TenantUser"> | string
+    firstName?: StringNullableFilter<"TenantUser"> | string | null
+    lastName?: StringNullableFilter<"TenantUser"> | string | null
+    role?: EnumTenantUserRoleFilter<"TenantUser"> | $Enums.TenantUserRole
+    isActive?: BoolFilter<"TenantUser"> | boolean
+    failedLogins?: IntFilter<"TenantUser"> | number
+    lockedUntil?: DateTimeNullableFilter<"TenantUser"> | Date | string | null
+    lastLoginAt?: DateTimeNullableFilter<"TenantUser"> | Date | string | null
+    createdAt?: DateTimeFilter<"TenantUser"> | Date | string
+    updatedAt?: DateTimeFilter<"TenantUser"> | Date | string
+  }
+
+  export type InvitationUpsertWithWhereUniqueWithoutTenantInput = {
+    where: InvitationWhereUniqueInput
+    update: XOR<InvitationUpdateWithoutTenantInput, InvitationUncheckedUpdateWithoutTenantInput>
+    create: XOR<InvitationCreateWithoutTenantInput, InvitationUncheckedCreateWithoutTenantInput>
+  }
+
+  export type InvitationUpdateWithWhereUniqueWithoutTenantInput = {
+    where: InvitationWhereUniqueInput
+    data: XOR<InvitationUpdateWithoutTenantInput, InvitationUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type InvitationUpdateManyWithWhereWithoutTenantInput = {
+    where: InvitationScalarWhereInput
+    data: XOR<InvitationUpdateManyMutationInput, InvitationUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type InvitationScalarWhereInput = {
+    AND?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+    OR?: InvitationScalarWhereInput[]
+    NOT?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+    id?: StringFilter<"Invitation"> | string
+    tenantId?: StringFilter<"Invitation"> | string
+    email?: StringFilter<"Invitation"> | string
+    role?: EnumTenantUserRoleFilter<"Invitation"> | $Enums.TenantUserRole
+    tokenHash?: StringFilter<"Invitation"> | string
+    expiresAt?: DateTimeFilter<"Invitation"> | Date | string
+    acceptedAt?: DateTimeNullableFilter<"Invitation"> | Date | string | null
+    createdBy?: StringFilter<"Invitation"> | string
+    createdAt?: DateTimeFilter<"Invitation"> | Date | string
+  }
+
+  export type TenantCreateWithoutUsersInput = {
+    id?: string
+    name: string
+    slug: string
+    status?: $Enums.TenantStatus
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentCreateNestedManyWithoutTenantInput
+    policies?: PolicyCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
+    apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
+    outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
+    webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
+    invitations?: InvitationCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutUsersInput = {
+    id?: string
+    name: string
+    slug: string
+    status?: $Enums.TenantStatus
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
+    policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookUncheckedCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
+    outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
+    webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutUsersInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutUsersInput, TenantUncheckedCreateWithoutUsersInput>
+  }
+
+  export type SessionCreateWithoutUserInput = {
+    id?: string
+    refreshTokenHash: string
+    device?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    lastUsedAt?: Date | string
+    expiresAt: Date | string
+    revokedAt?: Date | string | null
+    replacedBy?: string | null
+  }
+
+  export type SessionUncheckedCreateWithoutUserInput = {
+    id?: string
+    refreshTokenHash: string
+    device?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    lastUsedAt?: Date | string
+    expiresAt: Date | string
+    revokedAt?: Date | string | null
+    replacedBy?: string | null
+  }
+
+  export type SessionCreateOrConnectWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionCreateManyUserInputEnvelope = {
+    data: SessionCreateManyUserInput | SessionCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type PasswordResetTokenCreateWithoutUserInput = {
+    id?: string
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type PasswordResetTokenUncheckedCreateWithoutUserInput = {
+    id?: string
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type PasswordResetTokenCreateOrConnectWithoutUserInput = {
+    where: PasswordResetTokenWhereUniqueInput
+    create: XOR<PasswordResetTokenCreateWithoutUserInput, PasswordResetTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type PasswordResetTokenCreateManyUserInputEnvelope = {
+    data: PasswordResetTokenCreateManyUserInput | PasswordResetTokenCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutUsersInput = {
+    update: XOR<TenantUpdateWithoutUsersInput, TenantUncheckedUpdateWithoutUsersInput>
+    create: XOR<TenantCreateWithoutUsersInput, TenantUncheckedCreateWithoutUsersInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutUsersInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutUsersInput, TenantUncheckedUpdateWithoutUsersInput>
+  }
+
+  export type TenantUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
+    apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
+    outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
+    webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutUsersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUncheckedUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
+    outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
+    webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type SessionUpsertWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    update: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+    create: XOR<SessionCreateWithoutUserInput, SessionUncheckedCreateWithoutUserInput>
+  }
+
+  export type SessionUpdateWithWhereUniqueWithoutUserInput = {
+    where: SessionWhereUniqueInput
+    data: XOR<SessionUpdateWithoutUserInput, SessionUncheckedUpdateWithoutUserInput>
+  }
+
+  export type SessionUpdateManyWithWhereWithoutUserInput = {
+    where: SessionScalarWhereInput
+    data: XOR<SessionUpdateManyMutationInput, SessionUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type SessionScalarWhereInput = {
+    AND?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    OR?: SessionScalarWhereInput[]
+    NOT?: SessionScalarWhereInput | SessionScalarWhereInput[]
+    id?: StringFilter<"Session"> | string
+    userId?: StringFilter<"Session"> | string
+    refreshTokenHash?: StringFilter<"Session"> | string
+    device?: StringNullableFilter<"Session"> | string | null
+    ipAddress?: StringNullableFilter<"Session"> | string | null
+    userAgent?: StringNullableFilter<"Session"> | string | null
+    createdAt?: DateTimeFilter<"Session"> | Date | string
+    lastUsedAt?: DateTimeFilter<"Session"> | Date | string
+    expiresAt?: DateTimeFilter<"Session"> | Date | string
+    revokedAt?: DateTimeNullableFilter<"Session"> | Date | string | null
+    replacedBy?: StringNullableFilter<"Session"> | string | null
+  }
+
+  export type PasswordResetTokenUpsertWithWhereUniqueWithoutUserInput = {
+    where: PasswordResetTokenWhereUniqueInput
+    update: XOR<PasswordResetTokenUpdateWithoutUserInput, PasswordResetTokenUncheckedUpdateWithoutUserInput>
+    create: XOR<PasswordResetTokenCreateWithoutUserInput, PasswordResetTokenUncheckedCreateWithoutUserInput>
+  }
+
+  export type PasswordResetTokenUpdateWithWhereUniqueWithoutUserInput = {
+    where: PasswordResetTokenWhereUniqueInput
+    data: XOR<PasswordResetTokenUpdateWithoutUserInput, PasswordResetTokenUncheckedUpdateWithoutUserInput>
+  }
+
+  export type PasswordResetTokenUpdateManyWithWhereWithoutUserInput = {
+    where: PasswordResetTokenScalarWhereInput
+    data: XOR<PasswordResetTokenUpdateManyMutationInput, PasswordResetTokenUncheckedUpdateManyWithoutUserInput>
+  }
+
+  export type PasswordResetTokenScalarWhereInput = {
+    AND?: PasswordResetTokenScalarWhereInput | PasswordResetTokenScalarWhereInput[]
+    OR?: PasswordResetTokenScalarWhereInput[]
+    NOT?: PasswordResetTokenScalarWhereInput | PasswordResetTokenScalarWhereInput[]
+    id?: StringFilter<"PasswordResetToken"> | string
+    userId?: StringFilter<"PasswordResetToken"> | string
+    tokenHash?: StringFilter<"PasswordResetToken"> | string
+    expiresAt?: DateTimeFilter<"PasswordResetToken"> | Date | string
+    usedAt?: DateTimeNullableFilter<"PasswordResetToken"> | Date | string | null
+    createdAt?: DateTimeFilter<"PasswordResetToken"> | Date | string
+  }
+
+  export type TenantUserCreateWithoutSessionsInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    firstName?: string | null
+    lastName?: string | null
+    role?: $Enums.TenantUserRole
+    isActive?: boolean
+    failedLogins?: number
+    lockedUntil?: Date | string | null
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutUsersInput
+    passwordResetTokens?: PasswordResetTokenCreateNestedManyWithoutUserInput
+  }
+
+  export type TenantUserUncheckedCreateWithoutSessionsInput = {
+    id?: string
+    tenantId: string
+    email: string
+    passwordHash: string
+    firstName?: string | null
+    lastName?: string | null
+    role?: $Enums.TenantUserRole
+    isActive?: boolean
+    failedLogins?: number
+    lockedUntil?: Date | string | null
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    passwordResetTokens?: PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type TenantUserCreateOrConnectWithoutSessionsInput = {
+    where: TenantUserWhereUniqueInput
+    create: XOR<TenantUserCreateWithoutSessionsInput, TenantUserUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type TenantUserUpsertWithoutSessionsInput = {
+    update: XOR<TenantUserUpdateWithoutSessionsInput, TenantUserUncheckedUpdateWithoutSessionsInput>
+    create: XOR<TenantUserCreateWithoutSessionsInput, TenantUserUncheckedCreateWithoutSessionsInput>
+    where?: TenantUserWhereInput
+  }
+
+  export type TenantUserUpdateToOneWithWhereWithoutSessionsInput = {
+    where?: TenantUserWhereInput
+    data: XOR<TenantUserUpdateWithoutSessionsInput, TenantUserUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type TenantUserUpdateWithoutSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    failedLogins?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
+    passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
+  }
+
+  export type TenantUserUncheckedUpdateWithoutSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    failedLogins?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type TenantCreateWithoutInvitationsInput = {
+    id?: string
+    name: string
+    slug: string
+    status?: $Enums.TenantStatus
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentCreateNestedManyWithoutTenantInput
+    policies?: PolicyCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
+    apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
+    outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
+    webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
+    users?: TenantUserCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutInvitationsInput = {
+    id?: string
+    name: string
+    slug: string
+    status?: $Enums.TenantStatus
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
+    policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookUncheckedCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
+    outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
+    webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
+    users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutInvitationsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutInvitationsInput, TenantUncheckedCreateWithoutInvitationsInput>
+  }
+
+  export type TenantUpsertWithoutInvitationsInput = {
+    update: XOR<TenantUpdateWithoutInvitationsInput, TenantUncheckedUpdateWithoutInvitationsInput>
+    create: XOR<TenantCreateWithoutInvitationsInput, TenantUncheckedCreateWithoutInvitationsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutInvitationsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutInvitationsInput, TenantUncheckedUpdateWithoutInvitationsInput>
+  }
+
+  export type TenantUpdateWithoutInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
+    apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
+    outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
+    webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutInvitationsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUncheckedUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
+    outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
+    webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUserCreateWithoutPasswordResetTokensInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    firstName?: string | null
+    lastName?: string | null
+    role?: $Enums.TenantUserRole
+    isActive?: boolean
+    failedLogins?: number
+    lockedUntil?: Date | string | null
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutUsersInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+  }
+
+  export type TenantUserUncheckedCreateWithoutPasswordResetTokensInput = {
+    id?: string
+    tenantId: string
+    email: string
+    passwordHash: string
+    firstName?: string | null
+    lastName?: string | null
+    role?: $Enums.TenantUserRole
+    isActive?: boolean
+    failedLogins?: number
+    lockedUntil?: Date | string | null
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type TenantUserCreateOrConnectWithoutPasswordResetTokensInput = {
+    where: TenantUserWhereUniqueInput
+    create: XOR<TenantUserCreateWithoutPasswordResetTokensInput, TenantUserUncheckedCreateWithoutPasswordResetTokensInput>
+  }
+
+  export type TenantUserUpsertWithoutPasswordResetTokensInput = {
+    update: XOR<TenantUserUpdateWithoutPasswordResetTokensInput, TenantUserUncheckedUpdateWithoutPasswordResetTokensInput>
+    create: XOR<TenantUserCreateWithoutPasswordResetTokensInput, TenantUserUncheckedCreateWithoutPasswordResetTokensInput>
+    where?: TenantUserWhereInput
+  }
+
+  export type TenantUserUpdateToOneWithWhereWithoutPasswordResetTokensInput = {
+    where?: TenantUserWhereInput
+    data: XOR<TenantUserUpdateWithoutPasswordResetTokensInput, TenantUserUncheckedUpdateWithoutPasswordResetTokensInput>
+  }
+
+  export type TenantUserUpdateWithoutPasswordResetTokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    failedLogins?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutUsersNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+  }
+
+  export type TenantUserUncheckedUpdateWithoutPasswordResetTokensInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    failedLogins?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+  }
+
   export type TenantCreateWithoutOutboxEventsInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23515,12 +30560,15 @@ export namespace Prisma {
     webhooks?: WebhookCreateNestedManyWithoutTenantInput
     internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
+    users?: TenantUserCreateNestedManyWithoutTenantInput
+    invitations?: InvitationCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutOutboxEventsInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23531,6 +30579,8 @@ export namespace Prisma {
     webhooks?: WebhookUncheckedCreateNestedManyWithoutTenantInput
     internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
+    users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutOutboxEventsInput = {
@@ -23553,6 +30603,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23563,12 +30614,15 @@ export namespace Prisma {
     webhooks?: WebhookUpdateManyWithoutTenantNestedInput
     internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutOutboxEventsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23579,6 +30633,8 @@ export namespace Prisma {
     webhooks?: WebhookUncheckedUpdateManyWithoutTenantNestedInput
     internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type WebhookCreateWithoutCircuitBreakerInput = {
@@ -23653,6 +30709,7 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23663,12 +30720,15 @@ export namespace Prisma {
     webhooks?: WebhookCreateNestedManyWithoutTenantInput
     internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
+    users?: TenantUserCreateNestedManyWithoutTenantInput
+    invitations?: InvitationCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutWebhookDeliveriesInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23679,6 +30739,8 @@ export namespace Prisma {
     webhooks?: WebhookUncheckedCreateNestedManyWithoutTenantInput
     internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
+    users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutWebhookDeliveriesInput = {
@@ -23762,6 +30824,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23772,12 +30835,15 @@ export namespace Prisma {
     webhooks?: WebhookUpdateManyWithoutTenantNestedInput
     internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutWebhookDeliveriesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -23788,6 +30854,8 @@ export namespace Prisma {
     webhooks?: WebhookUncheckedUpdateManyWithoutTenantNestedInput
     internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type WebhookUpsertWithoutDeliveriesInput = {
@@ -23937,6 +31005,7 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23947,12 +31016,15 @@ export namespace Prisma {
     internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
+    users?: TenantUserCreateNestedManyWithoutTenantInput
+    invitations?: InvitationCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutPoliciesInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -23963,6 +31035,8 @@ export namespace Prisma {
     internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
+    users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutPoliciesInput = {
@@ -24015,6 +31089,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24025,12 +31100,15 @@ export namespace Prisma {
     internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutPoliciesInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24041,6 +31119,8 @@ export namespace Prisma {
     internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type ConsentUpsertWithWhereUniqueWithoutPolicyInput = {
@@ -24063,6 +31143,7 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24073,12 +31154,15 @@ export namespace Prisma {
     internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
+    users?: TenantUserCreateNestedManyWithoutTenantInput
+    invitations?: InvitationCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutConsentsInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24089,6 +31173,8 @@ export namespace Prisma {
     internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
+    users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutConsentsInput = {
@@ -24140,6 +31226,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24150,12 +31237,15 @@ export namespace Prisma {
     internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutConsentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24166,6 +31256,8 @@ export namespace Prisma {
     internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type PolicyUpsertWithoutConsentsInput = {
@@ -24207,6 +31299,7 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24217,12 +31310,15 @@ export namespace Prisma {
     internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
+    users?: TenantUserCreateNestedManyWithoutTenantInput
+    invitations?: InvitationCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutAuditLogsInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24233,6 +31329,8 @@ export namespace Prisma {
     internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
+    users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutAuditLogsInput = {
@@ -24255,6 +31353,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24265,12 +31364,15 @@ export namespace Prisma {
     internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutAuditLogsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24281,12 +31383,15 @@ export namespace Prisma {
     internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateWithoutApiKeysInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24297,12 +31402,15 @@ export namespace Prisma {
     internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
+    users?: TenantUserCreateNestedManyWithoutTenantInput
+    invitations?: InvitationCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutApiKeysInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24313,6 +31421,8 @@ export namespace Prisma {
     internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
+    users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutApiKeysInput = {
@@ -24335,6 +31445,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24345,12 +31456,15 @@ export namespace Prisma {
     internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutApiKeysInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24361,12 +31475,15 @@ export namespace Prisma {
     internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateWithoutWebhooksInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24377,12 +31494,15 @@ export namespace Prisma {
     internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
+    users?: TenantUserCreateNestedManyWithoutTenantInput
+    invitations?: InvitationCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutWebhooksInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24393,6 +31513,8 @@ export namespace Prisma {
     internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
+    users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutWebhooksInput = {
@@ -24478,6 +31600,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24488,12 +31611,15 @@ export namespace Prisma {
     internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutWebhooksInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24504,6 +31630,8 @@ export namespace Prisma {
     internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type WebhookCircuitBreakerUpsertWithoutWebhookInput = {
@@ -24555,6 +31683,7 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24565,12 +31694,15 @@ export namespace Prisma {
     webhooks?: WebhookCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
+    users?: TenantUserCreateNestedManyWithoutTenantInput
+    invitations?: InvitationCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutInternalEventsInput = {
     id?: string
     name: string
     slug: string
+    status?: $Enums.TenantStatus
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -24581,6 +31713,8 @@ export namespace Prisma {
     webhooks?: WebhookUncheckedCreateNestedManyWithoutTenantInput
     outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
+    users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutInternalEventsInput = {
@@ -24603,6 +31737,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24613,12 +31748,15 @@ export namespace Prisma {
     webhooks?: WebhookUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutInternalEventsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -24629,6 +31767,8 @@ export namespace Prisma {
     webhooks?: WebhookUncheckedUpdateManyWithoutTenantNestedInput
     outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type ConsentCreateManyTenantInput = {
@@ -24719,6 +31859,32 @@ export namespace Prisma {
     responseHeaders?: NullableJsonNullValueInput | InputJsonValue
     duration: number
     errorMessage?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TenantUserCreateManyTenantInput = {
+    id?: string
+    email: string
+    passwordHash: string
+    firstName?: string | null
+    lastName?: string | null
+    role?: $Enums.TenantUserRole
+    isActive?: boolean
+    failedLogins?: number
+    lockedUntil?: Date | string | null
+    lastLoginAt?: Date | string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type InvitationCreateManyTenantInput = {
+    id?: string
+    email: string
+    role?: $Enums.TenantUserRole
+    tokenHash: string
+    expiresAt: Date | string
+    acceptedAt?: Date | string | null
+    createdBy: string
     createdAt?: Date | string
   }
 
@@ -25000,6 +32166,172 @@ export namespace Prisma {
     responseHeaders?: NullableJsonNullValueInput | InputJsonValue
     duration?: IntFieldUpdateOperationsInput | number
     errorMessage?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TenantUserUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    failedLogins?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    passwordResetTokens?: PasswordResetTokenUpdateManyWithoutUserNestedInput
+  }
+
+  export type TenantUserUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    failedLogins?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    passwordResetTokens?: PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type TenantUserUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    passwordHash?: StringFieldUpdateOperationsInput | string
+    firstName?: NullableStringFieldUpdateOperationsInput | string | null
+    lastName?: NullableStringFieldUpdateOperationsInput | string | null
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    failedLogins?: IntFieldUpdateOperationsInput | number
+    lockedUntil?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    lastLoginAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvitationUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvitationUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type InvitationUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    role?: EnumTenantUserRoleFieldUpdateOperationsInput | $Enums.TenantUserRole
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    acceptedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdBy?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SessionCreateManyUserInput = {
+    id?: string
+    refreshTokenHash: string
+    device?: string | null
+    ipAddress?: string | null
+    userAgent?: string | null
+    createdAt?: Date | string
+    lastUsedAt?: Date | string
+    expiresAt: Date | string
+    revokedAt?: Date | string | null
+    replacedBy?: string | null
+  }
+
+  export type PasswordResetTokenCreateManyUserInput = {
+    id?: string
+    tokenHash: string
+    expiresAt: Date | string
+    usedAt?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type SessionUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refreshTokenHash?: StringFieldUpdateOperationsInput | string
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    replacedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SessionUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refreshTokenHash?: StringFieldUpdateOperationsInput | string
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    replacedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type SessionUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    refreshTokenHash?: StringFieldUpdateOperationsInput | string
+    device?: NullableStringFieldUpdateOperationsInput | string | null
+    ipAddress?: NullableStringFieldUpdateOperationsInput | string | null
+    userAgent?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    lastUsedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    revokedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    replacedBy?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type PasswordResetTokenUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PasswordResetTokenUncheckedUpdateWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PasswordResetTokenUncheckedUpdateManyWithoutUserInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tokenHash?: StringFieldUpdateOperationsInput | string
+    expiresAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    usedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

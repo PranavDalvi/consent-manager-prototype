@@ -1,5 +1,23 @@
 import { prisma } from "../db/prisma";
 
+export async function createAuditLog(params: {
+  tenantId: string;
+  userId?: string;
+  action: string;
+  purpose?: string;
+  metadata?: any;
+}) {
+  return prisma.auditLog.create({
+    data: {
+      tenantId: params.tenantId,
+      userId: params.userId || "system",
+      action: params.action,
+      purpose: params.purpose || "system_action",
+      metadata: params.metadata ?? null,
+    },
+  });
+}
+
 export async function fetchAuditLogs(
   tenantId: string,
   filters: { userId?: string; action?: string; page?: number; limit?: number }

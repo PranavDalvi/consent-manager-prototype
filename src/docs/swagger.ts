@@ -21,6 +21,11 @@ const options: swaggerJsdoc.Options = {
           in: "header",
           name: "X-API-Key",
         },
+        BearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
       },
       schemas: {
         WebhookDeliveryPayload: {

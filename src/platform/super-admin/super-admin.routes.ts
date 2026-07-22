@@ -8,6 +8,11 @@ import {
   getPlatformWebhooksHandler,
   getPlatformSystemHandler,
   getPlatformTenantsHandler,
+  createPlatformTenantHandler,
+  getPlatformTenantDetailsHandler,
+  updatePlatformTenantHandler,
+  updatePlatformTenantStatusHandler,
+  deletePlatformTenantHandler,
   getPlatformLogsHandler,
 } from "./super-admin.controller";
 import { superAdminAuthMiddleware } from "./super-admin.middleware";
@@ -80,6 +85,11 @@ router.post("/workers/:workerId/action", superAdminAuthMiddleware, workerActionH
 router.get("/webhooks", superAdminAuthMiddleware, getPlatformWebhooksHandler);
 router.get("/system", superAdminAuthMiddleware, getPlatformSystemHandler);
 router.get("/tenants", superAdminAuthMiddleware, getPlatformTenantsHandler);
+router.post("/tenants", superAdminAuthMiddleware, createPlatformTenantHandler);
+router.get("/tenants/:tenantId", superAdminAuthMiddleware, getPlatformTenantDetailsHandler);
+router.patch("/tenants/:tenantId", superAdminAuthMiddleware, updatePlatformTenantHandler);
+router.patch("/tenants/:tenantId/status", superAdminAuthMiddleware, updatePlatformTenantStatusHandler);
+router.delete("/tenants/:tenantId", superAdminAuthMiddleware, deletePlatformTenantHandler);
 router.get("/logs", superAdminAuthMiddleware, getPlatformLogsHandler);
 
 // Reliability Platform Endpoints

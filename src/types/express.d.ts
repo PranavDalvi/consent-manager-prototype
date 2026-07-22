@@ -5,7 +5,11 @@ declare global {
     interface Request {
       auth?: {
         tenantId: string;
-        apiKeyId: string;
+        userId?: string;
+        role?: string;
+        sessionId?: string;
+        apiKeyId?: string;
+        authType?: "JWT" | "API_KEY";
       };
       superAdmin?: {
         id: string;

@@ -4,12 +4,20 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AlertTriangle, X } from "lucide-react";
 
 import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
+import { AcceptInvite } from "./pages/AcceptInvite";
+import { ForgotPassword } from "./pages/ForgotPassword";
+import { ResetPassword } from "./pages/ResetPassword";
+
 import { Dashboard } from "./pages/Dashboard";
 import { ApiKeys } from "./pages/ApiKeys";
 import { Policies } from "./pages/Policies";
 import { Consents } from "./pages/Consents";
 import { AuditLogs } from "./pages/AuditLogs";
 import { Webhooks } from "./pages/Webhooks";
+import { Team } from "./pages/Team";
+import { Profile } from "./pages/Profile";
+import { Settings } from "./pages/Settings";
 
 import { PlatformLogin } from "./pages/platform/PlatformLogin";
 import { PlatformDashboard } from "./pages/platform/PlatformDashboard";
@@ -51,10 +59,18 @@ export default function App() {
     const handleUnauthorized = (e: Event) => {
       const customEvent = e as CustomEvent;
       setNotification({
-        message: customEvent.detail?.message || "Session expired or API key is invalid. Please log in again.",
+        message: customEvent.detail?.message || "Session expired. Please log in again.",
         type: "error",
       });
-      if (window.location.pathname !== "/login" && !window.location.pathname.startsWith("/platform")) {
+      const pathname = window.location.pathname;
+      if (
+        pathname !== "/login" &&
+        pathname !== "/register" &&
+        pathname !== "/accept-invite" &&
+        pathname !== "/forgot-password" &&
+        pathname !== "/reset-password" &&
+        !pathname.startsWith("/platform")
+      ) {
         window.location.href = "/login";
       }
     };
@@ -118,8 +134,14 @@ export default function App() {
 
         <BrowserRouter>
           <Routes>
-            {/* Tenant Authentication & Routes */}
+            {/* Public Authentication & Onboarding Routes */}
             <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/accept-invite" element={<AcceptInvite />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
+
+            {/* Protected Tenant Portal Routes */}
             <Route element={<ProtectedRoute />}>
               <Route path="/" element={<Dashboard />} />
               <Route path="/policies" element={<Policies />} />
@@ -127,6 +149,9 @@ export default function App() {
               <Route path="/consents" element={<Consents />} />
               <Route path="/audit-logs" element={<AuditLogs />} />
               <Route path="/webhooks" element={<Webhooks />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/settings" element={<Settings />} />
             </Route>
 
             {/* Super Admin Platform Routes */}

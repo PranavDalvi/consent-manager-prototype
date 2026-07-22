@@ -7,6 +7,9 @@ import {
   UserCheck,
   FileSpreadsheet,
   Webhook,
+  Users,
+  User,
+  Settings as SettingsIcon,
   LogOut,
   Menu,
   X,
@@ -15,6 +18,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 import { API_KEY_STORAGE_KEY } from "../services/apiClient";
+import { authService } from "../services/authService";
 
 interface SidebarItem {
   name: string;
@@ -29,6 +33,9 @@ const SIDEBAR_ITEMS: SidebarItem[] = [
   { name: "Consents", path: "/consents", icon: UserCheck },
   { name: "Audit Logs", path: "/audit-logs", icon: FileSpreadsheet },
   { name: "Webhooks", path: "/webhooks", icon: Webhook },
+  { name: "Team", path: "/team", icon: Users },
+  { name: "Profile", path: "/profile", icon: User },
+  { name: "Settings", path: "/settings", icon: SettingsIcon },
 ];
 
 export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -51,8 +58,9 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
     }
   }, [isDarkMode]);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     localStorage.removeItem(API_KEY_STORAGE_KEY);
+    await authService.logout().catch(() => {});
     navigate("/login");
   };
 

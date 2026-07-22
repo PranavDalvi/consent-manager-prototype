@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { apiKeyAuthMiddleware } from "../middlewares/api-key-auth.middleware";
+import { tenantAuthMiddleware } from "../middlewares/tenant-auth.middleware";
 import { validate } from "../middlewares/validate.middleware";
 import { createPolicySchema, createPolicyVersionSchema, policyIdSchema } from "../validators/policy.validator";
 import { archivePolicyHandler, createPolicyHandler, createPolicyVersionHandler, getPolicyHandler, listPoliciesHandler, listPolicyVersionsHandler } from "../controllers/policy.controller";
@@ -16,7 +16,7 @@ const router = Router();
  *     security:
  *       - ApiKeyAuth: []
  */
-router.post("/", apiKeyAuthMiddleware, validate(createPolicySchema, "body"), createPolicyHandler);
+router.post("/", tenantAuthMiddleware, validate(createPolicySchema, "body"), createPolicyHandler);
 /**
  * @swagger
  * /policies:
@@ -27,7 +27,7 @@ router.post("/", apiKeyAuthMiddleware, validate(createPolicySchema, "body"), cre
  *     security:
  *       - ApiKeyAuth: []
  */
-router.get("/", apiKeyAuthMiddleware, listPoliciesHandler);
+router.get("/", tenantAuthMiddleware, listPoliciesHandler);
 /**
  * @swagger
  * /policies/{id}:
@@ -38,7 +38,7 @@ router.get("/", apiKeyAuthMiddleware, listPoliciesHandler);
  *     security:
  *       - ApiKeyAuth: []
  */
-router.get("/:id", apiKeyAuthMiddleware, validate(policyIdSchema, "params"), getPolicyHandler);
+router.get("/:id", tenantAuthMiddleware, validate(policyIdSchema, "params"), getPolicyHandler);
 /**
  * @swagger
  * /policies/{id}/archive:
@@ -49,7 +49,7 @@ router.get("/:id", apiKeyAuthMiddleware, validate(policyIdSchema, "params"), get
  *     security:
  *       - ApiKeyAuth: []
  */
-router.patch("/:id/archive", apiKeyAuthMiddleware, validate(policyIdSchema, "params"), archivePolicyHandler);
+router.patch("/:id/archive", tenantAuthMiddleware, validate(policyIdSchema, "params"), archivePolicyHandler);
 /**
  * @swagger
  * /policies/{id}/versions:
@@ -60,7 +60,7 @@ router.patch("/:id/archive", apiKeyAuthMiddleware, validate(policyIdSchema, "par
  *     security:
  *       - ApiKeyAuth: []
  */
-router.post("/:id/versions", apiKeyAuthMiddleware, validate(createPolicyVersionSchema, "body"), createPolicyVersionHandler);
+router.post("/:id/versions", tenantAuthMiddleware, validate(createPolicyVersionSchema, "body"), createPolicyVersionHandler);
 /**
  * @swagger
  * /policies/{id}/versions:
@@ -71,6 +71,6 @@ router.post("/:id/versions", apiKeyAuthMiddleware, validate(createPolicyVersionS
  *     security:
  *       - ApiKeyAuth: []
  */
-router.get("/:id/versions", apiKeyAuthMiddleware, validate(policyIdSchema, "params"), listPolicyVersionsHandler);
+router.get("/:id/versions", tenantAuthMiddleware, validate(policyIdSchema, "params"), listPolicyVersionsHandler);
 
 export default router;

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { apiKeyAuthMiddleware } from "../middlewares/api-key-auth.middleware";
+import { tenantAuthMiddleware } from "../middlewares/tenant-auth.middleware";
 import { prisma } from "../db/prisma";
 
 const router = Router();
@@ -14,7 +14,7 @@ const router = Router();
  *     tags:
  *       - Events
  */
-router.get("/", apiKeyAuthMiddleware, async (req, res, next) => {
+router.get("/", tenantAuthMiddleware, async (req, res, next) => {
   try {
     const tenantId = req.auth?.tenantId;
     if (!tenantId) {

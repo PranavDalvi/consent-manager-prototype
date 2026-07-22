@@ -14,13 +14,28 @@ enum ConsentStatus {
   REVOKED
 }
 
+enum TenantStatus {
+  ACTIVE
+  SUSPENDED
+  ARCHIVED
+  DELETED
+}
+
+enum TenantUserRole {
+  OWNER
+  ADMIN
+  DEVELOPER
+  VIEWER
+}
+
 model Tenant {
-  id        String   @id @default(cuid())
+  id        String       @id @default(cuid())
   name      String
-  slug      String   @unique
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  slug      String       @unique
+  status    TenantStatus @default(ACTIVE)
+  isActive  Boolean      @default(true)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
 
   consents          Consent[]
   policies          Policy[]
@@ -30,8 +45,83 @@ model Tenant {
   internalEvents    InternalEvent[]
   outboxEvents      OutboxEvent[]
   webhookDeliveries WebhookDelivery[]
+  users             TenantUser[]
+  invitations       Invitation[]
 
   @@index([isActive])
+  @@index([status])
+}
+
+model TenantUser {
+  id           String         @id @default(cuid())
+  tenantId     String
+  tenant       Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  email        String
+  passwordHash String
+  firstName    String?
+  lastName     String?
+  role         TenantUserRole @default(OWNER)
+  isActive     Boolean        @default(true)
+  failedLogins Int            @default(0)
+  lockedUntil  DateTime?
+  lastLoginAt  DateTime?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  sessions            Session[]
+  passwordResetTokens PasswordResetToken[]
+
+  @@unique([tenantId, email])
+  @@index([tenantId])
+  @@index([email])
+}
+
+model Session {
+  id               String     @id @default(cuid())
+  userId           String
+  user             TenantUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  refreshTokenHash String     @unique
+  device           String?
+  ipAddress        String?
+  userAgent        String?
+  createdAt        DateTime   @default(now())
+  lastUsedAt       DateTime   @default(now())
+  expiresAt        DateTime
+  revokedAt        DateTime?
+  replacedBy       String?
+
+  @@index([userId])
+  @@index([refreshTokenHash])
+}
+
+model Invitation {
+  id         String         @id @default(cuid())
+  tenantId   String
+  tenant     Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  email      String
+  role       TenantUserRole @default(DEVELOPER)
+  tokenHash  String         @unique
+  expiresAt  DateTime
+  acceptedAt DateTime?
+  createdBy  String
+  createdAt  DateTime       @default(now())
+
+  @@index([tenantId])
+  @@index([email])
+  @@index([tokenHash])
+}
+
+model PasswordResetToken {
+  id        String     @id @default(cuid())
+  userId    String
+  user      TenantUser @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String     @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime   @default(now())
+
+  @@index([userId])
+  @@index([tokenHash])
 }
 
 enum CircuitBreakerState {

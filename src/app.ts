@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
-import { prisma } from "./db/prisma";
+import cookieParser from "cookie-parser";
+import { prisma } from "./lib/prisma";
 import consentRoutes from "./routes/consent.routes";
 import { errorHandler } from "./middlewares/error.middleware";
 import swaggerSpec from "./docs/swagger";
@@ -10,6 +11,8 @@ import apiKeyRoutes from "./routes/api-key.routes";
 import policyRoutes from "./routes/policy.routes";
 import webhookRoutes from "./routes/webhook.routes";
 import eventRoutes from "./routes/event.routes";
+import authRoutes from "./routes/auth.routes";
+import teamRoutes from "./routes/team.routes";
 
 import { initTracing } from "./platform/observability/tracing";
 import { observabilityMiddleware } from "./platform/observability/logging.middleware";
@@ -24,7 +27,13 @@ initTracing();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 // Observability and Metrics Middlewares
 app.use(observabilityMiddleware);
@@ -42,13 +51,17 @@ app.use("/", healthRoutes);
 // Platform Super Admin APIs
 app.use("/api/platform", superAdminRoutes);
 
+// Authentication & Team Management APIs
+app.use("/api/auth", authRoutes);
+app.use("/api/team", teamRoutes);
+
 // Legacy check endpoint
 app.get("/db-check", async (_req, res) => {
   const count = await prisma.consent.count();
   res.json({ consentCount: count });
 });
 
-// Tenant APIs
+// Tenant Resource APIs
 app.use("/api/consents", consentRoutes);
 app.use("/api/policies", policyRoutes);
 app.use("/api/audit", auditRoutes);

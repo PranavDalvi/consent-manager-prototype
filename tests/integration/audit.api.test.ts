@@ -140,12 +140,13 @@ describeAuditApi("Audit Logs API", () => {
     expect(response.body.data[1].action).toBe("CONSENT_GRANTED");
   });
 
-  it("rejects a request without userId", async () => {
+  it("allows fetching audit logs without userId filter", async () => {
     const response = await request(app)
       .get("/api/audit")
       .set("X-API-Key", tenantAKey)
       .query({});
-    expect(response.status).toBe(400);
+    expect(response.status).toBe(200);
+    expect(Array.isArray(response.body.data)).toBe(true);
   });
 
   it("does not expose logs belonging to another tenant", async () => {

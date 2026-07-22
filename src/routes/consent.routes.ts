@@ -1,12 +1,12 @@
 import { Router } from "express";
 import { checkConsentHandler, fetchUserConsentsHandler, grantConsentHandler, revokeConsentHandler, listConsentsHandler } from "../controllers/consent.controller";
-import { apiKeyAuthMiddleware } from "../middlewares/api-key-auth.middleware";
+import { tenantAuthMiddleware } from "../middlewares/tenant-auth.middleware";
 import { validate } from "../middlewares/validate.middleware";
 import { checkConsentSchema, fetchUserConsentsSchema, grantConsentSchema, revokeConsentSchema } from "../validators/consent.validator";
 
 const router = Router();
 
-router.get("/", apiKeyAuthMiddleware, listConsentsHandler);
+router.get("/", tenantAuthMiddleware, listConsentsHandler);
 
 /**
  * @swagger
@@ -35,7 +35,7 @@ router.get("/", apiKeyAuthMiddleware, listConsentsHandler);
  *       201:
  *         description: Consent granted
  */
-router.post("/", apiKeyAuthMiddleware, validate(grantConsentSchema, "body"), grantConsentHandler);
+router.post("/", tenantAuthMiddleware, validate(grantConsentSchema, "body"), grantConsentHandler);
 
 
 /**
@@ -55,7 +55,7 @@ router.post("/", apiKeyAuthMiddleware, validate(grantConsentSchema, "body"), gra
  *       200:
  *         description: Consent revoked
  */
-router.post("/revoke/:consentId", apiKeyAuthMiddleware, validate(revokeConsentSchema, "params"), revokeConsentHandler);
+router.post("/revoke/:consentId", tenantAuthMiddleware, validate(revokeConsentSchema, "params"), revokeConsentHandler);
 
 /**
  * @swagger
@@ -79,7 +79,7 @@ router.post("/revoke/:consentId", apiKeyAuthMiddleware, validate(revokeConsentSc
  *       200:
  *         description: Consent status checked
  */
-router.get("/check", apiKeyAuthMiddleware, validate(checkConsentSchema, "query"), checkConsentHandler);
+router.get("/check", tenantAuthMiddleware, validate(checkConsentSchema, "query"), checkConsentHandler);
 
 /**
  * @swagger
@@ -98,6 +98,6 @@ router.get("/check", apiKeyAuthMiddleware, validate(checkConsentSchema, "query")
 *       200:
 *         description: User consents fetched
 */
-router.get("/user/:userId", apiKeyAuthMiddleware, validate(fetchUserConsentsSchema, "params"), fetchUserConsentsHandler);
+router.get("/user/:userId", tenantAuthMiddleware, validate(fetchUserConsentsSchema, "params"), fetchUserConsentsHandler);
 
 export default router;

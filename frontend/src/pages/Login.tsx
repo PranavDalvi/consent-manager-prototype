@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { Key, Lock, AlertCircle } from "lucide-react";
+import { Lock, LogIn, AlertCircle } from "lucide-react";
 import { Input, Button, Card } from "../components/UI";
-import { API_KEY_STORAGE_KEY } from "../services/apiClient";
+import { authService } from "../services/authService";
 
 export const Login: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -14,28 +14,17 @@ export const Login: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<{ apiKey: string }>();
+  } = useForm<{ email: string; password: string; tenantSlug?: string }>();
 
-  const onSubmit = async (data: { apiKey: string }) => {
+  const onSubmit = async (data: { email: string; password: string; tenantSlug?: string }) => {
     setIsLoading(true);
     setError(null);
     try {
-      // Validate that the key works by hitting the policies endpoint or simple test endpoint
-      const response = await fetch("/api/policies", {
-        headers: {
-          "X-API-Key": data.apiKey,
-        },
-      });
-
-      if (response.ok) {
-        localStorage.setItem(API_KEY_STORAGE_KEY, data.apiKey);
-        navigate("/");
-      } else {
-        const errorData = await response.json().catch(() => ({}));
-        setError(errorData.message || "Invalid API key. Please check and try again.");
-      }
-    } catch (err) {
-      setError("Unable to connect to the server. Please check your connection.");
+      await authService.login(data);
+      navigate("/");
+    } catch (err: any) {
+      const msg = err.response?.data?.message || err.message || "Login failed. Please check your credentials.";
+      setError(msg);
     } finally {
       setIsLoading(false);
     }
@@ -48,9 +37,9 @@ export const Login: React.FC = () => {
           <div className="h-12 w-12 rounded-xl bg-primary text-primary-foreground flex items-center justify-center font-bold text-xl mb-4 shadow-lg shadow-primary/20">
             <Lock className="w-6 h-6 stroke-[2]" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight">Tenant Console</h1>
+          <h1 className="text-2xl font-bold tracking-tight">Tenant Portal Login</h1>
           <p className="text-sm text-muted-foreground mt-1.5">
-            Enter your API Key to access the Consent Manager console
+            Sign in to manage policies, consents, team, and security settings
           </p>
         </div>
 
@@ -61,22 +50,53 @@ export const Login: React.FC = () => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <Input
-            label="API Key"
-            type="password"
-            placeholder="X-API-Key..."
-            error={errors.apiKey?.message}
-            {...register("apiKey", {
-              required: "API Key is required to login",
-              minLength: { value: 5, message: "API Key must be at least 5 characters" },
+            label="Email Address"
+            type="email"
+            placeholder="user@organization.com"
+            error={errors.email?.message}
+            {...register("email", {
+              required: "Email is required",
+              pattern: { value: /^\S+@\S+$/i, message: "Invalid email address" },
             })}
           />
 
-          <Button type="submit" className="w-full h-11" loading={isLoading}>
-            <Key className="w-4 h-4" />
-            Authenticate
+          <Input
+            label="Password"
+            type="password"
+            placeholder="••••••••"
+            error={errors.password?.message}
+            {...register("password", {
+              required: "Password is required",
+            })}
+          />
+
+          <Input
+            label="Workspace / Tenant Slug (Optional)"
+            type="text"
+            placeholder="acme-corp"
+            error={errors.tenantSlug?.message}
+            {...register("tenantSlug")}
+          />
+
+          <div className="flex items-center justify-between text-sm py-1">
+            <Link to="/forgot-password" className="text-primary hover:underline text-xs font-medium">
+              Forgot password?
+            </Link>
+          </div>
+
+          <Button type="submit" className="w-full h-11 mt-2" loading={isLoading}>
+            <LogIn className="w-4 h-4 mr-2" />
+            Sign In
           </Button>
+
+          <div className="pt-4 border-t text-center text-sm text-muted-foreground">
+            Don't have an account?{" "}
+            <Link to="/register" className="text-primary font-semibold hover:underline">
+              Create a workspace
+            </Link>
+          </div>
         </form>
       </Card>
     </div>
