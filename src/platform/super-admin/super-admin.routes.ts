@@ -28,6 +28,10 @@ import {
   getReplaysHandler,
   getOutboxHandler,
   getCircuitBreakersHandler,
+  getDetailedQueuesHandler,
+  queueActionHandler,
+  getWorkersStatusHandler,
+  workerActionHandler,
 } from "../controllers/reliability.controller";
 
 const router = Router();
@@ -69,6 +73,10 @@ router.get("/overview", superAdminAuthMiddleware, getPlatformOverviewHandler);
 router.get("/metrics", superAdminAuthMiddleware, getPlatformMetricsHandler);
 router.get("/health", superAdminAuthMiddleware, getPlatformHealthHandler);
 router.get("/queues", superAdminAuthMiddleware, getPlatformQueuesHandler);
+router.get("/queues/detailed", superAdminAuthMiddleware, getDetailedQueuesHandler);
+router.post("/queues/:queueName/action", superAdminAuthMiddleware, queueActionHandler);
+router.get("/workers/status", superAdminAuthMiddleware, getWorkersStatusHandler);
+router.post("/workers/:workerId/action", superAdminAuthMiddleware, workerActionHandler);
 router.get("/webhooks", superAdminAuthMiddleware, getPlatformWebhooksHandler);
 router.get("/system", superAdminAuthMiddleware, getPlatformSystemHandler);
 router.get("/tenants", superAdminAuthMiddleware, getPlatformTenantsHandler);

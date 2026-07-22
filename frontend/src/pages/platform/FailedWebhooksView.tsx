@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { platformApiClient } from "../../services/platformApiClient";
-import { Webhook, RotateCcw, AlertTriangle, CheckCircle, Clock } from "lucide-react";
+import { Webhook, RotateCcw } from "lucide-react";
 
 export const FailedWebhooksView: React.FC = () => {
   const queryClient = useQueryClient();

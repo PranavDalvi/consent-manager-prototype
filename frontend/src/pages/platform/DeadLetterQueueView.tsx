@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { platformApiClient } from "../../services/platformApiClient";
-import { AlertOctagon, RotateCcw, Trash2, CheckCircle2, XCircle, Search, Filter } from "lucide-react";
+import { AlertOctagon, RotateCcw, Search, Filter } from "lucide-react";
 
 export const DeadLetterQueueView: React.FC = () => {
   const queryClient = useQueryClient();
@@ -9,7 +9,7 @@ export const DeadLetterQueueView: React.FC = () => {
   const [selectedQueue, setSelectedQueue] = useState("ALL");
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-  const { data: dlqJobs = [], isLoading, refetch } = useQuery({
+  const { data: dlqJobs = [], isLoading } = useQuery({
     queryKey: ["platform-dlq"],
     queryFn: async () => {
       const res = await platformApiClient.get("/dlq");

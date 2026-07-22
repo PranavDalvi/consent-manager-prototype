@@ -17,6 +17,10 @@ import { PlatformTenants } from "./pages/platform/PlatformTenants";
 import { PlatformLogViewer } from "./pages/platform/PlatformLogViewer";
 import { PlatformMetricsView } from "./pages/platform/PlatformMetricsView";
 import { PlatformQueuesView } from "./pages/platform/PlatformQueuesView";
+import { PlatformWorkersView } from "./pages/platform/PlatformWorkersView";
+import { PlatformWebhooksView } from "./pages/platform/PlatformWebhooksView";
+import { PlatformHealthView } from "./pages/platform/PlatformHealthView";
+import { PlatformSettingsView } from "./pages/platform/PlatformSettingsView";
 import { DeadLetterQueueView } from "./pages/platform/DeadLetterQueueView";
 import { FailedWebhooksView } from "./pages/platform/FailedWebhooksView";
 import { FailedEventsView } from "./pages/platform/FailedEventsView";
@@ -136,11 +140,11 @@ export default function App() {
               <Route path="/platform/metrics" element={<PlatformMetricsView />} />
               <Route path="/platform/tenants" element={<PlatformTenants />} />
               <Route path="/platform/queues" element={<PlatformQueuesView />} />
-              <Route path="/platform/workers" element={<PlatformQueuesView />} />
-              <Route path="/platform/webhooks" element={<PlatformDashboard />} />
-              <Route path="/platform/health" element={<PlatformDashboard />} />
+              <Route path="/platform/workers" element={<PlatformWorkersView />} />
+              <Route path="/platform/webhooks" element={<PlatformWebhooksView />} />
+              <Route path="/platform/health" element={<PlatformHealthView />} />
               <Route path="/platform/logs" element={<PlatformLogViewer />} />
-              <Route path="/platform/settings" element={<PlatformDashboard />} />
+              <Route path="/platform/settings" element={<PlatformSettingsView />} />
             </Route>
 
             <Route path="*" element={<Navigate to="/" replace />} />

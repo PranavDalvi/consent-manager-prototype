@@ -1,7 +1,7 @@
 import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import { platformApiClient } from "../../services/platformApiClient";
-import { Calendar, CheckCircle2, XCircle, Clock } from "lucide-react";
+import { Calendar, CheckCircle2, XCircle } from "lucide-react";
 
 export const ScheduledJobsView: React.FC = () => {
   const { data: jobs = [], isLoading } = useQuery({

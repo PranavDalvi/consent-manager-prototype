@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { platformApiClient } from "../../services/platformApiClient";
-import { Activity, RotateCcw, AlertTriangle, Play } from "lucide-react";
+import { Activity, RotateCcw } from "lucide-react";
 
 export const FailedEventsView: React.FC = () => {
   const queryClient = useQueryClient();
