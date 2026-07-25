@@ -28,7 +28,7 @@ For server-to-server calls (e.g., your backend checking or recording user consen
 
 #### Example Header
 ```http
-X-API-Key: cm_live_2ca0ea7386d4462eccac04b08ecbf8ba5921a171968b90beb4da40b532b78b9a
+X-API-Key: cm_live_sample_api_key_0000000000000000
 ```
 
 ---

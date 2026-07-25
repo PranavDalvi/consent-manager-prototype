@@ -233,7 +233,7 @@ You can generate additional API keys using the bootstrapped key via `curl` (Linu
 ```bash
 curl -X POST http://localhost:3000/api/api-keys \
   -H "Content-Type: application/json" \
-  -H "X-API-Key: cm_live_2ca0ea7386d4462eccac04b08ecbf8ba5921a171968b90beb4da40b532b78b9a" \
+  -H "X-API-Key: cm_live_sample_api_key_0000000000000000" \
   -d '{"name": "My New Integration Key"}'
 ```
 
@@ -242,7 +242,7 @@ curl -X POST http://localhost:3000/api/api-keys \
 ```powershell
 $headers = @{
     "Content-Type" = "application/json"
-    "X-API-Key"    = "cm_live_2ca0ea7386d4462eccac04b08ecbf8ba5921a171968b90beb4da40b532b78b9a"
+    "X-API-Key"    = "cm_live_sample_api_key_0000000000000000"
 }
 $body = @{
     name = "My New Integration Key"
