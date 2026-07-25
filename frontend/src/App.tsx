@@ -12,6 +12,7 @@ import { ResetPassword } from "./pages/ResetPassword";
 import { Dashboard } from "./pages/Dashboard";
 import { ApiKeys } from "./pages/ApiKeys";
 import { Policies } from "./pages/Policies";
+import { Touchpoints } from "./pages/Touchpoints";
 import { Consents } from "./pages/Consents";
 import { AuditLogs } from "./pages/AuditLogs";
 import { Webhooks } from "./pages/Webhooks";
@@ -144,6 +145,7 @@ export default function App() {
             {/* Protected Tenant Portal Routes */}
             <Route element={<ProtectedRoute />}>
               <Route path="/" element={<Dashboard />} />
+              <Route path="/touchpoints" element={<Touchpoints />} />
               <Route path="/policies" element={<Policies />} />
               <Route path="/api-keys" element={<ApiKeys />} />
               <Route path="/consents" element={<Consents />} />

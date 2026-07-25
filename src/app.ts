@@ -13,6 +13,7 @@ import webhookRoutes from "./routes/webhook.routes";
 import eventRoutes from "./routes/event.routes";
 import authRoutes from "./routes/auth.routes";
 import teamRoutes from "./routes/team.routes";
+import touchpointRoutes from "./routes/touchpoint.routes";
 
 import { initTracing } from "./platform/observability/tracing";
 import { observabilityMiddleware } from "./platform/observability/logging.middleware";
@@ -68,6 +69,7 @@ app.use("/api/audit", auditRoutes);
 app.use("/api/api-keys", apiKeyRoutes);
 app.use("/api/webhooks", webhookRoutes);
 app.use("/api/events", eventRoutes);
+app.use("/api/touchpoints", touchpointRoutes);
 
 app.use(errorHandler);
 

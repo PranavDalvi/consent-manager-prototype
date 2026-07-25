@@ -74,6 +74,16 @@ export type CleanupExecution = $Result.DefaultSelection<Prisma.$CleanupExecution
  */
 export type Policy = $Result.DefaultSelection<Prisma.$PolicyPayload>
 /**
+ * Model Touchpoint
+ * 
+ */
+export type Touchpoint = $Result.DefaultSelection<Prisma.$TouchpointPayload>
+/**
+ * Model TouchpointPolicy
+ * 
+ */
+export type TouchpointPolicy = $Result.DefaultSelection<Prisma.$TouchpointPolicyPayload>
+/**
  * Model Consent
  * 
  */
@@ -402,6 +412,26 @@ export class PrismaClient<
     * ```
     */
   get policy(): Prisma.PolicyDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.touchpoint`: Exposes CRUD operations for the **Touchpoint** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Touchpoints
+    * const touchpoints = await prisma.touchpoint.findMany()
+    * ```
+    */
+  get touchpoint(): Prisma.TouchpointDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.touchpointPolicy`: Exposes CRUD operations for the **TouchpointPolicy** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TouchpointPolicies
+    * const touchpointPolicies = await prisma.touchpointPolicy.findMany()
+    * ```
+    */
+  get touchpointPolicy(): Prisma.TouchpointPolicyDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.consent`: Exposes CRUD operations for the **Consent** model.
@@ -908,6 +938,8 @@ export namespace Prisma {
     ReplayHistory: 'ReplayHistory',
     CleanupExecution: 'CleanupExecution',
     Policy: 'Policy',
+    Touchpoint: 'Touchpoint',
+    TouchpointPolicy: 'TouchpointPolicy',
     Consent: 'Consent',
     AuditLog: 'AuditLog',
     ApiKey: 'ApiKey',
@@ -929,7 +961,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "tenant" | "tenantUser" | "session" | "invitation" | "passwordResetToken" | "outboxEvent" | "webhookCircuitBreaker" | "webhookDelivery" | "webhookRetryHistory" | "replayHistory" | "cleanupExecution" | "policy" | "consent" | "auditLog" | "apiKey" | "webhook" | "internalEvent" | "superAdmin"
+      modelProps: "tenant" | "tenantUser" | "session" | "invitation" | "passwordResetToken" | "outboxEvent" | "webhookCircuitBreaker" | "webhookDelivery" | "webhookRetryHistory" | "replayHistory" | "cleanupExecution" | "policy" | "touchpoint" | "touchpointPolicy" | "consent" | "auditLog" | "apiKey" | "webhook" | "internalEvent" | "superAdmin"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1821,6 +1853,154 @@ export namespace Prisma {
           }
         }
       }
+      Touchpoint: {
+        payload: Prisma.$TouchpointPayload<ExtArgs>
+        fields: Prisma.TouchpointFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TouchpointFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TouchpointFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPayload>
+          }
+          findFirst: {
+            args: Prisma.TouchpointFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TouchpointFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPayload>
+          }
+          findMany: {
+            args: Prisma.TouchpointFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPayload>[]
+          }
+          create: {
+            args: Prisma.TouchpointCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPayload>
+          }
+          createMany: {
+            args: Prisma.TouchpointCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TouchpointCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPayload>[]
+          }
+          delete: {
+            args: Prisma.TouchpointDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPayload>
+          }
+          update: {
+            args: Prisma.TouchpointUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPayload>
+          }
+          deleteMany: {
+            args: Prisma.TouchpointDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TouchpointUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TouchpointUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPayload>[]
+          }
+          upsert: {
+            args: Prisma.TouchpointUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPayload>
+          }
+          aggregate: {
+            args: Prisma.TouchpointAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTouchpoint>
+          }
+          groupBy: {
+            args: Prisma.TouchpointGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TouchpointGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TouchpointCountArgs<ExtArgs>
+            result: $Utils.Optional<TouchpointCountAggregateOutputType> | number
+          }
+        }
+      }
+      TouchpointPolicy: {
+        payload: Prisma.$TouchpointPolicyPayload<ExtArgs>
+        fields: Prisma.TouchpointPolicyFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TouchpointPolicyFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPolicyPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TouchpointPolicyFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPolicyPayload>
+          }
+          findFirst: {
+            args: Prisma.TouchpointPolicyFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPolicyPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TouchpointPolicyFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPolicyPayload>
+          }
+          findMany: {
+            args: Prisma.TouchpointPolicyFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPolicyPayload>[]
+          }
+          create: {
+            args: Prisma.TouchpointPolicyCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPolicyPayload>
+          }
+          createMany: {
+            args: Prisma.TouchpointPolicyCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.TouchpointPolicyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPolicyPayload>[]
+          }
+          delete: {
+            args: Prisma.TouchpointPolicyDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPolicyPayload>
+          }
+          update: {
+            args: Prisma.TouchpointPolicyUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPolicyPayload>
+          }
+          deleteMany: {
+            args: Prisma.TouchpointPolicyDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TouchpointPolicyUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.TouchpointPolicyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPolicyPayload>[]
+          }
+          upsert: {
+            args: Prisma.TouchpointPolicyUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$TouchpointPolicyPayload>
+          }
+          aggregate: {
+            args: Prisma.TouchpointPolicyAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTouchpointPolicy>
+          }
+          groupBy: {
+            args: Prisma.TouchpointPolicyGroupByArgs<ExtArgs>
+            result: $Utils.Optional<TouchpointPolicyGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TouchpointPolicyCountArgs<ExtArgs>
+            result: $Utils.Optional<TouchpointPolicyCountAggregateOutputType> | number
+          }
+        }
+      }
       Consent: {
         payload: Prisma.$ConsentPayload<ExtArgs>
         fields: Prisma.ConsentFieldRefs
@@ -2385,6 +2565,8 @@ export namespace Prisma {
     replayHistory?: ReplayHistoryOmit
     cleanupExecution?: CleanupExecutionOmit
     policy?: PolicyOmit
+    touchpoint?: TouchpointOmit
+    touchpointPolicy?: TouchpointPolicyOmit
     consent?: ConsentOmit
     auditLog?: AuditLogOmit
     apiKey?: ApiKeyOmit
@@ -2481,6 +2663,7 @@ export namespace Prisma {
     webhookDeliveries: number
     users: number
     invitations: number
+    touchpoints: number
   }
 
   export type TenantCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2494,6 +2677,7 @@ export namespace Prisma {
     webhookDeliveries?: boolean | TenantCountOutputTypeCountWebhookDeliveriesArgs
     users?: boolean | TenantCountOutputTypeCountUsersArgs
     invitations?: boolean | TenantCountOutputTypeCountInvitationsArgs
+    touchpoints?: boolean | TenantCountOutputTypeCountTouchpointsArgs
   }
 
   // Custom InputTypes
@@ -2577,6 +2761,13 @@ export namespace Prisma {
     where?: InvitationWhereInput
   }
 
+  /**
+   * TenantCountOutputType without action
+   */
+  export type TenantCountOutputTypeCountTouchpointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TouchpointWhereInput
+  }
+
 
   /**
    * Count Type TenantUserCountOutputType
@@ -2655,10 +2846,12 @@ export namespace Prisma {
 
   export type PolicyCountOutputType = {
     consents: number
+    touchpointPolicies: number
   }
 
   export type PolicyCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     consents?: boolean | PolicyCountOutputTypeCountConsentsArgs
+    touchpointPolicies?: boolean | PolicyCountOutputTypeCountTouchpointPoliciesArgs
   }
 
   // Custom InputTypes
@@ -2677,6 +2870,44 @@ export namespace Prisma {
    */
   export type PolicyCountOutputTypeCountConsentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: ConsentWhereInput
+  }
+
+  /**
+   * PolicyCountOutputType without action
+   */
+  export type PolicyCountOutputTypeCountTouchpointPoliciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TouchpointPolicyWhereInput
+  }
+
+
+  /**
+   * Count Type TouchpointCountOutputType
+   */
+
+  export type TouchpointCountOutputType = {
+    policies: number
+  }
+
+  export type TouchpointCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    policies?: boolean | TouchpointCountOutputTypeCountPoliciesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * TouchpointCountOutputType without action
+   */
+  export type TouchpointCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointCountOutputType
+     */
+    select?: TouchpointCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * TouchpointCountOutputType without action
+   */
+  export type TouchpointCountOutputTypeCountPoliciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TouchpointPolicyWhereInput
   }
 
 
@@ -2905,6 +3136,7 @@ export namespace Prisma {
     webhookDeliveries?: boolean | Tenant$webhookDeliveriesArgs<ExtArgs>
     users?: boolean | Tenant$usersArgs<ExtArgs>
     invitations?: boolean | Tenant$invitationsArgs<ExtArgs>
+    touchpoints?: boolean | Tenant$touchpointsArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tenant"]>
 
@@ -2950,6 +3182,7 @@ export namespace Prisma {
     webhookDeliveries?: boolean | Tenant$webhookDeliveriesArgs<ExtArgs>
     users?: boolean | Tenant$usersArgs<ExtArgs>
     invitations?: boolean | Tenant$invitationsArgs<ExtArgs>
+    touchpoints?: boolean | Tenant$touchpointsArgs<ExtArgs>
     _count?: boolean | TenantCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TenantIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -2968,6 +3201,7 @@ export namespace Prisma {
       webhookDeliveries: Prisma.$WebhookDeliveryPayload<ExtArgs>[]
       users: Prisma.$TenantUserPayload<ExtArgs>[]
       invitations: Prisma.$InvitationPayload<ExtArgs>[]
+      touchpoints: Prisma.$TouchpointPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -3381,6 +3615,7 @@ export namespace Prisma {
     webhookDeliveries<T extends Tenant$webhookDeliveriesArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$webhookDeliveriesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$WebhookDeliveryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     users<T extends Tenant$usersArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$usersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TenantUserPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     invitations<T extends Tenant$invitationsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$invitationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$InvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    touchpoints<T extends Tenant$touchpointsArgs<ExtArgs> = {}>(args?: Subset<T, Tenant$touchpointsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4047,6 +4282,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: InvitationScalarFieldEnum | InvitationScalarFieldEnum[]
+  }
+
+  /**
+   * Tenant.touchpoints
+   */
+  export type Tenant$touchpointsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointInclude<ExtArgs> | null
+    where?: TouchpointWhereInput
+    orderBy?: TouchpointOrderByWithRelationInput | TouchpointOrderByWithRelationInput[]
+    cursor?: TouchpointWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TouchpointScalarFieldEnum | TouchpointScalarFieldEnum[]
   }
 
   /**
@@ -15748,6 +16007,7 @@ export namespace Prisma {
     updatedAt?: boolean
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     consents?: boolean | Policy$consentsArgs<ExtArgs>
+    touchpointPolicies?: boolean | Policy$touchpointPoliciesArgs<ExtArgs>
     _count?: boolean | PolicyCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["policy"]>
 
@@ -15793,6 +16053,7 @@ export namespace Prisma {
   export type PolicyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     tenant?: boolean | TenantDefaultArgs<ExtArgs>
     consents?: boolean | Policy$consentsArgs<ExtArgs>
+    touchpointPolicies?: boolean | Policy$touchpointPoliciesArgs<ExtArgs>
     _count?: boolean | PolicyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PolicyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15807,6 +16068,7 @@ export namespace Prisma {
     objects: {
       tenant: Prisma.$TenantPayload<ExtArgs>
       consents: Prisma.$ConsentPayload<ExtArgs>[]
+      touchpointPolicies: Prisma.$TouchpointPolicyPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -16214,6 +16476,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     consents<T extends Policy$consentsArgs<ExtArgs> = {}>(args?: Subset<T, Policy$consentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ConsentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    touchpointPolicies<T extends Policy$touchpointPoliciesArgs<ExtArgs> = {}>(args?: Subset<T, Policy$touchpointPoliciesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16677,6 +16940,30 @@ export namespace Prisma {
   }
 
   /**
+   * Policy.touchpointPolicies
+   */
+  export type Policy$touchpointPoliciesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyInclude<ExtArgs> | null
+    where?: TouchpointPolicyWhereInput
+    orderBy?: TouchpointPolicyOrderByWithRelationInput | TouchpointPolicyOrderByWithRelationInput[]
+    cursor?: TouchpointPolicyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TouchpointPolicyScalarFieldEnum | TouchpointPolicyScalarFieldEnum[]
+  }
+
+  /**
    * Policy without action
    */
   export type PolicyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -16692,6 +16979,2269 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: PolicyInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Touchpoint
+   */
+
+  export type AggregateTouchpoint = {
+    _count: TouchpointCountAggregateOutputType | null
+    _min: TouchpointMinAggregateOutputType | null
+    _max: TouchpointMaxAggregateOutputType | null
+  }
+
+  export type TouchpointMinAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    name: string | null
+    slug: string | null
+    description: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TouchpointMaxAggregateOutputType = {
+    id: string | null
+    tenantId: string | null
+    name: string | null
+    slug: string | null
+    description: string | null
+    isActive: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type TouchpointCountAggregateOutputType = {
+    id: number
+    tenantId: number
+    name: number
+    slug: number
+    description: number
+    isActive: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type TouchpointMinAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    slug?: true
+    description?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TouchpointMaxAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    slug?: true
+    description?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type TouchpointCountAggregateInputType = {
+    id?: true
+    tenantId?: true
+    name?: true
+    slug?: true
+    description?: true
+    isActive?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type TouchpointAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Touchpoint to aggregate.
+     */
+    where?: TouchpointWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Touchpoints to fetch.
+     */
+    orderBy?: TouchpointOrderByWithRelationInput | TouchpointOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TouchpointWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Touchpoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Touchpoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Touchpoints
+    **/
+    _count?: true | TouchpointCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TouchpointMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TouchpointMaxAggregateInputType
+  }
+
+  export type GetTouchpointAggregateType<T extends TouchpointAggregateArgs> = {
+        [P in keyof T & keyof AggregateTouchpoint]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTouchpoint[P]>
+      : GetScalarType<T[P], AggregateTouchpoint[P]>
+  }
+
+
+
+
+  export type TouchpointGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TouchpointWhereInput
+    orderBy?: TouchpointOrderByWithAggregationInput | TouchpointOrderByWithAggregationInput[]
+    by: TouchpointScalarFieldEnum[] | TouchpointScalarFieldEnum
+    having?: TouchpointScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TouchpointCountAggregateInputType | true
+    _min?: TouchpointMinAggregateInputType
+    _max?: TouchpointMaxAggregateInputType
+  }
+
+  export type TouchpointGroupByOutputType = {
+    id: string
+    tenantId: string
+    name: string
+    slug: string
+    description: string | null
+    isActive: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: TouchpointCountAggregateOutputType | null
+    _min: TouchpointMinAggregateOutputType | null
+    _max: TouchpointMaxAggregateOutputType | null
+  }
+
+  type GetTouchpointGroupByPayload<T extends TouchpointGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TouchpointGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TouchpointGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TouchpointGroupByOutputType[P]>
+            : GetScalarType<T[P], TouchpointGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TouchpointSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    policies?: boolean | Touchpoint$policiesArgs<ExtArgs>
+    _count?: boolean | TouchpointCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["touchpoint"]>
+
+  export type TouchpointSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["touchpoint"]>
+
+  export type TouchpointSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["touchpoint"]>
+
+  export type TouchpointSelectScalar = {
+    id?: boolean
+    tenantId?: boolean
+    name?: boolean
+    slug?: boolean
+    description?: boolean
+    isActive?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type TouchpointOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "tenantId" | "name" | "slug" | "description" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["touchpoint"]>
+  export type TouchpointInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+    policies?: boolean | Touchpoint$policiesArgs<ExtArgs>
+    _count?: boolean | TouchpointCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type TouchpointIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+  export type TouchpointIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    tenant?: boolean | TenantDefaultArgs<ExtArgs>
+  }
+
+  export type $TouchpointPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Touchpoint"
+    objects: {
+      tenant: Prisma.$TenantPayload<ExtArgs>
+      policies: Prisma.$TouchpointPolicyPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      tenantId: string
+      name: string
+      slug: string
+      description: string | null
+      isActive: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["touchpoint"]>
+    composites: {}
+  }
+
+  type TouchpointGetPayload<S extends boolean | null | undefined | TouchpointDefaultArgs> = $Result.GetResult<Prisma.$TouchpointPayload, S>
+
+  type TouchpointCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TouchpointFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TouchpointCountAggregateInputType | true
+    }
+
+  export interface TouchpointDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Touchpoint'], meta: { name: 'Touchpoint' } }
+    /**
+     * Find zero or one Touchpoint that matches the filter.
+     * @param {TouchpointFindUniqueArgs} args - Arguments to find a Touchpoint
+     * @example
+     * // Get one Touchpoint
+     * const touchpoint = await prisma.touchpoint.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TouchpointFindUniqueArgs>(args: SelectSubset<T, TouchpointFindUniqueArgs<ExtArgs>>): Prisma__TouchpointClient<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Touchpoint that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TouchpointFindUniqueOrThrowArgs} args - Arguments to find a Touchpoint
+     * @example
+     * // Get one Touchpoint
+     * const touchpoint = await prisma.touchpoint.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TouchpointFindUniqueOrThrowArgs>(args: SelectSubset<T, TouchpointFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TouchpointClient<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Touchpoint that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointFindFirstArgs} args - Arguments to find a Touchpoint
+     * @example
+     * // Get one Touchpoint
+     * const touchpoint = await prisma.touchpoint.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TouchpointFindFirstArgs>(args?: SelectSubset<T, TouchpointFindFirstArgs<ExtArgs>>): Prisma__TouchpointClient<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Touchpoint that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointFindFirstOrThrowArgs} args - Arguments to find a Touchpoint
+     * @example
+     * // Get one Touchpoint
+     * const touchpoint = await prisma.touchpoint.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TouchpointFindFirstOrThrowArgs>(args?: SelectSubset<T, TouchpointFindFirstOrThrowArgs<ExtArgs>>): Prisma__TouchpointClient<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Touchpoints that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Touchpoints
+     * const touchpoints = await prisma.touchpoint.findMany()
+     * 
+     * // Get first 10 Touchpoints
+     * const touchpoints = await prisma.touchpoint.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const touchpointWithIdOnly = await prisma.touchpoint.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TouchpointFindManyArgs>(args?: SelectSubset<T, TouchpointFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Touchpoint.
+     * @param {TouchpointCreateArgs} args - Arguments to create a Touchpoint.
+     * @example
+     * // Create one Touchpoint
+     * const Touchpoint = await prisma.touchpoint.create({
+     *   data: {
+     *     // ... data to create a Touchpoint
+     *   }
+     * })
+     * 
+     */
+    create<T extends TouchpointCreateArgs>(args: SelectSubset<T, TouchpointCreateArgs<ExtArgs>>): Prisma__TouchpointClient<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Touchpoints.
+     * @param {TouchpointCreateManyArgs} args - Arguments to create many Touchpoints.
+     * @example
+     * // Create many Touchpoints
+     * const touchpoint = await prisma.touchpoint.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TouchpointCreateManyArgs>(args?: SelectSubset<T, TouchpointCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Touchpoints and returns the data saved in the database.
+     * @param {TouchpointCreateManyAndReturnArgs} args - Arguments to create many Touchpoints.
+     * @example
+     * // Create many Touchpoints
+     * const touchpoint = await prisma.touchpoint.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Touchpoints and only return the `id`
+     * const touchpointWithIdOnly = await prisma.touchpoint.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TouchpointCreateManyAndReturnArgs>(args?: SelectSubset<T, TouchpointCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Touchpoint.
+     * @param {TouchpointDeleteArgs} args - Arguments to delete one Touchpoint.
+     * @example
+     * // Delete one Touchpoint
+     * const Touchpoint = await prisma.touchpoint.delete({
+     *   where: {
+     *     // ... filter to delete one Touchpoint
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TouchpointDeleteArgs>(args: SelectSubset<T, TouchpointDeleteArgs<ExtArgs>>): Prisma__TouchpointClient<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Touchpoint.
+     * @param {TouchpointUpdateArgs} args - Arguments to update one Touchpoint.
+     * @example
+     * // Update one Touchpoint
+     * const touchpoint = await prisma.touchpoint.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TouchpointUpdateArgs>(args: SelectSubset<T, TouchpointUpdateArgs<ExtArgs>>): Prisma__TouchpointClient<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Touchpoints.
+     * @param {TouchpointDeleteManyArgs} args - Arguments to filter Touchpoints to delete.
+     * @example
+     * // Delete a few Touchpoints
+     * const { count } = await prisma.touchpoint.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TouchpointDeleteManyArgs>(args?: SelectSubset<T, TouchpointDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Touchpoints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Touchpoints
+     * const touchpoint = await prisma.touchpoint.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TouchpointUpdateManyArgs>(args: SelectSubset<T, TouchpointUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Touchpoints and returns the data updated in the database.
+     * @param {TouchpointUpdateManyAndReturnArgs} args - Arguments to update many Touchpoints.
+     * @example
+     * // Update many Touchpoints
+     * const touchpoint = await prisma.touchpoint.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Touchpoints and only return the `id`
+     * const touchpointWithIdOnly = await prisma.touchpoint.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TouchpointUpdateManyAndReturnArgs>(args: SelectSubset<T, TouchpointUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Touchpoint.
+     * @param {TouchpointUpsertArgs} args - Arguments to update or create a Touchpoint.
+     * @example
+     * // Update or create a Touchpoint
+     * const touchpoint = await prisma.touchpoint.upsert({
+     *   create: {
+     *     // ... data to create a Touchpoint
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Touchpoint we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TouchpointUpsertArgs>(args: SelectSubset<T, TouchpointUpsertArgs<ExtArgs>>): Prisma__TouchpointClient<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Touchpoints.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointCountArgs} args - Arguments to filter Touchpoints to count.
+     * @example
+     * // Count the number of Touchpoints
+     * const count = await prisma.touchpoint.count({
+     *   where: {
+     *     // ... the filter for the Touchpoints we want to count
+     *   }
+     * })
+    **/
+    count<T extends TouchpointCountArgs>(
+      args?: Subset<T, TouchpointCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TouchpointCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Touchpoint.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TouchpointAggregateArgs>(args: Subset<T, TouchpointAggregateArgs>): Prisma.PrismaPromise<GetTouchpointAggregateType<T>>
+
+    /**
+     * Group by Touchpoint.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TouchpointGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TouchpointGroupByArgs['orderBy'] }
+        : { orderBy?: TouchpointGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TouchpointGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTouchpointGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Touchpoint model
+   */
+  readonly fields: TouchpointFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Touchpoint.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TouchpointClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    tenant<T extends TenantDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TenantDefaultArgs<ExtArgs>>): Prisma__TenantClient<$Result.GetResult<Prisma.$TenantPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    policies<T extends Touchpoint$policiesArgs<ExtArgs> = {}>(args?: Subset<T, Touchpoint$policiesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Touchpoint model
+   */
+  interface TouchpointFieldRefs {
+    readonly id: FieldRef<"Touchpoint", 'String'>
+    readonly tenantId: FieldRef<"Touchpoint", 'String'>
+    readonly name: FieldRef<"Touchpoint", 'String'>
+    readonly slug: FieldRef<"Touchpoint", 'String'>
+    readonly description: FieldRef<"Touchpoint", 'String'>
+    readonly isActive: FieldRef<"Touchpoint", 'Boolean'>
+    readonly createdAt: FieldRef<"Touchpoint", 'DateTime'>
+    readonly updatedAt: FieldRef<"Touchpoint", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Touchpoint findUnique
+   */
+  export type TouchpointFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointInclude<ExtArgs> | null
+    /**
+     * Filter, which Touchpoint to fetch.
+     */
+    where: TouchpointWhereUniqueInput
+  }
+
+  /**
+   * Touchpoint findUniqueOrThrow
+   */
+  export type TouchpointFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointInclude<ExtArgs> | null
+    /**
+     * Filter, which Touchpoint to fetch.
+     */
+    where: TouchpointWhereUniqueInput
+  }
+
+  /**
+   * Touchpoint findFirst
+   */
+  export type TouchpointFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointInclude<ExtArgs> | null
+    /**
+     * Filter, which Touchpoint to fetch.
+     */
+    where?: TouchpointWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Touchpoints to fetch.
+     */
+    orderBy?: TouchpointOrderByWithRelationInput | TouchpointOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Touchpoints.
+     */
+    cursor?: TouchpointWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Touchpoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Touchpoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Touchpoints.
+     */
+    distinct?: TouchpointScalarFieldEnum | TouchpointScalarFieldEnum[]
+  }
+
+  /**
+   * Touchpoint findFirstOrThrow
+   */
+  export type TouchpointFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointInclude<ExtArgs> | null
+    /**
+     * Filter, which Touchpoint to fetch.
+     */
+    where?: TouchpointWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Touchpoints to fetch.
+     */
+    orderBy?: TouchpointOrderByWithRelationInput | TouchpointOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Touchpoints.
+     */
+    cursor?: TouchpointWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Touchpoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Touchpoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Touchpoints.
+     */
+    distinct?: TouchpointScalarFieldEnum | TouchpointScalarFieldEnum[]
+  }
+
+  /**
+   * Touchpoint findMany
+   */
+  export type TouchpointFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointInclude<ExtArgs> | null
+    /**
+     * Filter, which Touchpoints to fetch.
+     */
+    where?: TouchpointWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Touchpoints to fetch.
+     */
+    orderBy?: TouchpointOrderByWithRelationInput | TouchpointOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Touchpoints.
+     */
+    cursor?: TouchpointWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Touchpoints from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Touchpoints.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Touchpoints.
+     */
+    distinct?: TouchpointScalarFieldEnum | TouchpointScalarFieldEnum[]
+  }
+
+  /**
+   * Touchpoint create
+   */
+  export type TouchpointCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Touchpoint.
+     */
+    data: XOR<TouchpointCreateInput, TouchpointUncheckedCreateInput>
+  }
+
+  /**
+   * Touchpoint createMany
+   */
+  export type TouchpointCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Touchpoints.
+     */
+    data: TouchpointCreateManyInput | TouchpointCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Touchpoint createManyAndReturn
+   */
+  export type TouchpointCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * The data used to create many Touchpoints.
+     */
+    data: TouchpointCreateManyInput | TouchpointCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Touchpoint update
+   */
+  export type TouchpointUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Touchpoint.
+     */
+    data: XOR<TouchpointUpdateInput, TouchpointUncheckedUpdateInput>
+    /**
+     * Choose, which Touchpoint to update.
+     */
+    where: TouchpointWhereUniqueInput
+  }
+
+  /**
+   * Touchpoint updateMany
+   */
+  export type TouchpointUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Touchpoints.
+     */
+    data: XOR<TouchpointUpdateManyMutationInput, TouchpointUncheckedUpdateManyInput>
+    /**
+     * Filter which Touchpoints to update
+     */
+    where?: TouchpointWhereInput
+    /**
+     * Limit how many Touchpoints to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Touchpoint updateManyAndReturn
+   */
+  export type TouchpointUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * The data used to update Touchpoints.
+     */
+    data: XOR<TouchpointUpdateManyMutationInput, TouchpointUncheckedUpdateManyInput>
+    /**
+     * Filter which Touchpoints to update
+     */
+    where?: TouchpointWhereInput
+    /**
+     * Limit how many Touchpoints to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Touchpoint upsert
+   */
+  export type TouchpointUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Touchpoint to update in case it exists.
+     */
+    where: TouchpointWhereUniqueInput
+    /**
+     * In case the Touchpoint found by the `where` argument doesn't exist, create a new Touchpoint with this data.
+     */
+    create: XOR<TouchpointCreateInput, TouchpointUncheckedCreateInput>
+    /**
+     * In case the Touchpoint was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TouchpointUpdateInput, TouchpointUncheckedUpdateInput>
+  }
+
+  /**
+   * Touchpoint delete
+   */
+  export type TouchpointDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointInclude<ExtArgs> | null
+    /**
+     * Filter which Touchpoint to delete.
+     */
+    where: TouchpointWhereUniqueInput
+  }
+
+  /**
+   * Touchpoint deleteMany
+   */
+  export type TouchpointDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Touchpoints to delete
+     */
+    where?: TouchpointWhereInput
+    /**
+     * Limit how many Touchpoints to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Touchpoint.policies
+   */
+  export type Touchpoint$policiesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyInclude<ExtArgs> | null
+    where?: TouchpointPolicyWhereInput
+    orderBy?: TouchpointPolicyOrderByWithRelationInput | TouchpointPolicyOrderByWithRelationInput[]
+    cursor?: TouchpointPolicyWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TouchpointPolicyScalarFieldEnum | TouchpointPolicyScalarFieldEnum[]
+  }
+
+  /**
+   * Touchpoint without action
+   */
+  export type TouchpointDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Touchpoint
+     */
+    select?: TouchpointSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Touchpoint
+     */
+    omit?: TouchpointOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model TouchpointPolicy
+   */
+
+  export type AggregateTouchpointPolicy = {
+    _count: TouchpointPolicyCountAggregateOutputType | null
+    _avg: TouchpointPolicyAvgAggregateOutputType | null
+    _sum: TouchpointPolicySumAggregateOutputType | null
+    _min: TouchpointPolicyMinAggregateOutputType | null
+    _max: TouchpointPolicyMaxAggregateOutputType | null
+  }
+
+  export type TouchpointPolicyAvgAggregateOutputType = {
+    displayOrder: number | null
+  }
+
+  export type TouchpointPolicySumAggregateOutputType = {
+    displayOrder: number | null
+  }
+
+  export type TouchpointPolicyMinAggregateOutputType = {
+    id: string | null
+    touchpointId: string | null
+    policyId: string | null
+    isRequired: boolean | null
+    displayOrder: number | null
+    customLabel: string | null
+    createdAt: Date | null
+  }
+
+  export type TouchpointPolicyMaxAggregateOutputType = {
+    id: string | null
+    touchpointId: string | null
+    policyId: string | null
+    isRequired: boolean | null
+    displayOrder: number | null
+    customLabel: string | null
+    createdAt: Date | null
+  }
+
+  export type TouchpointPolicyCountAggregateOutputType = {
+    id: number
+    touchpointId: number
+    policyId: number
+    isRequired: number
+    displayOrder: number
+    customLabel: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type TouchpointPolicyAvgAggregateInputType = {
+    displayOrder?: true
+  }
+
+  export type TouchpointPolicySumAggregateInputType = {
+    displayOrder?: true
+  }
+
+  export type TouchpointPolicyMinAggregateInputType = {
+    id?: true
+    touchpointId?: true
+    policyId?: true
+    isRequired?: true
+    displayOrder?: true
+    customLabel?: true
+    createdAt?: true
+  }
+
+  export type TouchpointPolicyMaxAggregateInputType = {
+    id?: true
+    touchpointId?: true
+    policyId?: true
+    isRequired?: true
+    displayOrder?: true
+    customLabel?: true
+    createdAt?: true
+  }
+
+  export type TouchpointPolicyCountAggregateInputType = {
+    id?: true
+    touchpointId?: true
+    policyId?: true
+    isRequired?: true
+    displayOrder?: true
+    customLabel?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type TouchpointPolicyAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TouchpointPolicy to aggregate.
+     */
+    where?: TouchpointPolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TouchpointPolicies to fetch.
+     */
+    orderBy?: TouchpointPolicyOrderByWithRelationInput | TouchpointPolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TouchpointPolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TouchpointPolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TouchpointPolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TouchpointPolicies
+    **/
+    _count?: true | TouchpointPolicyCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TouchpointPolicyAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TouchpointPolicySumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TouchpointPolicyMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TouchpointPolicyMaxAggregateInputType
+  }
+
+  export type GetTouchpointPolicyAggregateType<T extends TouchpointPolicyAggregateArgs> = {
+        [P in keyof T & keyof AggregateTouchpointPolicy]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTouchpointPolicy[P]>
+      : GetScalarType<T[P], AggregateTouchpointPolicy[P]>
+  }
+
+
+
+
+  export type TouchpointPolicyGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: TouchpointPolicyWhereInput
+    orderBy?: TouchpointPolicyOrderByWithAggregationInput | TouchpointPolicyOrderByWithAggregationInput[]
+    by: TouchpointPolicyScalarFieldEnum[] | TouchpointPolicyScalarFieldEnum
+    having?: TouchpointPolicyScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TouchpointPolicyCountAggregateInputType | true
+    _avg?: TouchpointPolicyAvgAggregateInputType
+    _sum?: TouchpointPolicySumAggregateInputType
+    _min?: TouchpointPolicyMinAggregateInputType
+    _max?: TouchpointPolicyMaxAggregateInputType
+  }
+
+  export type TouchpointPolicyGroupByOutputType = {
+    id: string
+    touchpointId: string
+    policyId: string
+    isRequired: boolean
+    displayOrder: number
+    customLabel: string | null
+    createdAt: Date
+    _count: TouchpointPolicyCountAggregateOutputType | null
+    _avg: TouchpointPolicyAvgAggregateOutputType | null
+    _sum: TouchpointPolicySumAggregateOutputType | null
+    _min: TouchpointPolicyMinAggregateOutputType | null
+    _max: TouchpointPolicyMaxAggregateOutputType | null
+  }
+
+  type GetTouchpointPolicyGroupByPayload<T extends TouchpointPolicyGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TouchpointPolicyGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TouchpointPolicyGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TouchpointPolicyGroupByOutputType[P]>
+            : GetScalarType<T[P], TouchpointPolicyGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TouchpointPolicySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    touchpointId?: boolean
+    policyId?: boolean
+    isRequired?: boolean
+    displayOrder?: boolean
+    customLabel?: boolean
+    createdAt?: boolean
+    touchpoint?: boolean | TouchpointDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["touchpointPolicy"]>
+
+  export type TouchpointPolicySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    touchpointId?: boolean
+    policyId?: boolean
+    isRequired?: boolean
+    displayOrder?: boolean
+    customLabel?: boolean
+    createdAt?: boolean
+    touchpoint?: boolean | TouchpointDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["touchpointPolicy"]>
+
+  export type TouchpointPolicySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    touchpointId?: boolean
+    policyId?: boolean
+    isRequired?: boolean
+    displayOrder?: boolean
+    customLabel?: boolean
+    createdAt?: boolean
+    touchpoint?: boolean | TouchpointDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["touchpointPolicy"]>
+
+  export type TouchpointPolicySelectScalar = {
+    id?: boolean
+    touchpointId?: boolean
+    policyId?: boolean
+    isRequired?: boolean
+    displayOrder?: boolean
+    customLabel?: boolean
+    createdAt?: boolean
+  }
+
+  export type TouchpointPolicyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "touchpointId" | "policyId" | "isRequired" | "displayOrder" | "customLabel" | "createdAt", ExtArgs["result"]["touchpointPolicy"]>
+  export type TouchpointPolicyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    touchpoint?: boolean | TouchpointDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }
+  export type TouchpointPolicyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    touchpoint?: boolean | TouchpointDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }
+  export type TouchpointPolicyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    touchpoint?: boolean | TouchpointDefaultArgs<ExtArgs>
+    policy?: boolean | PolicyDefaultArgs<ExtArgs>
+  }
+
+  export type $TouchpointPolicyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "TouchpointPolicy"
+    objects: {
+      touchpoint: Prisma.$TouchpointPayload<ExtArgs>
+      policy: Prisma.$PolicyPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      touchpointId: string
+      policyId: string
+      isRequired: boolean
+      displayOrder: number
+      customLabel: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["touchpointPolicy"]>
+    composites: {}
+  }
+
+  type TouchpointPolicyGetPayload<S extends boolean | null | undefined | TouchpointPolicyDefaultArgs> = $Result.GetResult<Prisma.$TouchpointPolicyPayload, S>
+
+  type TouchpointPolicyCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<TouchpointPolicyFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: TouchpointPolicyCountAggregateInputType | true
+    }
+
+  export interface TouchpointPolicyDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TouchpointPolicy'], meta: { name: 'TouchpointPolicy' } }
+    /**
+     * Find zero or one TouchpointPolicy that matches the filter.
+     * @param {TouchpointPolicyFindUniqueArgs} args - Arguments to find a TouchpointPolicy
+     * @example
+     * // Get one TouchpointPolicy
+     * const touchpointPolicy = await prisma.touchpointPolicy.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends TouchpointPolicyFindUniqueArgs>(args: SelectSubset<T, TouchpointPolicyFindUniqueArgs<ExtArgs>>): Prisma__TouchpointPolicyClient<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one TouchpointPolicy that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {TouchpointPolicyFindUniqueOrThrowArgs} args - Arguments to find a TouchpointPolicy
+     * @example
+     * // Get one TouchpointPolicy
+     * const touchpointPolicy = await prisma.touchpointPolicy.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends TouchpointPolicyFindUniqueOrThrowArgs>(args: SelectSubset<T, TouchpointPolicyFindUniqueOrThrowArgs<ExtArgs>>): Prisma__TouchpointPolicyClient<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TouchpointPolicy that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointPolicyFindFirstArgs} args - Arguments to find a TouchpointPolicy
+     * @example
+     * // Get one TouchpointPolicy
+     * const touchpointPolicy = await prisma.touchpointPolicy.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends TouchpointPolicyFindFirstArgs>(args?: SelectSubset<T, TouchpointPolicyFindFirstArgs<ExtArgs>>): Prisma__TouchpointPolicyClient<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first TouchpointPolicy that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointPolicyFindFirstOrThrowArgs} args - Arguments to find a TouchpointPolicy
+     * @example
+     * // Get one TouchpointPolicy
+     * const touchpointPolicy = await prisma.touchpointPolicy.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends TouchpointPolicyFindFirstOrThrowArgs>(args?: SelectSubset<T, TouchpointPolicyFindFirstOrThrowArgs<ExtArgs>>): Prisma__TouchpointPolicyClient<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more TouchpointPolicies that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointPolicyFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TouchpointPolicies
+     * const touchpointPolicies = await prisma.touchpointPolicy.findMany()
+     * 
+     * // Get first 10 TouchpointPolicies
+     * const touchpointPolicies = await prisma.touchpointPolicy.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const touchpointPolicyWithIdOnly = await prisma.touchpointPolicy.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends TouchpointPolicyFindManyArgs>(args?: SelectSubset<T, TouchpointPolicyFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a TouchpointPolicy.
+     * @param {TouchpointPolicyCreateArgs} args - Arguments to create a TouchpointPolicy.
+     * @example
+     * // Create one TouchpointPolicy
+     * const TouchpointPolicy = await prisma.touchpointPolicy.create({
+     *   data: {
+     *     // ... data to create a TouchpointPolicy
+     *   }
+     * })
+     * 
+     */
+    create<T extends TouchpointPolicyCreateArgs>(args: SelectSubset<T, TouchpointPolicyCreateArgs<ExtArgs>>): Prisma__TouchpointPolicyClient<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many TouchpointPolicies.
+     * @param {TouchpointPolicyCreateManyArgs} args - Arguments to create many TouchpointPolicies.
+     * @example
+     * // Create many TouchpointPolicies
+     * const touchpointPolicy = await prisma.touchpointPolicy.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends TouchpointPolicyCreateManyArgs>(args?: SelectSubset<T, TouchpointPolicyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many TouchpointPolicies and returns the data saved in the database.
+     * @param {TouchpointPolicyCreateManyAndReturnArgs} args - Arguments to create many TouchpointPolicies.
+     * @example
+     * // Create many TouchpointPolicies
+     * const touchpointPolicy = await prisma.touchpointPolicy.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many TouchpointPolicies and only return the `id`
+     * const touchpointPolicyWithIdOnly = await prisma.touchpointPolicy.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends TouchpointPolicyCreateManyAndReturnArgs>(args?: SelectSubset<T, TouchpointPolicyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a TouchpointPolicy.
+     * @param {TouchpointPolicyDeleteArgs} args - Arguments to delete one TouchpointPolicy.
+     * @example
+     * // Delete one TouchpointPolicy
+     * const TouchpointPolicy = await prisma.touchpointPolicy.delete({
+     *   where: {
+     *     // ... filter to delete one TouchpointPolicy
+     *   }
+     * })
+     * 
+     */
+    delete<T extends TouchpointPolicyDeleteArgs>(args: SelectSubset<T, TouchpointPolicyDeleteArgs<ExtArgs>>): Prisma__TouchpointPolicyClient<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one TouchpointPolicy.
+     * @param {TouchpointPolicyUpdateArgs} args - Arguments to update one TouchpointPolicy.
+     * @example
+     * // Update one TouchpointPolicy
+     * const touchpointPolicy = await prisma.touchpointPolicy.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends TouchpointPolicyUpdateArgs>(args: SelectSubset<T, TouchpointPolicyUpdateArgs<ExtArgs>>): Prisma__TouchpointPolicyClient<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more TouchpointPolicies.
+     * @param {TouchpointPolicyDeleteManyArgs} args - Arguments to filter TouchpointPolicies to delete.
+     * @example
+     * // Delete a few TouchpointPolicies
+     * const { count } = await prisma.touchpointPolicy.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends TouchpointPolicyDeleteManyArgs>(args?: SelectSubset<T, TouchpointPolicyDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TouchpointPolicies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointPolicyUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TouchpointPolicies
+     * const touchpointPolicy = await prisma.touchpointPolicy.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends TouchpointPolicyUpdateManyArgs>(args: SelectSubset<T, TouchpointPolicyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TouchpointPolicies and returns the data updated in the database.
+     * @param {TouchpointPolicyUpdateManyAndReturnArgs} args - Arguments to update many TouchpointPolicies.
+     * @example
+     * // Update many TouchpointPolicies
+     * const touchpointPolicy = await prisma.touchpointPolicy.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more TouchpointPolicies and only return the `id`
+     * const touchpointPolicyWithIdOnly = await prisma.touchpointPolicy.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends TouchpointPolicyUpdateManyAndReturnArgs>(args: SelectSubset<T, TouchpointPolicyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one TouchpointPolicy.
+     * @param {TouchpointPolicyUpsertArgs} args - Arguments to update or create a TouchpointPolicy.
+     * @example
+     * // Update or create a TouchpointPolicy
+     * const touchpointPolicy = await prisma.touchpointPolicy.upsert({
+     *   create: {
+     *     // ... data to create a TouchpointPolicy
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TouchpointPolicy we want to update
+     *   }
+     * })
+     */
+    upsert<T extends TouchpointPolicyUpsertArgs>(args: SelectSubset<T, TouchpointPolicyUpsertArgs<ExtArgs>>): Prisma__TouchpointPolicyClient<$Result.GetResult<Prisma.$TouchpointPolicyPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of TouchpointPolicies.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointPolicyCountArgs} args - Arguments to filter TouchpointPolicies to count.
+     * @example
+     * // Count the number of TouchpointPolicies
+     * const count = await prisma.touchpointPolicy.count({
+     *   where: {
+     *     // ... the filter for the TouchpointPolicies we want to count
+     *   }
+     * })
+    **/
+    count<T extends TouchpointPolicyCountArgs>(
+      args?: Subset<T, TouchpointPolicyCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TouchpointPolicyCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TouchpointPolicy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointPolicyAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TouchpointPolicyAggregateArgs>(args: Subset<T, TouchpointPolicyAggregateArgs>): Prisma.PrismaPromise<GetTouchpointPolicyAggregateType<T>>
+
+    /**
+     * Group by TouchpointPolicy.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TouchpointPolicyGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TouchpointPolicyGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TouchpointPolicyGroupByArgs['orderBy'] }
+        : { orderBy?: TouchpointPolicyGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TouchpointPolicyGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTouchpointPolicyGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TouchpointPolicy model
+   */
+  readonly fields: TouchpointPolicyFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TouchpointPolicy.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TouchpointPolicyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    touchpoint<T extends TouchpointDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TouchpointDefaultArgs<ExtArgs>>): Prisma__TouchpointClient<$Result.GetResult<Prisma.$TouchpointPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    policy<T extends PolicyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, PolicyDefaultArgs<ExtArgs>>): Prisma__PolicyClient<$Result.GetResult<Prisma.$PolicyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the TouchpointPolicy model
+   */
+  interface TouchpointPolicyFieldRefs {
+    readonly id: FieldRef<"TouchpointPolicy", 'String'>
+    readonly touchpointId: FieldRef<"TouchpointPolicy", 'String'>
+    readonly policyId: FieldRef<"TouchpointPolicy", 'String'>
+    readonly isRequired: FieldRef<"TouchpointPolicy", 'Boolean'>
+    readonly displayOrder: FieldRef<"TouchpointPolicy", 'Int'>
+    readonly customLabel: FieldRef<"TouchpointPolicy", 'String'>
+    readonly createdAt: FieldRef<"TouchpointPolicy", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * TouchpointPolicy findUnique
+   */
+  export type TouchpointPolicyFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which TouchpointPolicy to fetch.
+     */
+    where: TouchpointPolicyWhereUniqueInput
+  }
+
+  /**
+   * TouchpointPolicy findUniqueOrThrow
+   */
+  export type TouchpointPolicyFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which TouchpointPolicy to fetch.
+     */
+    where: TouchpointPolicyWhereUniqueInput
+  }
+
+  /**
+   * TouchpointPolicy findFirst
+   */
+  export type TouchpointPolicyFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which TouchpointPolicy to fetch.
+     */
+    where?: TouchpointPolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TouchpointPolicies to fetch.
+     */
+    orderBy?: TouchpointPolicyOrderByWithRelationInput | TouchpointPolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TouchpointPolicies.
+     */
+    cursor?: TouchpointPolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TouchpointPolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TouchpointPolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TouchpointPolicies.
+     */
+    distinct?: TouchpointPolicyScalarFieldEnum | TouchpointPolicyScalarFieldEnum[]
+  }
+
+  /**
+   * TouchpointPolicy findFirstOrThrow
+   */
+  export type TouchpointPolicyFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which TouchpointPolicy to fetch.
+     */
+    where?: TouchpointPolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TouchpointPolicies to fetch.
+     */
+    orderBy?: TouchpointPolicyOrderByWithRelationInput | TouchpointPolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TouchpointPolicies.
+     */
+    cursor?: TouchpointPolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TouchpointPolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TouchpointPolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TouchpointPolicies.
+     */
+    distinct?: TouchpointPolicyScalarFieldEnum | TouchpointPolicyScalarFieldEnum[]
+  }
+
+  /**
+   * TouchpointPolicy findMany
+   */
+  export type TouchpointPolicyFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyInclude<ExtArgs> | null
+    /**
+     * Filter, which TouchpointPolicies to fetch.
+     */
+    where?: TouchpointPolicyWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TouchpointPolicies to fetch.
+     */
+    orderBy?: TouchpointPolicyOrderByWithRelationInput | TouchpointPolicyOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TouchpointPolicies.
+     */
+    cursor?: TouchpointPolicyWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TouchpointPolicies from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TouchpointPolicies.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TouchpointPolicies.
+     */
+    distinct?: TouchpointPolicyScalarFieldEnum | TouchpointPolicyScalarFieldEnum[]
+  }
+
+  /**
+   * TouchpointPolicy create
+   */
+  export type TouchpointPolicyCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TouchpointPolicy.
+     */
+    data: XOR<TouchpointPolicyCreateInput, TouchpointPolicyUncheckedCreateInput>
+  }
+
+  /**
+   * TouchpointPolicy createMany
+   */
+  export type TouchpointPolicyCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TouchpointPolicies.
+     */
+    data: TouchpointPolicyCreateManyInput | TouchpointPolicyCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * TouchpointPolicy createManyAndReturn
+   */
+  export type TouchpointPolicyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * The data used to create many TouchpointPolicies.
+     */
+    data: TouchpointPolicyCreateManyInput | TouchpointPolicyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TouchpointPolicy update
+   */
+  export type TouchpointPolicyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TouchpointPolicy.
+     */
+    data: XOR<TouchpointPolicyUpdateInput, TouchpointPolicyUncheckedUpdateInput>
+    /**
+     * Choose, which TouchpointPolicy to update.
+     */
+    where: TouchpointPolicyWhereUniqueInput
+  }
+
+  /**
+   * TouchpointPolicy updateMany
+   */
+  export type TouchpointPolicyUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TouchpointPolicies.
+     */
+    data: XOR<TouchpointPolicyUpdateManyMutationInput, TouchpointPolicyUncheckedUpdateManyInput>
+    /**
+     * Filter which TouchpointPolicies to update
+     */
+    where?: TouchpointPolicyWhereInput
+    /**
+     * Limit how many TouchpointPolicies to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * TouchpointPolicy updateManyAndReturn
+   */
+  export type TouchpointPolicyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * The data used to update TouchpointPolicies.
+     */
+    data: XOR<TouchpointPolicyUpdateManyMutationInput, TouchpointPolicyUncheckedUpdateManyInput>
+    /**
+     * Filter which TouchpointPolicies to update
+     */
+    where?: TouchpointPolicyWhereInput
+    /**
+     * Limit how many TouchpointPolicies to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * TouchpointPolicy upsert
+   */
+  export type TouchpointPolicyUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TouchpointPolicy to update in case it exists.
+     */
+    where: TouchpointPolicyWhereUniqueInput
+    /**
+     * In case the TouchpointPolicy found by the `where` argument doesn't exist, create a new TouchpointPolicy with this data.
+     */
+    create: XOR<TouchpointPolicyCreateInput, TouchpointPolicyUncheckedCreateInput>
+    /**
+     * In case the TouchpointPolicy was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TouchpointPolicyUpdateInput, TouchpointPolicyUncheckedUpdateInput>
+  }
+
+  /**
+   * TouchpointPolicy delete
+   */
+  export type TouchpointPolicyDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyInclude<ExtArgs> | null
+    /**
+     * Filter which TouchpointPolicy to delete.
+     */
+    where: TouchpointPolicyWhereUniqueInput
+  }
+
+  /**
+   * TouchpointPolicy deleteMany
+   */
+  export type TouchpointPolicyDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TouchpointPolicies to delete
+     */
+    where?: TouchpointPolicyWhereInput
+    /**
+     * Limit how many TouchpointPolicies to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * TouchpointPolicy without action
+   */
+  export type TouchpointPolicyDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TouchpointPolicy
+     */
+    select?: TouchpointPolicySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the TouchpointPolicy
+     */
+    omit?: TouchpointPolicyOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: TouchpointPolicyInclude<ExtArgs> | null
   }
 
 
@@ -23590,6 +26140,33 @@ export namespace Prisma {
   export type PolicyScalarFieldEnum = (typeof PolicyScalarFieldEnum)[keyof typeof PolicyScalarFieldEnum]
 
 
+  export const TouchpointScalarFieldEnum: {
+    id: 'id',
+    tenantId: 'tenantId',
+    name: 'name',
+    slug: 'slug',
+    description: 'description',
+    isActive: 'isActive',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type TouchpointScalarFieldEnum = (typeof TouchpointScalarFieldEnum)[keyof typeof TouchpointScalarFieldEnum]
+
+
+  export const TouchpointPolicyScalarFieldEnum: {
+    id: 'id',
+    touchpointId: 'touchpointId',
+    policyId: 'policyId',
+    isRequired: 'isRequired',
+    displayOrder: 'displayOrder',
+    customLabel: 'customLabel',
+    createdAt: 'createdAt'
+  };
+
+  export type TouchpointPolicyScalarFieldEnum = (typeof TouchpointPolicyScalarFieldEnum)[keyof typeof TouchpointPolicyScalarFieldEnum]
+
+
   export const ConsentScalarFieldEnum: {
     id: 'id',
     tenantId: 'tenantId',
@@ -23889,6 +26466,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryListRelationFilter
     users?: TenantUserListRelationFilter
     invitations?: InvitationListRelationFilter
+    touchpoints?: TouchpointListRelationFilter
   }
 
   export type TenantOrderByWithRelationInput = {
@@ -23909,6 +26487,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryOrderByRelationAggregateInput
     users?: TenantUserOrderByRelationAggregateInput
     invitations?: InvitationOrderByRelationAggregateInput
+    touchpoints?: TouchpointOrderByRelationAggregateInput
   }
 
   export type TenantWhereUniqueInput = Prisma.AtLeast<{
@@ -23932,6 +26511,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryListRelationFilter
     users?: TenantUserListRelationFilter
     invitations?: InvitationListRelationFilter
+    touchpoints?: TouchpointListRelationFilter
   }, "id" | "slug">
 
   export type TenantOrderByWithAggregationInput = {
@@ -24776,6 +27356,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Policy"> | Date | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     consents?: ConsentListRelationFilter
+    touchpointPolicies?: TouchpointPolicyListRelationFilter
   }
 
   export type PolicyOrderByWithRelationInput = {
@@ -24790,6 +27371,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     tenant?: TenantOrderByWithRelationInput
     consents?: ConsentOrderByRelationAggregateInput
+    touchpointPolicies?: TouchpointPolicyOrderByRelationAggregateInput
   }
 
   export type PolicyWhereUniqueInput = Prisma.AtLeast<{
@@ -24808,6 +27390,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Policy"> | Date | string
     tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
     consents?: ConsentListRelationFilter
+    touchpointPolicies?: TouchpointPolicyListRelationFilter
   }, "id" | "tenantId_purpose_version">
 
   export type PolicyOrderByWithAggregationInput = {
@@ -24840,6 +27423,151 @@ export namespace Prisma {
     isActive?: BoolWithAggregatesFilter<"Policy"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Policy"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Policy"> | Date | string
+  }
+
+  export type TouchpointWhereInput = {
+    AND?: TouchpointWhereInput | TouchpointWhereInput[]
+    OR?: TouchpointWhereInput[]
+    NOT?: TouchpointWhereInput | TouchpointWhereInput[]
+    id?: StringFilter<"Touchpoint"> | string
+    tenantId?: StringFilter<"Touchpoint"> | string
+    name?: StringFilter<"Touchpoint"> | string
+    slug?: StringFilter<"Touchpoint"> | string
+    description?: StringNullableFilter<"Touchpoint"> | string | null
+    isActive?: BoolFilter<"Touchpoint"> | boolean
+    createdAt?: DateTimeFilter<"Touchpoint"> | Date | string
+    updatedAt?: DateTimeFilter<"Touchpoint"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    policies?: TouchpointPolicyListRelationFilter
+  }
+
+  export type TouchpointOrderByWithRelationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    tenant?: TenantOrderByWithRelationInput
+    policies?: TouchpointPolicyOrderByRelationAggregateInput
+  }
+
+  export type TouchpointWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    tenantId_slug?: TouchpointTenantIdSlugCompoundUniqueInput
+    AND?: TouchpointWhereInput | TouchpointWhereInput[]
+    OR?: TouchpointWhereInput[]
+    NOT?: TouchpointWhereInput | TouchpointWhereInput[]
+    tenantId?: StringFilter<"Touchpoint"> | string
+    name?: StringFilter<"Touchpoint"> | string
+    slug?: StringFilter<"Touchpoint"> | string
+    description?: StringNullableFilter<"Touchpoint"> | string | null
+    isActive?: BoolFilter<"Touchpoint"> | boolean
+    createdAt?: DateTimeFilter<"Touchpoint"> | Date | string
+    updatedAt?: DateTimeFilter<"Touchpoint"> | Date | string
+    tenant?: XOR<TenantScalarRelationFilter, TenantWhereInput>
+    policies?: TouchpointPolicyListRelationFilter
+  }, "id" | "tenantId_slug">
+
+  export type TouchpointOrderByWithAggregationInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: TouchpointCountOrderByAggregateInput
+    _max?: TouchpointMaxOrderByAggregateInput
+    _min?: TouchpointMinOrderByAggregateInput
+  }
+
+  export type TouchpointScalarWhereWithAggregatesInput = {
+    AND?: TouchpointScalarWhereWithAggregatesInput | TouchpointScalarWhereWithAggregatesInput[]
+    OR?: TouchpointScalarWhereWithAggregatesInput[]
+    NOT?: TouchpointScalarWhereWithAggregatesInput | TouchpointScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Touchpoint"> | string
+    tenantId?: StringWithAggregatesFilter<"Touchpoint"> | string
+    name?: StringWithAggregatesFilter<"Touchpoint"> | string
+    slug?: StringWithAggregatesFilter<"Touchpoint"> | string
+    description?: StringNullableWithAggregatesFilter<"Touchpoint"> | string | null
+    isActive?: BoolWithAggregatesFilter<"Touchpoint"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Touchpoint"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Touchpoint"> | Date | string
+  }
+
+  export type TouchpointPolicyWhereInput = {
+    AND?: TouchpointPolicyWhereInput | TouchpointPolicyWhereInput[]
+    OR?: TouchpointPolicyWhereInput[]
+    NOT?: TouchpointPolicyWhereInput | TouchpointPolicyWhereInput[]
+    id?: StringFilter<"TouchpointPolicy"> | string
+    touchpointId?: StringFilter<"TouchpointPolicy"> | string
+    policyId?: StringFilter<"TouchpointPolicy"> | string
+    isRequired?: BoolFilter<"TouchpointPolicy"> | boolean
+    displayOrder?: IntFilter<"TouchpointPolicy"> | number
+    customLabel?: StringNullableFilter<"TouchpointPolicy"> | string | null
+    createdAt?: DateTimeFilter<"TouchpointPolicy"> | Date | string
+    touchpoint?: XOR<TouchpointScalarRelationFilter, TouchpointWhereInput>
+    policy?: XOR<PolicyScalarRelationFilter, PolicyWhereInput>
+  }
+
+  export type TouchpointPolicyOrderByWithRelationInput = {
+    id?: SortOrder
+    touchpointId?: SortOrder
+    policyId?: SortOrder
+    isRequired?: SortOrder
+    displayOrder?: SortOrder
+    customLabel?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    touchpoint?: TouchpointOrderByWithRelationInput
+    policy?: PolicyOrderByWithRelationInput
+  }
+
+  export type TouchpointPolicyWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    touchpointId_policyId?: TouchpointPolicyTouchpointIdPolicyIdCompoundUniqueInput
+    AND?: TouchpointPolicyWhereInput | TouchpointPolicyWhereInput[]
+    OR?: TouchpointPolicyWhereInput[]
+    NOT?: TouchpointPolicyWhereInput | TouchpointPolicyWhereInput[]
+    touchpointId?: StringFilter<"TouchpointPolicy"> | string
+    policyId?: StringFilter<"TouchpointPolicy"> | string
+    isRequired?: BoolFilter<"TouchpointPolicy"> | boolean
+    displayOrder?: IntFilter<"TouchpointPolicy"> | number
+    customLabel?: StringNullableFilter<"TouchpointPolicy"> | string | null
+    createdAt?: DateTimeFilter<"TouchpointPolicy"> | Date | string
+    touchpoint?: XOR<TouchpointScalarRelationFilter, TouchpointWhereInput>
+    policy?: XOR<PolicyScalarRelationFilter, PolicyWhereInput>
+  }, "id" | "touchpointId_policyId">
+
+  export type TouchpointPolicyOrderByWithAggregationInput = {
+    id?: SortOrder
+    touchpointId?: SortOrder
+    policyId?: SortOrder
+    isRequired?: SortOrder
+    displayOrder?: SortOrder
+    customLabel?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: TouchpointPolicyCountOrderByAggregateInput
+    _avg?: TouchpointPolicyAvgOrderByAggregateInput
+    _max?: TouchpointPolicyMaxOrderByAggregateInput
+    _min?: TouchpointPolicyMinOrderByAggregateInput
+    _sum?: TouchpointPolicySumOrderByAggregateInput
+  }
+
+  export type TouchpointPolicyScalarWhereWithAggregatesInput = {
+    AND?: TouchpointPolicyScalarWhereWithAggregatesInput | TouchpointPolicyScalarWhereWithAggregatesInput[]
+    OR?: TouchpointPolicyScalarWhereWithAggregatesInput[]
+    NOT?: TouchpointPolicyScalarWhereWithAggregatesInput | TouchpointPolicyScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"TouchpointPolicy"> | string
+    touchpointId?: StringWithAggregatesFilter<"TouchpointPolicy"> | string
+    policyId?: StringWithAggregatesFilter<"TouchpointPolicy"> | string
+    isRequired?: BoolWithAggregatesFilter<"TouchpointPolicy"> | boolean
+    displayOrder?: IntWithAggregatesFilter<"TouchpointPolicy"> | number
+    customLabel?: StringNullableWithAggregatesFilter<"TouchpointPolicy"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"TouchpointPolicy"> | Date | string
   }
 
   export type ConsentWhereInput = {
@@ -25314,6 +28042,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
     users?: TenantUserCreateNestedManyWithoutTenantInput
     invitations?: InvitationCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateInput = {
@@ -25334,6 +28063,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
     users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUpdateInput = {
@@ -25354,6 +28084,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
     users?: TenantUserUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateInput = {
@@ -25374,6 +28105,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
     users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateManyInput = {
@@ -26302,6 +29034,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutPoliciesInput
     consents?: ConsentCreateNestedManyWithoutPolicyInput
+    touchpointPolicies?: TouchpointPolicyCreateNestedManyWithoutPolicyInput
   }
 
   export type PolicyUncheckedCreateInput = {
@@ -26315,6 +29048,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     consents?: ConsentUncheckedCreateNestedManyWithoutPolicyInput
+    touchpointPolicies?: TouchpointPolicyUncheckedCreateNestedManyWithoutPolicyInput
   }
 
   export type PolicyUpdateInput = {
@@ -26328,6 +29062,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutPoliciesNestedInput
     consents?: ConsentUpdateManyWithoutPolicyNestedInput
+    touchpointPolicies?: TouchpointPolicyUpdateManyWithoutPolicyNestedInput
   }
 
   export type PolicyUncheckedUpdateInput = {
@@ -26341,6 +29076,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     consents?: ConsentUncheckedUpdateManyWithoutPolicyNestedInput
+    touchpointPolicies?: TouchpointPolicyUncheckedUpdateManyWithoutPolicyNestedInput
   }
 
   export type PolicyCreateManyInput = {
@@ -26376,6 +29112,154 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TouchpointCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutTouchpointsInput
+    policies?: TouchpointPolicyCreateNestedManyWithoutTouchpointInput
+  }
+
+  export type TouchpointUncheckedCreateInput = {
+    id?: string
+    tenantId: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    policies?: TouchpointPolicyUncheckedCreateNestedManyWithoutTouchpointInput
+  }
+
+  export type TouchpointUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutTouchpointsNestedInput
+    policies?: TouchpointPolicyUpdateManyWithoutTouchpointNestedInput
+  }
+
+  export type TouchpointUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    policies?: TouchpointPolicyUncheckedUpdateManyWithoutTouchpointNestedInput
+  }
+
+  export type TouchpointCreateManyInput = {
+    id?: string
+    tenantId: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TouchpointUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TouchpointUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TouchpointPolicyCreateInput = {
+    id?: string
+    isRequired?: boolean
+    displayOrder?: number
+    customLabel?: string | null
+    createdAt?: Date | string
+    touchpoint: TouchpointCreateNestedOneWithoutPoliciesInput
+    policy: PolicyCreateNestedOneWithoutTouchpointPoliciesInput
+  }
+
+  export type TouchpointPolicyUncheckedCreateInput = {
+    id?: string
+    touchpointId: string
+    policyId: string
+    isRequired?: boolean
+    displayOrder?: number
+    customLabel?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TouchpointPolicyUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isRequired?: BoolFieldUpdateOperationsInput | boolean
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    customLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    touchpoint?: TouchpointUpdateOneRequiredWithoutPoliciesNestedInput
+    policy?: PolicyUpdateOneRequiredWithoutTouchpointPoliciesNestedInput
+  }
+
+  export type TouchpointPolicyUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    touchpointId?: StringFieldUpdateOperationsInput | string
+    policyId?: StringFieldUpdateOperationsInput | string
+    isRequired?: BoolFieldUpdateOperationsInput | boolean
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    customLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TouchpointPolicyCreateManyInput = {
+    id?: string
+    touchpointId: string
+    policyId: string
+    isRequired?: boolean
+    displayOrder?: number
+    customLabel?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TouchpointPolicyUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isRequired?: BoolFieldUpdateOperationsInput | boolean
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    customLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TouchpointPolicyUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    touchpointId?: StringFieldUpdateOperationsInput | string
+    policyId?: StringFieldUpdateOperationsInput | string
+    isRequired?: BoolFieldUpdateOperationsInput | boolean
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    customLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type ConsentCreateInput = {
@@ -26975,6 +29859,12 @@ export namespace Prisma {
     none?: InvitationWhereInput
   }
 
+  export type TouchpointListRelationFilter = {
+    every?: TouchpointWhereInput
+    some?: TouchpointWhereInput
+    none?: TouchpointWhereInput
+  }
+
   export type ConsentOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -27012,6 +29902,10 @@ export namespace Prisma {
   }
 
   export type InvitationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TouchpointOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -27839,6 +30733,16 @@ export namespace Prisma {
     durationMs?: SortOrder
   }
 
+  export type TouchpointPolicyListRelationFilter = {
+    every?: TouchpointPolicyWhereInput
+    some?: TouchpointPolicyWhereInput
+    none?: TouchpointPolicyWhereInput
+  }
+
+  export type TouchpointPolicyOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type PolicyTenantIdPurposeVersionCompoundUniqueInput = {
     tenantId: string
     purpose: string
@@ -27889,16 +30793,102 @@ export namespace Prisma {
     version?: SortOrder
   }
 
-  export type EnumConsentStatusFilter<$PrismaModel = never> = {
-    equals?: $Enums.ConsentStatus | EnumConsentStatusFieldRefInput<$PrismaModel>
-    in?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
-    notIn?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
-    not?: NestedEnumConsentStatusFilter<$PrismaModel> | $Enums.ConsentStatus
+  export type TouchpointTenantIdSlugCompoundUniqueInput = {
+    tenantId: string
+    slug: string
+  }
+
+  export type TouchpointCountOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TouchpointMaxOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TouchpointMinOrderByAggregateInput = {
+    id?: SortOrder
+    tenantId?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    isActive?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type TouchpointScalarRelationFilter = {
+    is?: TouchpointWhereInput
+    isNot?: TouchpointWhereInput
   }
 
   export type PolicyScalarRelationFilter = {
     is?: PolicyWhereInput
     isNot?: PolicyWhereInput
+  }
+
+  export type TouchpointPolicyTouchpointIdPolicyIdCompoundUniqueInput = {
+    touchpointId: string
+    policyId: string
+  }
+
+  export type TouchpointPolicyCountOrderByAggregateInput = {
+    id?: SortOrder
+    touchpointId?: SortOrder
+    policyId?: SortOrder
+    isRequired?: SortOrder
+    displayOrder?: SortOrder
+    customLabel?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TouchpointPolicyAvgOrderByAggregateInput = {
+    displayOrder?: SortOrder
+  }
+
+  export type TouchpointPolicyMaxOrderByAggregateInput = {
+    id?: SortOrder
+    touchpointId?: SortOrder
+    policyId?: SortOrder
+    isRequired?: SortOrder
+    displayOrder?: SortOrder
+    customLabel?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TouchpointPolicyMinOrderByAggregateInput = {
+    id?: SortOrder
+    touchpointId?: SortOrder
+    policyId?: SortOrder
+    isRequired?: SortOrder
+    displayOrder?: SortOrder
+    customLabel?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type TouchpointPolicySumOrderByAggregateInput = {
+    displayOrder?: SortOrder
+  }
+
+  export type EnumConsentStatusFilter<$PrismaModel = never> = {
+    equals?: $Enums.ConsentStatus | EnumConsentStatusFieldRefInput<$PrismaModel>
+    in?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
+    notIn?: $Enums.ConsentStatus[] | ListEnumConsentStatusFieldRefInput<$PrismaModel>
+    not?: NestedEnumConsentStatusFilter<$PrismaModel> | $Enums.ConsentStatus
   }
 
   export type ConsentTenantIdUserIdPurposeCompoundUniqueInput = {
@@ -28215,6 +31205,13 @@ export namespace Prisma {
     connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
   }
 
+  export type TouchpointCreateNestedManyWithoutTenantInput = {
+    create?: XOR<TouchpointCreateWithoutTenantInput, TouchpointUncheckedCreateWithoutTenantInput> | TouchpointCreateWithoutTenantInput[] | TouchpointUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TouchpointCreateOrConnectWithoutTenantInput | TouchpointCreateOrConnectWithoutTenantInput[]
+    createMany?: TouchpointCreateManyTenantInputEnvelope
+    connect?: TouchpointWhereUniqueInput | TouchpointWhereUniqueInput[]
+  }
+
   export type ConsentUncheckedCreateNestedManyWithoutTenantInput = {
     create?: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput> | ConsentCreateWithoutTenantInput[] | ConsentUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: ConsentCreateOrConnectWithoutTenantInput | ConsentCreateOrConnectWithoutTenantInput[]
@@ -28283,6 +31280,13 @@ export namespace Prisma {
     connectOrCreate?: InvitationCreateOrConnectWithoutTenantInput | InvitationCreateOrConnectWithoutTenantInput[]
     createMany?: InvitationCreateManyTenantInputEnvelope
     connect?: InvitationWhereUniqueInput | InvitationWhereUniqueInput[]
+  }
+
+  export type TouchpointUncheckedCreateNestedManyWithoutTenantInput = {
+    create?: XOR<TouchpointCreateWithoutTenantInput, TouchpointUncheckedCreateWithoutTenantInput> | TouchpointCreateWithoutTenantInput[] | TouchpointUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TouchpointCreateOrConnectWithoutTenantInput | TouchpointCreateOrConnectWithoutTenantInput[]
+    createMany?: TouchpointCreateManyTenantInputEnvelope
+    connect?: TouchpointWhereUniqueInput | TouchpointWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -28441,6 +31445,20 @@ export namespace Prisma {
     deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
   }
 
+  export type TouchpointUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<TouchpointCreateWithoutTenantInput, TouchpointUncheckedCreateWithoutTenantInput> | TouchpointCreateWithoutTenantInput[] | TouchpointUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TouchpointCreateOrConnectWithoutTenantInput | TouchpointCreateOrConnectWithoutTenantInput[]
+    upsert?: TouchpointUpsertWithWhereUniqueWithoutTenantInput | TouchpointUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: TouchpointCreateManyTenantInputEnvelope
+    set?: TouchpointWhereUniqueInput | TouchpointWhereUniqueInput[]
+    disconnect?: TouchpointWhereUniqueInput | TouchpointWhereUniqueInput[]
+    delete?: TouchpointWhereUniqueInput | TouchpointWhereUniqueInput[]
+    connect?: TouchpointWhereUniqueInput | TouchpointWhereUniqueInput[]
+    update?: TouchpointUpdateWithWhereUniqueWithoutTenantInput | TouchpointUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: TouchpointUpdateManyWithWhereWithoutTenantInput | TouchpointUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: TouchpointScalarWhereInput | TouchpointScalarWhereInput[]
+  }
+
   export type ConsentUncheckedUpdateManyWithoutTenantNestedInput = {
     create?: XOR<ConsentCreateWithoutTenantInput, ConsentUncheckedCreateWithoutTenantInput> | ConsentCreateWithoutTenantInput[] | ConsentUncheckedCreateWithoutTenantInput[]
     connectOrCreate?: ConsentCreateOrConnectWithoutTenantInput | ConsentCreateOrConnectWithoutTenantInput[]
@@ -28579,6 +31597,20 @@ export namespace Prisma {
     update?: InvitationUpdateWithWhereUniqueWithoutTenantInput | InvitationUpdateWithWhereUniqueWithoutTenantInput[]
     updateMany?: InvitationUpdateManyWithWhereWithoutTenantInput | InvitationUpdateManyWithWhereWithoutTenantInput[]
     deleteMany?: InvitationScalarWhereInput | InvitationScalarWhereInput[]
+  }
+
+  export type TouchpointUncheckedUpdateManyWithoutTenantNestedInput = {
+    create?: XOR<TouchpointCreateWithoutTenantInput, TouchpointUncheckedCreateWithoutTenantInput> | TouchpointCreateWithoutTenantInput[] | TouchpointUncheckedCreateWithoutTenantInput[]
+    connectOrCreate?: TouchpointCreateOrConnectWithoutTenantInput | TouchpointCreateOrConnectWithoutTenantInput[]
+    upsert?: TouchpointUpsertWithWhereUniqueWithoutTenantInput | TouchpointUpsertWithWhereUniqueWithoutTenantInput[]
+    createMany?: TouchpointCreateManyTenantInputEnvelope
+    set?: TouchpointWhereUniqueInput | TouchpointWhereUniqueInput[]
+    disconnect?: TouchpointWhereUniqueInput | TouchpointWhereUniqueInput[]
+    delete?: TouchpointWhereUniqueInput | TouchpointWhereUniqueInput[]
+    connect?: TouchpointWhereUniqueInput | TouchpointWhereUniqueInput[]
+    update?: TouchpointUpdateWithWhereUniqueWithoutTenantInput | TouchpointUpdateWithWhereUniqueWithoutTenantInput[]
+    updateMany?: TouchpointUpdateManyWithWhereWithoutTenantInput | TouchpointUpdateManyWithWhereWithoutTenantInput[]
+    deleteMany?: TouchpointScalarWhereInput | TouchpointScalarWhereInput[]
   }
 
   export type TenantCreateNestedOneWithoutUsersInput = {
@@ -28878,11 +31910,25 @@ export namespace Prisma {
     connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
   }
 
+  export type TouchpointPolicyCreateNestedManyWithoutPolicyInput = {
+    create?: XOR<TouchpointPolicyCreateWithoutPolicyInput, TouchpointPolicyUncheckedCreateWithoutPolicyInput> | TouchpointPolicyCreateWithoutPolicyInput[] | TouchpointPolicyUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: TouchpointPolicyCreateOrConnectWithoutPolicyInput | TouchpointPolicyCreateOrConnectWithoutPolicyInput[]
+    createMany?: TouchpointPolicyCreateManyPolicyInputEnvelope
+    connect?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+  }
+
   export type ConsentUncheckedCreateNestedManyWithoutPolicyInput = {
     create?: XOR<ConsentCreateWithoutPolicyInput, ConsentUncheckedCreateWithoutPolicyInput> | ConsentCreateWithoutPolicyInput[] | ConsentUncheckedCreateWithoutPolicyInput[]
     connectOrCreate?: ConsentCreateOrConnectWithoutPolicyInput | ConsentCreateOrConnectWithoutPolicyInput[]
     createMany?: ConsentCreateManyPolicyInputEnvelope
     connect?: ConsentWhereUniqueInput | ConsentWhereUniqueInput[]
+  }
+
+  export type TouchpointPolicyUncheckedCreateNestedManyWithoutPolicyInput = {
+    create?: XOR<TouchpointPolicyCreateWithoutPolicyInput, TouchpointPolicyUncheckedCreateWithoutPolicyInput> | TouchpointPolicyCreateWithoutPolicyInput[] | TouchpointPolicyUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: TouchpointPolicyCreateOrConnectWithoutPolicyInput | TouchpointPolicyCreateOrConnectWithoutPolicyInput[]
+    createMany?: TouchpointPolicyCreateManyPolicyInputEnvelope
+    connect?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
   }
 
   export type TenantUpdateOneRequiredWithoutPoliciesNestedInput = {
@@ -28907,6 +31953,20 @@ export namespace Prisma {
     deleteMany?: ConsentScalarWhereInput | ConsentScalarWhereInput[]
   }
 
+  export type TouchpointPolicyUpdateManyWithoutPolicyNestedInput = {
+    create?: XOR<TouchpointPolicyCreateWithoutPolicyInput, TouchpointPolicyUncheckedCreateWithoutPolicyInput> | TouchpointPolicyCreateWithoutPolicyInput[] | TouchpointPolicyUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: TouchpointPolicyCreateOrConnectWithoutPolicyInput | TouchpointPolicyCreateOrConnectWithoutPolicyInput[]
+    upsert?: TouchpointPolicyUpsertWithWhereUniqueWithoutPolicyInput | TouchpointPolicyUpsertWithWhereUniqueWithoutPolicyInput[]
+    createMany?: TouchpointPolicyCreateManyPolicyInputEnvelope
+    set?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    disconnect?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    delete?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    connect?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    update?: TouchpointPolicyUpdateWithWhereUniqueWithoutPolicyInput | TouchpointPolicyUpdateWithWhereUniqueWithoutPolicyInput[]
+    updateMany?: TouchpointPolicyUpdateManyWithWhereWithoutPolicyInput | TouchpointPolicyUpdateManyWithWhereWithoutPolicyInput[]
+    deleteMany?: TouchpointPolicyScalarWhereInput | TouchpointPolicyScalarWhereInput[]
+  }
+
   export type ConsentUncheckedUpdateManyWithoutPolicyNestedInput = {
     create?: XOR<ConsentCreateWithoutPolicyInput, ConsentUncheckedCreateWithoutPolicyInput> | ConsentCreateWithoutPolicyInput[] | ConsentUncheckedCreateWithoutPolicyInput[]
     connectOrCreate?: ConsentCreateOrConnectWithoutPolicyInput | ConsentCreateOrConnectWithoutPolicyInput[]
@@ -28919,6 +31979,104 @@ export namespace Prisma {
     update?: ConsentUpdateWithWhereUniqueWithoutPolicyInput | ConsentUpdateWithWhereUniqueWithoutPolicyInput[]
     updateMany?: ConsentUpdateManyWithWhereWithoutPolicyInput | ConsentUpdateManyWithWhereWithoutPolicyInput[]
     deleteMany?: ConsentScalarWhereInput | ConsentScalarWhereInput[]
+  }
+
+  export type TouchpointPolicyUncheckedUpdateManyWithoutPolicyNestedInput = {
+    create?: XOR<TouchpointPolicyCreateWithoutPolicyInput, TouchpointPolicyUncheckedCreateWithoutPolicyInput> | TouchpointPolicyCreateWithoutPolicyInput[] | TouchpointPolicyUncheckedCreateWithoutPolicyInput[]
+    connectOrCreate?: TouchpointPolicyCreateOrConnectWithoutPolicyInput | TouchpointPolicyCreateOrConnectWithoutPolicyInput[]
+    upsert?: TouchpointPolicyUpsertWithWhereUniqueWithoutPolicyInput | TouchpointPolicyUpsertWithWhereUniqueWithoutPolicyInput[]
+    createMany?: TouchpointPolicyCreateManyPolicyInputEnvelope
+    set?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    disconnect?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    delete?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    connect?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    update?: TouchpointPolicyUpdateWithWhereUniqueWithoutPolicyInput | TouchpointPolicyUpdateWithWhereUniqueWithoutPolicyInput[]
+    updateMany?: TouchpointPolicyUpdateManyWithWhereWithoutPolicyInput | TouchpointPolicyUpdateManyWithWhereWithoutPolicyInput[]
+    deleteMany?: TouchpointPolicyScalarWhereInput | TouchpointPolicyScalarWhereInput[]
+  }
+
+  export type TenantCreateNestedOneWithoutTouchpointsInput = {
+    create?: XOR<TenantCreateWithoutTouchpointsInput, TenantUncheckedCreateWithoutTouchpointsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutTouchpointsInput
+    connect?: TenantWhereUniqueInput
+  }
+
+  export type TouchpointPolicyCreateNestedManyWithoutTouchpointInput = {
+    create?: XOR<TouchpointPolicyCreateWithoutTouchpointInput, TouchpointPolicyUncheckedCreateWithoutTouchpointInput> | TouchpointPolicyCreateWithoutTouchpointInput[] | TouchpointPolicyUncheckedCreateWithoutTouchpointInput[]
+    connectOrCreate?: TouchpointPolicyCreateOrConnectWithoutTouchpointInput | TouchpointPolicyCreateOrConnectWithoutTouchpointInput[]
+    createMany?: TouchpointPolicyCreateManyTouchpointInputEnvelope
+    connect?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+  }
+
+  export type TouchpointPolicyUncheckedCreateNestedManyWithoutTouchpointInput = {
+    create?: XOR<TouchpointPolicyCreateWithoutTouchpointInput, TouchpointPolicyUncheckedCreateWithoutTouchpointInput> | TouchpointPolicyCreateWithoutTouchpointInput[] | TouchpointPolicyUncheckedCreateWithoutTouchpointInput[]
+    connectOrCreate?: TouchpointPolicyCreateOrConnectWithoutTouchpointInput | TouchpointPolicyCreateOrConnectWithoutTouchpointInput[]
+    createMany?: TouchpointPolicyCreateManyTouchpointInputEnvelope
+    connect?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+  }
+
+  export type TenantUpdateOneRequiredWithoutTouchpointsNestedInput = {
+    create?: XOR<TenantCreateWithoutTouchpointsInput, TenantUncheckedCreateWithoutTouchpointsInput>
+    connectOrCreate?: TenantCreateOrConnectWithoutTouchpointsInput
+    upsert?: TenantUpsertWithoutTouchpointsInput
+    connect?: TenantWhereUniqueInput
+    update?: XOR<XOR<TenantUpdateToOneWithWhereWithoutTouchpointsInput, TenantUpdateWithoutTouchpointsInput>, TenantUncheckedUpdateWithoutTouchpointsInput>
+  }
+
+  export type TouchpointPolicyUpdateManyWithoutTouchpointNestedInput = {
+    create?: XOR<TouchpointPolicyCreateWithoutTouchpointInput, TouchpointPolicyUncheckedCreateWithoutTouchpointInput> | TouchpointPolicyCreateWithoutTouchpointInput[] | TouchpointPolicyUncheckedCreateWithoutTouchpointInput[]
+    connectOrCreate?: TouchpointPolicyCreateOrConnectWithoutTouchpointInput | TouchpointPolicyCreateOrConnectWithoutTouchpointInput[]
+    upsert?: TouchpointPolicyUpsertWithWhereUniqueWithoutTouchpointInput | TouchpointPolicyUpsertWithWhereUniqueWithoutTouchpointInput[]
+    createMany?: TouchpointPolicyCreateManyTouchpointInputEnvelope
+    set?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    disconnect?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    delete?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    connect?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    update?: TouchpointPolicyUpdateWithWhereUniqueWithoutTouchpointInput | TouchpointPolicyUpdateWithWhereUniqueWithoutTouchpointInput[]
+    updateMany?: TouchpointPolicyUpdateManyWithWhereWithoutTouchpointInput | TouchpointPolicyUpdateManyWithWhereWithoutTouchpointInput[]
+    deleteMany?: TouchpointPolicyScalarWhereInput | TouchpointPolicyScalarWhereInput[]
+  }
+
+  export type TouchpointPolicyUncheckedUpdateManyWithoutTouchpointNestedInput = {
+    create?: XOR<TouchpointPolicyCreateWithoutTouchpointInput, TouchpointPolicyUncheckedCreateWithoutTouchpointInput> | TouchpointPolicyCreateWithoutTouchpointInput[] | TouchpointPolicyUncheckedCreateWithoutTouchpointInput[]
+    connectOrCreate?: TouchpointPolicyCreateOrConnectWithoutTouchpointInput | TouchpointPolicyCreateOrConnectWithoutTouchpointInput[]
+    upsert?: TouchpointPolicyUpsertWithWhereUniqueWithoutTouchpointInput | TouchpointPolicyUpsertWithWhereUniqueWithoutTouchpointInput[]
+    createMany?: TouchpointPolicyCreateManyTouchpointInputEnvelope
+    set?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    disconnect?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    delete?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    connect?: TouchpointPolicyWhereUniqueInput | TouchpointPolicyWhereUniqueInput[]
+    update?: TouchpointPolicyUpdateWithWhereUniqueWithoutTouchpointInput | TouchpointPolicyUpdateWithWhereUniqueWithoutTouchpointInput[]
+    updateMany?: TouchpointPolicyUpdateManyWithWhereWithoutTouchpointInput | TouchpointPolicyUpdateManyWithWhereWithoutTouchpointInput[]
+    deleteMany?: TouchpointPolicyScalarWhereInput | TouchpointPolicyScalarWhereInput[]
+  }
+
+  export type TouchpointCreateNestedOneWithoutPoliciesInput = {
+    create?: XOR<TouchpointCreateWithoutPoliciesInput, TouchpointUncheckedCreateWithoutPoliciesInput>
+    connectOrCreate?: TouchpointCreateOrConnectWithoutPoliciesInput
+    connect?: TouchpointWhereUniqueInput
+  }
+
+  export type PolicyCreateNestedOneWithoutTouchpointPoliciesInput = {
+    create?: XOR<PolicyCreateWithoutTouchpointPoliciesInput, PolicyUncheckedCreateWithoutTouchpointPoliciesInput>
+    connectOrCreate?: PolicyCreateOrConnectWithoutTouchpointPoliciesInput
+    connect?: PolicyWhereUniqueInput
+  }
+
+  export type TouchpointUpdateOneRequiredWithoutPoliciesNestedInput = {
+    create?: XOR<TouchpointCreateWithoutPoliciesInput, TouchpointUncheckedCreateWithoutPoliciesInput>
+    connectOrCreate?: TouchpointCreateOrConnectWithoutPoliciesInput
+    upsert?: TouchpointUpsertWithoutPoliciesInput
+    connect?: TouchpointWhereUniqueInput
+    update?: XOR<XOR<TouchpointUpdateToOneWithWhereWithoutPoliciesInput, TouchpointUpdateWithoutPoliciesInput>, TouchpointUncheckedUpdateWithoutPoliciesInput>
+  }
+
+  export type PolicyUpdateOneRequiredWithoutTouchpointPoliciesNestedInput = {
+    create?: XOR<PolicyCreateWithoutTouchpointPoliciesInput, PolicyUncheckedCreateWithoutTouchpointPoliciesInput>
+    connectOrCreate?: PolicyCreateOrConnectWithoutTouchpointPoliciesInput
+    upsert?: PolicyUpsertWithoutTouchpointPoliciesInput
+    connect?: PolicyWhereUniqueInput
+    update?: XOR<XOR<PolicyUpdateToOneWithWhereWithoutTouchpointPoliciesInput, PolicyUpdateWithoutTouchpointPoliciesInput>, PolicyUncheckedUpdateWithoutTouchpointPoliciesInput>
   }
 
   export type TenantCreateNestedOneWithoutConsentsInput = {
@@ -29447,6 +32605,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     consents?: ConsentCreateNestedManyWithoutPolicyInput
+    touchpointPolicies?: TouchpointPolicyCreateNestedManyWithoutPolicyInput
   }
 
   export type PolicyUncheckedCreateWithoutTenantInput = {
@@ -29459,6 +32618,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     consents?: ConsentUncheckedCreateNestedManyWithoutPolicyInput
+    touchpointPolicies?: TouchpointPolicyUncheckedCreateNestedManyWithoutPolicyInput
   }
 
   export type PolicyCreateOrConnectWithoutTenantInput = {
@@ -29750,6 +32910,38 @@ export namespace Prisma {
 
   export type InvitationCreateManyTenantInputEnvelope = {
     data: InvitationCreateManyTenantInput | InvitationCreateManyTenantInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TouchpointCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    policies?: TouchpointPolicyCreateNestedManyWithoutTouchpointInput
+  }
+
+  export type TouchpointUncheckedCreateWithoutTenantInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    policies?: TouchpointPolicyUncheckedCreateNestedManyWithoutTouchpointInput
+  }
+
+  export type TouchpointCreateOrConnectWithoutTenantInput = {
+    where: TouchpointWhereUniqueInput
+    create: XOR<TouchpointCreateWithoutTenantInput, TouchpointUncheckedCreateWithoutTenantInput>
+  }
+
+  export type TouchpointCreateManyTenantInputEnvelope = {
+    data: TouchpointCreateManyTenantInput | TouchpointCreateManyTenantInput[]
     skipDuplicates?: boolean
   }
 
@@ -30070,6 +33262,36 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Invitation"> | Date | string
   }
 
+  export type TouchpointUpsertWithWhereUniqueWithoutTenantInput = {
+    where: TouchpointWhereUniqueInput
+    update: XOR<TouchpointUpdateWithoutTenantInput, TouchpointUncheckedUpdateWithoutTenantInput>
+    create: XOR<TouchpointCreateWithoutTenantInput, TouchpointUncheckedCreateWithoutTenantInput>
+  }
+
+  export type TouchpointUpdateWithWhereUniqueWithoutTenantInput = {
+    where: TouchpointWhereUniqueInput
+    data: XOR<TouchpointUpdateWithoutTenantInput, TouchpointUncheckedUpdateWithoutTenantInput>
+  }
+
+  export type TouchpointUpdateManyWithWhereWithoutTenantInput = {
+    where: TouchpointScalarWhereInput
+    data: XOR<TouchpointUpdateManyMutationInput, TouchpointUncheckedUpdateManyWithoutTenantInput>
+  }
+
+  export type TouchpointScalarWhereInput = {
+    AND?: TouchpointScalarWhereInput | TouchpointScalarWhereInput[]
+    OR?: TouchpointScalarWhereInput[]
+    NOT?: TouchpointScalarWhereInput | TouchpointScalarWhereInput[]
+    id?: StringFilter<"Touchpoint"> | string
+    tenantId?: StringFilter<"Touchpoint"> | string
+    name?: StringFilter<"Touchpoint"> | string
+    slug?: StringFilter<"Touchpoint"> | string
+    description?: StringNullableFilter<"Touchpoint"> | string | null
+    isActive?: BoolFilter<"Touchpoint"> | boolean
+    createdAt?: DateTimeFilter<"Touchpoint"> | Date | string
+    updatedAt?: DateTimeFilter<"Touchpoint"> | Date | string
+  }
+
   export type TenantCreateWithoutUsersInput = {
     id?: string
     name: string
@@ -30087,6 +33309,7 @@ export namespace Prisma {
     outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
     invitations?: InvitationCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutUsersInput = {
@@ -30106,6 +33329,7 @@ export namespace Prisma {
     outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutUsersInput = {
@@ -30203,6 +33427,7 @@ export namespace Prisma {
     outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutUsersInput = {
@@ -30222,6 +33447,7 @@ export namespace Prisma {
     outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type SessionUpsertWithWhereUniqueWithoutUserInput = {
@@ -30386,6 +33612,7 @@ export namespace Prisma {
     outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
     users?: TenantUserCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutInvitationsInput = {
@@ -30405,6 +33632,7 @@ export namespace Prisma {
     outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
     users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutInvitationsInput = {
@@ -30440,6 +33668,7 @@ export namespace Prisma {
     outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
     users?: TenantUserUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutInvitationsInput = {
@@ -30459,6 +33688,7 @@ export namespace Prisma {
     outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
     users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUserCreateWithoutPasswordResetTokensInput = {
@@ -30562,6 +33792,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
     users?: TenantUserCreateNestedManyWithoutTenantInput
     invitations?: InvitationCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutOutboxEventsInput = {
@@ -30581,6 +33812,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
     users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutOutboxEventsInput = {
@@ -30616,6 +33848,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
     users?: TenantUserUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutOutboxEventsInput = {
@@ -30635,6 +33868,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
     users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type WebhookCreateWithoutCircuitBreakerInput = {
@@ -30722,6 +33956,7 @@ export namespace Prisma {
     outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
     users?: TenantUserCreateNestedManyWithoutTenantInput
     invitations?: InvitationCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutWebhookDeliveriesInput = {
@@ -30741,6 +33976,7 @@ export namespace Prisma {
     outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
     users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutWebhookDeliveriesInput = {
@@ -30837,6 +34073,7 @@ export namespace Prisma {
     outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
     users?: TenantUserUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutWebhookDeliveriesInput = {
@@ -30856,6 +34093,7 @@ export namespace Prisma {
     outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
     users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type WebhookUpsertWithoutDeliveriesInput = {
@@ -31018,6 +34256,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
     users?: TenantUserCreateNestedManyWithoutTenantInput
     invitations?: InvitationCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutPoliciesInput = {
@@ -31037,6 +34276,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
     users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutPoliciesInput = {
@@ -31074,6 +34314,34 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type TouchpointPolicyCreateWithoutPolicyInput = {
+    id?: string
+    isRequired?: boolean
+    displayOrder?: number
+    customLabel?: string | null
+    createdAt?: Date | string
+    touchpoint: TouchpointCreateNestedOneWithoutPoliciesInput
+  }
+
+  export type TouchpointPolicyUncheckedCreateWithoutPolicyInput = {
+    id?: string
+    touchpointId: string
+    isRequired?: boolean
+    displayOrder?: number
+    customLabel?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TouchpointPolicyCreateOrConnectWithoutPolicyInput = {
+    where: TouchpointPolicyWhereUniqueInput
+    create: XOR<TouchpointPolicyCreateWithoutPolicyInput, TouchpointPolicyUncheckedCreateWithoutPolicyInput>
+  }
+
+  export type TouchpointPolicyCreateManyPolicyInputEnvelope = {
+    data: TouchpointPolicyCreateManyPolicyInput | TouchpointPolicyCreateManyPolicyInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TenantUpsertWithoutPoliciesInput = {
     update: XOR<TenantUpdateWithoutPoliciesInput, TenantUncheckedUpdateWithoutPoliciesInput>
     create: XOR<TenantCreateWithoutPoliciesInput, TenantUncheckedCreateWithoutPoliciesInput>
@@ -31102,6 +34370,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
     users?: TenantUserUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutPoliciesInput = {
@@ -31121,6 +34390,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
     users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type ConsentUpsertWithWhereUniqueWithoutPolicyInput = {
@@ -31137,6 +34407,303 @@ export namespace Prisma {
   export type ConsentUpdateManyWithWhereWithoutPolicyInput = {
     where: ConsentScalarWhereInput
     data: XOR<ConsentUpdateManyMutationInput, ConsentUncheckedUpdateManyWithoutPolicyInput>
+  }
+
+  export type TouchpointPolicyUpsertWithWhereUniqueWithoutPolicyInput = {
+    where: TouchpointPolicyWhereUniqueInput
+    update: XOR<TouchpointPolicyUpdateWithoutPolicyInput, TouchpointPolicyUncheckedUpdateWithoutPolicyInput>
+    create: XOR<TouchpointPolicyCreateWithoutPolicyInput, TouchpointPolicyUncheckedCreateWithoutPolicyInput>
+  }
+
+  export type TouchpointPolicyUpdateWithWhereUniqueWithoutPolicyInput = {
+    where: TouchpointPolicyWhereUniqueInput
+    data: XOR<TouchpointPolicyUpdateWithoutPolicyInput, TouchpointPolicyUncheckedUpdateWithoutPolicyInput>
+  }
+
+  export type TouchpointPolicyUpdateManyWithWhereWithoutPolicyInput = {
+    where: TouchpointPolicyScalarWhereInput
+    data: XOR<TouchpointPolicyUpdateManyMutationInput, TouchpointPolicyUncheckedUpdateManyWithoutPolicyInput>
+  }
+
+  export type TouchpointPolicyScalarWhereInput = {
+    AND?: TouchpointPolicyScalarWhereInput | TouchpointPolicyScalarWhereInput[]
+    OR?: TouchpointPolicyScalarWhereInput[]
+    NOT?: TouchpointPolicyScalarWhereInput | TouchpointPolicyScalarWhereInput[]
+    id?: StringFilter<"TouchpointPolicy"> | string
+    touchpointId?: StringFilter<"TouchpointPolicy"> | string
+    policyId?: StringFilter<"TouchpointPolicy"> | string
+    isRequired?: BoolFilter<"TouchpointPolicy"> | boolean
+    displayOrder?: IntFilter<"TouchpointPolicy"> | number
+    customLabel?: StringNullableFilter<"TouchpointPolicy"> | string | null
+    createdAt?: DateTimeFilter<"TouchpointPolicy"> | Date | string
+  }
+
+  export type TenantCreateWithoutTouchpointsInput = {
+    id?: string
+    name: string
+    slug: string
+    status?: $Enums.TenantStatus
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentCreateNestedManyWithoutTenantInput
+    policies?: PolicyCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogCreateNestedManyWithoutTenantInput
+    apiKeys?: ApiKeyCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventCreateNestedManyWithoutTenantInput
+    outboxEvents?: OutboxEventCreateNestedManyWithoutTenantInput
+    webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
+    users?: TenantUserCreateNestedManyWithoutTenantInput
+    invitations?: InvitationCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantUncheckedCreateWithoutTouchpointsInput = {
+    id?: string
+    name: string
+    slug: string
+    status?: $Enums.TenantStatus
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentUncheckedCreateNestedManyWithoutTenantInput
+    policies?: PolicyUncheckedCreateNestedManyWithoutTenantInput
+    auditLogs?: AuditLogUncheckedCreateNestedManyWithoutTenantInput
+    apiKeys?: ApiKeyUncheckedCreateNestedManyWithoutTenantInput
+    webhooks?: WebhookUncheckedCreateNestedManyWithoutTenantInput
+    internalEvents?: InternalEventUncheckedCreateNestedManyWithoutTenantInput
+    outboxEvents?: OutboxEventUncheckedCreateNestedManyWithoutTenantInput
+    webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
+    users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
+    invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
+  }
+
+  export type TenantCreateOrConnectWithoutTouchpointsInput = {
+    where: TenantWhereUniqueInput
+    create: XOR<TenantCreateWithoutTouchpointsInput, TenantUncheckedCreateWithoutTouchpointsInput>
+  }
+
+  export type TouchpointPolicyCreateWithoutTouchpointInput = {
+    id?: string
+    isRequired?: boolean
+    displayOrder?: number
+    customLabel?: string | null
+    createdAt?: Date | string
+    policy: PolicyCreateNestedOneWithoutTouchpointPoliciesInput
+  }
+
+  export type TouchpointPolicyUncheckedCreateWithoutTouchpointInput = {
+    id?: string
+    policyId: string
+    isRequired?: boolean
+    displayOrder?: number
+    customLabel?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TouchpointPolicyCreateOrConnectWithoutTouchpointInput = {
+    where: TouchpointPolicyWhereUniqueInput
+    create: XOR<TouchpointPolicyCreateWithoutTouchpointInput, TouchpointPolicyUncheckedCreateWithoutTouchpointInput>
+  }
+
+  export type TouchpointPolicyCreateManyTouchpointInputEnvelope = {
+    data: TouchpointPolicyCreateManyTouchpointInput | TouchpointPolicyCreateManyTouchpointInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TenantUpsertWithoutTouchpointsInput = {
+    update: XOR<TenantUpdateWithoutTouchpointsInput, TenantUncheckedUpdateWithoutTouchpointsInput>
+    create: XOR<TenantCreateWithoutTouchpointsInput, TenantUncheckedCreateWithoutTouchpointsInput>
+    where?: TenantWhereInput
+  }
+
+  export type TenantUpdateToOneWithWhereWithoutTouchpointsInput = {
+    where?: TenantWhereInput
+    data: XOR<TenantUpdateWithoutTouchpointsInput, TenantUncheckedUpdateWithoutTouchpointsInput>
+  }
+
+  export type TenantUpdateWithoutTouchpointsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUpdateManyWithoutTenantNestedInput
+    apiKeys?: ApiKeyUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUpdateManyWithoutTenantNestedInput
+    outboxEvents?: OutboxEventUpdateManyWithoutTenantNestedInput
+    webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TenantUncheckedUpdateWithoutTouchpointsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    status?: EnumTenantStatusFieldUpdateOperationsInput | $Enums.TenantStatus
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUncheckedUpdateManyWithoutTenantNestedInput
+    policies?: PolicyUncheckedUpdateManyWithoutTenantNestedInput
+    auditLogs?: AuditLogUncheckedUpdateManyWithoutTenantNestedInput
+    apiKeys?: ApiKeyUncheckedUpdateManyWithoutTenantNestedInput
+    webhooks?: WebhookUncheckedUpdateManyWithoutTenantNestedInput
+    internalEvents?: InternalEventUncheckedUpdateManyWithoutTenantNestedInput
+    outboxEvents?: OutboxEventUncheckedUpdateManyWithoutTenantNestedInput
+    webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
+    users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
+    invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
+  }
+
+  export type TouchpointPolicyUpsertWithWhereUniqueWithoutTouchpointInput = {
+    where: TouchpointPolicyWhereUniqueInput
+    update: XOR<TouchpointPolicyUpdateWithoutTouchpointInput, TouchpointPolicyUncheckedUpdateWithoutTouchpointInput>
+    create: XOR<TouchpointPolicyCreateWithoutTouchpointInput, TouchpointPolicyUncheckedCreateWithoutTouchpointInput>
+  }
+
+  export type TouchpointPolicyUpdateWithWhereUniqueWithoutTouchpointInput = {
+    where: TouchpointPolicyWhereUniqueInput
+    data: XOR<TouchpointPolicyUpdateWithoutTouchpointInput, TouchpointPolicyUncheckedUpdateWithoutTouchpointInput>
+  }
+
+  export type TouchpointPolicyUpdateManyWithWhereWithoutTouchpointInput = {
+    where: TouchpointPolicyScalarWhereInput
+    data: XOR<TouchpointPolicyUpdateManyMutationInput, TouchpointPolicyUncheckedUpdateManyWithoutTouchpointInput>
+  }
+
+  export type TouchpointCreateWithoutPoliciesInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutTouchpointsInput
+  }
+
+  export type TouchpointUncheckedCreateWithoutPoliciesInput = {
+    id?: string
+    tenantId: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type TouchpointCreateOrConnectWithoutPoliciesInput = {
+    where: TouchpointWhereUniqueInput
+    create: XOR<TouchpointCreateWithoutPoliciesInput, TouchpointUncheckedCreateWithoutPoliciesInput>
+  }
+
+  export type PolicyCreateWithoutTouchpointPoliciesInput = {
+    id?: string
+    title: string
+    purpose: string
+    version: number
+    content: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    tenant: TenantCreateNestedOneWithoutPoliciesInput
+    consents?: ConsentCreateNestedManyWithoutPolicyInput
+  }
+
+  export type PolicyUncheckedCreateWithoutTouchpointPoliciesInput = {
+    id?: string
+    tenantId: string
+    title: string
+    purpose: string
+    version: number
+    content: string
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    consents?: ConsentUncheckedCreateNestedManyWithoutPolicyInput
+  }
+
+  export type PolicyCreateOrConnectWithoutTouchpointPoliciesInput = {
+    where: PolicyWhereUniqueInput
+    create: XOR<PolicyCreateWithoutTouchpointPoliciesInput, PolicyUncheckedCreateWithoutTouchpointPoliciesInput>
+  }
+
+  export type TouchpointUpsertWithoutPoliciesInput = {
+    update: XOR<TouchpointUpdateWithoutPoliciesInput, TouchpointUncheckedUpdateWithoutPoliciesInput>
+    create: XOR<TouchpointCreateWithoutPoliciesInput, TouchpointUncheckedCreateWithoutPoliciesInput>
+    where?: TouchpointWhereInput
+  }
+
+  export type TouchpointUpdateToOneWithWhereWithoutPoliciesInput = {
+    where?: TouchpointWhereInput
+    data: XOR<TouchpointUpdateWithoutPoliciesInput, TouchpointUncheckedUpdateWithoutPoliciesInput>
+  }
+
+  export type TouchpointUpdateWithoutPoliciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutTouchpointsNestedInput
+  }
+
+  export type TouchpointUncheckedUpdateWithoutPoliciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type PolicyUpsertWithoutTouchpointPoliciesInput = {
+    update: XOR<PolicyUpdateWithoutTouchpointPoliciesInput, PolicyUncheckedUpdateWithoutTouchpointPoliciesInput>
+    create: XOR<PolicyCreateWithoutTouchpointPoliciesInput, PolicyUncheckedCreateWithoutTouchpointPoliciesInput>
+    where?: PolicyWhereInput
+  }
+
+  export type PolicyUpdateToOneWithWhereWithoutTouchpointPoliciesInput = {
+    where?: PolicyWhereInput
+    data: XOR<PolicyUpdateWithoutTouchpointPoliciesInput, PolicyUncheckedUpdateWithoutTouchpointPoliciesInput>
+  }
+
+  export type PolicyUpdateWithoutTouchpointPoliciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    tenant?: TenantUpdateOneRequiredWithoutPoliciesNestedInput
+    consents?: ConsentUpdateManyWithoutPolicyNestedInput
+  }
+
+  export type PolicyUncheckedUpdateWithoutTouchpointPoliciesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    tenantId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    purpose?: StringFieldUpdateOperationsInput | string
+    version?: IntFieldUpdateOperationsInput | number
+    content?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    consents?: ConsentUncheckedUpdateManyWithoutPolicyNestedInput
   }
 
   export type TenantCreateWithoutConsentsInput = {
@@ -31156,6 +34723,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
     users?: TenantUserCreateNestedManyWithoutTenantInput
     invitations?: InvitationCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutConsentsInput = {
@@ -31175,6 +34743,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
     users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutConsentsInput = {
@@ -31192,6 +34761,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     tenant: TenantCreateNestedOneWithoutPoliciesInput
+    touchpointPolicies?: TouchpointPolicyCreateNestedManyWithoutPolicyInput
   }
 
   export type PolicyUncheckedCreateWithoutConsentsInput = {
@@ -31204,6 +34774,7 @@ export namespace Prisma {
     isActive?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    touchpointPolicies?: TouchpointPolicyUncheckedCreateNestedManyWithoutPolicyInput
   }
 
   export type PolicyCreateOrConnectWithoutConsentsInput = {
@@ -31239,6 +34810,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
     users?: TenantUserUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutConsentsInput = {
@@ -31258,6 +34830,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
     users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type PolicyUpsertWithoutConsentsInput = {
@@ -31281,6 +34854,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     tenant?: TenantUpdateOneRequiredWithoutPoliciesNestedInput
+    touchpointPolicies?: TouchpointPolicyUpdateManyWithoutPolicyNestedInput
   }
 
   export type PolicyUncheckedUpdateWithoutConsentsInput = {
@@ -31293,6 +34867,7 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    touchpointPolicies?: TouchpointPolicyUncheckedUpdateManyWithoutPolicyNestedInput
   }
 
   export type TenantCreateWithoutAuditLogsInput = {
@@ -31312,6 +34887,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
     users?: TenantUserCreateNestedManyWithoutTenantInput
     invitations?: InvitationCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutAuditLogsInput = {
@@ -31331,6 +34907,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
     users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutAuditLogsInput = {
@@ -31366,6 +34943,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
     users?: TenantUserUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutAuditLogsInput = {
@@ -31385,6 +34963,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
     users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateWithoutApiKeysInput = {
@@ -31404,6 +34983,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
     users?: TenantUserCreateNestedManyWithoutTenantInput
     invitations?: InvitationCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutApiKeysInput = {
@@ -31423,6 +35003,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
     users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutApiKeysInput = {
@@ -31458,6 +35039,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
     users?: TenantUserUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutApiKeysInput = {
@@ -31477,6 +35059,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
     users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantCreateWithoutWebhooksInput = {
@@ -31496,6 +35079,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
     users?: TenantUserCreateNestedManyWithoutTenantInput
     invitations?: InvitationCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutWebhooksInput = {
@@ -31515,6 +35099,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
     users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutWebhooksInput = {
@@ -31613,6 +35198,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
     users?: TenantUserUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutWebhooksInput = {
@@ -31632,6 +35218,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
     users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type WebhookCircuitBreakerUpsertWithoutWebhookInput = {
@@ -31696,6 +35283,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryCreateNestedManyWithoutTenantInput
     users?: TenantUserCreateNestedManyWithoutTenantInput
     invitations?: InvitationCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointCreateNestedManyWithoutTenantInput
   }
 
   export type TenantUncheckedCreateWithoutInternalEventsInput = {
@@ -31715,6 +35303,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedCreateNestedManyWithoutTenantInput
     users?: TenantUserUncheckedCreateNestedManyWithoutTenantInput
     invitations?: InvitationUncheckedCreateNestedManyWithoutTenantInput
+    touchpoints?: TouchpointUncheckedCreateNestedManyWithoutTenantInput
   }
 
   export type TenantCreateOrConnectWithoutInternalEventsInput = {
@@ -31750,6 +35339,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUpdateManyWithoutTenantNestedInput
     users?: TenantUserUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUpdateManyWithoutTenantNestedInput
   }
 
   export type TenantUncheckedUpdateWithoutInternalEventsInput = {
@@ -31769,6 +35359,7 @@ export namespace Prisma {
     webhookDeliveries?: WebhookDeliveryUncheckedUpdateManyWithoutTenantNestedInput
     users?: TenantUserUncheckedUpdateManyWithoutTenantNestedInput
     invitations?: InvitationUncheckedUpdateManyWithoutTenantNestedInput
+    touchpoints?: TouchpointUncheckedUpdateManyWithoutTenantNestedInput
   }
 
   export type ConsentCreateManyTenantInput = {
@@ -31888,6 +35479,16 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type TouchpointCreateManyTenantInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    isActive?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
   export type ConsentUpdateWithoutTenantInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
@@ -31928,6 +35529,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     consents?: ConsentUpdateManyWithoutPolicyNestedInput
+    touchpointPolicies?: TouchpointPolicyUpdateManyWithoutPolicyNestedInput
   }
 
   export type PolicyUncheckedUpdateWithoutTenantInput = {
@@ -31940,6 +35542,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     consents?: ConsentUncheckedUpdateManyWithoutPolicyNestedInput
+    touchpointPolicies?: TouchpointPolicyUncheckedUpdateManyWithoutPolicyNestedInput
   }
 
   export type PolicyUncheckedUpdateManyWithoutTenantInput = {
@@ -32251,6 +35854,38 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type TouchpointUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    policies?: TouchpointPolicyUpdateManyWithoutTouchpointNestedInput
+  }
+
+  export type TouchpointUncheckedUpdateWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    policies?: TouchpointPolicyUncheckedUpdateManyWithoutTouchpointNestedInput
+  }
+
+  export type TouchpointUncheckedUpdateManyWithoutTenantInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isActive?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type SessionCreateManyUserInput = {
     id?: string
     refreshTokenHash: string
@@ -32385,6 +36020,15 @@ export namespace Prisma {
     createdAt?: Date | string
   }
 
+  export type TouchpointPolicyCreateManyPolicyInput = {
+    id?: string
+    touchpointId: string
+    isRequired?: boolean
+    displayOrder?: number
+    customLabel?: string | null
+    createdAt?: Date | string
+  }
+
   export type ConsentUpdateWithoutPolicyInput = {
     id?: StringFieldUpdateOperationsInput | string
     userId?: StringFieldUpdateOperationsInput | string
@@ -32412,6 +36056,69 @@ export namespace Prisma {
     purpose?: StringFieldUpdateOperationsInput | string
     status?: EnumConsentStatusFieldUpdateOperationsInput | $Enums.ConsentStatus
     policyVersion?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TouchpointPolicyUpdateWithoutPolicyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isRequired?: BoolFieldUpdateOperationsInput | boolean
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    customLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    touchpoint?: TouchpointUpdateOneRequiredWithoutPoliciesNestedInput
+  }
+
+  export type TouchpointPolicyUncheckedUpdateWithoutPolicyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    touchpointId?: StringFieldUpdateOperationsInput | string
+    isRequired?: BoolFieldUpdateOperationsInput | boolean
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    customLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TouchpointPolicyUncheckedUpdateManyWithoutPolicyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    touchpointId?: StringFieldUpdateOperationsInput | string
+    isRequired?: BoolFieldUpdateOperationsInput | boolean
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    customLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TouchpointPolicyCreateManyTouchpointInput = {
+    id?: string
+    policyId: string
+    isRequired?: boolean
+    displayOrder?: number
+    customLabel?: string | null
+    createdAt?: Date | string
+  }
+
+  export type TouchpointPolicyUpdateWithoutTouchpointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    isRequired?: BoolFieldUpdateOperationsInput | boolean
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    customLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    policy?: PolicyUpdateOneRequiredWithoutTouchpointPoliciesNestedInput
+  }
+
+  export type TouchpointPolicyUncheckedUpdateWithoutTouchpointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    policyId?: StringFieldUpdateOperationsInput | string
+    isRequired?: BoolFieldUpdateOperationsInput | boolean
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    customLabel?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type TouchpointPolicyUncheckedUpdateManyWithoutTouchpointInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    policyId?: StringFieldUpdateOperationsInput | string
+    isRequired?: BoolFieldUpdateOperationsInput | boolean
+    displayOrder?: IntFieldUpdateOperationsInput | number
+    customLabel?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

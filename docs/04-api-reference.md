@@ -58,7 +58,16 @@ POST /api/consents
 
 ## Description
 
-Creates or updates a user's consent for a specific purpose and records the action in the audit log.
+Creates or updates a user's consent for a specific policy and records the action in the audit log.
+
+---
+
+## Request Headers
+
+```http
+X-API-Key: cm_live_...
+```
+*(or `Authorization: Bearer <token>`)*
 
 ---
 
@@ -66,10 +75,8 @@ Creates or updates a user's consent for a specific purpose and records the actio
 
 ```json
 {
-    "tenantId": "amazon",
     "userId": "user-123",
-    "purpose": "marketing",
-    "policyVersion": "v1"
+    "policyId": "cmq0wjdg10000j9pp60waqi1k"
 }
 ```
 
@@ -79,10 +86,8 @@ Creates or updates a user's consent for a specific purpose and records the actio
 
 | Field | Type | Required | Description |
 |--------|------|----------|-------------|
-| tenantId | string | Yes | Tenant identifier |
 | userId | string | Yes | User identifier |
-| purpose | string | Yes | Consent purpose |
-| policyVersion | string | Yes | Accepted policy version |
+| policyId | string | Yes | Policy ID accepted |
 
 ---
 
@@ -95,11 +100,10 @@ Creates or updates a user's consent for a specific purpose and records the actio
     "success": true,
     "data": {
         "id": "cmq0wjdg10000j9pp60waqi1k",
-        "tenantId": "amazon",
+        "tenantId": "tenant-uuid-123",
         "userId": "user-123",
-        "purpose": "marketing",
+        "policyId": "pol-456",
         "status": "GRANTED",
-        "policyVersion": "v1",
         "createdAt": "2026-06-05T12:30:02.449Z"
     }
 }
@@ -134,7 +138,15 @@ GET /api/consents/check
 
 ## Description
 
-Checks whether a user currently has active consent for a specific purpose.
+Checks whether a user currently has active consent for a specific purpose within the authenticated tenant.
+
+---
+
+## Request Headers
+
+```http
+X-API-Key: cm_live_...
+```
 
 ---
 
@@ -142,16 +154,15 @@ Checks whether a user currently has active consent for a specific purpose.
 
 | Parameter | Required | Description |
 |-----------|----------|-------------|
-| tenantId | Yes | Tenant identifier |
 | userId | Yes | User identifier |
-| purpose | Yes | Consent purpose |
+| purpose | Yes | Consent purpose (e.g., marketing) |
 
 ---
 
 ## Example Request
 
 ```http
-GET /api/consents/check?tenantId=amazon&userId=user-123&purpose=marketing
+GET /api/consents/check?userId=user-123&purpose=marketing
 ```
 
 ---

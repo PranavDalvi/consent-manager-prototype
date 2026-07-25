@@ -75,6 +75,27 @@ export interface InternalEvent {
   processedAt: string | null;
 }
 
+export interface TouchpointPolicy {
+  id?: string;
+  policyId: string;
+  policy?: Policy;
+  isRequired: boolean;
+  displayOrder: number;
+  customLabel?: string;
+}
+
+export interface Touchpoint {
+  id: string;
+  tenantId: string;
+  name: string;
+  slug: string;
+  description?: string | null;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+  policies?: TouchpointPolicy[];
+}
+
 export interface Pagination {
   total: number;
   page: number;

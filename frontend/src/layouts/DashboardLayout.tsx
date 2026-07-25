@@ -16,6 +16,7 @@ import {
   Sun,
   Moon,
   ChevronRight,
+  Compass,
 } from "lucide-react";
 import { API_KEY_STORAGE_KEY } from "../services/apiClient";
 import { authService } from "../services/authService";
@@ -28,6 +29,7 @@ interface SidebarItem {
 
 const SIDEBAR_ITEMS: SidebarItem[] = [
   { name: "Dashboard", path: "/", icon: LayoutDashboard },
+  { name: "Touchpoints", path: "/touchpoints", icon: Compass },
   { name: "Policies", path: "/policies", icon: ShieldCheck },
   { name: "API Keys", path: "/api-keys", icon: Key },
   { name: "Consents", path: "/consents", icon: UserCheck },

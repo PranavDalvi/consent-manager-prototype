@@ -268,6 +268,27 @@ exports.Prisma.PolicyScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.TouchpointScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  name: 'name',
+  slug: 'slug',
+  description: 'description',
+  isActive: 'isActive',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.TouchpointPolicyScalarFieldEnum = {
+  id: 'id',
+  touchpointId: 'touchpointId',
+  policyId: 'policyId',
+  isRequired: 'isRequired',
+  displayOrder: 'displayOrder',
+  customLabel: 'customLabel',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.ConsentScalarFieldEnum = {
   id: 'id',
   tenantId: 'tenantId',
@@ -406,6 +427,8 @@ exports.Prisma.ModelName = {
   ReplayHistory: 'ReplayHistory',
   CleanupExecution: 'CleanupExecution',
   Policy: 'Policy',
+  Touchpoint: 'Touchpoint',
+  TouchpointPolicy: 'TouchpointPolicy',
   Consent: 'Consent',
   AuditLog: 'AuditLog',
   ApiKey: 'ApiKey',

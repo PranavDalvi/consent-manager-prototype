@@ -47,6 +47,7 @@ model Tenant {
   webhookDeliveries WebhookDelivery[]
   users             TenantUser[]
   invitations       Invitation[]
+  touchpoints       Touchpoint[]
 
   @@index([isActive])
   @@index([status])
@@ -245,12 +246,47 @@ model Policy {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  consents Consent[]
+  consents           Consent[]
+  touchpointPolicies TouchpointPolicy[]
 
   @@unique([tenantId, purpose, version])
   @@index([tenantId])
   @@index([tenantId, purpose])
   @@index([tenantId, purpose, version])
+}
+
+model Touchpoint {
+  id          String   @id @default(cuid())
+  tenantId    String
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  name        String
+  slug        String
+  description String?
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  policies TouchpointPolicy[]
+
+  @@unique([tenantId, slug])
+  @@index([tenantId])
+  @@index([tenantId, isActive])
+}
+
+model TouchpointPolicy {
+  id           String     @id @default(cuid())
+  touchpointId String
+  touchpoint   Touchpoint @relation(fields: [touchpointId], references: [id], onDelete: Cascade)
+  policyId     String
+  policy       Policy     @relation(fields: [policyId], references: [id], onDelete: Restrict)
+  isRequired   Boolean    @default(true)
+  displayOrder Int        @default(0)
+  customLabel  String?
+  createdAt    DateTime   @default(now())
+
+  @@unique([touchpointId, policyId])
+  @@index([touchpointId])
+  @@index([policyId])
 }
 
 model Consent {

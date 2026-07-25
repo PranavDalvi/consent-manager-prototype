@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "../services/apiClient";
-import type { ApiResponse, Policy, ApiKey, Consent, AuditLog, Webhook, InternalEvent } from "../types";
+import type { ApiResponse, Policy, ApiKey, Consent, AuditLog, Webhook, InternalEvent, Touchpoint } from "../types";
 
 // --- POLICIES ---
 
@@ -243,6 +243,76 @@ export function useEvents() {
     queryFn: async () => {
       const response = await apiClient.get<ApiResponse<InternalEvent[]>>("/events");
       return response.data;
+    },
+  });
+}
+
+// --- TOUCHPOINTS ---
+
+export function useTouchpoints() {
+  return useQuery<ApiResponse<Touchpoint[]>, Error>({
+    queryKey: ["touchpoints"],
+    queryFn: async () => {
+      const response = await apiClient.get<ApiResponse<Touchpoint[]>>("/touchpoints");
+      return response.data;
+    },
+  });
+}
+
+export function useCreateTouchpoint() {
+  const queryClient = useQueryClient();
+  return useMutation<
+    ApiResponse<Touchpoint>,
+    Error,
+    {
+      name: string;
+      slug: string;
+      description?: string;
+      policies?: { policyId: string; isRequired?: boolean; displayOrder?: number; customLabel?: string }[];
+    }
+  >({
+    mutationFn: async (data) => {
+      const response = await apiClient.post<ApiResponse<Touchpoint>>("/touchpoints", data);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["touchpoints"] });
+    },
+  });
+}
+
+export function useUpdateTouchpoint() {
+  const queryClient = useQueryClient();
+  return useMutation<
+    ApiResponse<Touchpoint>,
+    Error,
+    {
+      id: string;
+      name?: string;
+      description?: string;
+      isActive?: boolean;
+      policies?: { policyId: string; isRequired?: boolean; displayOrder?: number; customLabel?: string }[];
+    }
+  >({
+    mutationFn: async ({ id, ...data }) => {
+      const response = await apiClient.put<ApiResponse<Touchpoint>>(`/touchpoints/${id}`, data);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["touchpoints"] });
+    },
+  });
+}
+
+export function useDeleteTouchpoint() {
+  const queryClient = useQueryClient();
+  return useMutation<ApiResponse<{ success: boolean }>, Error, string>({
+    mutationFn: async (id) => {
+      const response = await apiClient.delete<ApiResponse<{ success: boolean }>>(`/touchpoints/${id}`);
+      return response.data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["touchpoints"] });
     },
   });
 }
